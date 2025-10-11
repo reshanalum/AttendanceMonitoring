@@ -2,9 +2,11 @@
 {
     public class Student
     {
-        public string StudentLRN { get; set; }
+        public string StudentId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string LRN { get; set; }
+
         public string PhoneNumber { get; set; }
         public string EnrollmentStatus { get; set; }
 

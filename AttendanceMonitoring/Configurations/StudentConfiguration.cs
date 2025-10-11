@@ -9,10 +9,12 @@ namespace AttendanceMonitoring.Configurations
         public void Configure(EntityTypeBuilder<Student> builder)
         {
             builder.ToTable(nameof(Student));
-            builder.HasKey(c => c.StudentLRN);
+            builder.HasKey(c => c.StudentId);
             builder.Property(c => c.FirstName)
                 .HasColumnType("varchar(150)");
             builder.Property(c => c.LastName)
+                .HasColumnType("varchar(150)");
+            builder.Property(c => c.LRN)
                 .HasColumnType("varchar(150)");
             builder.Property(c => c.PhoneNumber)
                 .HasColumnType("varchar(150)");
