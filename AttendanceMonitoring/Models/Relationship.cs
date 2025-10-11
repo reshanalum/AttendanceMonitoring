@@ -4,6 +4,8 @@
     {
         public string RelationshipId { get; set; }
 
+        public string RelationshipType { get; set; }
+
         //Relationships
         public string StudentLRN { get; set; }
         public Student StudentLink { get; set; }
