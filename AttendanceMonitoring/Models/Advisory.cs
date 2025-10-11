@@ -10,7 +10,7 @@
         //Relationships
         public string ClassAdviserId { get; set; }
         public Class_Adviser ClassAdviserLink { get; set; }
-        public string StudentLRN { get; set; }
+        public string StudentId { get; set; }
         public Student StudentLink { get; set; }
 
 

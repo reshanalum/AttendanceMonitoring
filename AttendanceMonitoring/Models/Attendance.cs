@@ -8,7 +8,7 @@
         public string Status { get; set; } //either IN or OUT
 
         //Relationships
-        public string StudentLRN { get; set; }
+        public string StudentId { get; set; }
         public Student StudentLink { get; set; }
 
         public List<Notification> NotificationList { get; set; }

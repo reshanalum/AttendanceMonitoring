@@ -18,7 +18,7 @@ namespace AttendanceMonitoring.Configurations
             //Foreign Key
             builder.HasOne(c => c.StudentLink)
                 .WithMany(c => c.AttendanceList)
-                .HasForeignKey(c => c.StudentLRN);
+                .HasForeignKey(c => c.StudentId);
 
         }
     }

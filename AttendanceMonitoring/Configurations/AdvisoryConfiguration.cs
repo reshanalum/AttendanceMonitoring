@@ -22,7 +22,7 @@ namespace AttendanceMonitoring.Configurations
 
             builder.HasOne(c => c.StudentLink)
                 .WithMany(c => c.AdvisoryList)
-                .HasForeignKey(c => c.StudentLRN);
+                .HasForeignKey(c => c.StudentId);
         }
     }
 
