@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace AttendanceMonitoring.Command
+namespace AttendanceMonitoringSystem.Command
 {
     class RelayCommands : ICommand
     {
