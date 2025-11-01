@@ -23,10 +23,11 @@ namespace AttendanceMonitoring
         public DbSet<Student> Students { get; set; }
         public DbSet<User> Users { get; set; }
 
+        public AttendanceMonitoringContext(DbContextOptions options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=C:\\Users\\resha\\Documents\\AttendanceMonitoring.db");
+            optionsBuilder.UseSqlite("Data Source=C:\\Users\\Tomaroy\\source\\repos\\AttendanceMonitoring.db");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

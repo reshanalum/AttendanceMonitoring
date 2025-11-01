@@ -1,3 +1,5 @@
+using AttendanceMonitoring;
+using Microsoft.EntityFrameworkCore;
 
 namespace AttendanceMonitoringApi
 {
@@ -13,6 +15,10 @@ namespace AttendanceMonitoringApi
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            // Connection to database
+            builder.Services.AddDbContext<AttendanceMonitoringContext>(option =>
+                option.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             var app = builder.Build();
 
