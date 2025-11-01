@@ -10,19 +10,28 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace AttendanceMonitoringSystem.View
 {
     /// <summary>
-    /// Interaction logic for Page1.xaml
+    /// Interaction logic for LoginView.xaml
     /// </summary>
-    public partial class Page1 : Page
+    public partial class LoginView : Window
     {
-        public Page1()
+        public LoginView()
         {
             InitializeComponent();
+        }
+
+        private void Username_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void btnADD_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
