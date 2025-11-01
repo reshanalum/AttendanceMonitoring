@@ -5,6 +5,8 @@ VisualStudioVersion = 17.14.36518.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AttendanceMonitoring", "AttendanceMonitoring\AttendanceMonitoring.csproj", "{6D5925C4-55EA-4244-AC9D-F9C449F98B32}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AttendanceMonitoringSystem", "AttendanceMonitoringSystem\AttendanceMonitoringSystem.csproj", "{C2BA0E3C-CE93-4307-B959-33BBB24B1254}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{6D5925C4-55EA-4244-AC9D-F9C449F98B32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D5925C4-55EA-4244-AC9D-F9C449F98B32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D5925C4-55EA-4244-AC9D-F9C449F98B32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2BA0E3C-CE93-4307-B959-33BBB24B1254}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2BA0E3C-CE93-4307-B959-33BBB24B1254}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2BA0E3C-CE93-4307-B959-33BBB24B1254}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2BA0E3C-CE93-4307-B959-33BBB24B1254}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
