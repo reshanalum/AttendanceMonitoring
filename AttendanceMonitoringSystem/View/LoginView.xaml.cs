@@ -23,5 +23,15 @@ namespace AttendanceMonitoringSystem.View
         {
             InitializeComponent();
         }
+
+        private void Username_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void btnADD_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
