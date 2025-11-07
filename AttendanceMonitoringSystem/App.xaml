@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:AttendanceMonitoringSystem"
              StartupUri="View/LoginView.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/Button.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
     </Application.Resources>
 </Application>
