@@ -24,6 +24,11 @@ namespace AttendanceMonitoringSystem.View
             InitializeComponent();
         }
 
+        private void Password_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
         private void Username_TextChanged(object sender, TextChangedEventArgs e)
         {
 
