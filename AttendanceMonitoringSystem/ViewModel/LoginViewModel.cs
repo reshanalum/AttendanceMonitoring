@@ -8,5 +8,9 @@ namespace AttendanceMonitoringSystem.ViewModel
 {
     internal class LoginViewModel
     {
+        public LoginViewModel()
+        {
+            
+        }
     }
 }
