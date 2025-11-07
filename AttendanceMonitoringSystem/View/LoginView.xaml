@@ -14,9 +14,11 @@
         BorderBrush="Transparent">
     
     <Window.Resources>
-       
-        
-            <DropShadowEffect x:Key="DropShadow"
+
+        <c:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+
+
+        <DropShadowEffect x:Key="DropShadow"
                       Color="#000000"
                       Opacity="0.30"
                       BlurRadius="8"

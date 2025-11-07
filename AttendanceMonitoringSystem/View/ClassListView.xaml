@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AttendanceMonitoringSystem.View"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:c="clr-namespace:AttendanceMonitoringSystem.Command"
              mc:Ignorable="d" 
              d:DesignHeight="939" 
              d:DesignWidth="1105"
