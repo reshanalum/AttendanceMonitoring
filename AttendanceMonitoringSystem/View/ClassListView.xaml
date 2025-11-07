@@ -12,6 +12,8 @@
              Background="#F4F4F4">
 
     <UserControl.Resources>
+
+        <c:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         
         <Style x:Key="PageButtonStyle" TargetType="Button">
             <Setter Property="Width" Value="40"/>
