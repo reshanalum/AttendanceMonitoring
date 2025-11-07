@@ -9,7 +9,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\BG.png" />
+    <None Remove="Images\Key.png" />
+    <None Remove="Images\School Logo.png" />
+    <None Remove="Images\Username.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\BG.png" />
+    <Resource Include="Images\Key.png" />
+    <Resource Include="Images\School Logo.png" />
+    <Resource Include="Images\Username.png" />
   </ItemGroup>
 
 </Project>
