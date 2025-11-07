@@ -9,5 +9,15 @@
 
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\BG.png" />
+    <Resource Include="Images\Key.png" />
+    <Resource Include="Images\School Logo.png" />
+    <Resource Include="Images\Username.png" />
+  </ItemGroup>
 
 </Project>
