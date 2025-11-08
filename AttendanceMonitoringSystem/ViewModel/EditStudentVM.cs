@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace AttendanceMonitoringSystem.ViewModel
 {
-    class SectionListViewModel
+    class EditStudentVM
     {
-
     }
-
-
 }
