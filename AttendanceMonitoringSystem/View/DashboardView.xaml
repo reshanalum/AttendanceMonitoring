@@ -4,11 +4,26 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AttendanceMonitoringSystem.View"
+             xmlns:ViewModel="clr-namespace:AttendanceMonitoringSystem.ViewModel"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d" 
              d:DesignHeight="1024" 
              d:DesignWidth="1440"
              Background="#F4F4F4">
+
+    <UserControl.DataContext>
+        <ViewModel:DashboardVM/>
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+
+        <DataTemplate DataType="{x:Type ViewModel:ClassListVM}">
+            <local:ClassListView/>
+        </DataTemplate>
+
+    </UserControl.Resources>
+
+
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -77,9 +92,19 @@
                 </Rectangle.Effect>
             </Rectangle>
 
+            <TextBlock Grid.Row="1"
+                Text="BLAHHHHHHHHHHHHHHHH"
+                                   Foreground="#002D96"
+                                   FontSize="20"
+                                   FontWeight="Light"
+                                   FontFamily="Arial Black"
+                                   Margin="20,40,0,0"/>
+
             <!-- Content -->
-            <Border Grid.Row="1" 
-                    Background="#F4F4F4"/>
+            <ContentControl Grid.Row="1"
+                                            Margin="5"
+                                            Background="Transparent"
+                                            Content="{Binding CurrentView}"/>
         </Grid>
 
         <StackPanel Grid.Column="0">
@@ -118,7 +143,8 @@
 
             <RadioButton Cursor="Hand"
                          Margin="0,50,0,0"
-                         Height="60">
+                         Height="60"
+                      Command="{Binding ShowDashboardCommand}">
                 <RadioButton.Template>
                     <ControlTemplate TargetType="RadioButton">
                         <Border x:Name="border"
@@ -177,7 +203,8 @@
             </RadioButton>
 
             <RadioButton Cursor="Hand"
-                         Height="60">
+                         Height="60"
+                         Command="{Binding ShowClassListCommand}">
                 <RadioButton.Template>
                     <ControlTemplate TargetType="RadioButton">
                         <Border x:Name="border"

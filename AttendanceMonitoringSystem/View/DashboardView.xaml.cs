@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using AttendanceMonitoringSystem.ViewModel;
 
 namespace AttendanceMonitoringSystem.View
 {
@@ -20,9 +21,13 @@ namespace AttendanceMonitoringSystem.View
     /// </summary>
     public partial class DashboardView : UserControl
     {
+
         public DashboardView()
         {
             InitializeComponent();
+            DashboardVM dashboardVM = new DashboardVM();
+            this.DataContext = dashboardVM;
         }
+
     }
 }
