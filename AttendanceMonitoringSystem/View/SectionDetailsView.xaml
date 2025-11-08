@@ -77,12 +77,12 @@
                 </Border>
 
                 <Border Width="250"
-        Height="180"
-        Background="White"
-        CornerRadius="10"
-        Padding="0"
-        Margin="20,0,20,0"
-        SnapsToDevicePixels="True">
+                        Height="180"
+                        Background="White"
+                        CornerRadius="10"
+                        Padding="0"
+                        Margin="20,0,20,0"
+                        SnapsToDevicePixels="True">
 
                     <Border.Effect>
                         <DropShadowEffect Color="#002D96" 
