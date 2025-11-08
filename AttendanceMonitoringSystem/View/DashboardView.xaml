@@ -15,6 +15,72 @@
             <ColumnDefinition Width="300"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0"
+                    Background="White"
+                    Height="100"
+                    VerticalAlignment="Top">
+
+
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0"
+                                VerticalAlignment="Center"
+                                Width="150"
+                                HorizontalAlignment="Left">
+                        <TextBlock Text="Admin" 
+                                   Foreground="#002D96" 
+                                   FontSize="25" 
+                                   FontWeight="Normal" 
+                                   FontFamily="Arial Black"
+                                   Margin="20,0,0,0"/>
+                        <TextBlock Text="Faculty"
+                                   Foreground="#002D96"
+                                   FontSize="20"
+                                   FontWeight="Light"
+                                   FontFamily="Segoe UI"
+                                   Margin="20,0,0,0"/>
+                    </StackPanel>
+
+                    <fa:ImageAwesome Grid.Column="1"
+                                     Icon="UserCircle" 
+                                     Width="60" 
+                                     Height="50" 
+                                     Foreground="#002D96"
+                                     VerticalAlignment="Center"
+                                     HorizontalAlignment="Right"
+                                     Margin="0,0,20,0"/>
+                </Grid>
+            </Border>
+
+         
+            <Rectangle Grid.Row="0"
+                       Height="5"
+                       VerticalAlignment="Bottom"
+                       Fill="Transparent">
+                <Rectangle.Effect>
+                    <DropShadowEffect BlurRadius="5"
+                              ShadowDepth="0"
+                              Opacity="0.3"
+                              Color="Black"/>
+                </Rectangle.Effect>
+            </Rectangle>
+
+            <!-- Content -->
+            <Border Grid.Row="1" 
+                    Background="#F4F4F4"/>
+        </Grid>
 
         <StackPanel Grid.Column="0">
             <StackPanel.Background>
