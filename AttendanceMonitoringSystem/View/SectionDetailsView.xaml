@@ -12,6 +12,10 @@
              d:DesignWidth="1105"
              Background="#F4F4F4">
 
+    <UserControl.DataContext>
+        <ViewModel:SectionDetailsVM/>
+    </UserControl.DataContext>
+
     <UserControl.Resources>
         <c:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
 

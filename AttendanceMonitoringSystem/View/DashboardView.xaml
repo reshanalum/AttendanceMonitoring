@@ -6,21 +6,14 @@
              xmlns:local="clr-namespace:AttendanceMonitoringSystem.View"
              xmlns:ViewModel="clr-namespace:AttendanceMonitoringSystem.ViewModel"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:c="clr-namespace:AttendanceMonitoringSystem.Command"
              mc:Ignorable="d" 
              d:DesignHeight="1024" 
              d:DesignWidth="1440"
              Background="#F4F4F4">
 
-    <UserControl.DataContext>
-        <ViewModel:DashboardVM/>
-    </UserControl.DataContext>
-
     <UserControl.Resources>
-
-        <DataTemplate DataType="{x:Type ViewModel:ClassListVM}">
-            <local:ClassListView/>
-        </DataTemplate>
-
+        <c:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     </UserControl.Resources>
 
 
@@ -144,7 +137,7 @@
             <RadioButton Cursor="Hand"
                          Margin="0,50,0,0"
                          Height="60"
-                      Command="{Binding ShowDashboardCommand}">
+                      Click="ShowDashboard">
                 <RadioButton.Template>
                     <ControlTemplate TargetType="RadioButton">
                         <Border x:Name="border"
@@ -204,7 +197,7 @@
 
             <RadioButton Cursor="Hand"
                          Height="60"
-                         Command="{Binding ShowClassListCommand}">
+                         Click ="ShowSectionList">
                 <RadioButton.Template>
                     <ControlTemplate TargetType="RadioButton">
                         <Border x:Name="border"
@@ -263,7 +256,8 @@
             </RadioButton>
 
             <RadioButton Cursor="Hand"
-                         Height="60">
+                         Height="60"
+                         Click ="ShowTeacherList">
                 <RadioButton.Template>
                     <ControlTemplate TargetType="RadioButton">
                         <Border x:Name="border"

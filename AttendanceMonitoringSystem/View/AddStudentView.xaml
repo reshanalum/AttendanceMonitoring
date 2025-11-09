@@ -12,15 +12,9 @@
              d:DesignWidth="1105"
              Background="#F4F4F4">
 
-    <UserControl.DataContext>
-        <ViewModel:ClassListVM/>
-    </UserControl.DataContext>
-
     <UserControl.Resources>
 
-        <c:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     </UserControl.Resources>
-
     <Grid Margin="50">
 
         <Grid.RowDefinitions>
@@ -516,7 +510,7 @@
                 <Button Width="120" 
                         Height="40" 
                         Cursor="Hand" 
-                        Click="CancelButtonClick">
+                        Click="CancelButton">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border x:Name="border"
@@ -559,7 +553,7 @@
                 <Button Width="120" 
                         Height="40" 
                         Cursor="Hand" 
-                        Click="SaveButtonClick"
+                        Click="SaveButton"
                         Margin="20,0,20,0">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
@@ -621,6 +615,7 @@
                 </StackPanel>
 
             </Grid>
+
 
         </Grid>
 

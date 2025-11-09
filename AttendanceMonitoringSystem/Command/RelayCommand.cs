@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace GardenGloryApp.Commands;
+namespace AttendanceMonitoringSystem.Commands;
 
 public class RelayCommand : ICommand
 {

@@ -319,7 +319,7 @@
 
                     <Button Cursor="Hand"
                             Style="{StaticResource IconButtonStyle}"
-                            Click="AddButton_Click">
+                            Click="AddButton">
                         <fa:ImageAwesome Icon="UserPlus"
                                  Foreground="#002D96"
                                  Width="40"
@@ -330,7 +330,7 @@
                     <Button Cursor="Hand"
                              Style="{StaticResource IconButtonStyle}"
                              Margin="20,0,0,0"
-                            Click="EditButton_Click">
+                            Click="EditButton">
                         <fa:ImageAwesome Icon="Edit"
                                  Foreground="#002D96"
                                  Width="40"

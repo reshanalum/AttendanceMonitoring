@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AttendanceMonitoringSystem.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,18 @@ namespace AttendanceMonitoringSystem.View
         public EditStudent()
         {
             InitializeComponent();
+            EditStudentVM editstudentVM = new EditStudentVM();
+            this.DataContext = editstudentVM;
+        }
+
+        private void CancelButton(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SaveButton(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AttendanceMonitoringSystem.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,12 +24,25 @@ namespace AttendanceMonitoringSystem.View
         public SectionListView()
         {
             InitializeComponent();
+            SectionListVM sectionlistVM = new SectionListVM();
+            this.DataContext = sectionlistVM;
         }
 
         private void SectionListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
         }
+
+        private void AddSection(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void EditSection(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 
 

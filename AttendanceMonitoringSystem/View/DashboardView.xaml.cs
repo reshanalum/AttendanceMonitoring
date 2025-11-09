@@ -21,13 +21,33 @@ namespace AttendanceMonitoringSystem.View
     /// </summary>
     public partial class DashboardView : UserControl
     {
-
+        private DashboardVM _vm;
         public DashboardView()
         {
             InitializeComponent();
-            DashboardVM dashboardVM = new DashboardVM();
-            this.DataContext = dashboardVM;
+            _vm = new DashboardVM(); 
+            DataContext = _vm;
         }
 
+        private void Logout(object sender, RoutedEventArgs e)
+        {
+
+
+        }
+        private void ShowDashboard(object sender, RoutedEventArgs e)
+        {
+            _vm.ExecuteShowDashboard();
+        }
+
+        private void ShowSectionList(object sender, RoutedEventArgs e)
+        {
+            _vm.ExecuteShowSectionList();
+        }
+
+        private void ShowTeacherList(object sender, RoutedEventArgs e)
+        {
+          
+            
+        }
     }
 }

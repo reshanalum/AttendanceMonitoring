@@ -1,5 +1,5 @@
 ﻿using AttendanceMonitoringSystem.Commands;
-using GardenGloryApp.Commands;
+using AttendanceMonitoringSystem.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +12,11 @@ namespace AttendanceMonitoringSystem.ViewModel
 {
     public class DashboardVM: NotifyPropertyChanged
     {
-        public ICommand ShowClassListCommand { get; set; }
+        public ICommand ShowSectionListCommand { get; set; }
         public ICommand ShowDashboardCommand { get; set; }
 
-        private NotifyPropertyChanged _currentView;
-
-        public NotifyPropertyChanged CurrentView
+        private object _currentView;
+        public object CurrentView
         {
             get { return _currentView; }
             set
@@ -29,21 +28,24 @@ namespace AttendanceMonitoringSystem.ViewModel
 
         public DashboardVM()
         {
-            ShowClassListCommand = new RelayCommand(ExecuteShowClassListCommand);
-            ShowDashboardCommand = new RelayCommand(ExecuteShowDashboardCommand);
+
         }
 
-        private void ExecuteShowClassListCommand(object obj)
+        public void ExecuteShowSectionList()
         {
-            CurrentView = new ClassListVM();
 
+            var sectionListView = new SectionListView();
+            CurrentView = sectionListView;
         }
 
-        private void ExecuteShowDashboardCommand(object obj)
+        public void ExecuteShowDashboard()
         {
-            CurrentView = null;
 
+            //var employeesView = new Employees(this, Permissions);
+            //CurrentView = employeesView;
+            //Caption = "Employee";
         }
+
 
 
 

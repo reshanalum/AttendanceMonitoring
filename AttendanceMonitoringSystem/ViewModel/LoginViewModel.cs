@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AttendanceMonitoringSystem.ViewModel
 {
-    internal class LoginViewModel
+    public class LoginViewModel
     {
         public LoginViewModel()
         {

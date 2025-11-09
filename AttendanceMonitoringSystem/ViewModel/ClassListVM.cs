@@ -7,7 +7,7 @@ using AttendanceMonitoringSystem.Commands;
 
 namespace AttendanceMonitoringSystem.ViewModel
 {
-    class ClassListVM:NotifyPropertyChanged
+    public class ClassListVM:NotifyPropertyChanged
     {
     }
 }
