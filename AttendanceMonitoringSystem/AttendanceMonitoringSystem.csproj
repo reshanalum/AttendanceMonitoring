@@ -20,6 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AttendanceMonitoring\AttendanceMonitoring.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Images\BG.png" />
     <Resource Include="Images\Key.png" />
     <Resource Include="Images\School Logo.png" />
