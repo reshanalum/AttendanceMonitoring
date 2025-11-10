@@ -1,13 +1,15 @@
-﻿using AttendanceMonitoringSystem.Commands;
+﻿using AttendanceMonitoring;
+using AttendanceMonitoring.Models;
+using AttendanceMonitoringSystem.Commands;
 using AttendanceMonitoringSystem.View;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using AttendanceMonitoring.Models;
 
 namespace AttendanceMonitoringSystem.ViewModel
 {
@@ -17,39 +19,51 @@ namespace AttendanceMonitoringSystem.ViewModel
         public ICommand ShowEditStudentCommand { get; set; }
         public ICommand ShowAddStudentCommand { get; set; }
 
-        private Employee selectedEmployee;
+        public ObservableCollection<Student> StudentList { get; set; } = new ObservableCollection<Student>();
 
-        public Employee SelectedEmployee
+        private Student selectedStudent;
+
+        public Student SelectedStudent
         {
-            get => selectedEmployee;
+            get => selectedStudent;
             set
             {
-                selectedEmployee = value;
+                selectedStudent = value;
                 OnPropertyChanged();
             }
         }
 
-        private string employeeSearchText;
+        private string studentSearchText;
 
-        public string EmployeeSearchText
+        public string StudentSearchText
         {
-            get => employeeSearchText;
+            get => studentSearchText;
             set
             {
-                employeeSearchText = value;
+                studentSearchText = value;
                 FilterEmployees();
             }
         }
 
-        private void LoadEmployees()
+        private void LoadStudents()
         {
-            using var context = new GardenGloryContext();
-            var employees = context.Employees.ToList();
+            using var context = new AttendanceMonitoringContext();
 
-            EmployeesList.Clear();
-            foreach (var emp in employees)
+            var students = context.Students.Select(c => new Student
             {
-                EmployeesList.Add(emp);
+                StudentId = c.StudentId,
+                FirstName = c.FirstName,
+                LastName = c.LastName,
+                LRN = c.LRN,
+                PhoneNumber = c.PhoneNumber,
+                EnrollmentStatus = c.EnrollmentStatus
+            }).ToList();
+
+            StudentList.Clear();
+
+            foreach (var s in students)
+            {
+                StudentList.Add(s);
             }
         }
 
@@ -58,75 +72,73 @@ namespace AttendanceMonitoringSystem.ViewModel
 
         }
 
-        public void DeleteEmployee(object obj)
+        public void DeleteStudent(object obj)
         {
 
-            if (obj is not Employee employeeToDelete)
+            if (obj is not Student studentToDelete)
             {
-                MessageBox.Show("No employee selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("No student selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
             var result = MessageBox.Show(
-                $"Are you sure you want to delete employee: {employeeToDelete.FirstName} {employeeToDelete.LastName}?",
+                $"Are you sure you want to delete student: {studentToDelete.FirstName} {studentToDelete.LastName}?",
                 "Confirm Deletion", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
             if (result != MessageBoxResult.Yes)
                 return;
 
-            using var context = new GardenGloryContext();
-            var employeeInDb = context.Employees.FirstOrDefault(c => c.EmployeeId == employeeToDelete.EmployeeId);
+            using var context = new AttendanceMonitoringContext();
+            var studentInDb = context.Students.FirstOrDefault(c => c.StudentId == studentToDelete.StudentId);
 
-            if (employeeInDb == null)
+            if (studentInDb == null)
             {
-                MessageBox.Show("The selected employee does not exist in the database.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("The selected student does not exist in the database.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            context.Employees.Remove(employeeInDb);
+            context.Students.Remove(studentInDb);
             context.SaveChanges();
-            EmployeesList.Remove(employeeToDelete);
-            SelectedEmployee = null;
+            StudentList.Remove(studentToDelete);
+            SelectedStudent = null;
         }
-
-
 
         private void ExecuteEditEmployeeCommand(object obj)
         {
-            if (obj is Employee employee)
+            if (obj is Student student)
             {
-                SelectedEmployee = employee;
-                var editView = new EditEmployee();
-                editView.DataContext = new EditEmployeeVM(employee, _mainVM);
-                _mainVM.CurrentView = editView;
+                SelectedStudent = student;
+                var editView = new EditStudent();
+                editView.DataContext = new EditStudentVM(student,_dashboardVM);
+                _dashboardVM.CurrentView = editView;
             }
         }
 
         private void ExecuteAddEmployeeCommand(object obj)
         {
-            var addView = new AddEmployee();
-            addView.DataContext = new AddEmployeeVM(_mainVM);
-            _mainVM.CurrentView = addView;
+            var addView = new AddStudentView();
+            addView.DataContext = new AddStudentVM(_dashboardVM);
+            _dashboardVM.CurrentView = addView;
         }
 
         public void FilterEmployees()
         {
-            string search = EmployeeSearchText.ToLower();
+            string search = StudentSearchText.ToLower();
 
-            using var context = new GardenGloryContext();
-            var employees = context.Employees
+            using var context = new AttendanceMonitoringContext();
+            var students = context.Students
                 .Where(c =>
-                    c.EmployeeId.ToString().Contains(search) ||
+                    c.StudentId.ToString().Contains(search) ||
                     c.FirstName.ToLower().Contains(search) ||
                     c.LastName.ToLower().Contains(search) ||
-                    c.CellPhone.ToLower().Contains(search) ||
-                    c.ExperienceLevel.ToLower().Contains(search))
+                    c.LRN.ToLower().Contains(search) ||
+                    c.PhoneNumber.ToLower().Contains(search))
                 .ToList();
 
-            EmployeesList.Clear();
-            foreach (var emp in employees)
+            StudentList.Clear();
+            foreach (var s in students)
             {
-                EmployeesList.Add(emp);
+                StudentList.Add(s);
             }
 
         }

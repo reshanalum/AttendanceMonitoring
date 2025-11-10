@@ -22,11 +22,11 @@ namespace AttendanceMonitoringSystem.View
     public partial class StudentListView : UserControl
     {
         private StudentListVM _vm;
-        public StudentListView()
+        public StudentListView(DashboardVM dashboardVM)
         {
             InitializeComponent();
-            _vm = new StudentListVM();
-            DataContext = _vm;
+            _vm = new StudentListVM(dashboardVM);
+            this.DataContext = _vm;
 
         }
 
