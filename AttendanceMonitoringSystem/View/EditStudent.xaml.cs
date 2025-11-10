@@ -21,11 +21,12 @@ namespace AttendanceMonitoringSystem.View
     /// </summary>
     public partial class EditStudent : UserControl
     {
+        private EditStudentVM _vm;
+
         public EditStudent()
         {
             InitializeComponent();
-            EditStudentVM editstudentVM = new EditStudentVM();
-            this.DataContext = editstudentVM;
+
         }
 
         private void CancelButton(object sender, RoutedEventArgs e)
@@ -36,6 +37,11 @@ namespace AttendanceMonitoringSystem.View
         private void SaveButton(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            _vm = (EditStudentVM)DataContext;
         }
     }
 }

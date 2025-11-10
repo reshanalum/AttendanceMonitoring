@@ -22,11 +22,15 @@ namespace AttendanceMonitoringSystem.View
     /// </summary>
     public partial class AddStudentView : UserControl
     {
+        private AddStudentVM _vm;
         public AddStudentView()
         {
             InitializeComponent();
-            AddStudentVM addstudentVM = new AddStudentVM();
-            this.DataContext = addstudentVM;
+
+        }
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            _vm = (AddStudentVM)DataContext;
         }
 
         private void CancelButton(object sender, RoutedEventArgs e)
