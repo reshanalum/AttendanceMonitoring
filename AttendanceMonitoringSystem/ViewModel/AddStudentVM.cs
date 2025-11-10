@@ -71,7 +71,7 @@ namespace AttendanceMonitoringSystem.ViewModel
 
             context.Students.Add(newStudent);
             context.SaveChanges();
-            MessageBox.Show($"New employee added with ID: {NewStudentID}", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show($"New student added with ID: {NewStudentID}", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             BackToStudentList();
         }
 
