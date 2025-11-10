@@ -74,7 +74,7 @@
                                FontWeight="Bold" 
                                Foreground="#002D96"/>
 
-                        <Border Background="White"
+                        <Border Background="#E0E0E0"
                                 BorderThickness="2"
                                 CornerRadius="6"
                                 Padding="10,5"
@@ -94,7 +94,9 @@
                                      FontSize="18"
                                      Foreground="#333"
                                      VerticalContentAlignment="Center"
-                                     Padding="10,5" />
+                                     Padding="10,5"
+                                     Text="{Binding NewParentID}"
+                                     IsReadOnly="True"/>
                         </Border>
 
                     </StackPanel>
@@ -131,7 +133,8 @@
                                      FontSize="18"
                                      Foreground="#333"
                                      VerticalContentAlignment="Center"
-                                     Padding="10,5" />
+                                     Padding="10,5"
+                                     Text="{Binding NewParentFirstName}"/>
                         </Border>
 
                     </StackPanel>
@@ -167,7 +170,8 @@
                                      FontSize="18"
                                      Foreground="#333"
                                      VerticalContentAlignment="Center"
-                                     Padding="10,5" />
+                                     Padding="10,5"
+                                     Text="{Binding NewParentEmail}"/>
                         </Border>
 
                     </StackPanel>
@@ -203,7 +207,8 @@
                                      FontSize="18"
                                      Foreground="#333"
                                      VerticalContentAlignment="Center"
-                                     Padding="10,5" />
+                                     Padding="10,5"
+                                     Text="{Binding NewParentLastName}"/>
                         </Border>
 
                     </StackPanel>
@@ -239,7 +244,8 @@
                                      FontSize="18"
                                      Foreground="#333"
                                      VerticalContentAlignment="Center"
-                                     Padding="10,5" />
+                                     Padding="10,5" 
+                                    Text="{Binding NewParentContactNumber1}"/>
                         </Border>
 
                     </StackPanel>
@@ -250,7 +256,7 @@
                                 Margin="20,10,20,10"
                                 VerticalAlignment="Center">
 
-                        <TextBlock Text="Contact Number #1" 
+                        <TextBlock Text="Contact Number #2" 
                                FontSize="23" 
                                FontWeight="Bold" 
                                Foreground="#002D96"/>
@@ -275,7 +281,8 @@
                                      FontSize="18"
                                      Foreground="#333"
                                      VerticalContentAlignment="Center"
-                                     Padding="10,5" />
+                                     Padding="10,5"
+                                      Text="{Binding NewParentContactNumber2}"/>
                         </Border>
 
                     </StackPanel>
@@ -315,7 +322,7 @@
                                FontWeight="Bold" 
                                Foreground="#002D96"/>
 
-                        <Border Background="White"
+                        <Border Background="#E0E0E0"
                                 BorderThickness="2"
                                 CornerRadius="6"
                                 Padding="10,5"
@@ -335,7 +342,9 @@
                                      FontSize="18"
                                      Foreground="#333"
                                      VerticalContentAlignment="Center"
-                                     Padding="10,5" />
+                                     Padding="10,5"
+                                     Text="{Binding NewStudentID}"
+                                     IsReadOnly="True"/>
                         </Border>
 
                     </StackPanel>
@@ -371,7 +380,8 @@
                                      FontSize="18"
                                      Foreground="#333"
                                      VerticalContentAlignment="Center"
-                                     Padding="10,5" />
+                                     Padding="10,5"
+                                     Text="{Binding NewLRN, UpdateSourceTrigger=PropertyChanged}" />
                         </Border>
 
                     </StackPanel>
@@ -408,7 +418,8 @@
                                      FontSize="18"
                                      Foreground="#333"
                                      VerticalContentAlignment="Center"
-                                     Padding="10,5" />
+                                     Padding="10,5"
+                                     Text="{Binding NewFirstName, UpdateSourceTrigger=PropertyChanged}" />
                         </Border>
 
                     </StackPanel>
@@ -444,7 +455,8 @@
                                      FontSize="18"
                                      Foreground="#333"
                                      VerticalContentAlignment="Center"
-                                     Padding="10,5" />
+                                     Padding="10,5"
+                                     Text="{Binding NewLastName, UpdateSourceTrigger=PropertyChanged}" />
                         </Border>
 
                     </StackPanel>
@@ -480,7 +492,8 @@
                                      FontSize="18"
                                      Foreground="#333"
                                      VerticalContentAlignment="Center"
-                                     Padding="10,5" />
+                                     Padding="10,5"
+                                    Text="{Binding NewPhoneNumber, UpdateSourceTrigger=PropertyChanged}" />
                         </Border>
 
                     </StackPanel>

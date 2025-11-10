@@ -126,6 +126,7 @@ namespace AttendanceMonitoringSystem.ViewModel
             _dashboardVM.CurrentView = addView;
         }
 
+
         public void FilterStudents()
         {
             string search = StudentSearchText.ToLower();
