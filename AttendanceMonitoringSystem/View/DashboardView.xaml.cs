@@ -46,8 +46,12 @@ namespace AttendanceMonitoringSystem.View
 
         private void ShowTeacherList(object sender, RoutedEventArgs e)
         {
-          
-            
+            _vm.ExecuteShowTeacherPage();
+        }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

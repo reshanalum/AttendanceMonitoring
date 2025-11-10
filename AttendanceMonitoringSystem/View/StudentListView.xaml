@@ -8,7 +8,7 @@
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:c="clr-namespace:AttendanceMonitoringSystem.Command"
              mc:Ignorable="d" 
-             d:DesignHeight="939" 
+             d:DesignHeight="944" 
              d:DesignWidth="1105"
              Background="#F4F4F4">
 
@@ -66,38 +66,50 @@
             <Setter Property="BorderBrush" Value="#002D96"/>
         </Style>
 
-            <Style x:Key="IconButtonStyle" TargetType="Button">
-                <Setter Property="Background" Value="Transparent"/>
-                <Setter Property="BorderThickness" Value="0"/>
-                <Setter Property="Padding" Value="0"/>
-                <Setter Property="Cursor" Value="Hand"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}"
-                            CornerRadius="4"
-                            SnapsToDevicePixels="True">
-                                <ContentPresenter HorizontalAlignment="Center" 
-                                          VerticalAlignment="Center"/>
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <!-- Hover -->
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#1FFFFFFF"/>
-                                    <!-- 10% white -->
-                                </Trigger>
-                                <Trigger Property="IsPressed" Value="True">
-                                    <Setter Property="Background" Value="#33FFFFFF"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
+        <Style x:Key="IconButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="root">
+                            <!-- Background -->
+                            <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="6"
+                            SnapsToDevicePixels="True"/>
+                            <!-- Icon/Content -->
+                            <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+                        </Grid>
 
+                        <ControlTemplate.Triggers>
+                            <!-- Hover -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#402D96FF"/>
+                                <!-- Semi-transparent overlay matching icon color -->
+                            </Trigger>
+
+                            <!-- Pressed -->
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#602D96FF"/>
+                            </Trigger>
+
+                            <!-- Disabled -->
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Opacity" Value="0.5"/>
+                                <Setter Property="Foreground" Value="#AAA"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
 
-    <Grid Margin="50">
+    <Grid Margin="20">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
@@ -298,14 +310,16 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0"
-                            Orientation="Vertical">
+                            Orientation="Vertical"
+                            VerticalAlignment="Center">
+
                     <TextBlock Text="Student List" 
-                               FontSize="40" 
+                               FontSize="30" 
                                FontWeight="Bold" 
                                Foreground="#002D96"/>
 
                     <TextBlock Text="Grade 6 - St. Peter" 
-                               FontSize="18" 
+                               FontSize="14" 
                                Foreground="Gray"
                                FontWeight="Bold" 
                                Margin="0,0,0,10"
@@ -319,23 +333,26 @@
 
                     <Button Cursor="Hand"
                             Style="{StaticResource IconButtonStyle}"
-                            Click="AddButton">
+                            Width="45"
+                            Height="45"
+                            Command="{Binding ShowAddStudentCommand}">
                         <fa:ImageAwesome Icon="UserPlus"
                                  Foreground="#002D96"
                                  Width="40"
                                  Height="40"
-                                 Margin="20,0,0,0"/>
+                                 HorizontalAlignment="Center"/>
                     </Button>
 
                     <Button Cursor="Hand"
-                             Style="{StaticResource IconButtonStyle}"
-                             Margin="20,0,0,0"
-                            Click="EditButton">
+                            Style="{StaticResource IconButtonStyle}"
+                            Margin="20,0,20,0"
+                            Width="45"
+                            Height="45"
+                            Command="{Binding ShowEditStudentCommand}">
                         <fa:ImageAwesome Icon="Edit"
                                  Foreground="#002D96"
                                  Width="40"
-                                 Height="40"
-                                  Margin="10,0,10,0"/>
+                                 Height="40"/>
                     </Button>
 
 

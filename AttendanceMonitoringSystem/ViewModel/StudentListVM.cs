@@ -16,6 +16,7 @@ namespace AttendanceMonitoringSystem.ViewModel
     public class StudentListVM: NotifyPropertyChanged
     {
         private readonly DashboardVM _dashboardVM;
+
         public ICommand ShowEditStudentCommand { get; set; }
         public ICommand ShowAddStudentCommand { get; set; }
 
@@ -41,7 +42,7 @@ namespace AttendanceMonitoringSystem.ViewModel
             set
             {
                 studentSearchText = value;
-                FilterEmployees();
+                FilterStudents();
             }
         }
 
@@ -67,8 +68,12 @@ namespace AttendanceMonitoringSystem.ViewModel
             }
         }
 
-        public StudentListVM(DashboardVM _dashboardVM)
+        public StudentListVM(DashboardVM dashboardVM)
         {
+            LoadStudents();
+            ShowEditStudentCommand = new RelayCommand(ExecuteEditStudentCommand);
+            ShowAddStudentCommand = new RelayCommand(ExecuteAddStudentCommand);
+            _dashboardVM = dashboardVM;
 
         }
 
@@ -103,7 +108,7 @@ namespace AttendanceMonitoringSystem.ViewModel
             SelectedStudent = null;
         }
 
-        private void ExecuteEditEmployeeCommand(object obj)
+        private void ExecuteEditStudentCommand(object obj)
         {
             if (obj is Student student)
             {
@@ -114,14 +119,14 @@ namespace AttendanceMonitoringSystem.ViewModel
             }
         }
 
-        private void ExecuteAddEmployeeCommand(object obj)
+        private void ExecuteAddStudentCommand(object obj)
         {
             var addView = new AddStudentView();
             addView.DataContext = new AddStudentVM(_dashboardVM);
             _dashboardVM.CurrentView = addView;
         }
 
-        public void FilterEmployees()
+        public void FilterStudents()
         {
             string search = StudentSearchText.ToLower();
 

@@ -12,8 +12,6 @@ namespace AttendanceMonitoringSystem.ViewModel
 {
     public class DashboardVM: NotifyPropertyChanged
     {
-        public ICommand ShowSectionListCommand { get; set; }
-        public ICommand ShowDashboardCommand { get; set; }
 
         private object _currentView;
         public object CurrentView
@@ -44,6 +42,14 @@ namespace AttendanceMonitoringSystem.ViewModel
             //var employeesView = new Employees(this, Permissions);
             //CurrentView = employeesView;
             //Caption = "Employee";
+        }
+
+        public void ExecuteShowTeacherPage()
+        {
+            //temporary lang
+
+            var studentListView = new StudentListView(this);
+            CurrentView = studentListView;
         }
 
 

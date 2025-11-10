@@ -8,14 +8,14 @@
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:c="clr-namespace:AttendanceMonitoringSystem.Command"
              mc:Ignorable="d" 
-             d:DesignHeight="939" 
+             d:DesignHeight="944" 
              d:DesignWidth="1105"
              Background="#F4F4F4">
 
     <UserControl.Resources>
 
     </UserControl.Resources>
-    <Grid Margin="50">
+    <Grid Margin="20">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
@@ -599,14 +599,16 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0"
-                            Orientation="Vertical">
+                            Orientation="Vertical"
+                            VerticalAlignment="Center">
+                
                     <TextBlock Text="Add Student" 
-                               FontSize="40" 
+                               FontSize="30" 
                                FontWeight="Bold" 
                                Foreground="#002D96"/>
 
                     <TextBlock Text="Grade 6 - St. Peter" 
-                               FontSize="18" 
+                               FontSize="14" 
                                Foreground="Gray"
                                FontWeight="Bold" 
                                Margin="0,0,0,10"

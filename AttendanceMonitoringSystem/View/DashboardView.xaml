@@ -26,13 +26,13 @@
         
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
+                <RowDefinition Height="80"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
             <Border Grid.Row="0"
                     Background="White"
-                    Height="100"
+                    Height="80"
                     VerticalAlignment="Top">
 
 
@@ -95,7 +95,7 @@
 
             <!-- Content -->
             <ContentControl Grid.Row="1"
-                                            Margin="5"
+                                            Margin="2"
                                             Background="Transparent"
                                             Content="{Binding CurrentView}"/>
         </Grid>
@@ -257,7 +257,7 @@
 
             <RadioButton Cursor="Hand"
                          Height="60"
-                         Click ="ShowTeacherList">
+                         Click ="ShowTeacherList" >
                 <RadioButton.Template>
                     <ControlTemplate TargetType="RadioButton">
                         <Border x:Name="border"

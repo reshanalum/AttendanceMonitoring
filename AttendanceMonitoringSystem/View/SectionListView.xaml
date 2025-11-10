@@ -17,6 +17,7 @@
     </UserControl.DataContext>
 
     <UserControl.Resources>
+
         <c:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
 
         <Style x:Key="PageButtonStyle" TargetType="Button">
@@ -68,35 +69,47 @@
         <Style x:Key="IconButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Padding" Value="4"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}"
-                            CornerRadius="4"
-                            SnapsToDevicePixels="True">
-                            <ContentPresenter HorizontalAlignment="Center" 
-                                          VerticalAlignment="Center"/>
-                        </Border>
+                        <Grid x:Name="root">
+                            <!-- Background -->
+                            <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="6"
+                            SnapsToDevicePixels="True"/>
+                            <!-- Icon/Content -->
+                            <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+                        </Grid>
+
                         <ControlTemplate.Triggers>
                             <!-- Hover -->
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#1FFFFFFF"/>
-                                <!-- 10% white -->
+                                <Setter TargetName="border" Property="Background" Value="#402D96FF"/>
+                                <!-- Semi-transparent overlay matching icon color -->
                             </Trigger>
+
+                            <!-- Pressed -->
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="#33FFFFFF"/>
+                                <Setter TargetName="border" Property="Background" Value="#602D96FF"/>
+                            </Trigger>
+
+                            <!-- Disabled -->
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Opacity" Value="0.5"/>
+                                <Setter Property="Foreground" Value="#AAA"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-
     </UserControl.Resources>
-    
-    <Grid Margin="50">
+
+    <Grid Margin="20">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
@@ -104,6 +117,60 @@
             <RowDefinition/>
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
+
+        <!-- Pagination Bar -->
+        <StackPanel Grid.Row="3"
+            Orientation="Horizontal"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Margin="0,20,0,0"
+            Background="Transparent">
+
+            <Button Content="Prev"
+            Style="{StaticResource PageButtonStyle}"
+            IsEnabled="True"
+            Width="50"
+            Height="50"
+            FontSize="18"/>
+
+            <Button Content="1" 
+            Style="{StaticResource ActivePageButtonStyle}"
+            Width="50"
+            Height="50"
+            FontSize="18"/>
+
+            <Button Content="2"
+            Style="{StaticResource PageButtonStyle}"
+            Width="50"
+            Height="50"
+            FontSize="18"/>
+
+            <Button Content="3" 
+            Style="{StaticResource PageButtonStyle}"
+            Width="50"
+            Height="50"
+            FontSize="18"/>
+
+            <TextBlock Text="..."
+               VerticalAlignment="Center"
+               Margin="8,0"
+               FontSize="18"
+               FontWeight="SemiBold"
+               Foreground="#6c757d"/>
+
+            <Button Content="10" 
+            Style="{StaticResource PageButtonStyle}"
+            Width="50"
+            Height="50"
+            FontSize="18"/>
+
+
+            <Button Content="Next"
+            Style="{StaticResource PageButtonStyle}"
+            Width="50"
+            Height="50"
+            FontSize="18"/>
+        </StackPanel>
 
         <Border Grid.Row="2"
                 CornerRadius="2"
@@ -118,8 +185,7 @@
             </Border.Effect>
 
             <ListView  Padding="8,5"
-                        Grid.Row="2"
-                        MouseDoubleClick="SectionListView_MouseDoubleClick">
+                        Grid.Row="2">
 
                 <ListView.Resources>
                     <Style TargetType="GridViewColumnHeader">
@@ -239,19 +305,21 @@
             <Grid Grid.Column="0">
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="310"/>
+                    <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0"
-                            Orientation="Vertical">
+                            Orientation="Vertical"
+                            VerticalAlignment="Center">
+
                     <TextBlock Text="Section List" 
-                               FontSize="40" 
+                               FontSize="30" 
                                FontWeight="Bold" 
                                Foreground="#002D96"/>
 
-                    <TextBlock Text="Vicente Hizon Sr. Elementary School" 
-                               FontSize="18" 
+                    <TextBlock Text="Grade 6 - St. Peter" 
+                               FontSize="14" 
                                Foreground="Gray"
                                FontWeight="Bold" 
                                Margin="0,0,0,10"
@@ -265,27 +333,32 @@
 
                     <Button Cursor="Hand"
                             Style="{StaticResource IconButtonStyle}"
-                            Click="AddSection">
+                            Width="45"
+                            Height="45"
+                            Command="{Binding ShowAddStudentCommand}">
                         <fa:ImageAwesome Icon="UserPlus"
                                  Foreground="#002D96"
                                  Width="40"
                                  Height="40"
-                                 Margin="20,0,0,0"/>
+                                 HorizontalAlignment="Center"/>
                     </Button>
 
                     <Button Cursor="Hand"
-                             Style="{StaticResource IconButtonStyle}"
-                             Margin="20,0,0,0"
-                            Click="EditSection">
+                            Style="{StaticResource IconButtonStyle}"
+                            Margin="20,0,20,0"
+                            Width="45"
+                            Height="45"
+                            Command="{Binding ShowEditStudentCommand}">
                         <fa:ImageAwesome Icon="Edit"
                                  Foreground="#002D96"
                                  Width="40"
-                                 Height="40"
-                                  Margin="10,0,10,0"/>
+                                 Height="40"/>
                     </Button>
 
 
                 </StackPanel>
+
+
 
 
             </Grid>

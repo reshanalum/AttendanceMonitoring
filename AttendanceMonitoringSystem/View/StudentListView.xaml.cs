@@ -30,15 +30,5 @@ namespace AttendanceMonitoringSystem.View
 
         }
 
-        private void AddButton(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void EditButton(object sender, RoutedEventArgs e)
-        {
-
-
-        }
     }
 }
