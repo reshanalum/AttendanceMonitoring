@@ -184,8 +184,11 @@
                           Opacity="0.15"/>
             </Border.Effect>
 
-            <ListView  Padding="8,5"
-                        Grid.Row="2">
+            <ListView   Padding="8,5"
+                        Grid.Row="2"
+                        ItemsSource="{Binding Advisory}"
+                        SelectedItem="{Binding SelectedSection}"
+                        SelectedIndex="{Binding SelectedIndex}">
 
                 <ListView.Resources>
                     <Style TargetType="GridViewColumnHeader">
@@ -219,18 +222,45 @@
 
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="LRN" 
-                                    Width="150"/>
-                        <GridViewColumn Header="Name" 
-                                    Width="250"/>
-                        <GridViewColumn Header="Status" 
-                                    Width="130"/>
-                        <GridViewColumn Header="Time In" 
-                                    Width="180"/>
-                        <GridViewColumn Header="Time Out" 
-                                    Width="180"/>
-                        <GridViewColumn Header="" 
-                                    Width="100"/>
+                        <GridViewColumn Header="Class Section" 
+                                    Width="450">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding SectionName}"
+                                           FontFamily="Montserrat"
+                                            FontWeight="Medium"
+                                            Foreground="#002D96"
+                                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="Class Adviser" 
+                                    Width="300">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding ClassAdviserId.FirstName}"
+                                               FontFamily="Montserrat"
+                                                FontWeight="Medium"
+                                                Foreground="#002D96"
+                                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="# of Students" 
+                                    Width="200">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding NumberOfStudents}"
+                                               FontFamily="Montserrat"
+                                                FontWeight="Medium"
+                                                Foreground="#002D96"
+                                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
                         <GridViewColumn Width="100">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
@@ -262,12 +292,12 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Border Grid.Column="1"
+            <Border
                     Background="White"
                     BorderThickness="2"
                     CornerRadius="2"
                     Padding="10,0"
-                    SnapsToDevicePixels="True">
+                    SnapsToDevicePixels="True" Grid.ColumnSpan="2" Margin="532,10,0,10">
 
                 <Border.Effect>
                     <DropShadowEffect Color="Black" 
@@ -281,7 +311,7 @@
 
                     <fa:ImageAwesome Icon="Search"
                                      Foreground="#002D96"
-                                     Width="40" Height="40"
+                                     Width="40" Height="28"
                                      Margin="10,0,5,0"/>
 
                     <TextBox x:Name="SearchBox"
