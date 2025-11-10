@@ -102,7 +102,7 @@
 
         <StackPanel Grid.Column="0">
             <StackPanel.Background>
-                <ImageBrush ImageSource="/AttendanceMonitoringSystem;component/Images/BG.png"/>
+                <ImageBrush ImageSource="/Images/Navigationpanel.png"/>
             </StackPanel.Background>
 
             <StackPanel Orientation="Horizontal">
