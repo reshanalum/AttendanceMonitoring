@@ -317,7 +317,8 @@
 
             <RadioButton Cursor="Hand"
                          Margin="0,550,0,0"
-                         Height="60">
+                         Height="60"
+                         Click ="ShowLogout" >
                 <RadioButton.Template>
                     <ControlTemplate TargetType="RadioButton">
                         <Border x:Name="border"
