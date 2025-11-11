@@ -15,7 +15,7 @@ namespace AttendanceMonitoring.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "9.0.9");
+            modelBuilder.HasAnnotation("ProductVersion", "9.0.10");
 
             modelBuilder.Entity("AttendanceMonitoring.Models.Advisory", b =>
                 {

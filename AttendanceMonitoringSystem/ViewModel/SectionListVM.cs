@@ -27,7 +27,7 @@ namespace AttendanceMonitoringSystem.ViewModel
         }
         public Advisory SelectedSection
         {
-            get{ return _selectedSection; }
+            get => _selectedSection; 
             set{ _selectedSection = value;
                 OnPropertyChanged();
             }

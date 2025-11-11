@@ -12,9 +12,6 @@
              d:DesignWidth="1105"
              Background="#F4F4F4">
 
-    <UserControl.DataContext>
-        <ViewModel:SectionListVM/>
-    </UserControl.DataContext>
 
     <UserControl.Resources>
 
@@ -186,7 +183,7 @@
 
             <ListView   Padding="8,5"
                         Grid.Row="2"
-                        ItemsSource="{Binding Advisory}"
+                        ItemsSource="{Binding AdvisoryList}"
                         SelectedItem="{Binding SelectedSection}"
                         SelectedIndex="{Binding SelectedIndex}">
 
@@ -228,7 +225,7 @@
                                 <DataTemplate>
                                     <TextBlock Text="{Binding SectionName}"
                                            FontFamily="Montserrat"
-                                            FontWeight="Medium"
+                                            FontWeight="Regular"
                                             Foreground="#002D96"
                                             HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </DataTemplate>
@@ -241,7 +238,7 @@
                                 <DataTemplate>
                                     <TextBlock Text="{Binding ClassAdviserId}"
                                                FontFamily="Montserrat"
-                                                FontWeight="Medium"
+                                                FontWeight="Regular"
                                                 Foreground="#002D96"
                                                 HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </DataTemplate>
@@ -254,7 +251,7 @@
                                 <DataTemplate>
                                     <TextBlock Text="{Binding StudentId}"
                                                FontFamily="Montserrat"
-                                                FontWeight="Medium"
+                                                FontWeight="Regular"
                                                 Foreground="#002D96"
                                                 HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </DataTemplate>

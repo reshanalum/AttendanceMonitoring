@@ -32,7 +32,7 @@ namespace AttendanceMonitoringSystem.ViewModel
         public void ExecuteShowSectionList()
         {
 
-            var sectionListView = new SectionListView();
+            var sectionListView = new SectionListView(this);
             CurrentView = sectionListView;
         }
 
