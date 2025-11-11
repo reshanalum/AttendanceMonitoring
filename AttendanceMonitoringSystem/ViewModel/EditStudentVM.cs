@@ -34,7 +34,7 @@ namespace AttendanceMonitoringSystem.ViewModel
             _dashboardVM = dashboardVM;
         }
 
-        public void SaveEditedEmployee()
+        public void SaveEditedStudent()
         {
             if (EditingStudent == null) return;
 

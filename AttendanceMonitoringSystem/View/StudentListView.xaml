@@ -12,9 +12,7 @@
              d:DesignWidth="1105"
              Background="#F4F4F4">
 
-    <UserControl.DataContext>
-        <ViewModel:ClassListVM/>
-    </UserControl.DataContext>
+
 
     <UserControl.Resources>
 
@@ -185,7 +183,9 @@
             </Border.Effect>
 
             <ListView  Padding="8,5"
-                        Grid.Row="2">
+                        Grid.Row="2"
+                       ItemsSource="{Binding StudentList}"
+                       SelectedItem="{Binding SelectedStudent}">
 
                 <ListView.Resources>
                     <Style TargetType="GridViewColumnHeader">
@@ -220,15 +220,23 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="LRN" 
-                                    Width="150"/>
-                        <GridViewColumn Header="Name" 
-                                    Width="250"/>
-                        <GridViewColumn Header="Status" 
-                                    Width="130"/>
-                        <GridViewColumn Header="Time In" 
-                                    Width="180"/>
-                        <GridViewColumn Header="Time Out" 
-                                    Width="180"/>
+                                    Width="130"
+                                    DisplayMemberBinding="{Binding Path=LRN}"/>
+                        <GridViewColumn Header="Student ID" 
+                                    Width="130"
+                                   DisplayMemberBinding="{Binding Path=StudentId}"/>
+                        <GridViewColumn Header="First Name" 
+                                    Width="200"
+                                    DisplayMemberBinding="{Binding Path=FirstName}"/>
+                        <GridViewColumn Header="Last Name" 
+                                    Width="150"
+                                    DisplayMemberBinding="{Binding Path=LastName}"/>
+                        <GridViewColumn Header="Phone Number" 
+                                    Width="150"
+                                    DisplayMemberBinding="{Binding Path=PhoneNumber}"/>
+                        <GridViewColumn Header="Enrollment Status" 
+                                    Width="180"
+                                    DisplayMemberBinding="{Binding Path=EnrollmentStatus}"/>
                         <GridViewColumn Header="" 
                                     Width="100"/>
                         <GridViewColumn Width="100">

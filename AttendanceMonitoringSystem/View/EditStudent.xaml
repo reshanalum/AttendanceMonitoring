@@ -317,7 +317,8 @@
                                FontWeight="Bold" 
                                Foreground="#002D96"/>
 
-                        <Border Background="White"
+
+                        <Border Background="#E0E0E0"
                                 BorderThickness="2"
                                 CornerRadius="6"
                                 Padding="10,5"
@@ -337,7 +338,9 @@
                                      FontSize="18"
                                      Foreground="#333"
                                      VerticalContentAlignment="Center"
-                                     Padding="10,5" />
+                                     Padding="10,5"
+                                     Text="{Binding EditingStudent.StudentId, UpdateSourceTrigger=PropertyChanged}"
+                                     IsReadOnly="True"/>
                         </Border>
 
                     </StackPanel>
@@ -353,7 +356,7 @@
                                FontWeight="Bold" 
                                Foreground="#002D96"/>
 
-                        <Border Background="White"
+                        <Border Background="#E0E0E0"
                                 BorderThickness="2"
                                 CornerRadius="6"
                                 Padding="10,5"
@@ -373,7 +376,9 @@
                                      FontSize="18"
                                      Foreground="#333"
                                      VerticalContentAlignment="Center"
-                                     Padding="10,5" />
+                                     Padding="10,5"
+                                     Text="{Binding EditingStudent.LRN, UpdateSourceTrigger=PropertyChanged}"
+                                     IsReadOnly="True"/>
                         </Border>
 
                     </StackPanel>
@@ -410,7 +415,9 @@
                                      FontSize="18"
                                      Foreground="#333"
                                      VerticalContentAlignment="Center"
-                                     Padding="10,5" />
+                                     Padding="10,5"
+                                      Text="{Binding EditingStudent.FirstName, UpdateSourceTrigger=PropertyChanged}"
+                                     />
                         </Border>
 
                     </StackPanel>
@@ -446,7 +453,8 @@
                                      FontSize="18"
                                      Foreground="#333"
                                      VerticalContentAlignment="Center"
-                                     Padding="10,5" />
+                                     Padding="10,5"
+                                      Text="{Binding EditingStudent.LastName, UpdateSourceTrigger=PropertyChanged}"/>
                         </Border>
 
                     </StackPanel>
@@ -482,7 +490,8 @@
                                      FontSize="18"
                                      Foreground="#333"
                                      VerticalContentAlignment="Center"
-                                     Padding="10,5" />
+                                     Padding="10,5"
+                                      Text="{Binding EditingStudent.PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
                         </Border>
 
                     </StackPanel>
