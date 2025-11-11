@@ -31,12 +31,14 @@ namespace AttendanceMonitoringSystem.View
 
         private void CancelButton(object sender, RoutedEventArgs e)
         {
-
+            if (DataContext is EditStudentVM vm)
+                vm.BackToStudentList();
         }
 
         private void SaveButton(object sender, RoutedEventArgs e)
         {
-
+            if (DataContext is EditStudentVM vm)
+                vm.SaveEditedStudent();
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

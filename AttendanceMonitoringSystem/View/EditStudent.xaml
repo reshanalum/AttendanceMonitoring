@@ -12,11 +12,6 @@
              d:DesignWidth="1105"
              Background="#F4F4F4">
 
-    <UserControl.Resources>
-
-        <c:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-    </UserControl.Resources>
-
     <Grid Margin="10">
 
         <Grid.RowDefinitions>
@@ -99,7 +94,7 @@
                                      Foreground="#333"
                                      VerticalContentAlignment="Center"
                                      Padding="10,5"
-                                     Text="{Binding NewParentID}"
+                                     Text="{Binding EditingParent.ParentId}"
                                      IsReadOnly="True"/>
                         </Border>
 
@@ -139,7 +134,7 @@
                                      Foreground="#333"
                                      VerticalContentAlignment="Center"
                                      Padding="10,5"
-                                     Text="{Binding NewParentFirstName}"/>
+                                     Text="{Binding EditingParent.FirstName}"/>
                         </Border>
 
                     </StackPanel>
@@ -177,7 +172,7 @@
                                      Foreground="#333"
                                      VerticalContentAlignment="Center"
                                      Padding="10,5"
-                                    Text="{Binding NewParentEmail}"/>
+                                    Text="{Binding EditingParent.Email}"/>
                         </Border>
 
                     </StackPanel>
@@ -215,7 +210,7 @@
                                      Foreground="#333"
                                      VerticalContentAlignment="Center"
                                      Padding="10,5"
-                                     Text="{Binding NewParentLastName}"/>
+                                     Text="{Binding EditingParent.LastName}"/>
                         </Border>
 
                     </StackPanel>
@@ -253,7 +248,7 @@
                                      Foreground="#333"
                                      VerticalContentAlignment="Center"
                                      Padding="10,5"
-                                     Text="{Binding NewParentContactNumber1}"/>
+                                     Text="{Binding Contact1.PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
                         </Border>
 
                     </StackPanel>
@@ -291,7 +286,7 @@
                                      Foreground="#333"
                                      VerticalContentAlignment="Center"
                                      Padding="10,5"
-                                     Text="{Binding NewParentContactNetwork1}"/>
+                                     Text="{Binding Contact1.Network, UpdateSourceTrigger=PropertyChanged}"/>
                         </Border>
 
                     </StackPanel>
@@ -329,7 +324,7 @@
                                      Foreground="#333"
                                      VerticalContentAlignment="Center"
                                      Padding="10,5" 
-                                    Text="{Binding NewParentContactNumber2}"/>
+                                    Text="{Binding Contact2.PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
                         </Border>
 
                     </StackPanel>
@@ -367,7 +362,7 @@
                                      Foreground="#333"
                                      VerticalContentAlignment="Center"
                                      Padding="10,5" 
-                                    Text="{Binding NewParentContactNetwork2}"/>
+                                    Text="{Binding Contact2.Network, UpdateSourceTrigger=PropertyChanged}"/>
                         </Border>
 
                     </StackPanel>
@@ -625,7 +620,7 @@
                                 VerticalContentAlignment="Center"
                                 Padding="10,5"
                                 ItemsSource="{Binding EnrollmentStatus}"
-                                SelectedItem="{Binding NewEnrollmentStatus, UpdateSourceTrigger=PropertyChanged}"/>
+                                SelectedItem="{Binding EditingStudent.EnrollmentStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                         </Border>
 

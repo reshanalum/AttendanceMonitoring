@@ -11,68 +11,34 @@ using System.Windows;
 
 namespace AttendanceMonitoringSystem.ViewModel
 {
-    public class EditStudentVM: NotifyPropertyChanged
+    public class EditStudentVM : NotifyPropertyChanged
     {
         private readonly DashboardVM _dashboardVM;
 
-        private Student _editingStudent;
-        public Student EditingStudent
-        {
-            get => _editingStudent;
-            set
-            {
-                _editingStudent = value;
-                OnPropertyChanged();
-            }
-        }
+        public Student EditingStudent { get; set; }
+        public Parent EditingParent { get; set; }
+        public Contact Contact1 { get; set; }
+        public Contact Contact2 { get; set; }
 
-        private Parent _editingParent;
-        public Parent EditingParent
-        {
-            get => _editingParent;
-            set
-            {
-                _editingParent = value;
-                OnPropertyChanged();
-            }
-        }
-
-
-        private Contact _contact1;
-        public Contact Contact1
-        {
-            get => _contact1;
-            set
-            {
-                _contact1 = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private Contact _contact2;
-        public Contact Contact2
-        {
-            get => _contact2;
-            set
-            {
-                _contact2 = value;
-                OnPropertyChanged();
-            }
-        }
-
-        // 🧭 Constructor
-        public EditStudentVM(Student student, DashboardVM dashboardVM)
+        public List<string> EnrollmentStatus { get; set; }
+        public EditStudentVM(Student selectedStudent, DashboardVM dashboardVM)
         {
             _dashboardVM = dashboardVM;
-            LoadStudentAndParent(student);
+
+
+            EnrollmentStatus = new List<string>
+            {
+                "Enrolled",
+                "Not Enrolled"
+            };
+
+            LoadStudentAndParent(selectedStudent);
         }
 
-        // 🔄 Load data from DB
         private void LoadStudentAndParent(Student student)
         {
             using var context = new AttendanceMonitoringContext();
 
-            // Load the full student record
             EditingStudent = context.Students.FirstOrDefault(s => s.StudentId == student.StudentId);
 
             if (EditingStudent == null)
@@ -81,7 +47,6 @@ namespace AttendanceMonitoringSystem.ViewModel
                 return;
             }
 
- 
             var relationship = context.Relationships.FirstOrDefault(r => r.StudentId == EditingStudent.StudentId);
             if (relationship == null)
             {
@@ -89,9 +54,7 @@ namespace AttendanceMonitoringSystem.ViewModel
                 return;
             }
 
-       
             EditingParent = context.Parents.FirstOrDefault(p => p.ParentId == relationship.ParentId);
-
             if (EditingParent == null)
             {
                 MessageBox.Show("Parent details could not be loaded.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -100,16 +63,15 @@ namespace AttendanceMonitoringSystem.ViewModel
 
             var contacts = context.Contacts.Where(c => c.ParentId == EditingParent.ParentId).ToList();
 
-            if (contacts.Count > 0)
-                Contact1 = contacts[0];
-            else
-                Contact1 = new Contact { ParentId = EditingParent.ParentId };
+            Contact1 = contacts.Count > 0 ? contacts[0] : new Contact { ParentId = EditingParent.ParentId };
+            Contact2 = contacts.Count > 1 ? contacts[1] : new Contact { ParentId = EditingParent.ParentId };
 
-            if (contacts.Count > 1)
-                Contact2 = contacts[1];
-            else
-                Contact2 = new Contact { ParentId = EditingParent.ParentId };
+            OnPropertyChanged(nameof(EditingStudent));
+            OnPropertyChanged(nameof(EditingParent));
+            OnPropertyChanged(nameof(Contact1));
+            OnPropertyChanged(nameof(Contact2));
         }
+
 
         public void SaveEditedStudent()
         {
@@ -121,32 +83,27 @@ namespace AttendanceMonitoringSystem.ViewModel
 
             using var context = new AttendanceMonitoringContext();
 
-      
-            var studentInDb = context.Students.FirstOrDefault(c => c.StudentId == EditingStudent.StudentId);
+            var studentInDb = context.Students.FirstOrDefault(s => s.StudentId == EditingStudent.StudentId);
             if (studentInDb != null)
             {
                 studentInDb.FirstName = EditingStudent.FirstName;
                 studentInDb.LastName = EditingStudent.LastName;
+                studentInDb.LRN = EditingStudent.LRN;
                 studentInDb.PhoneNumber = EditingStudent.PhoneNumber;
                 studentInDb.EnrollmentStatus = EditingStudent.EnrollmentStatus;
-                studentInDb.LRN = EditingStudent.LRN;
             }
 
-            if (EditingParent != null)
+            var parentInDb = context.Parents.FirstOrDefault(p => p.ParentId == EditingParent.ParentId);
+            if (parentInDb != null)
             {
-                var parentInDb = context.Parents.FirstOrDefault(p => p.ParentId == EditingParent.ParentId);
-                if (parentInDb != null)
-                {
-                    parentInDb.FirstName = EditingParent.FirstName;
-                    parentInDb.LastName = EditingParent.LastName;
-                    parentInDb.Email = EditingParent.Email;
-                }
+                parentInDb.FirstName = EditingParent.FirstName;
+                parentInDb.LastName = EditingParent.LastName;
+                parentInDb.Email = EditingParent.Email;
             }
 
             if (Contact1 != null && !string.IsNullOrWhiteSpace(Contact1.PhoneNumber))
             {
                 var contact1InDb = context.Contacts.FirstOrDefault(c => c.ContactId == Contact1.ContactId);
-
                 if (contact1InDb != null)
                 {
                     contact1InDb.PhoneNumber = Contact1.PhoneNumber;
@@ -154,17 +111,14 @@ namespace AttendanceMonitoringSystem.ViewModel
                 }
                 else
                 {
-                
                     Contact1.ParentId = EditingParent.ParentId;
                     context.Contacts.Add(Contact1);
                 }
             }
 
-   
             if (Contact2 != null && !string.IsNullOrWhiteSpace(Contact2.PhoneNumber))
             {
                 var contact2InDb = context.Contacts.FirstOrDefault(c => c.ContactId == Contact2.ContactId);
-
                 if (contact2InDb != null)
                 {
                     contact2InDb.PhoneNumber = Contact2.PhoneNumber;
@@ -183,7 +137,7 @@ namespace AttendanceMonitoringSystem.ViewModel
             BackToStudentList();
         }
 
-        // 🔙 Go back to list
+
         public void BackToStudentList()
         {
             var studentView = new StudentListView(_dashboardVM);
@@ -192,4 +146,5 @@ namespace AttendanceMonitoringSystem.ViewModel
         }
     }
 }
+
 
