@@ -28,12 +28,26 @@ namespace AttendanceMonitoringSystem.View
             _vm = new DashboardVM(); 
             DataContext = _vm;
         }
-
-        private void Logout(object sender, RoutedEventArgs e)
+        private void ShowLogout(object sender, RoutedEventArgs e)
         {
+            var result = MessageBox.Show(
+                "Are you sure you want to log out?",
+                "Confirm Logout",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
 
+            if (result == MessageBoxResult.Yes)
+            {
 
+                var loginWindow = new LoginView();
+                loginWindow.Show();
+
+                // Close the current window that’s showing the dashboard
+                Window parentWindow = Window.GetWindow(this);
+                parentWindow?.Close();
+            }
         }
+
         private void ShowDashboard(object sender, RoutedEventArgs e)
         {
             _vm.ExecuteShowDashboard();
@@ -49,9 +63,5 @@ namespace AttendanceMonitoringSystem.View
             _vm.ExecuteShowTeacherPage();
         }
 
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

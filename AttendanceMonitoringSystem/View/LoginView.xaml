@@ -11,7 +11,8 @@
         ResizeMode="NoResize"
         Background="Transparent"
         AllowsTransparency="True"
-        BorderBrush="Transparent">
+        BorderBrush="Transparent"
+        WindowStartupLocation="CenterScreen">
     
     <Window.Resources>
 
