@@ -19,8 +19,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
-            <RowDefinition Height="10"/>
-            <RowDefinition/>
+            <RowDefinition />
 
         </Grid.RowDefinitions>
 
@@ -77,7 +76,7 @@
                                  Orientation="Vertical"
                                  Margin="10,0,20,0"
                                  VerticalAlignment="Top"
-                                Height="112">
+                                Height="112" Grid.RowSpan="2">
 
                         <TextBlock Text="Section Name" 
                                     FontSize="23" 
@@ -108,14 +107,13 @@
                                   Padding="10,5"
                                   Text="{Binding NewStudentID}"/>
                         </Border>
-
                     </StackPanel>
 
                     <StackPanel Grid.Row="1"
                              Grid.Column="1"
                              Orientation="Vertical"
                              Margin="20,0,20,0"
-                             VerticalAlignment="Top" Height="112">
+                             VerticalAlignment="Top" Height="112" Grid.RowSpan="2">
 
                         <TextBlock Text="Section Adviser" 
                             FontSize="23" 
@@ -144,14 +142,14 @@
                                   Padding="10,5"
                                   Text="{Binding NewLRN, UpdateSourceTrigger=PropertyChanged}" />
                         </Border>
-
                     </StackPanel>
                 </Grid>
             </Grid>
         </Border>
 
-
+        <!-- buttons -->
         <Grid Grid.Row="0">
+            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -161,50 +159,52 @@
                      HorizontalAlignment="Right"
                      VerticalAlignment="Center"
                      Orientation="Horizontal">
-                <!--<Button Width="120" 
+                
+               <Button Width="120" 
                      Height="40" 
                      Cursor="Hand" 
                      Click="CancelButton">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border x:Name="border"
+                
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
                                  Background="#002D96"
                                  CornerRadius="8"
                                  SnapsToDevicePixels="True">
-                                <StackPanel Orientation="Horizontal" 
+                            <StackPanel Orientation="Horizontal" 
                                          HorizontalAlignment="Center" 
                                          VerticalAlignment="Center">
-                                    <fa:ImageAwesome Icon="Times" 
+                                <fa:ImageAwesome Icon="Times" 
                                                   Foreground="White"
                                                   Width="16" 
                                                   Height="16" 
                                                   Margin="0,0,6,0"/>
-                                    <TextBlock Text="Cancel" 
+                                <TextBlock Text="Cancel" 
                                             Foreground="White" 
                                             VerticalAlignment="Center"
                                             FontSize="15"/>
-                                </StackPanel>
-                            </Border>
+                            </StackPanel>
+                        </Border>
 
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" 
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" 
                                       Value="True">
-                                    <Setter TargetName="border" 
+                                <Setter TargetName="border" 
                                          Property="Background" 
                                          Value="#0039D6"/>
-                                </Trigger>
-                                <Trigger Property="IsPressed" 
+                            </Trigger>
+                            <Trigger Property="IsPressed" 
                                       Value="True">
-                                    <Setter TargetName="border" 
+                                <Setter TargetName="border" 
                                          Property="Background"
                                          Value="#001F70"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>-->
-
-                <!--<Button Width="120" 
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+                </Button>
+            
+                <Button Width="120" 
                      Height="40" 
                      Cursor="Hand" 
                      Click="SaveButton"
@@ -240,7 +240,7 @@
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Button.Template>
-                </Button>-->
+                </Button>
 
             </StackPanel>
 
@@ -248,8 +248,8 @@
             <Grid Grid.Column="0">
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0"
@@ -267,12 +267,26 @@
                             FontWeight="Bold" 
                             Margin="0,0,0,10"
                             VerticalAlignment="Bottom"/>
-
                 </StackPanel>
 
             </Grid>
 
 
         </Grid>
+
+        <StackPanel Grid.Row="1"
+                    HorizontalAlignment="Left"
+                    Grid.ColumnSpan="2"
+                    VerticalAlignment="Top"
+                    Margin="0,150,0,0">
+            
+            <TextBlock Text="ADD STUDENTS" 
+                         FontSize="23" 
+                         FontWeight="Bold" 
+                         Foreground="#002D96"
+                         Margin="10,0,0,0"/>
+
+
+        </StackPanel>
     </Grid>
 </UserControl>

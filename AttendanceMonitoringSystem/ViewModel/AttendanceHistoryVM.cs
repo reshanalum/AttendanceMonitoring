@@ -26,7 +26,6 @@ namespace AttendanceMonitoringSystem.ViewModel
                 _selectedAttendance = value;
             }
         }
-
         public int SelectedIndex
         {
             get { return _selectedIndex; }
