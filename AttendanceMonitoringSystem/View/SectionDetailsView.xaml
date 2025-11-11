@@ -145,7 +145,7 @@
 
                 
             </Grid>
-            <Grid Grid.Column="0">
+            <Grid Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,226,0">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -154,12 +154,12 @@
 
                 <StackPanel Grid.Column="0"
                             Orientation="Vertical">
-                    <TextBlock Text="Section List" 
+                    <TextBlock Text="Name of Section" 
                                FontSize="40" 
                                FontWeight="Bold" 
                                Foreground="#002D96"/>
 
-                    <TextBlock Text="Grade 6 - St. Peter" 
+                    <TextBlock Text="Adviser: gsdgjj" 
                                FontSize="18" 
                                Foreground="Gray"
                                FontWeight="Bold" 

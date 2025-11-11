@@ -19,7 +19,7 @@
     <UserControl.Resources>
 
         <c:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-        
+
         <Style x:Key="PageButtonStyle" TargetType="Button">
             <Setter Property="Width" Value="40"/>
             <Setter Property="Height" Value="40"/>
@@ -96,13 +96,13 @@
             Width="50"
             Height="50"
             FontSize="18"/>
-            
+
             <Button Content="2"
             Style="{StaticResource PageButtonStyle}"
             Width="50"
             Height="50"
             FontSize="18"/>
-            
+
             <Button Content="3" 
             Style="{StaticResource PageButtonStyle}"
             Width="50"
@@ -134,7 +134,7 @@
                 CornerRadius="2"
                 Background="White"
                 SnapsToDevicePixels="True">
-            
+
             <Border.Effect>
                 <DropShadowEffect Color="Black"
                           BlurRadius="10"
@@ -144,7 +144,7 @@
 
             <ListView  Padding="8,5"
                        Grid.Row="2"
-                       ItemsSource="{Binding }">
+                       ItemsSource="{Binding ClassList}">
 
                 <ListView.Resources>
                     <Style TargetType="GridViewColumnHeader">
@@ -197,12 +197,12 @@
                                                 Height="24" 
                                                 Margin="2"
                                                 Background="Transparent">
-                                            <fa:ImageAwesome Icon="Pagelines" 
+                                        <fa:ImageAwesome Icon="Pagelines" 
                                                              Width="16" 
                                                              Height="16"
                                                              Foreground="#002D96"/>
-                                        </Button>
-         
+                                    </Button>
+
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -221,12 +221,12 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Border Grid.Column="1"
+            <Border
                     Background="White"
                     BorderThickness="2"
                     CornerRadius="2"
                     Padding="10,0"
-                    SnapsToDevicePixels="True">
+                    SnapsToDevicePixels="True" Grid.ColumnSpan="2" Margin="502,10,0,10">
 
                 <Border.Effect>
                     <DropShadowEffect Color="Black" 
@@ -237,10 +237,10 @@
 
                 <StackPanel Orientation="Horizontal" 
                             VerticalAlignment="Center">
-                    
+
                     <fa:ImageAwesome Icon="Search"
                                      Foreground="#002D96"
-                                     Width="40" Height="40"
+                                     Width="26" Height="32"
                                      Margin="10,0,5,0"/>
 
                     <TextBox x:Name="SearchBox"
@@ -258,7 +258,7 @@
                                IsHitTestVisible="False"
                                Visibility="{Binding Text.IsEmpty, ElementName=SearchBox, Converter={StaticResource BoolToVisibilityConverter}}"/>
                 </StackPanel>
-                
+
             </Border>
 
             <Grid Grid.Column="0">
@@ -287,7 +287,7 @@
                 <StackPanel Grid.Column="1"
                             Orientation="Horizontal"
                             HorizontalAlignment="Right">
-                    
+
                     <fa:ImageAwesome Icon="UserPlus"
                                      Foreground="#002D96"
                                      Width="40"
@@ -305,7 +305,7 @@
 
 
         </Grid>
-  
-            
+
+
     </Grid>
 </UserControl>

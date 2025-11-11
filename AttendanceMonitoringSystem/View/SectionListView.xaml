@@ -362,7 +362,7 @@
                             Style="{StaticResource IconButtonStyle}"
                             Width="45"
                             Height="45"
-                            Command="{Binding ShowAddStudentCommand}">
+                            Command="{Binding ShowAddSectionCommand}">
                         <fa:ImageAwesome Icon="UserPlus"
                                  Foreground="#002D96"
                                  Width="40"
@@ -375,7 +375,7 @@
                             Margin="20,0,20,0"
                             Width="45"
                             Height="45"
-                            Command="{Binding ShowEditStudentCommand}">
+                            Command="{Binding ShowEditSectionCommand}">
                         <fa:ImageAwesome Icon="Edit"
                                  Foreground="#002D96"
                                  Width="40"
