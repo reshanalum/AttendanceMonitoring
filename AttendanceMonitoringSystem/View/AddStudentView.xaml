@@ -523,7 +523,8 @@
                 <Button Width="120" 
                         Height="40" 
                         Cursor="Hand" 
-                        Click="CancelButton">
+                         Click="CancelButton_Click"
+                        >
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border x:Name="border"
@@ -566,7 +567,7 @@
                 <Button Width="120" 
                         Height="40" 
                         Cursor="Hand" 
-                        Click="SaveButton"
+                        Click="SaveButton_Click"
                         Margin="20,0,20,0">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">

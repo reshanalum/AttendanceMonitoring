@@ -23,23 +23,34 @@ namespace AttendanceMonitoringSystem.View
     public partial class AddStudentView : UserControl
     {
         private AddStudentVM _vm;
+
         public AddStudentView()
         {
             InitializeComponent();
-
+            Loaded += UserControl_Loaded;
         }
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             _vm = (AddStudentVM)DataContext;
         }
 
-        private void CancelButton(object sender, RoutedEventArgs e)
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (_vm != null)
+            {
+                _vm.SaveCommand(); // Calls your VM’s method
+            }
         }
-        private void SaveButton(object sender, RoutedEventArgs e)
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (_vm != null)
+            {
+                _vm.BackToStudentList(); // Navigate back
+            }
         }
+
+
     }
 }

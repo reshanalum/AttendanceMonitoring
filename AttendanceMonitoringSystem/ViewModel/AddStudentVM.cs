@@ -15,7 +15,9 @@ namespace AttendanceMonitoringSystem.ViewModel
     {
         private readonly DashboardVM _dashboardVM;
 
+
         public string NewStudentID { get; set; }
+
 
         public string NewFirstName { get; set; }
         public string NewLastName { get; set; }
@@ -40,6 +42,7 @@ namespace AttendanceMonitoringSystem.ViewModel
             _dashboardVM = dashboardVM;
             GenerateUniqueStudentId();
             GenerateUniqueParentId();
+
         }
 
 
