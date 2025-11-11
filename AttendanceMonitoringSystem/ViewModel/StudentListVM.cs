@@ -110,13 +110,18 @@ namespace AttendanceMonitoringSystem.ViewModel
 
         private void ExecuteEditStudentCommand(object obj)
         {
-            if (obj is Student student)
+
+            var student = SelectedStudent;
+
+            if (student == null)
             {
-                SelectedStudent = student;
-                var editView = new EditStudent();
-                editView.DataContext = new EditStudentVM(student,_dashboardVM);
-                _dashboardVM.CurrentView = editView;
+                MessageBox.Show("Please select a student to edit.", "No Selection", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
             }
+
+            var editView = new EditStudent();
+            editView.DataContext = new EditStudentVM(student, _dashboardVM);
+            _dashboardVM.CurrentView = editView;
         }
 
         private void ExecuteAddStudentCommand(object obj)
