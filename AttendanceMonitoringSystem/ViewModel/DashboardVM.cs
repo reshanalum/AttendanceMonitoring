@@ -39,9 +39,7 @@ namespace AttendanceMonitoringSystem.ViewModel
         public void ExecuteShowDashboard()
         {
 
-            //var employeesView = new Employees(this, Permissions);
-            //CurrentView = employeesView;
-            //Caption = "Employee";
+            CurrentView = null;
         }
 
         public void ExecuteShowTeacherPage()

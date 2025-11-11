@@ -12,9 +12,6 @@
              d:DesignWidth="1105"
              Background="#F4F4F4">
 
-    <UserControl.DataContext>
-        <ViewModel:SectionDetailsVM/>
-    </UserControl.DataContext>
 
     <UserControl.Resources>
         <c:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
@@ -51,7 +48,7 @@
 
                     <Button Background="Transparent"  
                          Cursor="Hand"
-                        Click="StudentButton_Click">
+                         Command="{Binding ShowStudentListCommand}">
 
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
@@ -97,7 +94,6 @@
 
 
                     <Button Cursor="Hand"
-                            Click="AttendanceHistoryButton_Click" 
                             Background="Transparent">
                         
                         <Button.Template>
