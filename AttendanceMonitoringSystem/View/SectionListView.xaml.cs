@@ -21,11 +21,12 @@ namespace AttendanceMonitoringSystem.View
     /// </summary>
     public partial class SectionListView : UserControl
     {
-        public SectionListView()
+        private SectionListVM _vm;
+        public SectionListView(DashboardVM dashboardVM)
         {
             InitializeComponent();
-            SectionListVM sectionlistVM = new SectionListVM();
-            this.DataContext = sectionlistVM;
+            _vm = new SectionListVM(dashboardVM);
+            this.DataContext = _vm;
         }
 
         private void SectionListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)

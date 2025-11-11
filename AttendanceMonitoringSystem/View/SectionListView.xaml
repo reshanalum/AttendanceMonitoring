@@ -193,8 +193,8 @@
                 <ListView.Resources>
                     <Style TargetType="GridViewColumnHeader">
                         <Setter Property="Background" Value="White"/>
-                        <Setter Property="Foreground" Value="#333"/>
-                        <Setter Property="FontWeight" Value="SemiBold"/>
+                        <Setter Property="Foreground" Value="#002D96"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
                         <Setter Property="FontSize" Value="14"/>
                         <Setter Property="Height" Value="40"/>
                         <Setter Property="Padding" Value="10,0"/>

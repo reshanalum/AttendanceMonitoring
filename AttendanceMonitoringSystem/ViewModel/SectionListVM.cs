@@ -20,11 +20,16 @@ namespace AttendanceMonitoringSystem.ViewModel
         private int _selectedIndex;
         private string studentSearchText;
 
+        public SectionListVM(DashboardVM dashboardVM)
+        {
+            LoadSections();
+            _dashboardVM = dashboardVM;
+        }
         public Advisory SelectedSection
         {
             get{ return _selectedSection; }
             set{ _selectedSection = value;
-                OnPropertyChanged("SelectedSection");
+                OnPropertyChanged();
             }
         }
 
@@ -41,7 +46,7 @@ namespace AttendanceMonitoringSystem.ViewModel
             { 
                 studentSearchText = value;
                 FilterStudents();
-                OnPropertyChanged("StudentSearchText");
+                OnPropertyChanged();
             }
         }
 
@@ -108,14 +113,5 @@ namespace AttendanceMonitoringSystem.ViewModel
                 AdvisoryList.Add(section);
             }
         }
-
-        public SectionListVM(DashboardVM dashboardVM)
-        {
-            LoadSections();
-            _dashboardVM = dashboardVM;
-        }
-
-
-
     }
 }
