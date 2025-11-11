@@ -212,11 +212,11 @@
                 <Button Width="120" 
                      Height="40" 
                      Cursor="Hand" 
-                     Click="CancelButton">
-
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border x:Name="border"
+                  >
+                
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
                                  Background="#002D96"
                                  CornerRadius="8"
                                  SnapsToDevicePixels="True">
@@ -256,7 +256,6 @@
                 <Button Width="120" 
                      Height="40" 
                      Cursor="Hand" 
-                     Click="SaveButton"
                      Margin="20,0,20,0">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">

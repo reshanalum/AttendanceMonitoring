@@ -237,21 +237,37 @@
                         <GridViewColumn Header="Enrollment Status" 
                                     Width="180"
                                     DisplayMemberBinding="{Binding Path=EnrollmentStatus}"/>
-                        <GridViewColumn Header="" 
-                                    Width="100"/>
                         <GridViewColumn Width="100">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Width="24" 
-                                                Height="24" 
-                                                Margin="2"
-                                                Background="Transparent">
-                                        <fa:ImageAwesome Icon="Pagelines" 
-                                                             Width="16" 
-                                                             Height="16"
-                                                             Foreground="#002D96"/>
-                                    </Button>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 
+                                        <Button Width="24"
+                                                Height="24"
+                                                Background="#F4F4F4"
+                                                Command="{Binding DataContext.ShowStudentInformationCommand,
+                                                          RelativeSource={RelativeSource AncestorType=UserControl}}">
+
+                                            <fa:ImageAwesome Icon="Bars"
+                                                 Width="16"
+                                                 Height="16"
+                                                 Foreground="#002D96"/>
+                                                    </Button>
+
+
+                                        <Button Width="24"
+                        Height="24"
+                        Margin="2"
+                        Background="#F4F4F4"
+                        Command="{Binding DataContext.DeleteStudentCommand,
+                                  RelativeSource={RelativeSource AncestorType=UserControl}}"
+                        CommandParameter="{Binding}">
+                                            <fa:ImageAwesome Icon="Trash"
+                                     Width="16"
+                                     Height="16"
+                                     Foreground="DarkRed"/>
+                                        </Button>
+                                    </StackPanel>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -289,26 +305,22 @@
 
                     <fa:ImageAwesome Icon="Search"
                                      Foreground="#002D96"
-                                     Width="31" Height="35"
+                                     Width="40" Height="28"
                                      Margin="10,0,5,0"/>
 
-                    <TextBox x:Name="SearchBox"
-                             BorderThickness="0"
-                             Background="Transparent"
-                             VerticalContentAlignment="Center"
-                             FontSize="18"
-                             Foreground="Black"/>
+                        <TextBox x:Name="SearchBox"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 VerticalContentAlignment="Center"
+                                 FontSize="18"
+                                 Foreground="Black"
+                                 Text="{Binding Path=StudentSearchText, UpdateSourceTrigger=PropertyChanged, Delay=300}"/>
 
-                    <TextBlock Text="Search..."
-                               FontSize="18"
-                               Foreground="Gray"
-                               VerticalAlignment="Center"
-                               Margin="5,0,0,0"
-                               IsHitTestVisible="False"
-                               Visibility="{Binding Text.IsEmpty, ElementName=SearchBox, Converter={StaticResource BoolToVisibilityConverter}}"/>
+
                 </StackPanel>
 
             </Border>
+
 
             <Grid Grid.Column="0">
 

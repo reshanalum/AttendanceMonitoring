@@ -44,6 +44,18 @@ namespace AttendanceMonitoringSystem.View
 
         }
 
+        private void CancelButton(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
+
+        private void SaveButton(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 
 
