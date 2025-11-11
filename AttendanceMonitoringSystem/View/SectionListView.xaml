@@ -239,7 +239,7 @@
                                     Width="300">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding ClassAdviserId.FirstName}"
+                                    <TextBlock Text="{Binding ClassAdviserId}"
                                                FontFamily="Montserrat"
                                                 FontWeight="Medium"
                                                 Foreground="#002D96"
@@ -252,7 +252,7 @@
                                     Width="200">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding NumberOfStudents}"
+                                    <TextBlock Text="{Binding StudentId}"
                                                FontFamily="Montserrat"
                                                 FontWeight="Medium"
                                                 Foreground="#002D96"
