@@ -15,7 +15,7 @@
     <UserControl.Resources>
 
     </UserControl.Resources>
-    <Grid Margin="20">
+    <Grid Margin="10">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
@@ -39,7 +39,7 @@
 
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
+                    <RowDefinition Height="350"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
@@ -47,6 +47,7 @@
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>
+                        <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -70,7 +71,7 @@
                                 VerticalAlignment="Center">
 
                         <TextBlock Text="Parent ID" 
-                               FontSize="23" 
+                               FontSize="20" 
                                FontWeight="Bold" 
                                Foreground="#002D96"/>
 
@@ -79,7 +80,8 @@
                                 CornerRadius="6"
                                 Padding="10,5"
                                 SnapsToDevicePixels="True"
-                                Height="60">
+                                Height="50"
+                                Width="400">
 
                             <Border.Effect>
                                 <DropShadowEffect Color="#000000"
@@ -118,7 +120,8 @@
                                 CornerRadius="6"
                                 Padding="10,5"
                                 SnapsToDevicePixels="True"
-                                Height="60">
+                                Height="50"
+                                Width="400">
 
                             <Border.Effect>
                                 <DropShadowEffect Color="#000000"
@@ -155,7 +158,8 @@
                                 CornerRadius="6"
                                 Padding="10,5"
                                 SnapsToDevicePixels="True"
-                                Height="60">
+                                Height="50"
+                                Width="400">
 
                             <Border.Effect>
                                 <DropShadowEffect Color="#000000"
@@ -192,7 +196,8 @@
                                 CornerRadius="6"
                                 Padding="10,5"
                                 SnapsToDevicePixels="True"
-                                Height="60">
+                                Height="50"
+                                Width="400">
 
                             <Border.Effect>
                                 <DropShadowEffect Color="#000000"
@@ -229,7 +234,8 @@
                                 CornerRadius="6"
                                 Padding="10,5"
                                 SnapsToDevicePixels="True"
-                                Height="60">
+                                Height="50"
+                                Width="400">
 
                             <Border.Effect>
                                 <DropShadowEffect Color="#000000"
@@ -256,6 +262,44 @@
                                 Margin="20,10,20,10"
                                 VerticalAlignment="Center">
 
+                        <TextBlock Text="Contact Number #1 Network"  
+                               FontSize="23" 
+                               FontWeight="Bold" 
+                               Foreground="#002D96"/>
+
+                        <Border Background="White"
+                                BorderThickness="2"
+                                CornerRadius="6"
+                                Padding="10,5"
+                                SnapsToDevicePixels="True"
+                                Height="50"
+                                Width="400">
+
+                            <Border.Effect>
+                                <DropShadowEffect Color="#000000"
+                                     Opacity="0.35"   
+                                    BlurRadius="15"
+                                    ShadowDepth="3"/>
+                            </Border.Effect>
+
+                            <TextBox x:Name="ParentContact1NetworkTextBox"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     FontSize="18"
+                                     Foreground="#333"
+                                     VerticalContentAlignment="Center"
+                                     Padding="10,5"
+                                      Text="{Binding NewParentContactNetwork1}"/>
+                        </Border>
+
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4"
+                                Grid.Column="0"
+                                Orientation="Vertical"
+                                Margin="20,10,20,10"
+                                VerticalAlignment="Center">
+
                         <TextBlock Text="Contact Number #2" 
                                FontSize="23" 
                                FontWeight="Bold" 
@@ -266,7 +310,8 @@
                                 CornerRadius="6"
                                 Padding="10,5"
                                 SnapsToDevicePixels="True"
-                                Height="60">
+                                Height="50"
+                                Width="400">
 
                             <Border.Effect>
                                 <DropShadowEffect Color="#000000"
@@ -275,14 +320,52 @@
                                     ShadowDepth="3"/>
                             </Border.Effect>
 
-                            <TextBox x:Name="ParentContact2TextBox"
+                            <TextBox x:Name="ParentContact1NetwokTextBox"
                                      Background="Transparent"
                                      BorderThickness="0"
                                      FontSize="18"
                                      Foreground="#333"
                                      VerticalContentAlignment="Center"
-                                     Padding="10,5"
-                                      Text="{Binding NewParentContactNumber2}"/>
+                                     Padding="10,5" 
+                                    Text="{Binding NewParentContactNumber2}"/>
+                        </Border>
+
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4"
+                                Grid.Column="1"
+                                Orientation="Vertical"
+                                Margin="20,10,20,10"
+                                VerticalAlignment="Center">
+
+                        <TextBlock Text="Contact Number #2 Network" 
+                               FontSize="23" 
+                               FontWeight="Bold" 
+                               Foreground="#002D96"/>
+
+                        <Border Background="White"
+                                BorderThickness="2"
+                                CornerRadius="6"
+                                Padding="10,5"
+                                SnapsToDevicePixels="True"
+                                Height="50"
+                                Width="400">
+
+                            <Border.Effect>
+                                <DropShadowEffect Color="#000000"
+                                     Opacity="0.35"   
+                                    BlurRadius="15"
+                                    ShadowDepth="3"/>
+                            </Border.Effect>
+
+                            <TextBox x:Name="ParentContact2NetworkTextBox"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     FontSize="18"
+                                     Foreground="#333"
+                                     VerticalContentAlignment="Center"
+                                     Padding="10,5" 
+                                    Text="{Binding NewParentContactNetwork2}"/>
                         </Border>
 
                     </StackPanel>
@@ -314,7 +397,7 @@
                     <StackPanel Grid.Row="1"
                                 Grid.Column="0"
                                 Orientation="Vertical"
-                                Margin="20,10,20,10"
+                                Margin="20,0,20,0"
                                 VerticalAlignment="Center">
 
                         <TextBlock Text="Student ID" 
@@ -327,7 +410,8 @@
                                 CornerRadius="6"
                                 Padding="10,5"
                                 SnapsToDevicePixels="True"
-                                Height="60">
+                                Height="50"
+                                Width="400">
 
                             <Border.Effect>
                                 <DropShadowEffect Color="#000000"
@@ -365,7 +449,8 @@
                                 CornerRadius="6"
                                 Padding="10,5"
                                 SnapsToDevicePixels="True"
-                                Height="60">
+                                Height="50"
+                                Width="400">
 
                             <Border.Effect>
                                 <DropShadowEffect Color="#000000"
@@ -390,7 +475,7 @@
                     <StackPanel Grid.Row="2"
                                 Grid.Column="0"
                                 Orientation="Vertical"
-                                Margin="20,10,20,10"
+                                Margin="20,0,20,0"
                                 VerticalAlignment="Center">
 
                         <TextBlock Text="First Name" 
@@ -403,7 +488,8 @@
                                 CornerRadius="6"
                                 Padding="10,5"
                                 SnapsToDevicePixels="True"
-                                Height="60">
+                                Height="50"
+                                Width="400">
 
                             <Border.Effect>
                                 <DropShadowEffect Color="#000000"
@@ -440,7 +526,8 @@
                                 CornerRadius="6"
                                 Padding="10,5"
                                 SnapsToDevicePixels="True"
-                                Height="60">
+                                Height="50"
+                                Width="400">
 
                             <Border.Effect>
                                 <DropShadowEffect Color="#000000"
@@ -477,7 +564,8 @@
                                 CornerRadius="6"
                                 Padding="10,5"
                                 SnapsToDevicePixels="True"
-                                Height="60">
+                                Height="50"
+                                Width="400">
 
                             <Border.Effect>
                                 <DropShadowEffect Color="#000000"
@@ -497,6 +585,48 @@
                         </Border>
 
                     </StackPanel>
+
+                    <StackPanel Grid.Row="3"
+                                Grid.Column="1"
+                                Orientation="Vertical"
+                                Margin="20,10,20,10"
+                                VerticalAlignment="Center">
+
+                        <TextBlock Text="Enrollment Status" 
+                               FontSize="23" 
+                               FontWeight="Bold" 
+                               Foreground="#002D96"/>
+
+                        <Border Background="White"
+                                BorderThickness="2"
+                                CornerRadius="6"
+
+                                SnapsToDevicePixels="True"
+                                Height="50"
+                                Width="400">
+
+                            <Border.Effect>
+                                <DropShadowEffect Color="#000000"
+                                     Opacity="0.35"   
+                                    BlurRadius="15"
+                                    ShadowDepth="3"/>
+                            </Border.Effect>
+
+                            <ComboBox 
+                                Background="Transparent"
+                                BorderThickness="0"
+                                FontSize="18"
+                                Foreground="#333"
+                                VerticalContentAlignment="Center"
+                                Padding="10,5"
+                                ItemsSource="{Binding EnrollmentStatus}"
+                                SelectedItem="{Binding NewEnrollmentStatus, UpdateSourceTrigger=PropertyChanged}"/>
+
+                        </Border>
+
+                    </StackPanel>
+
+
 
                 </Grid>
 
