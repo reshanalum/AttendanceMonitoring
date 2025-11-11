@@ -80,12 +80,12 @@
                                 Height="112">
 
                         <TextBlock Text="Section Name" 
-                            FontSize="23" 
-                            FontWeight="Bold" 
-                            Foreground="#002D96"
-                                   Padding="0,0,0,0"/>
+                                    FontSize="23" 
+                                    FontWeight="Bold" 
+                                    Foreground="#002D96"
+                                   Padding="0,10,0,0"/>
 
-                        <Border Background="#E0E0E0"
+                        <Border Background="White"
                                  BorderThickness="2"
                                  CornerRadius="6"
                                  Padding="10,5"
@@ -106,8 +106,7 @@
                                   Foreground="#333"
                                   VerticalContentAlignment="Center"
                                   Padding="10,5"
-                                  Text="{Binding NewStudentID}"
-                                  IsReadOnly="True"/>
+                                  Text="{Binding NewStudentID}"/>
                         </Border>
 
                     </StackPanel>
@@ -121,7 +120,8 @@
                         <TextBlock Text="Section Adviser" 
                             FontSize="23" 
                             FontWeight="Bold" 
-                            Foreground="#002D96"/>
+                            Foreground="#002D96"
+                                   Padding="0,10,0,0"/>
                         <Border Background="White"
                              BorderThickness="2"
                              CornerRadius="6"
