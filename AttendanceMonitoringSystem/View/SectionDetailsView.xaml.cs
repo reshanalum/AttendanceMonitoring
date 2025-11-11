@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AttendanceMonitoringSystem.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,19 +21,12 @@ namespace AttendanceMonitoringSystem.View
     /// </summary>
     public partial class SectionDetailsView : UserControl
     {
-        public SectionDetailsView()
+        private SectionDetailsVM _vm;
+        public SectionDetailsView(DashboardVM dashboardVM)
         {
             InitializeComponent();
-        }
-
-        private void StudentButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void AttendanceHistoryButton_Click(object sender, RoutedEventArgs e)
-        {
-
+            _vm = new SectionDetailsVM(dashboardVM);
+            this.DataContext = _vm;
         }
 
 
