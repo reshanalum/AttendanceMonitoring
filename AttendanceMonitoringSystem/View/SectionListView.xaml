@@ -285,12 +285,12 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Border
+            <Border Grid.Column="1"
                     Background="White"
                     BorderThickness="2"
                     CornerRadius="2"
                     Padding="10,0"
-                    SnapsToDevicePixels="True" Grid.ColumnSpan="2" Margin="532,10,0,10">
+                    SnapsToDevicePixels="True">
 
                 <Border.Effect>
                     <DropShadowEffect Color="Black" 

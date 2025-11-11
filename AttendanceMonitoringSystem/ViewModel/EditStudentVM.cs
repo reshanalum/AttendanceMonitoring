@@ -32,6 +32,8 @@ namespace AttendanceMonitoringSystem.ViewModel
                 "Not Enrolled"
             };
 
+            Contact1 = new Contact();
+            Contact2 = new Contact();
             LoadStudentAndParent(selectedStudent);
         }
 
@@ -136,7 +138,6 @@ namespace AttendanceMonitoringSystem.ViewModel
 
             BackToStudentList();
         }
-
 
         public void BackToStudentList()
         {
