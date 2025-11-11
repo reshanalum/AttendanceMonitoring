@@ -518,7 +518,7 @@
                      HorizontalAlignment="Right"
                      VerticalAlignment="Center"
                      Orientation="Horizontal">
-                <Button Width="120" 
+                <!--<Button Width="120" 
                      Height="40" 
                      Cursor="Hand" 
                      Click="CancelButton">
@@ -559,9 +559,9 @@
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Button.Template>
-                </Button>
+                </Button>-->
 
-                <Button Width="120" 
+                <!--<Button Width="120" 
                      Height="40" 
                      Cursor="Hand" 
                      Click="SaveButton"
@@ -597,7 +597,7 @@
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Button.Template>
-                </Button>
+                </Button>-->
 
             </StackPanel>
 
