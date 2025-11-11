@@ -37,7 +37,7 @@ namespace AttendanceMonitoringSystem.ViewModel
         private void ExecuteAttendanceHistoryCommand(object obj)
         {
             var addView = new AttendanceHistoryView(_dashboardVM);
-            addView.DataContext = new AttendanceHistoryVM(_dashboardVM);
+            //addView.DataContext = new AttendanceHistoryVM(_dashboardVM);
             _dashboardVM.CurrentView = addView;
         }
     }

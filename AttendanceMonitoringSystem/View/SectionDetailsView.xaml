@@ -94,7 +94,6 @@
 
 
                     <Button Cursor="Hand"
-                            Click="AttendanceHistoryButton_Click" 
                             Background="Transparent">
                         
                         <Button.Template>

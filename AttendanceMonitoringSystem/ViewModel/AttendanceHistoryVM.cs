@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AttendanceMonitoringSystem.ViewModel
 {
-    internal class AttendanceHistoryVM
+    public class AttendanceHistoryVM
     {
     }
 }

@@ -25,8 +25,8 @@ namespace AttendanceMonitoringSystem.View
         public AttendanceHistoryView(DashboardVM dashboardVM)
         {
             InitializeComponent();
-            _vm = new AttendanceHistoryVM(dashboardVM);
-            this.DataContext = _vm;
+            //_vm = new AttendanceHistoryVM(dashboardVM);
+            //this.DataContext = _vm;
         }
     }
 }
