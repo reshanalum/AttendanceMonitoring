@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AttendanceMonitoringSystem.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,12 @@ namespace AttendanceMonitoringSystem.View
     /// </summary>
     public partial class AttendanceHistoryView : UserControl
     {
-        public AttendanceHistoryView()
+        private AttendanceHistoryVM _vm;
+        public AttendanceHistoryView(DashboardVM dashboardVM)
         {
             InitializeComponent();
+            _vm = new AttendanceHistoryVM(dashboardVM);
+            this.DataContext = _vm;
         }
     }
 }
