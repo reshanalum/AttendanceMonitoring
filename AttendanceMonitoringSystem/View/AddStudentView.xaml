@@ -12,9 +12,7 @@
              d:DesignWidth="1105"
              Background="#F4F4F4">
 
-    <UserControl.Resources>
 
-    </UserControl.Resources>
     <Grid Margin="10">
 
         <Grid.RowDefinitions>
@@ -327,7 +325,7 @@
                                      Foreground="#333"
                                      VerticalContentAlignment="Center"
                                      Padding="10,5" 
-                                    Text="{Binding NewParentContactNumber2}"/>
+                                    Text="{Binding NewParentContactNumber1}"/>
                         </Border>
 
                     </StackPanel>
@@ -436,7 +434,7 @@
                     <StackPanel Grid.Row="1"
                                 Grid.Column="1"
                                 Orientation="Vertical"
-                                Margin="20,10,20,10"
+                                Margin="20,0,20,0"
                                 VerticalAlignment="Center">
 
                         <TextBlock Text="LRN" 
@@ -632,8 +630,6 @@
 
 
             </Grid>
-
-
 
 
 
