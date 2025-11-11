@@ -1,0 +1,177 @@
+﻿<UserControl x:Class="AttendanceMonitoringSystem.View.AttendanceHistoryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AttendanceMonitoringSystem.View"
+             xmlns:ViewModel="clr-namespace:AttendanceMonitoringSystem.ViewModel" 
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:c="clr-namespace:AttendanceMonitoringSystem.Command"
+             mc:Ignorable="d" 
+             d:DesignHeight="944" d:DesignWidth="1105"
+             Background="#F4F4F4">
+
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="590"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Column="0"
+                Background="White"
+                Padding="10,0" Margin="0,30,15,30"
+                SnapsToDevicePixels="True">
+            <Border.Effect>
+                <DropShadowEffect Color="Black"
+                      BlurRadius="10"
+                      ShadowDepth="2"
+                      Opacity="0.15"/>
+            </Border.Effect>
+            <StackPanel Orientation="Horizontal" 
+             VerticalAlignment="Center">
+
+                <fa:ImageAwesome Icon="Search"
+                      Foreground="#002D96"
+                      Width="21" Height="30"
+                      Margin="10,0,5,0"/>
+
+                <TextBox x:Name="SearchBox"
+              BorderThickness="0"
+              Background="Transparent"
+              VerticalContentAlignment="Center"
+              FontSize="18"
+              Foreground="Black"/>
+
+                <TextBlock Text="Search..."
+                FontSize="18"
+                Foreground="Gray"
+                VerticalAlignment="Center"
+                Margin="5,0,0,0"
+                IsHitTestVisible="False"
+                Visibility="{Binding Text.IsEmpty,
+                            ElementName=SearchBox,
+                            Converter={StaticResource BoolToVisibilityConverter}}"/>
+            </StackPanel>
+        </Border>
+        <TextBlock Grid.Column="1"
+                   Text="Attendance History"
+                   FontSize="30"
+                   FontWeight="Bold"
+                   Foreground="#002D96"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Right"
+                   Margin="0,0,0,0"/>
+
+        <Border Grid.ColumnSpan="1"
+                    CornerRadius="2"
+                    Background="White"
+                    Grid.Row="1"
+                    SnapsToDevicePixels="True" Margin="0,0,15,130">
+
+            <Border.Effect>
+                <DropShadowEffect Color="Black"
+                                  BlurRadius="10"
+                                  ShadowDepth="2"
+                                  Opacity="0.15"/>
+            </Border.Effect>
+            
+            <ListView   Padding="8,5"
+                        Grid.Row="2"
+                        ItemsSource="{Binding StudentList}"
+                        SelectedItem="{Binding SelectedStudent}"
+                        SelectedIndex="{Binding SelectedIndex}">
+
+                <ListView.Resources>
+                    
+                    <Style TargetType="GridViewColumnHeader">
+                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="Foreground" Value="#002D96"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="FontSize" Value="14"/>
+                        <Setter Property="Height" Value="40"/>
+                        <Setter Property="Padding" Value="10,0"/>
+                        <Setter Property="BorderBrush" Value="#E5E7EB"/>
+                        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="GridViewColumnHeader">
+                                    <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                                        <TextBlock Text="{TemplateBinding Content}"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       Foreground="{TemplateBinding Foreground}"
+                                       FontWeight="{TemplateBinding FontWeight}"
+                                       FontSize="{TemplateBinding FontSize}"
+                                       Margin="{TemplateBinding Padding}"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.Resources>
+
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="LRN" 
+                                        Width="130">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding SectionName}"
+                                               FontFamily="Montserrat"
+                                                FontWeight="Regular"
+                                                Foreground="#002D96"
+                                                HorizontalAlignment="Center" VerticalAlignment="Center"/>           
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="First Name" 
+                                        Width="158">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Firstname}"
+                                               FontFamily="Montserrat"
+                                                FontWeight="Regular"
+                                                Foreground="#002D96"
+                                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Last Name" 
+                                        Width="158">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Lastname}"
+                                                FontFamily="Montserrat"
+                                                FontWeight="Regular"
+                                                Foreground="#002D96"
+                                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Border>
+        <Border Grid.Column="1"
+            CornerRadius="2"
+            Background="White"
+            Grid.Row="1"
+            SnapsToDevicePixels="True" Margin="20,0,0,0">
+
+            <Border.Effect>
+                <DropShadowEffect Color="Black"
+                          BlurRadius="10"
+                          ShadowDepth="2"
+                          Opacity="0.15"/>
+            </Border.Effect>
+
+        </Border>
+    </Grid>
+</UserControl>

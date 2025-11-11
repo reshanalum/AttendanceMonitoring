@@ -11,14 +11,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AttendanceMonitoring.Migrations
 {
     [DbContext(typeof(AttendanceMonitoringContext))]
-    [Migration("20251011133842_v1.3")]
-    partial class v13
+    [Migration("20251111045913_Add-Migration")]
+    partial class AddMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "9.0.9");
+            modelBuilder.HasAnnotation("ProductVersion", "9.0.10");
 
             modelBuilder.Entity("AttendanceMonitoring.Models.Advisory", b =>
                 {

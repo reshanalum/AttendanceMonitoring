@@ -16,18 +16,13 @@ using System.Windows.Shapes;
 namespace AttendanceMonitoringSystem.View
 {
     /// <summary>
-    /// Interaction logic for TeacherListView.xaml
+    /// Interaction logic for AttendanceHistoryView.xaml
     /// </summary>
-    public partial class TeacherListView : UserControl
+    public partial class AttendanceHistoryView : UserControl
     {
-        public TeacherListView()
+        public AttendanceHistoryView()
         {
             InitializeComponent();
-        }
-
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }

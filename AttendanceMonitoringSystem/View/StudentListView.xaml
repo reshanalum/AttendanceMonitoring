@@ -270,12 +270,12 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Border Grid.Column="1"
+            <Border
                     Background="White"
                     BorderThickness="2"
                     CornerRadius="2"
                     Padding="10,0"
-                    SnapsToDevicePixels="True">
+                    SnapsToDevicePixels="True" Grid.ColumnSpan="2" Margin="532,10,0,10">
 
                 <Border.Effect>
                     <DropShadowEffect Color="Black" 
@@ -289,7 +289,7 @@
 
                     <fa:ImageAwesome Icon="Search"
                                      Foreground="#002D96"
-                                     Width="40" Height="40"
+                                     Width="31" Height="35"
                                      Margin="10,0,5,0"/>
 
                     <TextBox x:Name="SearchBox"
@@ -365,8 +365,8 @@
 
 
                 </StackPanel>
-                
-                
+
+
 
 
             </Grid>
