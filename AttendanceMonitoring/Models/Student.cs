@@ -2,12 +2,11 @@
 {
     public class Student
     {
-        public string StudentId { get; set; }
+        public int StudentId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string LRN { get; set; }
-
-        public string PhoneNumber { get; set; }
+        public string RFID { get; set; }
         public string EnrollmentStatus { get; set; }
 
         //Relationships
