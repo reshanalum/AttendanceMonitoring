@@ -10,6 +10,14 @@ namespace AttendanceMonitoringApi
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.WebHost.ConfigureKestrel(serverOptions =>
+            {
+                serverOptions.ListenAnyIP(5000);
+                //serverOptions.ListenAnyIP(5001, listenOptions =>
+                //{
+                //    listenOptions.UseHttps();
+                //});
+            });
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -29,7 +37,7 @@ namespace AttendanceMonitoringApi
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
