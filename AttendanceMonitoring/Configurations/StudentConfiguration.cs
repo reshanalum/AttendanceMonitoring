@@ -16,7 +16,7 @@ namespace AttendanceMonitoring.Configurations
                 .HasColumnType("varchar(150)");
             builder.Property(c => c.LRN)
                 .HasColumnType("varchar(150)");
-            builder.Property(c => c.PhoneNumber)
+            builder.Property(c => c.RFID)
                 .HasColumnType("varchar(150)");
             builder.Property(c => c.EnrollmentStatus)
                 .HasColumnType("varchar(150)");

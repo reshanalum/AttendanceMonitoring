@@ -15,16 +15,16 @@ namespace AttendanceMonitoring.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "9.0.9");
+            modelBuilder.HasAnnotation("ProductVersion", "9.0.10");
 
             modelBuilder.Entity("AttendanceMonitoring.Models.Advisory", b =>
                 {
-                    b.Property<string>("AdvisoryId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("AdvisoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("ClassAdviserId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("ClassAdviserId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("SchoolYear")
                         .IsRequired()
@@ -34,9 +34,8 @@ namespace AttendanceMonitoring.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(150)");
 
-                    b.Property<string>("StudentId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("StudentId")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("AdvisoryId");
 
@@ -49,8 +48,9 @@ namespace AttendanceMonitoring.Migrations
 
             modelBuilder.Entity("AttendanceMonitoring.Models.Attendance", b =>
                 {
-                    b.Property<string>("AttendanceId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("AttendanceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("date");
@@ -59,9 +59,8 @@ namespace AttendanceMonitoring.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(150)");
 
-                    b.Property<string>("StudentId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("StudentId")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("AttendanceId");
 
@@ -72,18 +71,15 @@ namespace AttendanceMonitoring.Migrations
 
             modelBuilder.Entity("AttendanceMonitoring.Models.Class_Adviser", b =>
                 {
-                    b.Property<string>("ClassAdviserId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("ClassAdviserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("varchar(150)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("varchar(150)");
-
-                    b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("varchar(150)");
 
@@ -94,16 +90,12 @@ namespace AttendanceMonitoring.Migrations
 
             modelBuilder.Entity("AttendanceMonitoring.Models.Contact", b =>
                 {
-                    b.Property<string>("ContactId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("ContactId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("Network")
-                        .IsRequired()
-                        .HasColumnType("varchar(150)");
-
-                    b.Property<string>("ParentId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("ParentId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
@@ -118,19 +110,18 @@ namespace AttendanceMonitoring.Migrations
 
             modelBuilder.Entity("AttendanceMonitoring.Models.Delivered", b =>
                 {
-                    b.Property<string>("DeliveredId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("DeliveredId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("ContactId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("ContactId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("DateTimeSent")
                         .HasColumnType("date");
 
-                    b.Property<string>("NotificationId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("NotificationId")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("DeliveredId");
 
@@ -143,12 +134,12 @@ namespace AttendanceMonitoring.Migrations
 
             modelBuilder.Entity("AttendanceMonitoring.Models.Notification", b =>
                 {
-                    b.Property<string>("NotificationId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("NotificationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("AttendanceId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("AttendanceId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Message")
                         .IsRequired()
@@ -163,12 +154,9 @@ namespace AttendanceMonitoring.Migrations
 
             modelBuilder.Entity("AttendanceMonitoring.Models.Parent", b =>
                 {
-                    b.Property<string>("ParentId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("varchar(150)");
+                    b.Property<int>("ParentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -185,20 +173,19 @@ namespace AttendanceMonitoring.Migrations
 
             modelBuilder.Entity("AttendanceMonitoring.Models.Relationship", b =>
                 {
-                    b.Property<string>("RelationshipId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("RelationshipId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("ParentId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("ParentId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("RelationshipType")
                         .IsRequired()
                         .HasColumnType("varchar(150)");
 
-                    b.Property<string>("StudentId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("StudentId")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("RelationshipId");
 
@@ -211,8 +198,9 @@ namespace AttendanceMonitoring.Migrations
 
             modelBuilder.Entity("AttendanceMonitoring.Models.Student", b =>
                 {
-                    b.Property<string>("StudentId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("StudentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("EnrollmentStatus")
                         .IsRequired()
@@ -230,7 +218,7 @@ namespace AttendanceMonitoring.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(150)");
 
-                    b.Property<string>("PhoneNumber")
+                    b.Property<string>("RFID")
                         .IsRequired()
                         .HasColumnType("varchar(150)");
 
@@ -241,8 +229,9 @@ namespace AttendanceMonitoring.Migrations
 
             modelBuilder.Entity("AttendanceMonitoring.Models.User", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -256,10 +245,6 @@ namespace AttendanceMonitoring.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("varchar(150)");
-
-                    b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("varchar(150)");
 

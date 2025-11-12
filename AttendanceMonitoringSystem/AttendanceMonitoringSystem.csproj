@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\BG.png" />
+    <None Remove="Images\Key.png" />
+    <None Remove="Images\Navigationpanel.png" />
+    <None Remove="Images\School Logo.png" />
+    <None Remove="Images\Username.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AttendanceMonitoring\AttendanceMonitoring.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\BG.png" />
+    <Resource Include="Images\Key.png" />
+    <Resource Include="Images\Navigationpanel.png" />
+    <Resource Include="Images\School Logo.png" />
+    <Resource Include="Images\Username.png" />
+  </ItemGroup>
+
+</Project>

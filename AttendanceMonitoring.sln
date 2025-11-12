@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AttendanceMonitoring", "Att
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AttendanceMonitoringApi", "AttendanceMonitoringApi\AttendanceMonitoringApi.csproj", "{C45FA502-9DCF-438A-BE8E-33DC71CC2E61}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AttendanceMonitoringSystem", "AttendanceMonitoringSystem\AttendanceMonitoringSystem.csproj", "{700443EE-20A1-C4C4-4CD6-166A982154E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C45FA502-9DCF-438A-BE8E-33DC71CC2E61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C45FA502-9DCF-438A-BE8E-33DC71CC2E61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C45FA502-9DCF-438A-BE8E-33DC71CC2E61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{700443EE-20A1-C4C4-4CD6-166A982154E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{700443EE-20A1-C4C4-4CD6-166A982154E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{700443EE-20A1-C4C4-4CD6-166A982154E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{700443EE-20A1-C4C4-4CD6-166A982154E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
