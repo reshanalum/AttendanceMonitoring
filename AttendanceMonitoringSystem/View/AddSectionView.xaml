@@ -136,7 +136,7 @@
                                  CornerRadius="6"
                                  Padding="10,5"
                                  SnapsToDevicePixels="True"
-                                 Height="60">
+                                 Height="50">
 
                             <Border.Effect>
                                 <DropShadowEffect Color="#000000"
@@ -172,7 +172,7 @@
                              CornerRadius="6"
                              Padding="10,5"
                              SnapsToDevicePixels="True"
-                             Height="60">
+                             Height="50">
 
                             <Border.Effect>
                                 <DropShadowEffect Color="#000000"

@@ -27,6 +27,24 @@ namespace AttendanceMonitoringSystem.View
             InitializeComponent();
             _vm = new DashboardVM(); 
             DataContext = _vm;
+
+            Window window = Window.GetWindow(this);
+            if (window != null)
+            {
+                window.WindowStyle = WindowStyle.None;  // Removes the title bar
+                window.WindowState = WindowState.Maximized; // Makes it fullscreen
+                window.ResizeMode = ResizeMode.NoResize; // Prevents resizing
+            }
+            else
+            {
+                Loaded += (s, e) =>
+                {
+                    var win = Window.GetWindow(this);
+                    win.WindowStyle = WindowStyle.None;
+                    win.WindowState = WindowState.Maximized;
+                    win.ResizeMode = ResizeMode.NoResize;
+                };
+            }
         }
         private void ShowLogout(object sender, RoutedEventArgs e)
         {
