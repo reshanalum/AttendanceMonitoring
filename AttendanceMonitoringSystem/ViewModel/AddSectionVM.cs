@@ -32,7 +32,6 @@ namespace AttendanceMonitoringSystem.ViewModel
                 ClassAdviserId = c.ClassAdviserId,
                 FirstName = c.FirstName,
                 LastName = c.LastName,
-                PhoneNumber = c.PhoneNumber
 
             }).ToList();
 
@@ -53,7 +52,6 @@ namespace AttendanceMonitoringSystem.ViewModel
                 FirstName = c.FirstName,
                 LastName = c.LastName,
                 LRN = c.LRN,
-                PhoneNumber = c.PhoneNumber,
                 EnrollmentStatus = c.EnrollmentStatus
             }).ToList();
 

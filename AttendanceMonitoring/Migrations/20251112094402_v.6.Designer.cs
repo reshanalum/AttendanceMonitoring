@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AttendanceMonitoring.Migrations
 {
     [DbContext(typeof(AttendanceMonitoringContext))]
-    [Migration("20251112091259_v.1.2")]
-    partial class v12
+    [Migration("20251112094402_v.6")]
+    partial class v6
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

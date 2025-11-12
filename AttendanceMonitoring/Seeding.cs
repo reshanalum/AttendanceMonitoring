@@ -19,95 +19,81 @@ namespace AttendanceMonitoring
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
 
-                var enrollmentStatus = new List<string>()
-        {
-            "Enrolled", "Not Enrolled"
-        };
-                var studentGen = new Faker<Student>()
+                // 1️⃣ BASE ENTITIES -----------------------------------
+                var students = new Faker<Student>()
                     .RuleFor(c => c.FirstName, f => f.Name.FirstName())
                     .RuleFor(c => c.LastName, f => f.Name.LastName())
                     .RuleFor(c => c.LRN, f => f.Random.ReplaceNumbers("###########"))
                     .RuleFor(c => c.RFID, f => f.Random.ReplaceNumbers("?# ?# ?# ?#"))
-                    .RuleFor(c => c.EnrollmentStatus, f => f.PickRandom(enrollmentStatus));
-                var students = studentGen.Generate(50);
+                    .RuleFor(c => c.EnrollmentStatus, f => f.PickRandom("Enrolled", "Not Enrolled"))
+                    .Generate(30);
 
-                var parentGen = new Faker<Parent>()
+                var parents = new Faker<Parent>()
                     .RuleFor(c => c.FirstName, f => f.Name.FirstName())
-                    .RuleFor(c => c.LastName, f => f.Name.LastName());
-                var parents = parentGen.Generate(50);
+                    .RuleFor(c => c.LastName, f => f.Name.LastName())
+                    .Generate(30);
 
-                var networks = new List<string>()
-        {
-            "TNT", "SMART", "DITO", "GLOBE", "SUN"
-        };
+                var advisers = new Faker<Class_Adviser>()
+                    .RuleFor(c => c.FirstName, f => f.Name.FirstName())
+                    .RuleFor(c => c.LastName, f => f.Name.LastName())
+                    .Generate(10);
 
-                var contactGen = new Faker<Contact>()
+                context.Students.AddRange(students);
+                context.Parents.AddRange(parents);
+                context.Class_Advisers.AddRange(advisers);
+                context.SaveChanges(); // IDs assigned here
+
+                // 2️⃣ SECONDARY ENTITIES -------------------------------
+                var contacts = new Faker<Contact>()
                     .RuleFor(c => c.ParentId, f => f.PickRandom(parents).ParentId)
-                    .RuleFor(c => c.PhoneNumber, f => f.Random.ReplaceNumbers("09#########"));
-                var contacts = contactGen.Generate(50);
+                    .RuleFor(c => c.PhoneNumber, f => f.Random.ReplaceNumbers("09#########"))
+                    .Generate(30);
 
-                var adviserGen = new Faker<Class_Adviser>()
-                    .RuleFor(c => c.FirstName, f => f.Name.FirstName())
-                    .RuleFor(c => c.LastName, f => f.Name.LastName());
-                var advisers = adviserGen.Generate(50);
-
-                var advisoryGen = new Faker<Advisory>()
-                    .RuleFor(c => c.ClassAdviserId, f => f.PickRandom(advisers).ClassAdviserId)
+                var advisories = new Faker<Advisory>()
                     .RuleFor(c => c.StudentId, f => f.PickRandom(students).StudentId)
-                    .RuleFor(c => c.SectionName, f => f.Random.Word())
-                    .RuleFor(c => c.SchoolYear, f => f.Date.Past(2).Year.ToString());
-                var advisories = advisoryGen.Generate(50);
+                    .RuleFor(c => c.ClassAdviserId, f => f.PickRandom(advisers).ClassAdviserId)
+                    .RuleFor(c => c.SectionName, f => f.Commerce.Department())
+                    .RuleFor(c => c.SchoolYear, f => f.Date.Past(2).Year.ToString())
+                    .Generate(30);
 
-                var attendanceStatus = new List<string>()
-        {
-            "IN", "OUT"
-        };
-
-                var attendanceGen = new Faker<Attendance>()
+                var attendances = new Faker<Attendance>()
                     .RuleFor(c => c.StudentId, f => f.PickRandom(students).StudentId)
                     .RuleFor(c => c.DateTime, f => f.Date.Between(new DateTime(2025, 1, 1), DateTime.Now))
-                    .RuleFor(c => c.Status, f => f.PickRandom(attendanceStatus));
-                var attendances = attendanceGen.Generate(50);
+                    .RuleFor(c => c.Status, f => f.PickRandom("IN", "OUT"))
+                    .Generate(50);
 
-                var messages = new List<string>()
-        {
-            "ABOT NA IMONG ANAK LODS", "PASI NA IMONG ANAK LODS"
-        };
+                context.Contacts.AddRange(contacts);
+                context.Advisories.AddRange(advisories);
+                context.Attendances.AddRange(attendances);
+                context.SaveChanges(); // IDs assigned here
 
-                var notificationGen = new Faker<Notification>()
+                // 3️⃣ TERTIARY ENTITIES -------------------------------
+                var notifications = new Faker<Notification>()
                     .RuleFor(c => c.AttendanceId, f => f.PickRandom(attendances).AttendanceId)
-                    .RuleFor(c => c.Message, f => f.PickRandom(messages));
-                var notifications = notificationGen.Generate(50);
+                    .RuleFor(c => c.Message, f => f.PickRandom("ABOT NA IMONG ANAK LODS", "PASI NA IMONG ANAK LODS"))
+                    .Generate(50);
 
-                var deliveredGen = new Faker<Delivered>()
+                context.Notifications.AddRange(notifications);
+                context.SaveChanges(); // Needed before Delivered
+
+                // 4️⃣ FINAL DEPENDENTS -------------------------------
+                var delivered = new Faker<Delivered>()
                     .RuleFor(c => c.NotificationId, f => f.PickRandom(notifications).NotificationId)
                     .RuleFor(c => c.ContactId, f => f.PickRandom(contacts).ContactId)
-                    .RuleFor(c => c.DateTimeSent, f => f.Date.Between(new DateTime(2025, 1, 1), DateTime.Now));
-                var delivers = deliveredGen.Generate(50);
+                    .RuleFor(c => c.DateTimeSent, f => f.Date.Between(new DateTime(2025, 1, 1), DateTime.Now))
+                    .Generate(50);
 
-                var relationshipType = new List<string>()
-        {
-            "PARENT", "GUARDIAN"
-        };
-
-                var relationshipGen = new Faker<Relationship>()
+                var relationships = new Faker<Relationship>()
                     .RuleFor(c => c.StudentId, f => f.PickRandom(students).StudentId)
                     .RuleFor(c => c.ParentId, f => f.PickRandom(parents).ParentId)
-                    .RuleFor(c => c.RelationshipType, f => f.PickRandom(relationshipType));
-                var relationships = relationshipGen.Generate(50);
+                    .RuleFor(c => c.RelationshipType, f => f.PickRandom("PARENT", "GUARDIAN"))
+                    .Generate(30);
 
-                context.Set<Student>().AddRange(students);
-                context.Set<Parent>().AddRange(parents);
-                context.Set<Class_Adviser>().AddRange(advisers);
-                context.Set<Advisory>().AddRange(advisories);
-                context.Set<Attendance>().AddRange(attendances);
-                context.Set<Notification>().AddRange(notifications);
-                context.Set<Delivered>().AddRange(delivers);
-                context.Set<Contact>().AddRange(contacts);
-                context.Set<Relationship>().AddRange(relationships);
+                context.Delivereds.AddRange(delivered);
+                context.Relationships.AddRange(relationships);
                 context.SaveChanges();
-
             }
         }
+
     }
 }

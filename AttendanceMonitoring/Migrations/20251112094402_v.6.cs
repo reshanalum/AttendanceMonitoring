@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AttendanceMonitoring.Migrations
 {
     /// <inheritdoc />
-    public partial class v12 : Migration
+    public partial class v6 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
