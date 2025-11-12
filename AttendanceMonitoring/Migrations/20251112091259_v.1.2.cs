@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AttendanceMonitoring.Migrations
 {
     /// <inheritdoc />
-    public partial class AddMigration : Migration
+    public partial class v12 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,10 +15,10 @@ namespace AttendanceMonitoring.Migrations
                 name: "Class_Adviser",
                 columns: table => new
                 {
-                    ClassAdviserId = table.Column<string>(type: "TEXT", nullable: false),
+                    ClassAdviserId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     FirstName = table.Column<string>(type: "varchar(150)", nullable: false),
-                    LastName = table.Column<string>(type: "varchar(150)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "varchar(150)", nullable: false)
+                    LastName = table.Column<string>(type: "varchar(150)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,10 +29,10 @@ namespace AttendanceMonitoring.Migrations
                 name: "Parent",
                 columns: table => new
                 {
-                    ParentId = table.Column<string>(type: "TEXT", nullable: false),
+                    ParentId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     FirstName = table.Column<string>(type: "varchar(150)", nullable: false),
-                    LastName = table.Column<string>(type: "varchar(150)", nullable: false),
-                    Email = table.Column<string>(type: "varchar(150)", nullable: false)
+                    LastName = table.Column<string>(type: "varchar(150)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -43,11 +43,12 @@ namespace AttendanceMonitoring.Migrations
                 name: "Student",
                 columns: table => new
                 {
-                    StudentId = table.Column<string>(type: "TEXT", nullable: false),
+                    StudentId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     FirstName = table.Column<string>(type: "varchar(150)", nullable: false),
                     LastName = table.Column<string>(type: "varchar(150)", nullable: false),
                     LRN = table.Column<string>(type: "varchar(150)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "varchar(150)", nullable: false),
+                    RFID = table.Column<string>(type: "varchar(150)", nullable: false),
                     EnrollmentStatus = table.Column<string>(type: "varchar(150)", nullable: false)
                 },
                 constraints: table =>
@@ -59,10 +60,10 @@ namespace AttendanceMonitoring.Migrations
                 name: "User",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "TEXT", nullable: false),
+                    UserId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     FirstName = table.Column<string>(type: "varchar(150)", nullable: false),
                     LastName = table.Column<string>(type: "varchar(150)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "varchar(150)", nullable: false),
                     Email = table.Column<string>(type: "varchar(150)", nullable: false),
                     IsAdmin = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -75,10 +76,10 @@ namespace AttendanceMonitoring.Migrations
                 name: "Contact",
                 columns: table => new
                 {
-                    ContactId = table.Column<string>(type: "TEXT", nullable: false),
+                    ContactId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     PhoneNumber = table.Column<string>(type: "varchar(150)", nullable: false),
-                    Network = table.Column<string>(type: "varchar(150)", nullable: false),
-                    ParentId = table.Column<string>(type: "TEXT", nullable: false)
+                    ParentId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -95,11 +96,12 @@ namespace AttendanceMonitoring.Migrations
                 name: "Advisory",
                 columns: table => new
                 {
-                    AdvisoryId = table.Column<string>(type: "TEXT", nullable: false),
+                    AdvisoryId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     SectionName = table.Column<string>(type: "varchar(150)", nullable: false),
                     SchoolYear = table.Column<string>(type: "varchar(150)", nullable: false),
-                    ClassAdviserId = table.Column<string>(type: "TEXT", nullable: false),
-                    StudentId = table.Column<string>(type: "TEXT", nullable: false)
+                    ClassAdviserId = table.Column<int>(type: "INTEGER", nullable: false),
+                    StudentId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -122,10 +124,11 @@ namespace AttendanceMonitoring.Migrations
                 name: "Attendance",
                 columns: table => new
                 {
-                    AttendanceId = table.Column<string>(type: "TEXT", nullable: false),
+                    AttendanceId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     DateTime = table.Column<DateTime>(type: "date", nullable: false),
                     Status = table.Column<string>(type: "varchar(150)", nullable: false),
-                    StudentId = table.Column<string>(type: "TEXT", nullable: false)
+                    StudentId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -142,10 +145,11 @@ namespace AttendanceMonitoring.Migrations
                 name: "Relationship",
                 columns: table => new
                 {
-                    RelationshipId = table.Column<string>(type: "TEXT", nullable: false),
+                    RelationshipId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     RelationshipType = table.Column<string>(type: "varchar(150)", nullable: false),
-                    StudentId = table.Column<string>(type: "TEXT", nullable: false),
-                    ParentId = table.Column<string>(type: "TEXT", nullable: false)
+                    StudentId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ParentId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -168,9 +172,10 @@ namespace AttendanceMonitoring.Migrations
                 name: "Notification",
                 columns: table => new
                 {
-                    NotificationId = table.Column<string>(type: "TEXT", nullable: false),
+                    NotificationId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     Message = table.Column<string>(type: "varchar(400)", nullable: false),
-                    AttendanceId = table.Column<string>(type: "TEXT", nullable: false)
+                    AttendanceId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -187,10 +192,11 @@ namespace AttendanceMonitoring.Migrations
                 name: "Delivered",
                 columns: table => new
                 {
-                    DeliveredId = table.Column<string>(type: "TEXT", nullable: false),
+                    DeliveredId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     DateTimeSent = table.Column<DateTime>(type: "date", nullable: false),
-                    NotificationId = table.Column<string>(type: "TEXT", nullable: false),
-                    ContactId = table.Column<string>(type: "TEXT", nullable: false)
+                    NotificationId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ContactId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {

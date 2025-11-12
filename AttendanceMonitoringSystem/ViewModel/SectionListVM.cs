@@ -88,14 +88,14 @@ namespace AttendanceMonitoringSystem.ViewModel
                     AdvisoryId = g.Key.AdvisoryId,
                     SectionName = g.Key.SectionName,
                     SchoolYear = g.Key.SchoolYear,
-                    ClassAdviserId = g.Key.AdviserName,
-                    StudentId = g.Count().ToString()
+                    ClassAdviserId = g.Key.AdvisoryId, //ARVISER NAME DAPAT
+                    StudentId = g.Count()
                 })
                 .Where(c =>
                     c.SectionName.ToLower().Contains(search) ||
                     c.SchoolYear.ToLower().Contains(search) ||
-                    c.ClassAdviserId.ToLower().Contains(search) ||
-                    c.StudentId.ToLower().Contains(search))
+                    c.ClassAdviserId.ToString().ToLower().Contains(search) ||
+                    c.StudentId.ToString().ToLower().Contains(search))
                 .ToList();
 
             AdvisoryList.Clear();
@@ -122,8 +122,8 @@ namespace AttendanceMonitoringSystem.ViewModel
                     AdvisoryId = g.Key.AdvisoryId,
                     SectionName = g.Key.SectionName,
                     SchoolYear = g.Key.SchoolYear,
-                    ClassAdviserId = g.Key.AdviserName,
-                    StudentId = g.Count().ToString()
+                    ClassAdviserId = g.Key.AdvisoryId, //DAPAT ADVISER NAME
+                    StudentId = g.Count()
                 })
                 .ToList();
 

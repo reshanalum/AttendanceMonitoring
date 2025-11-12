@@ -56,7 +56,6 @@ namespace AttendanceMonitoringSystem.ViewModel
                 FirstName = c.FirstName,
                 LastName = c.LastName,
                 LRN = c.LRN,
-                PhoneNumber = c.PhoneNumber,
                 EnrollmentStatus = c.EnrollmentStatus
             }).ToList();
 
@@ -142,8 +141,7 @@ namespace AttendanceMonitoringSystem.ViewModel
                     c.StudentId.ToString().Contains(search) ||
                     c.FirstName.ToLower().Contains(search) ||
                     c.LastName.ToLower().Contains(search) ||
-                    c.LRN.ToLower().Contains(search) ||
-                    c.PhoneNumber.ToLower().Contains(search))
+                    c.LRN.ToLower().Contains(search))
                 .ToList();
 
             StudentList.Clear();
