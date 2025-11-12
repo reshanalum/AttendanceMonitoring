@@ -325,7 +325,7 @@
         <StackPanel Grid.Row="1"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
-                    Margin="0,150,0,0" Height="528">
+                    Margin="0,150,0,0">
 
             <TextBlock Text="ADD STUDENTS" 
                          FontSize="23" 
