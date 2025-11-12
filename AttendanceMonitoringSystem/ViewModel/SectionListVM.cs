@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using AttendanceMonitoring.Models;
 using AttendanceMonitoringSystem.Command;
 using AttendanceMonitoring;
+using System.Windows.Input;
+using AttendanceMonitoringSystem.View;
 
 namespace AttendanceMonitoringSystem.ViewModel
 {
@@ -20,11 +22,29 @@ namespace AttendanceMonitoringSystem.ViewModel
         private int _selectedIndex;
         private string studentSearchText;
 
+        public ICommand ShowEditSectionCommand { get; set; }
+        public ICommand ShowAddSectionCommand { get; set; }
+
         public SectionListVM(DashboardVM dashboardVM)
         {
             LoadSections();
+            ShowAddSectionCommand = new RelayCommand(ExecuteAddSectionCommand);
+            ShowEditSectionCommand = new RelayCommand(ExecuteEditSectionCommand);
             _dashboardVM = dashboardVM;
         }
+
+        private void ExecuteEditSectionCommand(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ExecuteAddSectionCommand(object obj)
+        {
+            var addView = new AddSectionView();
+            addView.DataContext = new AddSectionVM(_dashboardVM);
+            _dashboardVM.CurrentView = addView;
+        }
+
         public Advisory SelectedSection
         {
             get => _selectedSection; 
