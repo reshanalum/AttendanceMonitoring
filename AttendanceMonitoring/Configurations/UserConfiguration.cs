@@ -19,8 +19,6 @@ namespace AttendanceMonitoring.Configurations
                 .HasColumnType("varchar(150)");
             builder.Property(c => c.LastName)
                 .HasColumnType("varchar(150)");
-            builder.Property(c => c.PhoneNumber)
-                .HasColumnType("varchar(150)");
             builder.Property(c => c.Email)
                 .HasColumnType("varchar(150)");
             builder.Property(c => c.IsAdmin)

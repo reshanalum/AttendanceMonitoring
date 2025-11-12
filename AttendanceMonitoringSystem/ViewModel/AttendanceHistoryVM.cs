@@ -54,7 +54,7 @@ namespace AttendanceMonitoringSystem.ViewModel
                 .Select(c => new Attendance
                 {
                     AttendanceId = c.AttendanceId,
-                    StudentId = c.StudentLink.FirstName,
+                    StudentId = c.StudentLink.StudentId, //FIRST NAME OF THE STUDENT
                     DateTime = c.DateTime,
                     Status = c.Status,
                 })
@@ -73,7 +73,7 @@ namespace AttendanceMonitoringSystem.ViewModel
             var attendances = context.Attendances.Select(c => new Attendance
             {
                 AttendanceId = c.AttendanceId,
-                StudentId = c.StudentLink.FirstName,
+                StudentId = c.StudentLink.StudentId, // SHOULD BE FIRST NAME 
                 DateTime = c.DateTime,
                 Status = c.Status,
             }).ToList();

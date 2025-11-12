@@ -91,7 +91,6 @@ namespace AttendanceMonitoringSystem.ViewModel
                 studentInDb.FirstName = EditingStudent.FirstName;
                 studentInDb.LastName = EditingStudent.LastName;
                 studentInDb.LRN = EditingStudent.LRN;
-                studentInDb.PhoneNumber = EditingStudent.PhoneNumber;
                 studentInDb.EnrollmentStatus = EditingStudent.EnrollmentStatus;
             }
 
@@ -100,7 +99,6 @@ namespace AttendanceMonitoringSystem.ViewModel
             {
                 parentInDb.FirstName = EditingParent.FirstName;
                 parentInDb.LastName = EditingParent.LastName;
-                parentInDb.Email = EditingParent.Email;
             }
 
             if (Contact1 != null && !string.IsNullOrWhiteSpace(Contact1.PhoneNumber))
@@ -109,7 +107,6 @@ namespace AttendanceMonitoringSystem.ViewModel
                 if (contact1InDb != null)
                 {
                     contact1InDb.PhoneNumber = Contact1.PhoneNumber;
-                    contact1InDb.Network = Contact1.Network ?? "";
                 }
                 else
                 {
@@ -124,7 +121,6 @@ namespace AttendanceMonitoringSystem.ViewModel
                 if (contact2InDb != null)
                 {
                     contact2InDb.PhoneNumber = Contact2.PhoneNumber;
-                    contact2InDb.Network = Contact2.Network ?? "";
                 }
                 else
                 {

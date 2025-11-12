@@ -16,7 +16,7 @@ namespace AttendanceMonitoringSystem.ViewModel
         private readonly DashboardVM _dashboardVM;
 
 
-        public string NewStudentID { get; set; }
+        public int NewStudentID { get; set; }
 
 
         public string NewFirstName { get; set; }
@@ -25,22 +25,22 @@ namespace AttendanceMonitoringSystem.ViewModel
         public string NewPhoneNumber { get; set; }
         public string NewEnrollmentStatus { get; set; }
 
-        public string NewParentID { get; set; }     
+        public int NewParentID { get; set; }     
         public string NewParentFirstName { get; set; }
         public string NewParentLastName { get; set; }
         public string NewParentEmail { get; set; }
 
-        public string NewContact1ID { get; set; }
+        public int NewContact1ID { get; set; }
 
         public string NewParentContactNumber1 { get; set; }
         public string NewParentContactNetwork1 { get; set; }  //NEED PA BA TO? WALA SIYA NAKALAGAY SA UI
 
-        public string NewContact2ID { get; set; }
+        public int NewContact2ID { get; set; }
 
         public string NewParentContactNumber2 { get; set; }
         public string NewParentContactNetwork2 { get; set; }
 
-        public string NewRelationshipID { get; set; }
+        public int NewRelationshipID { get; set; }
 
 
         public List<string> EnrollmentStatus { get; set; }
@@ -71,9 +71,9 @@ namespace AttendanceMonitoringSystem.ViewModel
         {
             using var context = new AttendanceMonitoringContext();
             var random = new Random();
-            string randomStudentId;
+            int randomStudentId;
 
-            do { randomStudentId = random.Next(1000, 9999).ToString(); }
+            do { randomStudentId = random.Next(1000, 9999); }
             while (context.Students.Any(c => c.StudentId == randomStudentId));
 
             NewStudentID = randomStudentId;
@@ -84,9 +84,9 @@ namespace AttendanceMonitoringSystem.ViewModel
         {
             using var context = new AttendanceMonitoringContext();
             var random = new Random();
-            string randomRelationshipId;
+            int randomRelationshipId;
 
-            do { randomRelationshipId = random.Next(1000, 9999).ToString(); }
+            do { randomRelationshipId = random.Next(1000, 9999); }
             while (context.Relationships.Any(c => c.RelationshipId == randomRelationshipId));
 
             NewRelationshipID = randomRelationshipId;
@@ -97,9 +97,9 @@ namespace AttendanceMonitoringSystem.ViewModel
         {
             using var context = new AttendanceMonitoringContext();
             var random = new Random();
-            string randomParentId;
+            int randomParentId;
 
-            do { randomParentId = random.Next(1000, 9999).ToString(); }
+            do { randomParentId = random.Next(1000, 9999); }
             while (context.Parents.Any(c => c.ParentId == randomParentId));
 
             NewParentID = randomParentId;
@@ -109,18 +109,18 @@ namespace AttendanceMonitoringSystem.ViewModel
         {
             using var context = new AttendanceMonitoringContext();
             var random1 = new Random();
-            string randomContact1Id;
+            int randomContact1Id;
 
-            do { randomContact1Id = random1.Next(1000, 9999).ToString(); }
+            do { randomContact1Id = random1.Next(1000, 9999); }
             while (context.Contacts.Any(c => c.ContactId == randomContact1Id));
 
             NewContact1ID = randomContact1Id;
             OnPropertyChanged(nameof(NewContact1ID));
 
             var random2 = new Random();
-            string randomContact2Id;
+            int randomContact2Id;
 
-            do { randomContact2Id = random2.Next(1000, 9999).ToString(); }
+            do { randomContact2Id = random2.Next(1000, 9999); }
             while (context.Contacts.Any(c => c.ContactId == randomContact2Id));
 
             NewContact2ID = randomContact2Id;
@@ -157,7 +157,6 @@ namespace AttendanceMonitoringSystem.ViewModel
                 FirstName = NewFirstName,
                 LastName = NewLastName,
                 LRN = NewLRN,
-                PhoneNumber = NewPhoneNumber,
                 EnrollmentStatus = NewEnrollmentStatus
             };
 
@@ -168,8 +167,7 @@ namespace AttendanceMonitoringSystem.ViewModel
             {
                 ParentId = NewParentID,
                 FirstName = NewParentFirstName,
-                LastName = NewParentLastName,
-                Email = NewParentEmail
+                LastName = NewParentLastName
             };
 
             context.Parents.Add(newParent);
@@ -180,8 +178,7 @@ namespace AttendanceMonitoringSystem.ViewModel
             {
                 ContactId = NewContact1ID,
                 ParentId = newParent.ParentId,
-                PhoneNumber = NewParentContactNumber1,
-                Network = NewParentContactNetwork1 ?? ""
+                PhoneNumber = NewParentContactNumber1
             };
             context.Contacts.Add(contact1);
 
@@ -192,8 +189,7 @@ namespace AttendanceMonitoringSystem.ViewModel
                 {
                     ContactId = NewContact2ID,
                     ParentId = newParent.ParentId,
-                    PhoneNumber = NewParentContactNumber2,
-                    Network = NewParentContactNetwork2 ?? ""
+                    PhoneNumber = NewParentContactNumber2
                 };
                 context.Contacts.Add(contact2);
             }

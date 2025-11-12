@@ -12,8 +12,6 @@ namespace AttendanceMonitoring.Configurations
             builder.HasKey(c => c.ContactId);
             builder.Property(c => c.PhoneNumber)
                 .HasColumnType("varchar(150)");
-            builder.Property(c => c.Network)
-                .HasColumnType("varchar(150)");
 
             //Foreign Key
             builder.HasOne(c => c.ParentLink)
