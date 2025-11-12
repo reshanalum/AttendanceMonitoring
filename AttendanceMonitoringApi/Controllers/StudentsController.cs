@@ -28,19 +28,21 @@ namespace AttendanceMonitoringApi.Controllers
             return await _context.Students.ToListAsync();
         }
 
-        // GET: api/Students/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Student>> GetStudent(string id)
-        {
-            var student = await _context.Students.FindAsync(id);
+        //// GET: api/Students/5
+        //[HttpGet("/{uid}")]
+        //public async Task<ActionResult<Student>> GetStudentByUID(string uid)
+        //{
+        //    Student student = await _context.Students
+        //        .Where(c => c.UidRFID == uid)
+        //        .FirstAsync();
 
-            if (student == null)
-            {
-                return NotFound();
-            }
+        //    if (student == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return student;
-        }
+        //    return student;
+        //}
 
         // PUT: api/Students/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
