@@ -1,16 +1,18 @@
-﻿using AttendanceMonitoringSystem.Commands;
+﻿using AttendanceMonitoring;
+using AttendanceMonitoring.Models;
+using AttendanceMonitoringSystem.Command;
+using AttendanceMonitoringSystem.Commands;
+using AttendanceMonitoringSystem.View;
+using AttendanceMonitoringSystem.ViewModel;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AttendanceMonitoring.Models;
-using AttendanceMonitoringSystem.Command;
-using AttendanceMonitoring;
+using System.Windows;
 using System.Windows.Input;
-using AttendanceMonitoringSystem.View;
-using AttendanceMonitoringSystem.ViewModel;
 
 namespace AttendanceMonitoringSystem.ViewModel
 {
@@ -47,9 +49,29 @@ namespace AttendanceMonitoringSystem.ViewModel
 
         private void ExecuteEditSectionCommand(object obj)
         {
-            var editView = new EditSectionView();
-            editView.DataContext = new EditSectionVM(_dashboardVM);
-            _dashboardVM.CurrentView = editView;
+            if (SelectedSection != null)
+            {
+                // You need to get the actual Advisory object from DB using SectionName
+                using var context = new AttendanceMonitoringContext();
+                var advisoryToEdit = context.Advisories
+                    .Include(a => a.ClassAdviserLink)
+                    .FirstOrDefault(a => a.SectionName == SelectedSection.SectionName);
+
+                if (advisoryToEdit != null)
+                {
+                    var editView = new EditSectionView();
+                    editView.DataContext = new EditSectionVM(_dashboardVM, advisoryToEdit);
+                    _dashboardVM.CurrentView = editView;
+                }
+                else
+                {
+                    MessageBox.Show("Selected section could not be found.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No section selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private void ExecuteAddSectionCommand(object obj)

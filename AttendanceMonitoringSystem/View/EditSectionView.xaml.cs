@@ -45,7 +45,7 @@ namespace AttendanceMonitoringSystem.View
         {
             if (_vm != null)
             {
-                //_vm.BackToSectionList(); // Navigate back
+                _vm.BackToSectionList(); // Navigate back
             }
         }
     }

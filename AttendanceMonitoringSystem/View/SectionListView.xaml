@@ -180,7 +180,7 @@
             <ListView   Padding="8,5"
                         Grid.Row="2"
                         ItemsSource="{Binding AdvisoryList}"
-                        SelectedItem="{Binding SelectedSection}"
+                        SelectedItem="{Binding SelectedSection, Mode=TwoWay}"
                         SelectedIndex="{Binding SelectedIndex}">
 
                 <ListView.Resources>

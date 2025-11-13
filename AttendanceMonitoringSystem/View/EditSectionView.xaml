@@ -128,7 +128,7 @@
                                   Foreground="#333"
                                   VerticalContentAlignment="Center"
                                   Padding="10,5"
-                                  Text="{Binding NewSectionName}"/>
+                                  Text="{Binding EditingSectionName}"/>
                         </Border>
                     </StackPanel>
 
@@ -164,7 +164,7 @@
                                 VerticalContentAlignment="Center"
                                 Padding="10,5"
                                 ItemsSource="{Binding TeacherList}"
-                                SelectedValue="{Binding SelectedTeacherId, Mode=TwoWay}"
+                                SelectedValue="{Binding EditingSelectedTeacherId, Mode=TwoWay}"
                                 DisplayMemberPath="FirstName"
                                 BorderBrush="White"
                                 SelectedValuePath="ClassAdviserId"
@@ -285,7 +285,7 @@
                          Orientation="Vertical"
                          VerticalAlignment="Center">
 
-                    <TextBlock Text="Add Section" 
+                    <TextBlock Text="Edit Section" 
                             FontSize="30" 
                             FontWeight="Bold" 
                             Foreground="#002D96"/>
@@ -311,7 +311,7 @@
 
             <StackPanel Grid.Column="0"
                         VerticalAlignment="Center">
-                <TextBlock Text="ADD STUDENTS" 
+                <TextBlock Text="STUDENT LIST" 
                            FontSize="23" 
                            FontWeight="ExtraBold" 
                            Foreground="#002D96"

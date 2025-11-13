@@ -52,16 +52,17 @@ namespace AttendanceMonitoringSystem.ViewModel
         private void LoadStudents()
         {
             using var context = new AttendanceMonitoringContext();
-            var students = context.Students
-                .Select(c => new StudentDisplay
-                {
-                    Student = c,
-                    IsSelected = false
-                })
-                .ToList();
+            var studentsWithoutSections = context.Students
+                    .Where(s => !s.AdvisoryList.Any()) // <-- filter
+                    .Select(c => new StudentDisplay
+                    {
+                        Student = c,
+                        IsSelected = false
+                    })
+                    .ToList();
 
             StudentList.Clear();
-            foreach (var s in students)
+            foreach (var s in studentsWithoutSections)
             {
                 StudentList.Add(s);
             }
