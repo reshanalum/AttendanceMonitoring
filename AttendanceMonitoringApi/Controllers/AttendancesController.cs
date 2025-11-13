@@ -45,7 +45,7 @@ namespace AttendanceMonitoringApi.Controllers
         // PUT: api/Attendances/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAttendance(string id, Attendance attendance)
+        public async Task<IActionResult> PutAttendance(int id, Attendance attendance)
         {
             if (id != attendance.AttendanceId)
             {
@@ -80,13 +80,13 @@ namespace AttendanceMonitoringApi.Controllers
         {
             Attendance oldAttendance = await _context.Attendances
                 .Include(c => c.StudentLink)
-                .Where(c => c.StudentLink.UidRFID == uid)
+                .Where(c => c.StudentLink.RFID == uid)
                 .LastAsync();
 
             Attendance newAttendance = new()
             {
                 DateTime = DateTime.Now,
-                StudentLink = _context.Students.Where(c => c.UidRFID == uid).First(),
+                StudentLink = _context.Students.Where(c => c.RFID == uid).First(),
                 Status = oldAttendance.Status == "OUT" || oldAttendance == null ? "IN" : "OUT"
             };
 
@@ -126,7 +126,7 @@ namespace AttendanceMonitoringApi.Controllers
             return NoContent();
         }
 
-        private bool AttendanceExists(string id)
+        private bool AttendanceExists(int id)
         {
             return _context.Attendances.Any(e => e.AttendanceId == id);
         }

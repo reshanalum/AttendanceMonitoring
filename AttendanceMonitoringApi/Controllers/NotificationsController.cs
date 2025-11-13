@@ -45,7 +45,7 @@ namespace AttendanceMonitoringApi.Controllers
         // PUT: api/Notifications/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutNotification(string id, Notification notification)
+        public async Task<IActionResult> PutNotification(int id, Notification notification)
         {
             if (id != notification.NotificationId)
             {
@@ -103,7 +103,7 @@ namespace AttendanceMonitoringApi.Controllers
         {
             Attendance attendance = await _context.Attendances
                 .Include(c => c.StudentLink)
-                .Where(c => c.StudentLink.UidRFID == uid)
+                .Where(c => c.StudentLink.RFID == uid)
                 .LastAsync();
 
             Notification notification = new() 
@@ -148,7 +148,7 @@ namespace AttendanceMonitoringApi.Controllers
             return NoContent();
         }
 
-        private bool NotificationExists(string id)
+        private bool NotificationExists(int id)
         {
             return _context.Notifications.Any(e => e.NotificationId == id);
         }
