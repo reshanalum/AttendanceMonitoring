@@ -22,14 +22,21 @@ namespace AttendanceMonitoringSystem.View
     public partial class SectionDetailsView : UserControl
     {
         private SectionDetailsVM _vm;
-        public SectionDetailsView(DashboardVM dashboardVM)
+        public SectionDetailsView(DashboardVM dashboardVM, SectionDisplay section)
         {
             InitializeComponent();
-            _vm = new SectionDetailsVM(dashboardVM);
+            _vm = new SectionDetailsVM(dashboardVM, section);
             this.DataContext = _vm;
         }
 
-
+        //ButtonBack_Click
+        private void ButtonBack_Click(object sender, RoutedEventArgs e)
+        {
+            if (_vm != null)
+            {
+                _vm.BackToSectionList(); // Navigate back
+            }
+        }
 
     }
 

@@ -10,6 +10,7 @@ using AttendanceMonitoringSystem.Command;
 using AttendanceMonitoring;
 using System.Windows.Input;
 using AttendanceMonitoringSystem.View;
+using AttendanceMonitoringSystem.ViewModel;
 
 namespace AttendanceMonitoringSystem.ViewModel
 {
@@ -24,13 +25,24 @@ namespace AttendanceMonitoringSystem.ViewModel
 
         public ICommand ShowEditSectionCommand { get; set; }
         public ICommand ShowAddSectionCommand { get; set; }
+        public ICommand ViewSectionCommand { get; set; }
 
         public SectionListVM(DashboardVM dashboardVM)
         {
             LoadSections();
             ShowAddSectionCommand = new RelayCommand(ExecuteAddSectionCommand);
             ShowEditSectionCommand = new RelayCommand(ExecuteEditSectionCommand);
+            ViewSectionCommand = new RelayCommand(ExecuteViewSectionCommand);
             _dashboardVM = dashboardVM;
+        }
+
+        private void ExecuteViewSectionCommand(object obj)
+        {
+            if (obj is SectionDisplay section)
+            {
+                var sectionDetailsView = new SectionDetailsView(_dashboardVM, section);
+                _dashboardVM.CurrentView = sectionDetailsView;
+            }
         }
 
         private void ExecuteEditSectionCommand(object obj)

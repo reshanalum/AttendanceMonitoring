@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:AttendanceMonitoringSystem.View"
              xmlns:ViewModel="clr-namespace:AttendanceMonitoringSystem.ViewModel" 
              xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:faa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:c="clr-namespace:AttendanceMonitoringSystem.Command"
              mc:Ignorable="d" 
              d:DesignHeight="939" 
@@ -18,16 +19,17 @@
 
     </UserControl.Resources>
 
-    <Grid Margin="50">
+    <Grid Margin="40">
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="45"/>
             <RowDefinition Height="80"/>
             <RowDefinition Height="20"/>
             <RowDefinition Height="250"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="2"
+        <Grid Grid.Row="3"
               HorizontalAlignment="Left">
 
             <StackPanel Orientation="Horizontal">
@@ -94,8 +96,9 @@
 
 
                     <Button Cursor="Hand"
-                            Background="Transparent">
-                        
+                            Background="Transparent"
+                            Command="{Binding ShowAttendanceHistoryCommand}">
+
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <ContentPresenter HorizontalAlignment="Center" 
@@ -127,11 +130,55 @@
 
 
         </Grid>
-        
-
 
 
         <Grid Grid.Row="0">
+            <Button x:Name="BtnBack"
+                     BorderThickness="0"
+                     FontFamily="Montserrat"
+                     FontSize="15"
+                     FontWeight="Bold"
+                     Cursor="Hand"
+                     Click="ButtonBack_Click"
+                    HorizontalAlignment="Left"
+                    Margin="20,0,0,0">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FF3060FF"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Width="30" Height="30"
+                 Background="{TemplateBinding Background}" Margin="0,-2,3,-2">
+                            <ContentPresenter VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <faa:IconImage Icon="ArrowLeft"
+                               Height="25"
+                               Width="32"
+                               Foreground="#FF002D96">
+                    <faa:IconImage.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </faa:IconImage.RenderTransform>
+                </faa:IconImage>
+            </Button>
+
+        </Grid>
+
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -139,9 +186,9 @@
 
             <Grid Grid.Column="1">
 
-                
+
             </Grid>
-            <Grid Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,226,0">
+            <Grid Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,226,0" >
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -150,12 +197,12 @@
 
                 <StackPanel Grid.Column="0"
                             Orientation="Vertical">
-                    <TextBlock Text="Name of Section" 
+                    <TextBlock Text="{Binding SelectedSection.SectionName}" 
                                FontSize="40" 
                                FontWeight="Bold" 
                                Foreground="#002D96"/>
 
-                    <TextBlock Text="Adviser: gsdgjj" 
+                    <TextBlock Text="{Binding SelectedSection.AdviserName, StringFormat=Class Adviser: {0}}" 
                                FontSize="18" 
                                Foreground="Gray"
                                FontWeight="Bold" 

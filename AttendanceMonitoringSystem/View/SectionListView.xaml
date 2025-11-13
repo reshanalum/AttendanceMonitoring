@@ -257,16 +257,18 @@
                         <GridViewColumn Width="100">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Width="24" 
-                                                Height="24" 
-                                                Margin="2"
-                                                Background="Transparent">
-                                        <fa:ImageAwesome Icon="Pagelines" 
-                                                             Width="16" 
-                                                             Height="16"
-                                                             Foreground="#002D96"/>
+                                    <Button Content="View"
+                                            Width="80"
+                                            Height="28"
+                                            FontFamily="Montserrat"
+                                            FontWeight="SemiBold"
+                                            Foreground="White"
+                                            Background="#002D96"
+                                            BorderBrush="#002D96"
+                                            Cursor="Hand"
+                                            Command="{Binding DataContext.ViewSectionCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                            CommandParameter="{Binding}">
                                     </Button>
-
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

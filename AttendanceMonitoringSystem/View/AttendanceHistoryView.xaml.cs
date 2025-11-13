@@ -25,8 +25,15 @@ namespace AttendanceMonitoringSystem.View
         public AttendanceHistoryView(DashboardVM dashboardVM)
         {
             InitializeComponent();
-            //_vm = new AttendanceHistoryVM(dashboardVM);
-            //this.DataContext = _vm;
+            _vm = new AttendanceHistoryVM(dashboardVM);
+            this.DataContext = _vm;
+        }
+        private void ButtonBack_Click(object sender, RoutedEventArgs e)
+        {
+            if (_vm != null)
+            {
+                _vm.BackToSectionDetailsList(); // Navigate back
+            }
         }
     }
 }
