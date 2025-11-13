@@ -49,7 +49,7 @@ namespace AttendanceMonitoringApi.Controllers
             Relationship relationship = await _context.Relationships
                 .Include(c => c.StudentLink)
                 .Include(c => c.ParentLink)
-                .Where(c => c.StudentLink.UidRFID == uid)
+                .Where(c => c.StudentLink.RFID == uid)
                 .FirstAsync();
 
             if (relationship == null)
@@ -72,7 +72,7 @@ namespace AttendanceMonitoringApi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutParent(string id, Parent parent)
         {
-            if (id != parent.ParentId)
+            if (int.Parse(id) != parent.ParentId)
             {
                 return BadRequest();
             }
@@ -100,34 +100,34 @@ namespace AttendanceMonitoringApi.Controllers
 
         // POST: api/Parents
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Parent>> PostParent(Parent parent)
-        {
-            _context.Parents.Add(parent);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (ParentExists(parent.ParentId))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //[HttpPost]
+        //public async Task<ActionResult<Parent>> PostParent(Parent parent)
+        //{
+        //    _context.Parents.Add(parent);
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateException)
+        //    {
+        //        if (ParentExists(parent.ParentId))
+        //        {
+        //            return Conflict();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return CreatedAtAction("GetParent", new { id = parent.ParentId }, parent);
-        }
+        //    return CreatedAtAction("GetParent", new { id = parent.ParentId }, parent);
+        //}
 
         // DELETE: api/Parents/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteParent(string id)
         {
-            var parent = await _context.Parents.FindAsync(id);
+            var parent = await _context.Parents.FindAsync(int.Parse(id));
             if (parent == null)
             {
                 return NotFound();
@@ -141,7 +141,7 @@ namespace AttendanceMonitoringApi.Controllers
 
         private bool ParentExists(string id)
         {
-            return _context.Parents.Any(e => e.ParentId == id);
+            return _context.Parents.Any(e => e.ParentId == int.Parse(id));
         }
     }
 }
