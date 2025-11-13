@@ -40,7 +40,22 @@ namespace AttendanceMonitoringSystem.View
 
         private void btnADD_Click(object sender, RoutedEventArgs e)
         {
+            string username = Username.Text;
+            string password = Password.Text;
 
+            if (username == "1" && password == "1") // example validation
+            {
+                // Open Dashboard Window
+                DashboardView dashboard = new DashboardView();
+                dashboard.Show();
+
+                // Close Login Window
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Invalid username or password", "Login Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }

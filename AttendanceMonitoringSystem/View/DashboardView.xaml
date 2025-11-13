@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="AttendanceMonitoringSystem.View.DashboardView"
+﻿<Window x:Class="AttendanceMonitoringSystem.View.DashboardView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,24 +6,132 @@
              xmlns:local="clr-namespace:AttendanceMonitoringSystem.View"
              xmlns:ViewModel="clr-namespace:AttendanceMonitoringSystem.ViewModel"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:faa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:c="clr-namespace:AttendanceMonitoringSystem.Command"
              mc:Ignorable="d" 
              d:DesignHeight="1024" 
              d:DesignWidth="1440"
-             Background="#F4F4F4">
+             Background="#F4F4F4"
+             ResizeMode="NoResize"
+             WindowStyle="None">
 
-    <UserControl.Resources>
+    <Window.Resources>
         <c:BoolToVisibilityConverter x:Key="BoolToVisibilityCo
                                      nverter"/>
-    </UserControl.Resources>
-    
+    </Window.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        
-        <Grid Grid.Column="1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="1050"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.ColumnSpan="2"
+              Grid.Row="0">
+            <!-- Navigation-->
+
+            <Border Background="#FF0011C3" 
+                    Grid.Row="0">
+
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center">
+                    <Button x:Name="BtnMinimize"
+                           BorderThickness="0"
+                           FontFamily="Montserrat"
+                           FontWeight="ExtraBold"
+                           FontSize="15"
+                           Cursor="Hand"                       
+                           Click="ButtonMinimize_Click" Width="37"
+                           Margin="0,0,0,0">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#FF143296"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Width="30" Height="30"
+                        Background="{TemplateBinding Background}" Margin="0,0,0,0">
+                                    <ContentPresenter VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+
+                        <faa:IconImage Icon="WindowMinimize"
+                                      Height="14"
+                                      Width="20"
+                                      x:Name="MinimizeIcon"
+                                      Foreground="#FAFAFA"
+                                      HorizontalAlignment="Center">
+                            <faa:IconImage.Style>
+                                <Style TargetType="faa:IconImage">
+                                    <Setter Property="Foreground" Value="#FAFAFA"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Foreground" Value="#FAFAFA"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </faa:IconImage.Style>
+                        </faa:IconImage>
+                    </Button>
+                    <Button x:Name="BtnClose"
+                            BorderThickness="0"
+                            FontFamily="Montserrat"
+                            FontSize="15"
+                            FontWeight="Bold"
+                            Cursor="Hand"
+                            Click="ButtonClose_Click" >
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#FF143296"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Width="30" Height="30"
+                                    Background="{TemplateBinding Background}" Margin="0,-2,3,-2">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <faa:IconImage Icon="X"
+                                  Height="18"
+                                  Width="18"
+                                  Foreground="#FAFAFA">
+                            <faa:IconImage.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </faa:IconImage.RenderTransform>
+                        </faa:IconImage>
+                    </Button>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Column="1"
+              Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>
                 <RowDefinition/>
@@ -70,7 +178,7 @@
                 </Grid>
             </Border>
 
-         
+
             <Rectangle Grid.Row="0"
                        Height="5"
                        VerticalAlignment="Bottom"
@@ -101,7 +209,8 @@
                                             Content="{Binding CurrentView}" />
         </Grid>
 
-        <StackPanel Grid.Column="0">
+        <StackPanel Grid.Column="0"
+                    Grid.Row="1">
             <StackPanel.Background>
                 <ImageBrush ImageSource="/Images/Navigationpanel.png"/>
             </StackPanel.Background>
@@ -317,7 +426,7 @@
             </RadioButton>
 
             <RadioButton Cursor="Hand"
-                         Margin="0,550,0,0"
+                         Margin="0,600,0,0"
                          Height="60"
                          Click ="ShowLogout" >
                 <RadioButton.Template>
@@ -378,4 +487,4 @@
             </RadioButton>
         </StackPanel>
     </Grid>
-</UserControl>
+</Window>

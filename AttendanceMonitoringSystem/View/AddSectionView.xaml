@@ -121,7 +121,7 @@
                                  ShadowDepth="3"/>
                             </Border.Effect>
 
-                            <TextBox x:Name="StudentIdTextBox"
+                            <TextBox x:Name="SectionNameTextBox"
                                   Background="Transparent"
                                   BorderThickness="0"
                                   FontSize="18"
@@ -305,8 +305,8 @@
 
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="653"/>
-                <ColumnDefinition Width="900"/>
+                <ColumnDefinition Width="810"/>
+                <ColumnDefinition Width="750"/>
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0"
@@ -367,6 +367,7 @@
             <Border Height="600"
                     Width="1550">
                 <ListView  Padding="8,5"
+                           Margin="0,10,0,0"
                            ItemsSource="{Binding StudentList}">
                     <ListView.View>
                         <GridView>

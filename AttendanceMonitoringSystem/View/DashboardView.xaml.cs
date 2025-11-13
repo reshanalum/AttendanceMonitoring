@@ -19,7 +19,7 @@ namespace AttendanceMonitoringSystem.View
     /// <summary>
     /// Interaction logic for DashboardView.xaml
     /// </summary>
-    public partial class DashboardView : UserControl
+    public partial class DashboardView : Window
     {
         private DashboardVM _vm;
         public DashboardView()
@@ -81,5 +81,13 @@ namespace AttendanceMonitoringSystem.View
             _vm.ExecuteShowTeacherPage();
         }
 
+        private void ButtonClose_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+        private void ButtonMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
     }
 }

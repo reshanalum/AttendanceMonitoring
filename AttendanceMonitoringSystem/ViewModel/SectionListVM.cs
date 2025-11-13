@@ -35,7 +35,9 @@ namespace AttendanceMonitoringSystem.ViewModel
 
         private void ExecuteEditSectionCommand(object obj)
         {
-            throw new NotImplementedException();
+            var editView = new EditSectionView();
+            editView.DataContext = new EditSectionVM(_dashboardVM);
+            _dashboardVM.CurrentView = editView;
         }
 
         private void ExecuteAddSectionCommand(object obj)

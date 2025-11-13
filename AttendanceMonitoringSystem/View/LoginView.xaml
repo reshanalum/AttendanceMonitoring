@@ -150,7 +150,7 @@
                     FontSize="15"
                     FontWeight="Bold"
                     Cursor="Hand"
-                    Command="{Binding ShowAddLegCommand}"
+                    Command="{Binding LoginCommand}"
                     Margin="0,30,0,0"
                     Height="65"
                     Click="btnADD_Click" Width="399">

@@ -4,9 +4,425 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AttendanceMonitoringSystem.View"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:ViewModel="clr-namespace:AttendanceMonitoringSystem.ViewModel"
+             xmlns:c="clr-namespace:AttendanceMonitoringSystem.Command"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+             d:DesignHeight="944" d:DesignWidth="1105"
+             Background="#F4F4F4">
+
+    <UserControl.Resources>
+
+        <c:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+
+        <Style x:Key="PageButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Background" Value="#F8F9FA"/>
+            <Setter Property="Foreground" Value="#333"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="BorderBrush" Value="#D0D0D0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="8,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="5"
+                        Width="{TemplateBinding Width}"
+                        Height="{TemplateBinding Height}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#E9ECEF"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#DEE2E6"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="#AAA"/>
+                                <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <Style x:Key="ActivePageButtonStyle" BasedOn="{StaticResource PageButtonStyle}" TargetType="Button">
+            <Setter Property="Background" Value="#002D96"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#002D96"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Margin="20">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="660" />
+
+
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="1"
+                 CornerRadius="2"
+
+                 SnapsToDevicePixels="True">
+            <Grid Grid.Row="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="100"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="SECTION INFORMATION" 
+                            FontSize="23" 
+                            FontWeight="ExtraBold" 
+                            Foreground="#002D96"/>
+
+                    <StackPanel Grid.Row="1"
+                                 Grid.Column="0"
+                                 Orientation="Vertical"
+                                 Margin="10,0,20,0"
+                                 VerticalAlignment="Top"
+                                Height="112" Grid.RowSpan="2">
+
+                        <TextBlock Text="Section Name" 
+                                    FontSize="23" 
+                                    FontWeight="Bold" 
+                                    Foreground="#002D96"
+                                   Padding="0,10,0,0"/>
+
+                        <Border Background="White"
+                                 BorderThickness="2"
+                                 CornerRadius="6"
+                                 Padding="10,5"
+                                 SnapsToDevicePixels="True"
+                                 Height="50">
+
+                            <Border.Effect>
+                                <DropShadowEffect Color="#000000"
+                                  Opacity="0.35"   
+                                 BlurRadius="15"
+                                 ShadowDepth="3"/>
+                            </Border.Effect>
+
+                            <TextBox x:Name="NewSectionNameTextBox"
+                                  Background="Transparent"
+                                  BorderThickness="0"
+                                  FontSize="18"
+                                  Foreground="#333"
+                                  VerticalContentAlignment="Center"
+                                  Padding="10,5"
+                                  Text="{Binding NewSectionName}"/>
+                        </Border>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1"
+                             Grid.Column="1"
+                             Orientation="Vertical"
+                             Margin="20,0,10,0"
+                             VerticalAlignment="Top" Height="112">
+
+                        <TextBlock Text="Section Adviser" 
+                            FontSize="23" 
+                            FontWeight="Bold" 
+                            Foreground="#002D96"
+                                   Padding="0,10,0,0"/>
+                        <Border Background="#FFE9E9E9"
+                             BorderThickness="2"
+                             CornerRadius="6"
+                             Padding="10,5"
+                             SnapsToDevicePixels="True"
+                             Height="50">
+
+                            <Border.Effect>
+                                <DropShadowEffect Color="#000000"
+                                  Opacity="0.35"   
+                                 BlurRadius="15"
+                                 ShadowDepth="3"/>
+                            </Border.Effect>
+                            <ComboBox 
+                                Background="White"
+                                BorderThickness="0"
+                                FontSize="18"
+                                Foreground="#333"
+                                VerticalContentAlignment="Center"
+                                Padding="10,5"
+                                ItemsSource="{Binding TeacherList}"
+                                SelectedValue="{Binding SelectedTeacherId, Mode=TwoWay}"
+                                DisplayMemberPath="FirstName"
+                                BorderBrush="White"
+                                SelectedValuePath="ClassAdviserId"
+                                />
+                        </Border>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <!-- Searchbar -->
+        <Grid Grid.Row="0">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="1"
+                     HorizontalAlignment="Right"
+                     VerticalAlignment="Center"
+                     Orientation="Horizontal">
+
+                <Button Width="120" 
+                        Height="40" 
+                        Cursor="Hand"
+                         Click="CancelButton_Click"
+                  >
+
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border"
+                                 Background="#002D96"
+                                 CornerRadius="8"
+                                 SnapsToDevicePixels="True">
+                                <StackPanel Orientation="Horizontal" 
+                                         HorizontalAlignment="Center" 
+                                         VerticalAlignment="Center">
+                                    <fa:ImageAwesome Icon="Times" 
+                                                  Foreground="White"
+                                                  Width="16" 
+                                                  Height="16" 
+                                                  Margin="0,0,6,0"/>
+                                    <TextBlock Text="Cancel" 
+                                            Foreground="White" 
+                                            VerticalAlignment="Center"
+                                            FontSize="15"/>
+                                </StackPanel>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" 
+                                      Value="True">
+                                    <Setter TargetName="border" 
+                                         Property="Background" 
+                                         Value="#0039D6"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" 
+                                      Value="True">
+                                    <Setter TargetName="border" 
+                                         Property="Background"
+                                         Value="#001F70"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button Width="120" 
+                         Height="40" 
+                         Cursor="Hand" 
+                         Margin="20,0,20,0"
+                        Click="SaveButton_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border"
+                                 Background="#002D96"
+                                 CornerRadius="8"
+                                 SnapsToDevicePixels="True">
+                                <StackPanel Orientation="Horizontal" 
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center">
+                                    <fa:ImageAwesome Icon="Save" 
+                                                  Foreground="White" 
+                                                  Width="16" 
+                                                  Height="16"
+                                                  Margin="0,0,6,0"/>
+                                    <TextBlock Text="Save"
+                                            Foreground="White" 
+                                            VerticalAlignment="Center"
+                                            FontSize="15"/>
+                                </StackPanel>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="#0039D6"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="#001F70"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+            </StackPanel>
+
+
+            <Grid Grid.Column="0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0"
+                         Orientation="Vertical"
+                         VerticalAlignment="Center">
+
+                    <TextBlock Text="Add Section" 
+                            FontSize="30" 
+                            FontWeight="Bold" 
+                            Foreground="#002D96"/>
+
+                    <TextBlock Text="Grade 6 - St. Peter" 
+                            FontSize="14" 
+                            Foreground="Gray"
+                            FontWeight="Bold" 
+                            Margin="0,0,0,10"
+                            VerticalAlignment="Bottom"/>
+                </StackPanel>
+
+            </Grid>
+
+
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="810"/>
+                <ColumnDefinition Width="750"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0"
+                        VerticalAlignment="Center">
+                <TextBlock Text="ADD STUDENTS" 
+                           FontSize="23" 
+                           FontWeight="ExtraBold" 
+                           Foreground="#002D96"
+                           Padding="0,0,0,10"/>
+            </StackPanel>
+
+
+            <Border
+                     Background="White"
+                     BorderThickness="2"
+                     CornerRadius="6"
+                     SnapsToDevicePixels="True"
+                     Grid.Column="1">
+
+                <Border.Effect>
+                    <DropShadowEffect Color="Black" 
+                                           Opacity="0.2" 
+                                           BlurRadius="8" 
+                                           Direction="270"/>
+                </Border.Effect>
+
+                <StackPanel Orientation="Horizontal" 
+                                    VerticalAlignment="Center">
+
+                    <fa:ImageAwesome Icon="Search"
+                                          Foreground="#002D96"
+                                          Width="34" Height="24"
+                                          Margin="10,0,5,0"/>
+
+                    <TextBox x:Name="EditSearchBox"
+                                  BorderThickness="0"
+                                  Background="Transparent"
+                                  VerticalContentAlignment="Center"
+                                  FontSize="18"
+                                  Foreground="Black"/>
+
+                    <TextBlock Text="Search..."
+                                    FontSize="18"
+                                    Foreground="Gray"
+                                    VerticalAlignment="Center"
+                                    Margin="5,0,0,0"
+                                    IsHitTestVisible="False"
+                                    Visibility="{Binding Text.IsEmpty, ElementName=SearchBox, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                </StackPanel>
+
+            </Border>
+        </Grid>
+
+        <StackPanel Grid.Row="3"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top">
+
+            <Border Height="600"
+                    Width="1550">
+                <ListView  Padding="8,5"
+                           Margin="0,10,0,0"
+                           ItemsSource="{Binding StudentList}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="50">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="LRN" 
+                                            Width="290"
+                                            DisplayMemberBinding="{Binding Student.LRN}"/>
+                            <GridViewColumn Header="First Name" 
+                                            Width="350"
+                                            DisplayMemberBinding="{Binding Student.FirstName}"/>
+                            <GridViewColumn Header="Last Name" 
+                                            Width="350"
+                                            DisplayMemberBinding="{Binding Student.LastName}"/>
+
+                        </GridView>
+                    </ListView.View>
+                    <ListView.Resources>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="Foreground" Value="#333"/>
+                            <Setter Property="FontWeight" Value="SemiBold"/>
+                            <Setter Property="FontSize" Value="14"/>
+                            <Setter Property="Height" Value="40"/>
+                            <Setter Property="Padding" Value="10,0"/>
+                            <Setter Property="BorderBrush" Value="#E5E7EB"/>
+                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="GridViewColumnHeader">
+                                        <Border Background="{TemplateBinding Background}"
+ BorderBrush="{TemplateBinding BorderBrush}"
+ BorderThickness="{TemplateBinding BorderThickness}">
+                                            <TextBlock Text="{TemplateBinding Content}"
+        VerticalAlignment="Center"
+        HorizontalAlignment="Center"
+        Foreground="{TemplateBinding Foreground}"
+        FontWeight="{TemplateBinding FontWeight}"
+        FontSize="{TemplateBinding FontSize}"
+        Margin="{TemplateBinding Padding}"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.Resources>
+                </ListView>
+            </Border>
+
+        </StackPanel>
     </Grid>
 </UserControl>
