@@ -7,12 +7,9 @@
         xmlns:c="clr-namespace:AttendanceMonitoringSystem.Command"
         mc:Ignorable="d"
         Title="LoginView" Height="1024" Width="1440"
-        WindowStyle="None"
-        ResizeMode="NoResize"
-        Background="Transparent"
-        AllowsTransparency="True"
         BorderBrush="Transparent"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
     
     <Window.Resources>
 

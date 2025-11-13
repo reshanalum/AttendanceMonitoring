@@ -232,7 +232,7 @@
                                     Width="300">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding ClassAdviserId}"
+                                    <TextBlock Text="{Binding AdviserName}"
                                                FontFamily="Montserrat"
                                                 FontWeight="Regular"
                                                 Foreground="#002D96"
@@ -245,7 +245,7 @@
                                     Width="200">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding StudentId}"
+                                    <TextBlock Text="{Binding StudentCount}"
                                                FontFamily="Montserrat"
                                                 FontWeight="Regular"
                                                 Foreground="#002D96"
@@ -285,12 +285,12 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Border Grid.Column="1"
+            <Border
                     Background="White"
                     BorderThickness="2"
                     CornerRadius="2"
                     Padding="10,0"
-                    SnapsToDevicePixels="True">
+                    SnapsToDevicePixels="True" Grid.Column="1" >
 
                 <Border.Effect>
                     <DropShadowEffect Color="Black" 

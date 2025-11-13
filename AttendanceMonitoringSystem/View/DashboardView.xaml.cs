@@ -31,7 +31,7 @@ namespace AttendanceMonitoringSystem.View
             Window window = Window.GetWindow(this);
             if (window != null)
             {
-                window.WindowStyle = WindowStyle.None;  // Removes the title bar
+                //window.WindowStyle = WindowStyle.None;  // Removes the title bar
                 window.WindowState = WindowState.Maximized; // Makes it fullscreen
                 window.ResizeMode = ResizeMode.NoResize; // Prevents resizing
             }
@@ -40,7 +40,7 @@ namespace AttendanceMonitoringSystem.View
                 Loaded += (s, e) =>
                 {
                     var win = Window.GetWindow(this);
-                    win.WindowStyle = WindowStyle.None;
+                    //win.WindowStyle = WindowStyle.None;
                     win.WindowState = WindowState.Maximized;
                     win.ResizeMode = ResizeMode.NoResize;
                 };

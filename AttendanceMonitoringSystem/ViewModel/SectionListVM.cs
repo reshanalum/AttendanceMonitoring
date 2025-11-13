@@ -16,9 +16,9 @@ namespace AttendanceMonitoringSystem.ViewModel
     public class SectionListVM : NotifyPropertyChanged
     {
         private readonly DashboardVM _dashboardVM;
-        public ObservableCollection<Advisory> AdvisoryList { get; set; } = new ObservableCollection<Advisory>();
+        public ObservableCollection<SectionDisplay> AdvisoryList { get; set; } = new ObservableCollection<SectionDisplay>();
         
-        private Advisory _selectedSection;
+        private SectionDisplay _selectedSection;
         private int _selectedIndex;
         private string studentSearchText;
 
@@ -45,7 +45,7 @@ namespace AttendanceMonitoringSystem.ViewModel
             _dashboardVM.CurrentView = addView;
         }
 
-        public Advisory SelectedSection
+        public SectionDisplay SelectedSection
         {
             get => _selectedSection; 
             set{ _selectedSection = value;
@@ -56,7 +56,7 @@ namespace AttendanceMonitoringSystem.ViewModel
         public int SelectedIndex
         {
             get { return _selectedIndex; }
-            set { _selectedIndex = value; }
+            set { _selectedIndex = value; OnPropertyChanged(); }
         }
 
         public string StudentSearchText
@@ -65,44 +65,36 @@ namespace AttendanceMonitoringSystem.ViewModel
             set 
             { 
                 studentSearchText = value;
-                FilterStudents();
+                FilterSections();
                 OnPropertyChanged();
             }
         }
 
-        private void FilterStudents()
+        private void FilterSections()
         {
-            string search = StudentSearchText.ToLower();
+            string search = StudentSearchText?.ToLower() ?? "";
 
             using var context = new AttendanceMonitoringContext();
             var sections = context.Advisories
-                .GroupBy(c => new
+                .GroupBy(a => new
                 {
-                    c.AdvisoryId,
-                    c.SectionName,
-                    c.SchoolYear,
-                    AdviserName = c.ClassAdviserLink.FirstName
+                    a.SectionName,
+                    AdviserName = a.ClassAdviserLink.FirstName + " " + a.ClassAdviserLink.LastName
                 })
-                .Select(g => new Advisory
+                .Select(g => new SectionDisplay
                 {
-                    AdvisoryId = g.Key.AdvisoryId,
                     SectionName = g.Key.SectionName,
-                    SchoolYear = g.Key.SchoolYear,
-                    ClassAdviserId = g.Key.AdvisoryId, //ARVISER NAME DAPAT
-                    StudentId = g.Count()
+                    AdviserName = g.Key.AdviserName,
+                    StudentCount = g.Count()
                 })
-                .Where(c =>
-                    c.SectionName.ToLower().Contains(search) ||
-                    c.SchoolYear.ToLower().Contains(search) ||
-                    c.ClassAdviserId.ToString().ToLower().Contains(search) ||
-                    c.StudentId.ToString().ToLower().Contains(search))
+                .Where(s =>
+                    s.SectionName.ToLower().Contains(search) ||
+                    s.AdviserName.ToLower().Contains(search))
                 .ToList();
 
             AdvisoryList.Clear();
             foreach (var section in sections)
-            {
                 AdvisoryList.Add(section);
-            }
         }
 
         private void LoadSections()
@@ -110,28 +102,22 @@ namespace AttendanceMonitoringSystem.ViewModel
             using var context = new AttendanceMonitoringContext();
 
             var sections = context.Advisories
-                .GroupBy(c => new
+                .GroupBy(a => new
                 {
-                    c.AdvisoryId,
-                    c.SectionName,
-                    c.SchoolYear,
-                    AdviserName = c.ClassAdviserLink.FirstName
+                    a.SectionName,
+                    AdviserName = a.ClassAdviserLink.FirstName + " " + a.ClassAdviserLink.LastName
                 })
-                .Select(g => new Advisory
+                .Select(g => new SectionDisplay
                 {
-                    AdvisoryId = g.Key.AdvisoryId,
                     SectionName = g.Key.SectionName,
-                    SchoolYear = g.Key.SchoolYear,
-                    ClassAdviserId = g.Key.AdvisoryId, //DAPAT ADVISER NAME
-                    StudentId = g.Count()
+                    AdviserName = g.Key.AdviserName,
+                    StudentCount = g.Count()
                 })
                 .ToList();
 
             AdvisoryList.Clear();
             foreach (var section in sections)
-            {
                 AdvisoryList.Add(section);
-            }
         }
     }
 }

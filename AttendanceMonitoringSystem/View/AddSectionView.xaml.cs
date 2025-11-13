@@ -36,7 +36,7 @@ namespace AttendanceMonitoringSystem.View
         {
             if (_vm != null)
             {
-                //_vm.SaveCommand(); // Calls your VM’s method
+                _vm.SaveCommand(); // Calls your VM’s method
             }
         }
 
@@ -44,7 +44,7 @@ namespace AttendanceMonitoringSystem.View
         {
             if (_vm != null)
             {
-                //_vm.BackToSectionList(); // Navigate back
+                _vm.BackToSectionList(); // Navigate back
             }
         }
     }

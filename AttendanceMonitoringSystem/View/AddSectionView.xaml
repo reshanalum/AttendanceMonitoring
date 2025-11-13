@@ -66,45 +66,22 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
-            <RowDefinition />
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="660" />
+
 
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="2"
+        <Border Grid.Row="1"
                  CornerRadius="2"
-                 Background="White"
+
                  SnapsToDevicePixels="True">
-
-            <Border.Effect>
-                <DropShadowEffect Color="Black"
-                       BlurRadius="10"
-                       ShadowDepth="2"
-                       Opacity="0.15"/>
-            </Border.Effect>
-
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-
-
-                <Grid Grid.Row="1">
+            <Grid Grid.Row="1">
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>
-                    </Grid.RowDefinitions>
-
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-
-                </Grid>
-
-                <Grid Grid.Row="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition/>
-                        <RowDefinition/>
+                        <RowDefinition Height="100"/>
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
@@ -114,9 +91,8 @@
 
                     <TextBlock Text="SECTION INFORMATION" 
                             FontSize="23" 
-                            FontWeight="Bold" 
-                            Foreground="#002D96"
-                            Margin="10,0,0,0"/>
+                            FontWeight="ExtraBold" 
+                            Foreground="#002D96"/>
 
                     <StackPanel Grid.Row="1"
                                  Grid.Column="0"
@@ -159,8 +135,8 @@
                     <StackPanel Grid.Row="1"
                              Grid.Column="1"
                              Orientation="Vertical"
-                             Margin="20,0,20,0"
-                             VerticalAlignment="Top" Height="112" Grid.RowSpan="2">
+                             Margin="20,0,10,0"
+                             VerticalAlignment="Top" Height="112">
 
                         <TextBlock Text="Section Adviser" 
                             FontSize="23" 
@@ -188,15 +164,18 @@
                                 VerticalContentAlignment="Center"
                                 Padding="10,5"
                                 ItemsSource="{Binding TeacherList}"
-                                SelectedItem="{Binding NewTeacherList, UpdateSourceTrigger=PropertyChanged}"
-                                BorderBrush="White"/>
+                                SelectedValue="{Binding SelectedTeacherId, Mode=TwoWay}"
+                                DisplayMemberPath="FirstName"
+                                BorderBrush="White"
+                                SelectedValuePath="ClassAdviserId"
+                                />
                         </Border>
                     </StackPanel>
                 </Grid>
             </Grid>
         </Border>
 
-        <!-- buttons -->
+        <!-- Searchbar -->
         <Grid Grid.Row="0">
 
             <Grid.ColumnDefinitions>
@@ -210,13 +189,14 @@
                      Orientation="Horizontal">
 
                 <Button Width="120" 
-                     Height="40" 
-                     Cursor="Hand" 
+                        Height="40" 
+                        Cursor="Hand"
+                         Click="CancelButton_Click"
                   >
-                
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Border x:Name="border"
+
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border"
                                  Background="#002D96"
                                  CornerRadius="8"
                                  SnapsToDevicePixels="True">
@@ -254,9 +234,10 @@
                 </Button>
 
                 <Button Width="120" 
-                     Height="40" 
-                     Cursor="Hand" 
-                     Margin="20,0,20,0">
+                         Height="40" 
+                         Cursor="Hand" 
+                         Margin="20,0,20,0"
+                        Click="SaveButton_Click">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border x:Name="border"
@@ -322,109 +303,125 @@
 
         </Grid>
 
-        <StackPanel Grid.Row="1"
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="653"/>
+                <ColumnDefinition Width="900"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0"
+                        VerticalAlignment="Center">
+                <TextBlock Text="ADD STUDENTS" 
+                           FontSize="23" 
+                           FontWeight="ExtraBold" 
+                           Foreground="#002D96"
+                           Padding="0,0,0,10"/>
+            </StackPanel>
+
+
+            <Border
+                     Background="White"
+                     BorderThickness="2"
+                     CornerRadius="6"
+                     SnapsToDevicePixels="True"
+                     Grid.Column="1">
+
+                <Border.Effect>
+                    <DropShadowEffect Color="Black" 
+                                           Opacity="0.2" 
+                                           BlurRadius="8" 
+                                           Direction="270"/>
+                </Border.Effect>
+
+                <StackPanel Orientation="Horizontal" 
+                                    VerticalAlignment="Center">
+
+                    <fa:ImageAwesome Icon="Search"
+                                          Foreground="#002D96"
+                                          Width="34" Height="24"
+                                          Margin="10,0,5,0"/>
+
+                    <TextBox x:Name="SearchBox"
+                                  BorderThickness="0"
+                                  Background="Transparent"
+                                  VerticalContentAlignment="Center"
+                                  FontSize="18"
+                                  Foreground="Black"/>
+
+                    <TextBlock Text="Search..."
+                                    FontSize="18"
+                                    Foreground="Gray"
+                                    VerticalAlignment="Center"
+                                    Margin="5,0,0,0"
+                                    IsHitTestVisible="False"
+                                    Visibility="{Binding Text.IsEmpty, ElementName=SearchBox, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                </StackPanel>
+
+            </Border>
+        </Grid>
+
+        <StackPanel Grid.Row="3"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Top"
-                    Margin="0,150,0,0">
+                    VerticalAlignment="Top">
 
-            <TextBlock Text="ADD STUDENTS" 
-                         FontSize="23" 
-                         FontWeight="Bold" 
-                         Foreground="#002D96"
-                         Padding="0,0,0,10"/>
-            <ListView  Padding="8,5"
-                       ItemsSource="{Binding StudentList}"
-                       Height="484"
-                       Width="1032">
+            <Border Height="600"
+                    Width="1550">
+                <ListView  Padding="8,5"
+                           ItemsSource="{Binding StudentList}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="50">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
 
-                <ListView.Resources>
-                    <Style TargetType="GridViewColumnHeader">
-                        <Setter Property="Background" Value="White"/>
-                        <Setter Property="Foreground" Value="#333"/>
-                        <Setter Property="FontWeight" Value="SemiBold"/>
-                        <Setter Property="FontSize" Value="14"/>
-                        <Setter Property="Height" Value="40"/>
-                        <Setter Property="Padding" Value="10,0"/>
-                        <Setter Property="BorderBrush" Value="#E5E7EB"/>
-                        <Setter Property="BorderThickness" Value="0,0,0,1"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="GridViewColumnHeader">
-                                    <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}">
-                                        <TextBlock Text="{TemplateBinding Content}"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       Foreground="{TemplateBinding Foreground}"
-                                       FontWeight="{TemplateBinding FontWeight}"
-                                       FontSize="{TemplateBinding FontSize}"
-                                       Margin="{TemplateBinding Padding}"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ListView.Resources>
+                            <GridViewColumn Header="LRN" 
+                                            Width="290"
+                                            DisplayMemberBinding="{Binding Student.LRN}"/>
+                            <GridViewColumn Header="First Name" 
+                                            Width="350"
+                                            DisplayMemberBinding="{Binding Student.FirstName}"/>
+                            <GridViewColumn Header="Last Name" 
+                                            Width="350"
+                                            DisplayMemberBinding="{Binding Student.LastName}"/>
 
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="LRN" 
-                        Width="290"/>
-                        <GridViewColumn Header="First Name" 
-                        Width="350"/>
-                        <GridViewColumn Header="Last Name" 
-                        Width="350"/>
+                        </GridView>
+                    </ListView.View>
+                    <ListView.Resources>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="Foreground" Value="#333"/>
+                            <Setter Property="FontWeight" Value="SemiBold"/>
+                            <Setter Property="FontSize" Value="14"/>
+                            <Setter Property="Height" Value="40"/>
+                            <Setter Property="Padding" Value="10,0"/>
+                            <Setter Property="BorderBrush" Value="#E5E7EB"/>
+                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="GridViewColumnHeader">
+                                        <Border Background="{TemplateBinding Background}"
+ BorderBrush="{TemplateBinding BorderBrush}"
+ BorderThickness="{TemplateBinding BorderThickness}">
+                                            <TextBlock Text="{TemplateBinding Content}"
+        VerticalAlignment="Center"
+        HorizontalAlignment="Center"
+        Foreground="{TemplateBinding Foreground}"
+        FontWeight="{TemplateBinding FontWeight}"
+        FontSize="{TemplateBinding FontSize}"
+        Margin="{TemplateBinding Padding}"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.Resources>
+                </ListView>
+            </Border>
 
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </StackPanel>
-        
-        <!--Pagination-->
-        <StackPanel Grid.Row="1"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Bottom"
-                    Margin="0,0,0,50"
-                    Background="Transparent">
-            <Button Content="Prev"
-                    Style="{StaticResource PageButtonStyle}"
-                    IsEnabled="True"
-                    Width="50"
-                    Height="50"
-                    FontSize="18"/>
-            <Button Content="1" 
-                    Style="{StaticResource ActivePageButtonStyle}"
-                    Width="50"
-                    Height="50"
-                    FontSize="18"/>
-            <Button Content="2"
-                    Style="{StaticResource PageButtonStyle}"
-                    Width="50"
-                    Height="50"
-                    FontSize="18"/>
-            <Button Content="3" 
-                    Style="{StaticResource PageButtonStyle}"
-                    Width="50"
-                    Height="50"
-                    FontSize="18"/>
-            <TextBlock Text="..."
-                       VerticalAlignment="Center"
-                       Margin="8,0"
-                       FontSize="18"
-                       FontWeight="SemiBold"
-                       Foreground="#6c757d"/>
-            <Button Content="10" 
-                    Style="{StaticResource PageButtonStyle}"
-                    Width="50"
-                    Height="50"
-                    FontSize="18"/>
-            <Button Content="Next"
-                    Style="{StaticResource PageButtonStyle}"
-                    Width="50"
-                    Height="50"
-                    FontSize="18"/>
         </StackPanel>
     </Grid>
 </UserControl>
