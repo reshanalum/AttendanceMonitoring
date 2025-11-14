@@ -29,22 +29,22 @@ namespace AttendanceMonitoringApi.Controllers
         }
 
         // GET: api/Parents/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Parent>> GetParent(string id)
-        {
-            var parent = await _context.Parents.FindAsync(id);
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<Parent>> GetParent(string id)
+        //{
+        //    var parent = await _context.Parents.FindAsync(id);
 
-            if (parent == null)
-            {
-                return NotFound();
-            }
+        //    if (parent == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return parent;
-        }
+        //    return parent;
+        //}
 
         // GET: api/Parents/XX XX XX XX
-        [HttpGet("/{uid}")]
-        public async Task<ActionResult<Parent>> GetParentContactNumber(string uid)
+        [HttpGet("{uid}")]
+        public async Task<ActionResult<String>> GetParentContactNumber(string uid)
         {
             Relationship relationship = await _context.Relationships
                 .Include(c => c.StudentLink)
@@ -57,14 +57,18 @@ namespace AttendanceMonitoringApi.Controllers
                 return NotFound();
             }
 
-            string phoneNumber = relationship.ParentLink.ContactList.First().PhoneNumber;
+            string phoneNumber = await _context.Contacts
+                .Include(c => c.ParentLink)
+                .Where(c => c.ParentLink.ParentId == relationship.ParentId)
+                .Select(c => c.PhoneNumber)
+                .FirstAsync();
 
             if (phoneNumber == null)
             {
                 return NotFound();
             }
 
-            return Ok(phoneNumber);
+            return phoneNumber;
         }
 
         // PUT: api/Parents/5
