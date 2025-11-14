@@ -6,8 +6,8 @@
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string LRN { get; set; }
-        public string RFID { get; set; }
-        public string EnrollmentStatus { get; set; }
+        public string? RFID { get; set; }
+        public string? EnrollmentStatus { get; set; }
 
         //Relationships
         public List<Attendance> AttendanceList { get; set; }

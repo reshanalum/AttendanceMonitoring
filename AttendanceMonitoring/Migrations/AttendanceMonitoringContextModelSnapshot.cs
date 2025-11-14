@@ -203,7 +203,6 @@ namespace AttendanceMonitoring.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("EnrollmentStatus")
-                        .IsRequired()
                         .HasColumnType("varchar(150)");
 
                     b.Property<string>("FirstName")
@@ -219,7 +218,6 @@ namespace AttendanceMonitoring.Migrations
                         .HasColumnType("varchar(150)");
 
                     b.Property<string>("RFID")
-                        .IsRequired()
                         .HasColumnType("varchar(150)");
 
                     b.HasKey("StudentId");

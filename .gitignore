@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/AttendanceMonitoring/Migrations/20251112094402_v.6.Designer.cs
+/AttendanceMonitoring/Migrations/20251112094402_v.6.cs
