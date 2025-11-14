@@ -116,7 +116,7 @@
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
 
-      
+       
 
         <Border Grid.Row="2"
                 CornerRadius="2"
@@ -204,12 +204,11 @@
 
 
                                         <Button Width="24"
-                        Height="24"
-                        Margin="2"
-                        Background="#F4F4F4"
-                        Command="{Binding DataContext.DeleteStudentCommand,
-                                  RelativeSource={RelativeSource AncestorType=UserControl}}"
-                        CommandParameter="{Binding}">
+                                                Height="24"
+                                                Margin="2"
+                                                Background="#F4F4F4"
+                                                Command="{Binding DataContext.DeleteStudentCommand,
+                                                          RelativeSource={RelativeSource AncestorType=UserControl}}">
                                             <fa:ImageAwesome Icon="Trash"
                                      Width="16"
                                      Height="16"

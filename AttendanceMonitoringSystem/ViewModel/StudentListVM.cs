@@ -20,6 +20,8 @@ namespace AttendanceMonitoringSystem.ViewModel
         public ICommand ShowEditStudentCommand { get; set; }
         public ICommand ShowAddStudentCommand { get; set; }
 
+        public ICommand DeleteStudentCommand { get; set; }
+
         public ObservableCollection<Student> StudentList { get; set; } = new ObservableCollection<Student>();
 
         private Student selectedStudent;
@@ -72,6 +74,7 @@ namespace AttendanceMonitoringSystem.ViewModel
             LoadStudents();
             ShowEditStudentCommand = new RelayCommand(ExecuteEditStudentCommand);
             ShowAddStudentCommand = new RelayCommand(ExecuteAddStudentCommand);
+            DeleteStudentCommand = new RelayCommand(DeleteStudent);
             _dashboardVM = dashboardVM;
 
         }
@@ -79,21 +82,21 @@ namespace AttendanceMonitoringSystem.ViewModel
         public void DeleteStudent(object obj)
         {
 
-            if (obj is not Student studentToDelete)
+            if (SelectedStudent == null)
             {
                 MessageBox.Show("No student selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
             var result = MessageBox.Show(
-                $"Are you sure you want to delete student: {studentToDelete.FirstName} {studentToDelete.LastName}?",
+                $"Are you sure you want to delete student: {SelectedStudent.FirstName} {SelectedStudent.LastName}?",
                 "Confirm Deletion", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
             if (result != MessageBoxResult.Yes)
                 return;
 
             using var context = new AttendanceMonitoringContext();
-            var studentInDb = context.Students.FirstOrDefault(c => c.StudentId == studentToDelete.StudentId);
+            var studentInDb = context.Students.FirstOrDefault(c => c.StudentId == SelectedStudent.StudentId);
 
             if (studentInDb == null)
             {
@@ -103,7 +106,7 @@ namespace AttendanceMonitoringSystem.ViewModel
 
             context.Students.Remove(studentInDb);
             context.SaveChanges();
-            StudentList.Remove(studentToDelete);
+            StudentList.Remove(SelectedStudent);
             SelectedStudent = null;
         }
 
