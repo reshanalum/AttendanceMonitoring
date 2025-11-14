@@ -298,61 +298,6 @@
 
         </Grid>
 
-
-        <StackPanel Grid.Row="3"
-                    Grid.Column="0"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Margin="0,700,15,0"
-                    Background="Transparent">
-
-            <Button Content="Prev"
-            Style="{StaticResource PageButtonStyle}"
-            IsEnabled="True"
-            Width="50"
-            Height="50"
-            FontSize="18"/>
-
-            <Button Content="1" 
-            Style="{StaticResource ActivePageButtonStyle}"
-            Width="50"
-            Height="50"
-            FontSize="18"/>
-
-            <Button Content="2"
-            Style="{StaticResource PageButtonStyle}"
-            Width="50"
-            Height="50"
-            FontSize="18"/>
-
-            <Button Content="3" 
-            Style="{StaticResource PageButtonStyle}"
-            Width="50"
-            Height="50"
-            FontSize="18"/>
-
-            <TextBlock Text="..."
-               VerticalAlignment="Center"
-               Margin="8,0"
-               FontSize="18"
-               FontWeight="SemiBold"
-               Foreground="#6c757d"/>
-
-            <Button Content="10" 
-            Style="{StaticResource PageButtonStyle}"
-            Width="50"
-            Height="50"
-            FontSize="18"/>
-
-
-            <Button Content="Next"
-            Style="{StaticResource PageButtonStyle}"
-            Width="50"
-            Height="50"
-            FontSize="18"/>
-        </StackPanel>
-
         <Border Grid.Column="1"
             CornerRadius="2"
             Background="White"
