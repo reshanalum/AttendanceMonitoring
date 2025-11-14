@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AttendanceMonitoringSystem.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,16 +14,24 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AttendanceMonitoringSystem.ViewModel
+namespace AttendanceMonitoringSystem.View
 {
     /// <summary>
-    /// Interaction logic for TeacherInformationVM.xaml
+    /// Interaction logic for StudentInformation.xaml
     /// </summary>
-    public partial class TeacherInformationVM : UserControl
+    public partial class StudentInformation : UserControl
     {
-        public TeacherInformationVM()
+        private StudentInformationVM _vm;
+        public StudentInformation()
         {
             InitializeComponent();
         }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            _vm = (StudentInformationVM)DataContext;
+        }
     }
+
+
 }

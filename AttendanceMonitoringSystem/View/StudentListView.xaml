@@ -130,16 +130,17 @@
                           Opacity="0.15"/>
             </Border.Effect>
 
-            <ListView  Padding="8,5"
-                        Grid.Row="2"
-                       ItemsSource="{Binding StudentList}"
-                       SelectedItem="{Binding SelectedStudent}">
+            <ListView Padding="8,5"
+          Grid.Row="2"
+          ItemsSource="{Binding StudentList}"
+          SelectedItem="{Binding SelectedStudent}"
+          HorizontalContentAlignment="Stretch">
 
                 <ListView.Resources>
                     <Style TargetType="GridViewColumnHeader">
                         <Setter Property="Background" Value="White"/>
-                        <Setter Property="Foreground" Value="#333"/>
-                        <Setter Property="FontWeight" Value="SemiBold"/>
+                        <Setter Property="Foreground" Value="#002D96"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
                         <Setter Property="FontSize" Value="14"/>
                         <Setter Property="Height" Value="40"/>
                         <Setter Property="Padding" Value="10,0"/>
@@ -149,15 +150,15 @@
                             <Setter.Value>
                                 <ControlTemplate TargetType="GridViewColumnHeader">
                                     <Border Background="{TemplateBinding Background}"
-                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                            BorderThickness="{TemplateBinding BorderThickness}">
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
                                         <TextBlock Text="{TemplateBinding Content}"
-                                                   VerticalAlignment="Center"
-                                                   HorizontalAlignment="Center"
-                                                   Foreground="{TemplateBinding Foreground}"
-                                                   FontWeight="{TemplateBinding FontWeight}"
-                                                   FontSize="{TemplateBinding FontSize}"
-                                                   Margin="{TemplateBinding Padding}"/>
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       Foreground="{TemplateBinding Foreground}"
+                                       FontWeight="{TemplateBinding FontWeight}"
+                                       FontSize="{TemplateBinding FontSize}"
+                                       Margin="{TemplateBinding Padding}"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -167,58 +168,111 @@
 
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="LRN" 
-                                    Width="130"
-                                    DisplayMemberBinding="{Binding Path=LRN}"/>
-                        <GridViewColumn Header="Student ID" 
-                                    Width="130"
-                                   DisplayMemberBinding="{Binding Path=StudentId}"/>
-                        <GridViewColumn Header="First Name" 
-                                    Width="200"
-                                    DisplayMemberBinding="{Binding Path=FirstName}"/>
-                        <GridViewColumn Header="Last Name" 
-                                    Width="150"
-                                    DisplayMemberBinding="{Binding Path=LastName}"/>
-                        <GridViewColumn Header="Phone Number" 
-                                    Width="150"
-                                    DisplayMemberBinding="{Binding Path=PhoneNumber}"/>
-                        <GridViewColumn Header="Enrollment Status" 
-                                    Width="180"
-                                    DisplayMemberBinding="{Binding Path=EnrollmentStatus}"/>
-                        <GridViewColumn Width="100">
+                        <GridViewColumn Header="LRN" Width="130">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-
-                                        <Button Width="24"
-                                                Height="24"
-                                                Background="#F4F4F4"
-                                                Command="{Binding DataContext.ShowStudentInformationCommand,
-                                                          RelativeSource={RelativeSource AncestorType=UserControl}}">
-
-                                            <fa:ImageAwesome Icon="Bars"
-                                                 Width="16"
-                                                 Height="16"
-                                                 Foreground="#002D96"/>
-                                                    </Button>
-
-
-                                        <Button Width="24"
-                                                Height="24"
-                                                Margin="2"
-                                                Background="#F4F4F4"
-                                                Command="{Binding DataContext.DeleteStudentCommand,
-                                                          RelativeSource={RelativeSource AncestorType=UserControl}}">
-                                            <fa:ImageAwesome Icon="Trash"
-                                     Width="16"
-                                     Height="16"
-                                     Foreground="DarkRed"/>
-                                        </Button>
-                                    </StackPanel>
+                                    <Grid HorizontalAlignment="Stretch">
+                                        <TextBlock Text="{Binding LRN}" 
+                                       FontFamily="Montserrat"
+                                       FontWeight="Regular"
+                                       Foreground="#002D96"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                                    </Grid>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
+                        <GridViewColumn Header="Student ID" Width="130">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid HorizontalAlignment="Stretch">
+                                        <TextBlock Text="{Binding StudentId}" 
+                                       FontFamily="Montserrat"
+                                       FontWeight="Regular"
+                                       Foreground="#002D96"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="First Name" Width="200">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid HorizontalAlignment="Stretch">
+                                        <TextBlock Text="{Binding FirstName}" 
+                                       FontFamily="Montserrat"
+                                       FontWeight="Regular"
+                                       Foreground="#002D96"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="Last Name" Width="150">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid HorizontalAlignment="Stretch">
+                                        <TextBlock Text="{Binding LastName}" 
+                                       FontFamily="Montserrat"
+                                       FontWeight="Regular"
+                                       Foreground="#002D96"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="Enrollment Status" Width="180">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid HorizontalAlignment="Stretch">
+                                        <TextBlock Text="{Binding EnrollmentStatus}" 
+                                       FontFamily="Montserrat"
+                                       FontWeight="Regular"
+                                       Foreground="#002D96"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid HorizontalAlignment="Stretch">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <Button Width="24"
+                                        Height="24"
+                                        Background="#F4F4F4"
+                                        Command="{Binding DataContext.ShowStudentInformationCommand, RelativeSource={RelativeSource AncestorType=UserControl}}">
+                                                <fa:ImageAwesome Icon="Bars"
+                                                     Width="16"
+                                                     Height="16"
+                                                     Foreground="#002D96"/>
+                                            </Button>
+
+                                            <Button Width="24"
+                                        Height="24"
+                                        Margin="2"
+                                        Background="#F4F4F4"
+                                        Command="{Binding DataContext.DeleteStudentCommand, RelativeSource={RelativeSource AncestorType=UserControl}}">
+                                                <fa:ImageAwesome Icon="Trash"
+                                                     Width="16"
+                                                     Height="16"
+                                                     Foreground="DarkRed"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>

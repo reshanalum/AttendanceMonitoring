@@ -22,6 +22,12 @@ namespace AttendanceMonitoringSystem.ViewModel
 
         public ICommand DeleteStudentCommand { get; set; }
 
+        public ICommand ShowStudentInformationCommand { get; set; }
+
+        public string SelectedSectionName { get; set; }
+
+
+
         public ObservableCollection<Student> StudentList { get; set; } = new ObservableCollection<Student>();
 
         private Student selectedStudent;
@@ -72,12 +78,29 @@ namespace AttendanceMonitoringSystem.ViewModel
         public StudentListVM(DashboardVM dashboardVM)
         {
             LoadStudents();
-            ShowEditStudentCommand = new RelayCommand(ExecuteEditStudentCommand);
-            ShowAddStudentCommand = new RelayCommand(ExecuteAddStudentCommand);
-            DeleteStudentCommand = new RelayCommand(DeleteStudent);
             _dashboardVM = dashboardVM;
 
+            ShowEditStudentCommand = new RelayCommand(ExecuteEditStudentCommand);
+            ShowAddStudentCommand = new RelayCommand(ExecuteAddStudentCommand);
+
+            DeleteStudentCommand = new RelayCommand(DeleteStudent);
+            ShowStudentInformationCommand = new RelayCommand(ExecuteShowStudentInformation);
         }
+
+        private void ExecuteShowStudentInformation(object obj)
+        {
+            if (SelectedStudent == null)
+            {
+                MessageBox.Show("Please select a student first.", "No Selection", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            var view = new StudentInformation();
+            view.DataContext = new StudentInformationVM(SelectedStudent, _dashboardVM);
+            _dashboardVM.CurrentView = view;
+        }
+
+
 
         public void DeleteStudent(object obj)
         {

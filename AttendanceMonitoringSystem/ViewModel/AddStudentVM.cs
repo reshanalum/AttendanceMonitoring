@@ -42,6 +42,7 @@ namespace AttendanceMonitoringSystem.ViewModel
 
         public int NewRelationshipID { get; set; }
 
+        public string SectionName { get; set; }
 
         public List<string> EnrollmentStatus { get; set; }
 
@@ -50,20 +51,20 @@ namespace AttendanceMonitoringSystem.ViewModel
         public AddStudentVM(DashboardVM dashboardVM)
         {
             _dashboardVM = dashboardVM;
+            //SectionName = sectionName;
 
-             EnrollmentStatus = new List<string>
-            {
-                "Enrolled",
-                "Not Enrolled",
-            
-            };
-
+            EnrollmentStatus = new List<string>
+                                {
+                                    "Enrolled",
+                                    "Not Enrolled",
+                                };
 
             GenerateUniqueStudentId();
             GenerateUniqueParentId();
             GenerateUniqueContactId();
             GenerateRelationshipId();
         }
+
 
 
         //Methods

@@ -546,46 +546,10 @@
 
                     </StackPanel>
 
+                   
+
                     <StackPanel Grid.Row="3"
                                 Grid.Column="0"
-                                Orientation="Vertical"
-                                Margin="20,10,20,10"
-                                VerticalAlignment="Center">
-
-                        <TextBlock Text="Phone Number" 
-                               FontSize="23" 
-                               FontWeight="Bold" 
-                               Foreground="#002D96"/>
-
-                        <Border Background="White"
-                                BorderThickness="2"
-                                CornerRadius="6"
-                                Padding="10,5"
-                                SnapsToDevicePixels="True"
-                                Height="50"
-                                Width="400">
-
-                            <Border.Effect>
-                                <DropShadowEffect Color="#000000"
-                                     Opacity="0.35"   
-                                    BlurRadius="15"
-                                    ShadowDepth="3"/>
-                            </Border.Effect>
-
-                            <TextBox x:Name="PhoneNumberTextBox"
-                                     Background="Transparent"
-                                     BorderThickness="0"
-                                     FontSize="18"
-                                     Foreground="#333"
-                                     VerticalContentAlignment="Center"
-                                     Padding="10,5"
-                                    Text="{Binding NewPhoneNumber, UpdateSourceTrigger=PropertyChanged}" />
-                        </Border>
-
-                    </StackPanel>
-
-                    <StackPanel Grid.Row="3"
-                                Grid.Column="1"
                                 Orientation="Vertical"
                                 Margin="20,10,20,10"
                                 VerticalAlignment="Center">
