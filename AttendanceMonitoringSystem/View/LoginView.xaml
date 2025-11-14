@@ -102,13 +102,14 @@
                              TextChanged="Username_TextChanged"
                              Tag="Username"/>
                     <TextBlock Text="Username"
-                               Foreground="#FFC3C3C3"
-                               FontFamily="Arial"
-                               FontSize="20"
-                               VerticalAlignment="Center"
-                               Margin="20,0,0,0"
-                               IsHitTestVisible="False"
-                               Visibility="{Binding Text.IsEmpty, ElementName=Username, Converter={StaticResource BoolToVisibilityConverter}}"/>
+           Foreground="#FFC3C3C3"
+           FontFamily="Arial"
+           FontSize="20"
+           VerticalAlignment="Center"
+           Margin="20,0,0,0"
+           IsHitTestVisible="False"
+           Visibility="{Binding Text.Length, ElementName=Username, Converter={StaticResource BoolToVisibilityConverter}}"/>
+
                 </Grid>
             </Border>
             <Border CornerRadius="10"
@@ -118,27 +119,30 @@
                      Margin="0,30,0,0"
                      Effect="{StaticResource DropShadow}">
                 <Grid>
-                    <TextBox x:Name="Password"
-                              Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
-                              FontSize="13"
-                              FontWeight="Regular"
-                              FontFamily="Montserrat"
-                              BorderThickness="0"
-                              Height="52"
-                              VerticalContentAlignment="Center"
-                              Padding="20,0,0,0"
-                              Background="Transparent"
-                              Width="426"
-                              TextChanged="Password_TextChanged"
-                              Tag="Password"/>
-                    <TextBlock Text="Password"
-                                Foreground="#FFC3C3C3"
-                                FontFamily="Arial"
-                                FontSize="20"
-                                VerticalAlignment="Center"
-                                Margin="20,0,0,0"
-                                IsHitTestVisible="False"
-                                Visibility="{Binding Text.IsEmpty, ElementName=Password, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    <Grid>
+                        <PasswordBox x:Name="PasswordBox"
+                 FontSize="13"
+                 FontWeight="Regular"
+                 FontFamily="Montserrat"
+                 BorderThickness="0"
+                 Height="52"
+                 VerticalContentAlignment="Center"
+                 Padding="20,0,0,0"
+                 Background="Transparent"
+                 Width="426"
+                 PasswordChanged="PasswordBox_PasswordChanged"/>
+
+                        <TextBlock x:Name="PasswordPlaceholder"
+               Text="Password"
+               Foreground="#FFC3C3C3"
+               FontFamily="Arial"
+               FontSize="20"
+               VerticalAlignment="Center"
+               Margin="20,0,0,0"
+               IsHitTestVisible="False"/>
+                    </Grid>
+
+
                 </Grid>
             </Border>
             
