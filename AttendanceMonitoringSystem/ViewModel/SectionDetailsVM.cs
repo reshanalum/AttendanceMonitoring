@@ -42,9 +42,9 @@ namespace AttendanceMonitoringSystem.ViewModel
 
         private void ExecuteShowStudentListCommand(object obj)
         {
-            var addView = new StudentListView(_dashboardVM);
-            addView.DataContext = new StudentListVM(_dashboardVM);
-            _dashboardVM.CurrentView = addView;
+            var studentListView = new SpecificStudentListView();
+            studentListView.DataContext = new SpecificStudentListVM(_dashboardVM, SelectedSection.SectionName);
+            _dashboardVM.CurrentView = studentListView;
         }
 
         private void ExecuteAttendanceHistoryCommand(object obj)
