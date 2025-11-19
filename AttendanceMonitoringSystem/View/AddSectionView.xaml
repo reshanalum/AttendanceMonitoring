@@ -320,41 +320,41 @@
 
 
             <Border
-                     Background="White"
-                     BorderThickness="2"
-                     CornerRadius="6"
-                     SnapsToDevicePixels="True"
-                     Grid.Column="1">
+         Background="White"
+         BorderThickness="2"
+         CornerRadius="6"
+         SnapsToDevicePixels="True"
+         Grid.Column="1">
 
                 <Border.Effect>
                     <DropShadowEffect Color="Black" 
-                                           Opacity="0.2" 
-                                           BlurRadius="8" 
-                                           Direction="270"/>
+                               Opacity="0.2" 
+                               BlurRadius="8" 
+                               Direction="270"/>
                 </Border.Effect>
 
                 <StackPanel Orientation="Horizontal" 
-                                    VerticalAlignment="Center">
+                        VerticalAlignment="Center">
 
                     <fa:ImageAwesome Icon="Search"
-                                          Foreground="#002D96"
-                                          Width="34" Height="24"
-                                          Margin="10,0,5,0"/>
+                              Foreground="#002D96"
+                              Width="34" Height="24"
+                              Margin="10,0,5,0"/>
 
                     <TextBox x:Name="SearchBox"
-                                  BorderThickness="0"
-                                  Background="Transparent"
-                                  VerticalContentAlignment="Center"
-                                  FontSize="18"
-                                  Foreground="Black"/>
+                      BorderThickness="0"
+                      Background="Transparent"
+                      VerticalContentAlignment="Center"
+                      FontSize="18"
+                      Foreground="Black"/>
 
                     <TextBlock Text="Search..."
-                                    FontSize="18"
-                                    Foreground="Gray"
-                                    VerticalAlignment="Center"
-                                    Margin="5,0,0,0"
-                                    IsHitTestVisible="False"
-                                    Visibility="{Binding Text.IsEmpty, ElementName=SearchBox, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                        FontSize="18"
+                        Foreground="Gray"
+                        VerticalAlignment="Center"
+                        Margin="5,0,0,0"
+                        IsHitTestVisible="False"
+                        Visibility="{Binding Text.IsEmpty, ElementName=SearchBox, Converter={StaticResource BoolToVisibilityConverter}}"/>
                 </StackPanel>
 
             </Border>

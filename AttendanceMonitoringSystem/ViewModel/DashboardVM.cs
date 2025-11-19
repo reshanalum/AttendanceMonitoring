@@ -40,7 +40,8 @@ namespace AttendanceMonitoringSystem.ViewModel
         public void ExecuteShowDashboard()
         {
 
-            CurrentView = null;
+            var dashboardHomeView = new DashboardUserControlView(this);
+            CurrentView = dashboardHomeView;
         }
 
         public void ExecuteShowTeacherPage()
