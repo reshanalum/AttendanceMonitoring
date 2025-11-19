@@ -26,6 +26,20 @@ namespace AttendanceMonitoringSystem.ViewModel
 
         public string SelectedSectionName { get; set; }
 
+        private List<Student> _allStudents;
+
+        private string _studentSearchText;
+        public string StudentSearchText
+        {
+            get => _studentSearchText;
+            set
+            {
+                _studentSearchText = value;
+                FilterStudents();    
+                OnPropertyChanged();
+            }
+        }
+
 
 
         public ObservableCollection<Student> StudentList { get; set; } = new ObservableCollection<Student>();
@@ -42,37 +56,38 @@ namespace AttendanceMonitoringSystem.ViewModel
             }
         }
 
-        private string studentSearchText;
-
-        public string StudentSearchText
+        private void FilterStudents()
         {
-            get => studentSearchText;
-            set
-            {
-                studentSearchText = value;
-                FilterStudents();
-            }
+            string search = StudentSearchText?.Trim().ToLower() ?? "";
+
+            var filtered = _allStudents
+                .Where(s =>
+                    s.FirstName.ToLower().Contains(search) ||
+                    s.LastName.ToLower().Contains(search) ||
+                    s.StudentId.ToString().Contains(search) ||
+                    s.LRN.ToLower().Contains(search) ||
+                    s.EnrollmentStatus.ToLower().Contains(search)
+                )
+                .ToList();
+
+            StudentList.Clear();
+            foreach (var student in filtered)
+                StudentList.Add(student);
         }
+
+
 
         private void LoadStudents()
         {
+
             using var context = new AttendanceMonitoringContext();
 
-            var students = context.Students.Select(c => new Student
-            {
-                StudentId = c.StudentId,
-                FirstName = c.FirstName,
-                LastName = c.LastName,
-                LRN = c.LRN,
-                EnrollmentStatus = c.EnrollmentStatus
-            }).ToList();
+            _allStudents = context.Students.ToList();  // Master list
 
             StudentList.Clear();
+            foreach (var student in _allStudents)
+                StudentList.Add(student);
 
-            foreach (var s in students)
-            {
-                StudentList.Add(s);
-            }
         }
 
         public StudentListVM(DashboardVM dashboardVM)
@@ -154,28 +169,6 @@ namespace AttendanceMonitoringSystem.ViewModel
             var addView = new AddStudentView();
             addView.DataContext = new AddStudentVM(_dashboardVM);
             _dashboardVM.CurrentView = addView;
-        }
-
-
-        public void FilterStudents()
-        {
-            string search = StudentSearchText.ToLower();
-
-            using var context = new AttendanceMonitoringContext();
-            var students = context.Students
-                .Where(c =>
-                    c.StudentId.ToString().Contains(search) ||
-                    c.FirstName.ToLower().Contains(search) ||
-                    c.LastName.ToLower().Contains(search) ||
-                    c.LRN.ToLower().Contains(search))
-                .ToList();
-
-            StudentList.Clear();
-            foreach (var s in students)
-            {
-                StudentList.Add(s);
-            }
-
         }
 
     }
