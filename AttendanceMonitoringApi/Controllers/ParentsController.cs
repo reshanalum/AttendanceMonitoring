@@ -22,11 +22,11 @@ namespace AttendanceMonitoringApi.Controllers
         }
 
         // GET: api/Parents
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Parent>>> GetParents()
-        {
-            return await _context.Parents.ToListAsync();
-        }
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<Parent>>> GetParents()
+        //{
+        //    return await _context.Parents.ToListAsync();
+        //}
 
         // GET: api/Parents/5
         //[HttpGet("{id}")]
@@ -44,13 +44,16 @@ namespace AttendanceMonitoringApi.Controllers
 
         // GET: api/Parents/XX XX XX XX
         [HttpGet("{uid}")]
-        public async Task<ActionResult<String>> GetParentContactNumber(string uid)
+        public async Task<ActionResult<String>> GetParentContactNumberAndStudent(string uid)
         {
             Relationship relationship = await _context.Relationships
                 .Include(c => c.StudentLink)
                 .Include(c => c.ParentLink)
                 .Where(c => c.StudentLink.RFID == uid)
                 .FirstAsync();
+
+            string studentName = relationship.StudentLink.FirstName + " " + relationship.StudentLink.LastName;
+            string parentName = relationship.ParentLink.FirstName + " " + relationship.ParentLink.LastName;
 
             if (relationship == null)
             {
@@ -63,44 +66,45 @@ namespace AttendanceMonitoringApi.Controllers
                 .Select(c => c.PhoneNumber)
                 .FirstAsync();
 
+
             if (phoneNumber == null)
             {
                 return NotFound();
             }
 
-            return phoneNumber;
+            return phoneNumber + "\n" + studentName + "\n" + parentName + "\n" + DateTime.Now;
         }
 
         // PUT: api/Parents/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutParent(string id, Parent parent)
-        {
-            if (int.Parse(id) != parent.ParentId)
-            {
-                return BadRequest();
-            }
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutParent(string id, Parent parent)
+        //{
+        //    if (int.Parse(id) != parent.ParentId)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            _context.Entry(parent).State = EntityState.Modified;
+        //    _context.Entry(parent).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ParentExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!ParentExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
         // POST: api/Parents
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -128,24 +132,24 @@ namespace AttendanceMonitoringApi.Controllers
         //}
 
         // DELETE: api/Parents/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteParent(string id)
-        {
-            var parent = await _context.Parents.FindAsync(int.Parse(id));
-            if (parent == null)
-            {
-                return NotFound();
-            }
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> DeleteParent(string id)
+        //{
+        //    var parent = await _context.Parents.FindAsync(int.Parse(id));
+        //    if (parent == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            _context.Parents.Remove(parent);
-            await _context.SaveChangesAsync();
+        //    _context.Parents.Remove(parent);
+        //    await _context.SaveChangesAsync();
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
-        private bool ParentExists(string id)
-        {
-            return _context.Parents.Any(e => e.ParentId == int.Parse(id));
-        }
+        //private bool ParentExists(string id)
+        //{
+        //    return _context.Parents.Any(e => e.ParentId == int.Parse(id));
+        //}
     }
 }
