@@ -14,13 +14,31 @@ namespace AttendanceMonitoringSystem.ViewModel
     public class EditStudentVM : NotifyPropertyChanged
     {
         private readonly DashboardVM _dashboardVM;
-
         public Student EditingStudent { get; set; }
         public Parent EditingParent { get; set; }
         public Contact Contact1 { get; set; }
         public Contact Contact2 { get; set; }
 
         public List<string> EnrollmentStatus { get; set; }
+
+        private string _selectedEnrollmentStatus;
+        public string SelectedEnrollmentStatus
+        {
+            get => _selectedEnrollmentStatus;
+            set
+            {
+                if (_selectedEnrollmentStatus != value)
+                {
+                    _selectedEnrollmentStatus = value;
+                    OnPropertyChanged(nameof(SelectedEnrollmentStatus));
+
+                    // Update the EditingStudent property automatically
+                    if (EditingStudent != null)
+                        EditingStudent.EnrollmentStatus = value;
+                }
+            }
+        }
+
         public EditStudentVM(Student selectedStudent, DashboardVM dashboardVM)
         {
             _dashboardVM = dashboardVM;
