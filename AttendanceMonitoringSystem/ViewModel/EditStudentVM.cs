@@ -5,8 +5,6 @@ using AttendanceMonitoringSystem.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace AttendanceMonitoringSystem.ViewModel
@@ -14,11 +12,13 @@ namespace AttendanceMonitoringSystem.ViewModel
     public class EditStudentVM : NotifyPropertyChanged
     {
         private readonly DashboardVM _dashboardVM;
+
         public Student EditingStudent { get; set; }
         public Parent EditingParent { get; set; }
         public Contact Contact1 { get; set; }
         public Contact Contact2 { get; set; }
 
+        // ComboBox choices
         public List<string> EnrollmentStatus { get; set; }
 
         private string _selectedEnrollmentStatus;
@@ -32,7 +32,7 @@ namespace AttendanceMonitoringSystem.ViewModel
                     _selectedEnrollmentStatus = value;
                     OnPropertyChanged(nameof(SelectedEnrollmentStatus));
 
-                    // Update the EditingStudent property automatically
+                    // update student value
                     if (EditingStudent != null)
                         EditingStudent.EnrollmentStatus = value;
                 }
@@ -43,15 +43,16 @@ namespace AttendanceMonitoringSystem.ViewModel
         {
             _dashboardVM = dashboardVM;
 
-
+            // ComboBox items
             EnrollmentStatus = new List<string>
             {
-                "Enrolled",
-                "Not Enrolled"
+                "ENROLLED",
+                "NOT ENROLLED"
             };
 
             Contact1 = new Contact();
             Contact2 = new Contact();
+
             LoadStudentAndParent(selectedStudent);
         }
 
@@ -60,31 +61,28 @@ namespace AttendanceMonitoringSystem.ViewModel
             using var context = new AttendanceMonitoringContext();
 
             EditingStudent = context.Students.FirstOrDefault(s => s.StudentId == student.StudentId);
-
             if (EditingStudent == null)
             {
-                MessageBox.Show("The selected student could not be found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Selected student not found.");
                 return;
             }
 
             var relationship = context.Relationships.FirstOrDefault(r => r.StudentId == EditingStudent.StudentId);
             if (relationship == null)
             {
-                MessageBox.Show("No parent record found for this student.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("No parent assigned.");
                 return;
             }
 
             EditingParent = context.Parents.FirstOrDefault(p => p.ParentId == relationship.ParentId);
-            if (EditingParent == null)
-            {
-                MessageBox.Show("Parent details could not be loaded.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
 
             var contacts = context.Contacts.Where(c => c.ParentId == EditingParent.ParentId).ToList();
-
             Contact1 = contacts.Count > 0 ? contacts[0] : new Contact { ParentId = EditingParent.ParentId };
             Contact2 = contacts.Count > 1 ? contacts[1] : new Contact { ParentId = EditingParent.ParentId };
+
+            // IMPORTANT: Set the ComboBox selected item
+            SelectedEnrollmentStatus = EditingStudent.EnrollmentStatus?.Trim();
+            OnPropertyChanged(nameof(SelectedEnrollmentStatus));
 
             OnPropertyChanged(nameof(EditingStudent));
             OnPropertyChanged(nameof(EditingParent));
@@ -92,15 +90,8 @@ namespace AttendanceMonitoringSystem.ViewModel
             OnPropertyChanged(nameof(Contact2));
         }
 
-
         public void SaveEditedStudent()
         {
-            if (EditingStudent == null)
-            {
-                MessageBox.Show("No student selected for editing.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
             using var context = new AttendanceMonitoringContext();
 
             var studentInDb = context.Students.FirstOrDefault(s => s.StudentId == EditingStudent.StudentId);
@@ -119,37 +110,27 @@ namespace AttendanceMonitoringSystem.ViewModel
                 parentInDb.LastName = EditingParent.LastName;
             }
 
-            if (Contact1 != null && !string.IsNullOrWhiteSpace(Contact1.PhoneNumber))
+            if (!string.IsNullOrWhiteSpace(Contact1.PhoneNumber))
             {
-                var contact1InDb = context.Contacts.FirstOrDefault(c => c.ContactId == Contact1.ContactId);
-                if (contact1InDb != null)
-                {
-                    contact1InDb.PhoneNumber = Contact1.PhoneNumber;
-                }
+                var c1 = context.Contacts.FirstOrDefault(c => c.ContactId == Contact1.ContactId);
+                if (c1 != null)
+                    c1.PhoneNumber = Contact1.PhoneNumber;
                 else
-                {
-                    Contact1.ParentId = EditingParent.ParentId;
                     context.Contacts.Add(Contact1);
-                }
             }
 
-            if (Contact2 != null && !string.IsNullOrWhiteSpace(Contact2.PhoneNumber))
+            if (!string.IsNullOrWhiteSpace(Contact2.PhoneNumber))
             {
-                var contact2InDb = context.Contacts.FirstOrDefault(c => c.ContactId == Contact2.ContactId);
-                if (contact2InDb != null)
-                {
-                    contact2InDb.PhoneNumber = Contact2.PhoneNumber;
-                }
+                var c2 = context.Contacts.FirstOrDefault(c => c.ContactId == Contact2.ContactId);
+                if (c2 != null)
+                    c2.PhoneNumber = Contact2.PhoneNumber;
                 else
-                {
-                    Contact2.ParentId = EditingParent.ParentId;
                     context.Contacts.Add(Contact2);
-                }
             }
 
             context.SaveChanges();
-            MessageBox.Show("Student and parent details updated successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
+            MessageBox.Show("Saved successfully!", "Success");
             BackToStudentList();
         }
 
@@ -161,5 +142,3 @@ namespace AttendanceMonitoringSystem.ViewModel
         }
     }
 }
-
-

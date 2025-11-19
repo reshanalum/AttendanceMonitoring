@@ -466,15 +466,18 @@
                                     ShadowDepth="3"/>
                             </Border.Effect>
 
-                            <ComboBox 
-                                Background="Transparent"
+                            <ComboBox
+                                ItemsSource="{Binding EnrollmentStatus}"
+                                SelectedItem="{Binding SelectedEnrollmentStatus, Mode=TwoWay}"
+                                Background="White"
                                 BorderThickness="0"
                                 FontSize="18"
                                 Foreground="#333"
                                 VerticalContentAlignment="Center"
                                 Padding="10,5"
-                                ItemsSource="{Binding EnrollmentStatus}"
-                                SelectedItem="{Binding EditingStudent.EnrollmentStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                IsEnabled="True"/>
+
+
 
                         </Border>
 
