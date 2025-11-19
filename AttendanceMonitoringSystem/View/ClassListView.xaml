@@ -219,7 +219,7 @@
                                FontWeight="Bold" 
                                Foreground="#002D96"/>
 
-                    <TextBlock Text="Grade 6 - St. Peter" 
+                    <TextBlock Text="Grade 6  " 
                                FontSize="18" 
                                Foreground="Gray"
                                FontWeight="Bold" 

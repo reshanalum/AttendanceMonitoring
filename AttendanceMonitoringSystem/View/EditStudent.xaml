@@ -253,43 +253,7 @@
 
                     </StackPanel>
 
-                    <StackPanel Grid.Row="3"
-                                Grid.Column="1"
-                                Orientation="Vertical"
-                                Margin="20,10,20,10"
-                                VerticalAlignment="Center">
-
-                        <TextBlock Text="Contact Number #1 Network" 
-                               FontSize="23" 
-                               FontWeight="Bold" 
-                               Foreground="#002D96"/>
-
-                        <Border Background="White"
-                                BorderThickness="2"
-                                CornerRadius="6"
-                                Padding="10,5"
-                                SnapsToDevicePixels="True"
-                                Height="50"
-                                Width="400">
-
-                            <Border.Effect>
-                                <DropShadowEffect Color="#000000"
-                                     Opacity="0.35"   
-                                    BlurRadius="15"
-                                    ShadowDepth="3"/>
-                            </Border.Effect>
-
-                            <TextBox x:Name="ParentContact1NetworkTextBox"
-                                     Background="Transparent"
-                                     BorderThickness="0"
-                                     FontSize="18"
-                                     Foreground="#333"
-                                     VerticalContentAlignment="Center"
-                                     Padding="10,5"
-                                     Text="{Binding Contact1.Network, UpdateSourceTrigger=PropertyChanged}"/>
-                        </Border>
-
-                    </StackPanel>
+                  
 
                     <StackPanel Grid.Row="4"
                                 Grid.Column="0"
@@ -329,43 +293,7 @@
 
                     </StackPanel>
 
-                    <StackPanel Grid.Row="4"
-                                Grid.Column="1"
-                                Orientation="Vertical"
-                                Margin="20,10,20,10"
-                                VerticalAlignment="Center">
 
-                        <TextBlock Text="Contact Number #2 Network" 
-                               FontSize="23" 
-                               FontWeight="Bold" 
-                               Foreground="#002D96"/>
-
-                        <Border Background="White"
-                                BorderThickness="2"
-                                CornerRadius="6"
-                                Padding="10,5"
-                                SnapsToDevicePixels="True"
-                                Height="50"
-                                Width="400">
-
-                            <Border.Effect>
-                                <DropShadowEffect Color="#000000"
-                                     Opacity="0.35"   
-                                    BlurRadius="15"
-                                    ShadowDepth="3"/>
-                            </Border.Effect>
-
-                            <TextBox x:Name="ParentContact2NetworkTextBox"
-                                     Background="Transparent"
-                                     BorderThickness="0"
-                                     FontSize="18"
-                                     Foreground="#333"
-                                     VerticalContentAlignment="Center"
-                                     Padding="10,5" 
-                                    Text="{Binding Contact2.Network, UpdateSourceTrigger=PropertyChanged}"/>
-                        </Border>
-
-                    </StackPanel>
 
                 </Grid>
 
@@ -708,7 +636,7 @@
                                FontWeight="Bold" 
                                Foreground="#002D96"/>
 
-                    <TextBlock Text="Grade 6 - St. Peter" 
+                    <TextBlock Text="Grade 6  " 
                                FontSize="14" 
                                Foreground="Gray"
                                FontWeight="Bold" 
