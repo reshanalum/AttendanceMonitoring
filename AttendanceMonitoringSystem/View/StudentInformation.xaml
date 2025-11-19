@@ -45,7 +45,7 @@
 
                     <StackPanel>
 
-                        <TextBlock Text="Attendace History" 
+                        <TextBlock Text="Attendance History" 
                                FontSize="23" 
                                FontWeight="Bold" 
                                Foreground="#002D96"

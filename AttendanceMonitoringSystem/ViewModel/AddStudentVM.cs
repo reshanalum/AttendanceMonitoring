@@ -134,7 +134,6 @@ namespace AttendanceMonitoringSystem.ViewModel
             if (string.IsNullOrWhiteSpace(NewFirstName)
                 || string.IsNullOrWhiteSpace(NewLastName)
                 || string.IsNullOrWhiteSpace(NewLRN)
-                || string.IsNullOrWhiteSpace(NewPhoneNumber)
                 || string.IsNullOrWhiteSpace(NewEnrollmentStatus)
                 || string.IsNullOrWhiteSpace(NewParentFirstName)     
                 || string.IsNullOrWhiteSpace(NewParentLastName)
