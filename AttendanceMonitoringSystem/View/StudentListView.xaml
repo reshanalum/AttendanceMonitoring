@@ -302,31 +302,39 @@
                           Direction="270"/>
                 </Border.Effect>
 
-                <!-- Use Grid instead of StackPanel to give TextBox proper width -->
+
                 <Grid VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <!-- Search icon -->
                     <fa:ImageAwesome Icon="Search"
                          Foreground="#002D96"
                          Width="40" Height="28"
                          Margin="10,0,5,0"
                          VerticalAlignment="Center"/>
 
-                    <!-- Editable search box -->
                     <TextBox Grid.Column="1"
-                 x:Name="SearchBox"
-                 Focusable="True"
-                 IsTabStop="True"
-                 BorderThickness="0"
-                 Background="White"
-                 VerticalContentAlignment="Center"
-                 FontSize="18"
-                 Foreground="Black"
-                 Text="{Binding Path=StudentSearchText, UpdateSourceTrigger=PropertyChanged, Delay=300}"/>
+                             x:Name="SearchBox"
+                             Focusable="True"
+                             IsTabStop="True"
+                             BorderThickness="0"
+                             Background="White"
+                             VerticalContentAlignment="Center"
+                             FontSize="18"
+                             Foreground="Black"
+                             Text="{Binding Path=StudentSearchText, UpdateSourceTrigger=PropertyChanged, Delay=300}"/>
+
+
+                    <TextBlock Text="Search..."
+                               Grid.Column="1"
+                               FontSize="18"
+                               Foreground="Gray"
+                               VerticalAlignment="Center"
+                               Margin="5,0,0,0"
+                               IsHitTestVisible="False"
+                               Visibility="{Binding Text.IsEmpty, ElementName=SearchBox, Converter={StaticResource BoolToVisibilityConverter}}"/>
                 </Grid>
 
             </Border>

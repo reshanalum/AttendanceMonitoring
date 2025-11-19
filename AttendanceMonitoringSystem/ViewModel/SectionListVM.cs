@@ -36,7 +36,17 @@ namespace AttendanceMonitoringSystem.ViewModel
             }
         }
         private int _selectedIndex;
-        private string studentSearchText;
+        private string _sectionSearchText;
+        public string SectionSearchText
+        {
+            get => _sectionSearchText;
+            set
+            {
+                _sectionSearchText = value;
+                FilterSections();
+                OnPropertyChanged();
+            }
+        }
 
         public ICommand ShowEditSectionCommand { get; set; }
         public ICommand ShowAddSectionCommand { get; set; }
@@ -105,20 +115,9 @@ namespace AttendanceMonitoringSystem.ViewModel
             set { _selectedIndex = value; OnPropertyChanged(); }
         }
 
-        public string StudentSearchText
-        {
-            get { return studentSearchText; }
-            set 
-            { 
-                studentSearchText = value;
-                FilterSections();
-                OnPropertyChanged();
-            }
-        }
-
         private void FilterSections()
         {
-            string search = StudentSearchText?.ToLower() ?? "";
+            string search = SectionSearchText?.Trim().ToLower() ?? "";
 
             using var context = new AttendanceMonitoringContext();
             var sections = context.Advisories
