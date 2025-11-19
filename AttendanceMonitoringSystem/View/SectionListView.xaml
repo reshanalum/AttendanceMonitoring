@@ -237,7 +237,7 @@
             <Border
                     Background="White"
                     BorderThickness="2"
-                    CornerRadius="2"
+                    CornerRadius="10"
                     Padding="10,0"
                     SnapsToDevicePixels="True" Grid.Column="1" >
 

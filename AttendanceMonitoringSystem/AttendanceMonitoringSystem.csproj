@@ -24,6 +24,9 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Syncfusion.SfChart.WPF" Version="31.2.12" />
+    <PackageReference Include="Syncfusion.Shared.WPF" Version="31.2.12" />
+    <PackageReference Include="Syncfusion.Tools.WPF" Version="31.2.12" />
   </ItemGroup>
 
   <ItemGroup>

@@ -3,10 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:AttendanceMonitoringSystem.View"
-             xmlns:ViewModel="clr-namespace:AttendanceMonitoringSystem.ViewModel" 
+             xmlns:local="clr-namespace:AttendanceMonitoringSystem"
+             xmlns:vm="clr-namespace:AttendanceMonitoringSystem.ViewModel"
+             xmlns:View="clr-namespace:AttendanceMonitoringSystem.View"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:c="clr-namespace:AttendanceMonitoringSystem.Command"
+              xmlns:chart="clr-namespace:Syncfusion.UI.Xaml.Charts;assembly=Syncfusion.SfChart.WPF"
+             
              mc:Ignorable="d" 
              d:DesignHeight="939" 
              d:DesignWidth="1105"
@@ -67,9 +70,9 @@
 
         <Grid.RowDefinitions>
 
-            <RowDefinition Height="300"/>
+            <RowDefinition Height="250"/>
             <RowDefinition Height="100"/>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <TextBlock Text="WELCOME!" 
@@ -97,32 +100,130 @@
                                       Direction="270"/>
                 </Border.Effect>
 
-                <StackPanel Orientation="Horizontal" 
-                            VerticalAlignment="Center">
+                <Grid Height="50">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
                     <fa:ImageAwesome Icon="Search"
                                      Foreground="#002D96"
                                      Width="26" Height="32"
-                                     Margin="10,0,5,0"/>
+                                     Margin="10,0,5,0"
+                                     Grid.Column ="0"/>
 
-                    <TextBox x:Name="SearchBox"
-                             BorderThickness="0"
-                             Background="Transparent"
-                             VerticalContentAlignment="Center"
-                             FontSize="18"
-                             Foreground="Black"
-                             Height="50"/>
+                    <Grid Grid.Column="1">
+                        <TextBox x:Name="SearchBox"
+                                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 VerticalContentAlignment="Center"
+                                 FontSize="18"
+                                 Foreground="Black"
+                                 Height="50"/>
 
-                    <TextBlock Text="Search a Student, Teacher, or Section..."
-                               FontSize="18"
-                               Foreground="Gray"
-                               VerticalAlignment="Center"
-                               Margin="5,0,0,0"
-                               IsHitTestVisible="False"
-                               Visibility="{Binding Text.IsEmpty, ElementName=SearchBox, Converter={StaticResource BoolToVisibilityConverter}}"/>
-                </StackPanel>
+                        <TextBlock Text="Search a Student, Teacher, or Section..."
+                                   FontSize="18"
+                                   Foreground="Gray"
+                                   VerticalAlignment="Center"
+                                   Margin="5,0,0,0"
+                                   IsHitTestVisible="False"
+                                   Visibility="{Binding Text.IsEmpty, ElementName=SearchBox, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    </Grid>
+                </Grid>
 
             </Border>
+
+        </Grid>
+        
+        <!--CHARTS-->
+        <Grid Grid.Row="2">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <chart:SfChart Margin="10" 
+                            Header="Population Count"
+                            FontSize="17"
+                            FontWeight="Bold"
+                            Grid.Column="0">
+                <chart:SfChart.Legend>
+                    <chart:ChartLegend  BorderThickness="1"
+                                         Header="Types of Population"
+                                         DockPosition="Top"
+                                         ItemMargin="0,8,0,0"
+                                         FontSize="12"
+                                         IconHeight="13"
+                                         IconWidth="13"/>
+                </chart:SfChart.Legend>
+                <chart:SfChart.Behaviors>
+                    <chart:ChartSelectionBehavior EnableSegmentSelection="True"/>
+                </chart:SfChart.Behaviors>
+                <chart:PieSeries  ItemsSource="{Binding PopulationData}"
+                                   XBindingPath="SectionName"
+                                   YBindingPath="StudentCount"
+                                   EnableAnimation="True"
+                                   ShowTooltip="True"
+                                   SegmentSelectionBrush="#d1d1e0">
+
+                    <chart:PieSeries.AdornmentsInfo>
+                        <chart:ChartAdornmentInfo            ShowLabel="True" />
+                    </chart:PieSeries.AdornmentsInfo>
+                </chart:PieSeries>
+
+            </chart:SfChart>
+
+            <Grid Grid.Column="1">
+                <chart:SfChart Margin="20" 
+                                Header="Attendance History 2025-2026"
+                                FontSize="17"
+                                FontWeight="Bold">
+                    <chart:SfChart.PrimaryAxis>
+                        <chart:CategoryAxis PlotOffset="20" />
+                    </chart:SfChart.PrimaryAxis>
+                    <chart:SfChart.SecondaryAxis>
+                        <chart:NumericalAxis/>
+                    </chart:SfChart.SecondaryAxis>
+                    <chart:SfChart.Legend>
+                        <chart:ChartLegend Margin="11"/>
+                    </chart:SfChart.Legend>
+                    <chart:SfChart.Behaviors>
+                        <chart:ChartSelectionBehavior EnableSegmentSelection="True"/>
+                        <chart:ChartTrackBallBehavior/>
+                        <chart:ChartZoomPanBehavior EnableDirectionalZooming="True"
+                             EnablePanning="True"
+                             EnableSelectionZooming="True"/>
+                    </chart:SfChart.Behaviors>
+                    <chart:LineSeries ItemsSource="{Binding AttendanceDataChartList}" 
+                                        XBindingPath="DateLabel" 
+                                        YBindingPath="OnTime"
+                                        EnableAnimation="True"
+                                        SegmentSelectionBrush="#d1d1e0"
+                                        ShowTooltip="True"
+                                        Label="On Time">
+                        <chart:LineSeries.AdornmentsInfo>
+                            <chart:ChartAdornmentInfo ShowLabel="True" SegmentLabelFormat="0.00'B">
+                            </chart:ChartAdornmentInfo>
+                        </chart:LineSeries.AdornmentsInfo>
+                    </chart:LineSeries>
+                    <chart:LineSeries ItemsSource="{Binding AttendanceDataChartList}" 
+                                        XBindingPath="DateLabel" 
+                                        YBindingPath="Late"
+                                        EnableAnimation="True"
+                                        SegmentSelectionBrush="#d1d1e0"
+                                        ShowTooltip="True"
+                                        Label="Late">
+                        <chart:LineSeries.AdornmentsInfo>
+                            <chart:ChartAdornmentInfo ShowLabel="True" 
+                               LabelPosition="Inner" 
+                               SegmentLabelFormat="0.00'B" >
+                            </chart:ChartAdornmentInfo>
+                        </chart:LineSeries.AdornmentsInfo>
+                    </chart:LineSeries>
+                </chart:SfChart>
+            </Grid>
 
         </Grid>
 
