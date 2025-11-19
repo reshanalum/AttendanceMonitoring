@@ -22,6 +22,19 @@ namespace AttendanceMonitoringSystem.ViewModel
         public ObservableCollection<SectionDisplay> AdvisoryList { get; set; } = new ObservableCollection<SectionDisplay>();
         
         private SectionDisplay _selectedSection;
+        public SectionDisplay SelectedSection
+        {
+            get => _selectedSection;
+            set
+            {
+                if (_selectedSection != value)
+                {
+                    _selectedSection = value;
+                    OnPropertyChanged();
+                    (ShowEditSectionCommand as RelayCommand)?.RaiseCanExecuteChanged();
+                }
+            }
+        }
         private int _selectedIndex;
         private string studentSearchText;
 
@@ -33,9 +46,14 @@ namespace AttendanceMonitoringSystem.ViewModel
         {
             LoadSections();
             ShowAddSectionCommand = new RelayCommand(ExecuteAddSectionCommand);
-            ShowEditSectionCommand = new RelayCommand(ExecuteEditSectionCommand);
+            ShowEditSectionCommand = new RelayCommand(ExecuteEditSectionCommand, CanExecuteEditSectionCommand);
             ViewSectionCommand = new RelayCommand(ExecuteViewSectionCommand);
             _dashboardVM = dashboardVM;
+        }
+
+        private bool CanExecuteEditSectionCommand(object obj)
+        {
+            return true;
         }
 
         private void ExecuteViewSectionCommand(object obj)
@@ -49,28 +67,26 @@ namespace AttendanceMonitoringSystem.ViewModel
 
         private void ExecuteEditSectionCommand(object obj)
         {
-            if (SelectedSection != null)
+            if (SelectedSection == null)
             {
-                // You need to get the actual Advisory object from DB using SectionName
-                using var context = new AttendanceMonitoringContext();
-                var advisoryToEdit = context.Advisories
-                    .Include(a => a.ClassAdviserLink)
-                    .FirstOrDefault(a => a.SectionName == SelectedSection.SectionName);
+                MessageBox.Show("Please select a section before editing.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
 
-                if (advisoryToEdit != null)
-                {
-                    var editView = new EditSectionView();
-                    editView.DataContext = new EditSectionVM(_dashboardVM, advisoryToEdit);
-                    _dashboardVM.CurrentView = editView;
-                }
-                else
-                {
-                    MessageBox.Show("Selected section could not be found.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
+            using var context = new AttendanceMonitoringContext();
+            var advisoryToEdit = context.Advisories
+                .Include(a => a.ClassAdviserLink)
+                .FirstOrDefault(a => a.SectionName == SelectedSection.SectionName);
+
+            if (advisoryToEdit != null)
+            {
+                var editView = new EditSectionView();
+                editView.DataContext = new EditSectionVM(_dashboardVM, advisoryToEdit);
+                _dashboardVM.CurrentView = editView;
             }
             else
             {
-                MessageBox.Show("No section selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Selected section could not be found.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -81,13 +97,7 @@ namespace AttendanceMonitoringSystem.ViewModel
             _dashboardVM.CurrentView = addView;
         }
 
-        public SectionDisplay SelectedSection
-        {
-            get => _selectedSection; 
-            set{ _selectedSection = value;
-                OnPropertyChanged();
-            }
-        }
+      
 
         public int SelectedIndex
         {

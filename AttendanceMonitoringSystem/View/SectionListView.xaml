@@ -127,8 +127,8 @@
             <ListView   Padding="8,5"
                         Grid.Row="2"
                         ItemsSource="{Binding AdvisoryList}"
-                        SelectedItem="{Binding SelectedSection, Mode=TwoWay}"
-                        SelectedIndex="{Binding SelectedIndex}">
+                        SelectedItem="{Binding SelectedSection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        >
 
                 <ListView.Resources>
                     <Style TargetType="GridViewColumnHeader">

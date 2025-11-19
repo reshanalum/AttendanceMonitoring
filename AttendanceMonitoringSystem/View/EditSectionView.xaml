@@ -128,7 +128,8 @@
                                   Foreground="#333"
                                   VerticalContentAlignment="Center"
                                   Padding="10,5"
-                                  Text="{Binding EditingSectionName}"/>
+                                  Text="{Binding EditingSectionName}"
+                                  IsReadOnly="True"/>
                         </Border>
                     </StackPanel>
 
@@ -157,18 +158,17 @@
                                  ShadowDepth="3"/>
                             </Border.Effect>
                             <ComboBox 
-                                Background="White"
-                                BorderThickness="0"
-                                FontSize="18"
-                                Foreground="#333"
-                                VerticalContentAlignment="Center"
-                                Padding="10,5"
-                                ItemsSource="{Binding TeacherList}"
-                                SelectedValue="{Binding EditingSelectedTeacherId, Mode=TwoWay}"
-                                DisplayMemberPath="FirstName"
-                                BorderBrush="White"
-                                SelectedValuePath="ClassAdviserId"
-                                />
+                                    Background="White"
+                                    BorderThickness="0"
+                                    FontSize="18"
+                                    Foreground="#333"
+                                    VerticalContentAlignment="Center"
+                                    Padding="10,5"
+                                    ItemsSource="{Binding TeacherList}"
+                                    SelectedValue="{Binding EditingSelectedTeacher.ClassAdviserId, Mode=TwoWay}"
+                                    DisplayMemberPath="FirstName"
+                                    SelectedValuePath="ClassAdviserId"
+                                    IsEnabled="False"/>
                         </Border>
                     </StackPanel>
                 </Grid>

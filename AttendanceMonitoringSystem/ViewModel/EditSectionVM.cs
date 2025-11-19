@@ -1,6 +1,7 @@
 ﻿using AttendanceMonitoring;
 using AttendanceMonitoring.Models;
 using AttendanceMonitoringSystem.View;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -14,10 +15,8 @@ namespace AttendanceMonitoringSystem.ViewModel
         public ObservableCollection<StudentDisplay> StudentList { get; set; } = new();
         public ObservableCollection<Class_Adviser> TeacherList { get; set; } = new ObservableCollection<Class_Adviser>();
 
-        // Section being edited
         public Advisory EditingSection { get; set; }
-
-        // Selected teacher for section
+        public string EditingSectionName { get; set; }
         public Class_Adviser EditingSelectedTeacher { get; set; }
 
         public EditSectionVM(DashboardVM dashboardVM, Advisory sectionToEdit)
@@ -26,14 +25,11 @@ namespace AttendanceMonitoringSystem.ViewModel
 
             EditingSection = sectionToEdit;
             EditingSelectedTeacher = sectionToEdit.ClassAdviserLink;
+            EditingSectionName = sectionToEdit.SectionName;
 
             LoadTeachers();
-            LoadStudentsInSection(sectionToEdit.AdvisoryId);
+            LoadStudentsInSection(sectionToEdit);
         }
-
-        /// <summary>
-        /// Load all teachers
-        /// </summary>
         private void LoadTeachers()
         {
             using var context = new AttendanceMonitoringContext();
@@ -45,33 +41,29 @@ namespace AttendanceMonitoringSystem.ViewModel
                 TeacherList.Add(t);
             }
         }
-
-        /// <summary>
-        /// Load only students currently in the section
-        /// </summary>
-        private void LoadStudentsInSection(int sectionId)
+        private void LoadStudentsInSection(Advisory section)
         {
             using var context = new AttendanceMonitoringContext();
 
-            var studentsInSection = context.Students
-                .Where(s => s.AdvisoryList.Any(a => a.AdvisoryId == sectionId))
-                .Select(s => new StudentDisplay
-                {
-                    Student = s,
-                    IsSelected = true // mark as selected since they are in this section
-                })
+            var studentsInSectionIds = context.Advisories
+                .Where(a => a.SectionName == section.SectionName)
+                .Select(a => a.StudentId)
+                .ToList();
+            var allRelevantStudents = context.Students
+                .Where(s => studentsInSectionIds.Contains(s.StudentId)
+                            || !s.AdvisoryList.Any())
                 .ToList();
 
             StudentList.Clear();
-            foreach (var s in studentsInSection)
+            foreach (var student in allRelevantStudents)
             {
-                StudentList.Add(s);
+                StudentList.Add(new StudentDisplay
+                {
+                    Student = student,
+                    IsSelected = studentsInSectionIds.Contains(student.StudentId) // true if already in section
+                });
             }
         }
-
-        /// <summary>
-        /// Save the changes to the section
-        /// </summary>
         public void SaveCommand()
         {
             if (EditingSection == null || EditingSelectedTeacher == null)
@@ -138,10 +130,6 @@ namespace AttendanceMonitoringSystem.ViewModel
             MessageBox.Show("Section updated successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             BackToSectionList();
         }
-
-        /// <summary>
-        /// Navigate back to the section list
-        /// </summary>
         public void BackToSectionList()
         {
             var sectionView = new SectionListView(_dashboardVM);
@@ -149,9 +137,5 @@ namespace AttendanceMonitoringSystem.ViewModel
             _dashboardVM.CurrentView = sectionView;
         }
     }
-
-    /// <summary>
-    /// Wrapper class to display students with selection
-    /// </summary>
 
 }

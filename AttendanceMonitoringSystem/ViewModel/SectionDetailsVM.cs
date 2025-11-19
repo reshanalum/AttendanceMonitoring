@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace AttendanceMonitoringSystem.ViewModel
@@ -49,9 +50,16 @@ namespace AttendanceMonitoringSystem.ViewModel
 
         private void ExecuteAttendanceHistoryCommand(object obj)
         {
-            var addView = new AttendanceHistoryView(_dashboardVM);
-            addView.DataContext = new AttendanceHistoryVM(_dashboardVM);
-            _dashboardVM.CurrentView = addView;
+            if (SelectedSection == null)
+            {
+                MessageBox.Show("Please select a section first.", "No Section Selected",
+                MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            var view = new AttendanceHistoryView(_dashboardVM, SelectedSection);
+            _dashboardVM.CurrentView = view;
+
         }
 
         public void BackToSectionList()

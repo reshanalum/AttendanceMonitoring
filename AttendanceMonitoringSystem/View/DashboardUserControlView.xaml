@@ -70,7 +70,7 @@
 
         <Grid.RowDefinitions>
 
-            <RowDefinition Height="250"/>
+            <RowDefinition Height="200"/>
             <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -88,10 +88,11 @@
                     Background="White"
                     BorderThickness="2"
                     CornerRadius="30"
-                    Padding="10,0"
+                    Padding="10,0,0,0"
                     SnapsToDevicePixels="True"
                     Width="650"
-                    Height="80">
+                    Height="80"
+                >
 
                 <Border.Effect>
                     <DropShadowEffect Color="Black" 
@@ -143,6 +144,20 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+
+            <Border Grid.ColumnSpan="2"
+                    Background="White"
+                    CornerRadius="20"
+                    Margin="0,15,0,0">
+
+                <Border.Effect>
+                    <DropShadowEffect Color="#000000"
+                                     Opacity="0.35"   
+                                    BlurRadius="15"
+                                    ShadowDepth="3"/>
+                </Border.Effect>
+
+            </Border>
 
             <chart:SfChart Margin="10" 
                             Header="Population Count"

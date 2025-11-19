@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace AttendanceMonitoringSystem.ViewModel
 {
@@ -101,33 +102,54 @@ namespace AttendanceMonitoringSystem.ViewModel
                 .ToList();
         }
 
-        public AttendanceHistoryVM(DashboardVM dashboardVM)
+        public AttendanceHistoryVM(DashboardVM dashboardVM, SectionDisplay section)
         {
-            //LoadAttendanceHistory();
-            LoadAttendanceForStudent();
-            LoadStudents();
             _dashboardVM = dashboardVM;
+            selectedSection = section;
+            LoadStudents();
+
         }
         private void LoadStudents()
         {
+            if (selectedSection == null) return;
+
             using var context = new AttendanceMonitoringContext();
 
-            var students = context.Students.Select(c => new Student
-            {
-                StudentId = c.StudentId,
-                FirstName = c.FirstName,
-                LastName = c.LastName,
-                LRN = c.LRN,
-                EnrollmentStatus = c.EnrollmentStatus
-            }).ToList();
+            // Students in this section
+            var studentsInSection = context.Advisories
+                .Where(a => a.SectionName == selectedSection.SectionName)
+                .Select(a => a.StudentLink)
+                .ToList();
 
+            // Students NOT in any section
+            var studentIdsInAdv = context.Advisories
+                .Select(a => a.StudentId)
+                .ToList();
+
+            var noSectionStudents = context.Students
+                .Where(s => !studentIdsInAdv.Contains(s.StudentId))
+                .ToList();
+
+            // Combine both lists
+            var allStudents = studentsInSection
+                .Union(noSectionStudents)
+                .Select(s => new Student
+                {
+                    StudentId = s.StudentId,
+                    FirstName = s.FirstName,
+                    LastName = s.LastName,
+                    LRN = s.LRN,
+                    EnrollmentStatus = s.EnrollmentStatus
+                })
+                .ToList();
+
+            // Update observable list
             StudentList.Clear();
-
-            foreach (var s in students)
-            {
+            foreach (var s in allStudents)
                 StudentList.Add(s);
-            }
         }
+
+
         private SectionDisplay selectedSection; // add this in your class
 
         public void SetSelectedSection(SectionDisplay section)

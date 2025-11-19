@@ -22,10 +22,10 @@ namespace AttendanceMonitoringSystem.View
     public partial class AttendanceHistoryView : UserControl
     {
         private AttendanceHistoryVM _vm;
-        public AttendanceHistoryView(DashboardVM dashboardVM)
+        public AttendanceHistoryView(DashboardVM dashboardVM, SectionDisplay section)
         {
             InitializeComponent();
-            _vm = new AttendanceHistoryVM(dashboardVM);
+            _vm = new AttendanceHistoryVM(dashboardVM, section);
             this.DataContext = _vm;
         }
         private void ButtonBack_Click(object sender, RoutedEventArgs e)
