@@ -33,7 +33,7 @@ namespace AttendanceMonitoringSystem.ViewModel
         public int NewContact1ID { get; set; }
 
         public string NewParentContactNumber1 { get; set; }
-        public string NewParentContactNetwork1 { get; set; }  //NEED PA BA TO? WALA SIYA NAKALAGAY SA UI
+        public string NewParentContactNetwork1 { get; set; } 
 
         public int NewContact2ID { get; set; }
 
@@ -51,7 +51,6 @@ namespace AttendanceMonitoringSystem.ViewModel
         public AddStudentVM(DashboardVM dashboardVM)
         {
             _dashboardVM = dashboardVM;
-            //SectionName = sectionName;
 
             EnrollmentStatus = new List<string>
                                 {

@@ -27,7 +27,7 @@ namespace AttendanceMonitoringSystem.ViewModel
             set
             {
                 _selectedStudent = value;
-                LoadAttendanceForStudent(); // call whenever user selects a student
+                LoadAttendanceForStudent(); 
             }
         }
         private void LoadAttendanceForStudent()
@@ -95,7 +95,7 @@ namespace AttendanceMonitoringSystem.ViewModel
                 .Select(c => new Attendance
                 {
                     AttendanceId = c.AttendanceId,
-                    StudentId = c.StudentLink.StudentId, //FIRST NAME OF THE STUDENT
+                    StudentId = c.StudentLink.StudentId, 
                     DateTime = c.DateTime,
                     Status = c.Status,
                 })
@@ -115,13 +115,13 @@ namespace AttendanceMonitoringSystem.ViewModel
 
             using var context = new AttendanceMonitoringContext();
 
-            // Students in this section
+
             var studentsInSection = context.Advisories
                 .Where(a => a.SectionName == selectedSection.SectionName)
                 .Select(a => a.StudentLink)
                 .ToList();
 
-            // Students NOT in any section
+
             var studentIdsInAdv = context.Advisories
                 .Select(a => a.StudentId)
                 .ToList();
@@ -130,7 +130,7 @@ namespace AttendanceMonitoringSystem.ViewModel
                 .Where(s => !studentIdsInAdv.Contains(s.StudentId))
                 .ToList();
 
-            // Combine both lists
+   
             var allStudents = studentsInSection
                 .Union(noSectionStudents)
                 .Select(s => new Student
@@ -143,15 +143,14 @@ namespace AttendanceMonitoringSystem.ViewModel
                 })
                 .ToList();
 
-            // Update observable list
+   
             StudentList.Clear();
             foreach (var s in allStudents)
                 StudentList.Add(s);
         }
 
 
-        private SectionDisplay selectedSection; // add this in your class
-
+        private SectionDisplay selectedSection; 
         public void SetSelectedSection(SectionDisplay section)
         {
             selectedSection = section;

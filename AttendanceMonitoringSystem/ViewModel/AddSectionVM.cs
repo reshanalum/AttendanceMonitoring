@@ -53,7 +53,7 @@ namespace AttendanceMonitoringSystem.ViewModel
         {
             using var context = new AttendanceMonitoringContext();
             var studentsWithoutSections = context.Students
-                    .Where(s => !s.AdvisoryList.Any()) // <-- filter
+                    .Where(s => !s.AdvisoryList.Any()) 
                     .Select(c => new StudentDisplay
                     {
                         Student = c,
@@ -91,7 +91,7 @@ namespace AttendanceMonitoringSystem.ViewModel
                 {
                     SectionName = NewSectionName,
                     SchoolYear = "2025-2026",
-                    ClassAdviserId = SelectedTeacherId.Value, // converted int
+                    ClassAdviserId = SelectedTeacherId.Value, 
                     StudentId = s.Student.StudentId
                 };
 

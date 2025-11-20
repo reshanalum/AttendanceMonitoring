@@ -175,7 +175,6 @@
             </Grid>
         </Border>
 
-        <!-- Searchbar -->
         <Grid Grid.Row="0">
 
             <Grid.ColumnDefinitions>
@@ -405,15 +404,15 @@
                                 <Setter.Value>
                                     <ControlTemplate TargetType="GridViewColumnHeader">
                                         <Border Background="{TemplateBinding Background}"
- BorderBrush="{TemplateBinding BorderBrush}"
- BorderThickness="{TemplateBinding BorderThickness}">
+                                                 BorderBrush="{TemplateBinding BorderBrush}"
+                                                 BorderThickness="{TemplateBinding BorderThickness}">
                                             <TextBlock Text="{TemplateBinding Content}"
-        VerticalAlignment="Center"
-        HorizontalAlignment="Center"
-        Foreground="{TemplateBinding Foreground}"
-        FontWeight="{TemplateBinding FontWeight}"
-        FontSize="{TemplateBinding FontSize}"
-        Margin="{TemplateBinding Padding}"/>
+                                                    VerticalAlignment="Center"
+                                                    HorizontalAlignment="Center"
+                                                    Foreground="{TemplateBinding Foreground}"
+                                                    FontWeight="{TemplateBinding FontWeight}"
+                                                    FontSize="{TemplateBinding FontSize}"
+                                                    Margin="{TemplateBinding Padding}"/>
                                         </Border>
                                     </ControlTemplate>
                                 </Setter.Value>

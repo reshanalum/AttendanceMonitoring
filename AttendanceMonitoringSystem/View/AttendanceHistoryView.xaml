@@ -67,29 +67,25 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Grid x:Name="root">
-                            <!-- Background -->
                             <Border x:Name="border"
                             Background="{TemplateBinding Background}"
                             CornerRadius="6"
                             SnapsToDevicePixels="True"/>
-                            <!-- Icon/Content -->
                             <ContentPresenter HorizontalAlignment="Center"
                                       VerticalAlignment="Center"/>
                         </Grid>
 
                         <ControlTemplate.Triggers>
-                            <!-- Hover -->
+
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="border" Property="Background" Value="#402D96FF"/>
-                                <!-- Semi-transparent overlay matching icon color -->
+
                             </Trigger>
 
-                            <!-- Pressed -->
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter TargetName="border" Property="Background" Value="#602D96FF"/>
                             </Trigger>
 
-                            <!-- Disabled -->
                             <Trigger Property="IsEnabled" Value="False">
                                 <Setter TargetName="border" Property="Opacity" Value="0.5"/>
                                 <Setter Property="Foreground" Value="#AAA"/>

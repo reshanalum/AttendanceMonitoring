@@ -137,7 +137,7 @@
 
         </Grid>
         
-        <!--CHARTS-->
+
         <Grid Grid.Row="2">
             
             <Grid.ColumnDefinitions>

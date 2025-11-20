@@ -78,7 +78,7 @@ namespace AttendanceMonitoringSystem.ViewModel
         {
             using (var db = new AttendanceMonitoringContext())
             {
-                // Students
+
                 foreach (var s in db.Students.ToList())
                 {
                     AllSearchItems.Add(new SearchResult
@@ -89,7 +89,7 @@ namespace AttendanceMonitoringSystem.ViewModel
                     });
                 }
 
-                // Sections (Advisories)
+
                 foreach (var sec in db.Advisories.Select(a => a.SectionName).Distinct().ToList())
                 {
                     AllSearchItems.Add(new SearchResult
@@ -100,7 +100,7 @@ namespace AttendanceMonitoringSystem.ViewModel
                     });
                 }
 
-                // Teachers (ClassAdvisers)
+
                 foreach (var t in db.Class_Advisers.ToList())
                 {
                     AllSearchItems.Add(new SearchResult
@@ -149,7 +149,7 @@ namespace AttendanceMonitoringSystem.ViewModel
                 {
                     SectionName = "Students",
                     StudentCount = db.Students.Count(),
-                    //SliceColor = new SolidBrush(Color.FromArgb(0, 50, 112))
+
                 });
 
                 PopulationData.Add(new SectionDisplay
@@ -159,14 +159,14 @@ namespace AttendanceMonitoringSystem.ViewModel
                                     .Select(a => a.SectionName)
                                     .Distinct()
                                     .Count(),
-                    //SliceColor = new SolidBrush(Color.FromArgb(0, 92, 207))
+
                 });
 
                 PopulationData.Add(new SectionDisplay
                 {
                     SectionName = "Class Advisers",
                     StudentCount = db.Class_Advisers.Count(),
-                    //SliceColor = new SolidBrush(Color.FromArgb(79, 157, 255))
+
                 });
             }
         }

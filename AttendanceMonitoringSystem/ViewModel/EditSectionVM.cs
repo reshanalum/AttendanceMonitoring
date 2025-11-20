@@ -60,7 +60,7 @@ namespace AttendanceMonitoringSystem.ViewModel
                 StudentList.Add(new StudentDisplay
                 {
                     Student = student,
-                    IsSelected = studentsInSectionIds.Contains(student.StudentId) // true if already in section
+                    IsSelected = studentsInSectionIds.Contains(student.StudentId) 
                 });
             }
         }
@@ -74,15 +74,15 @@ namespace AttendanceMonitoringSystem.ViewModel
 
             using var context = new AttendanceMonitoringContext();
 
-            // Reload the section including its students
+
             var section = context.Advisories
                 .Where(a => a.AdvisoryId == EditingSection.AdvisoryId)
                 .ToList();
 
-            // Students currently selected in the UI
+
             var selectedStudentIds = StudentList.Where(s => s.IsSelected).Select(s => s.Student.StudentId).ToList();
 
-            // Remove students who are no longer selected
+
             var studentsToRemove = context.Advisories
                 .Where(a => a.SectionName == EditingSection.SectionName &&
                             !selectedStudentIds.Contains(a.StudentId))
@@ -93,7 +93,6 @@ namespace AttendanceMonitoringSystem.ViewModel
                 context.Advisories.Remove(s);
             }
 
-            // Add new students who are selected but not yet in the section
             var existingStudentIds = context.Advisories
                 .Where(a => a.SectionName == EditingSection.SectionName)
                 .Select(a => a.StudentId)
@@ -115,7 +114,7 @@ namespace AttendanceMonitoringSystem.ViewModel
                 context.Advisories.Add(newAdvisory);
             }
 
-            // Update section adviser if changed
+
             var advisoriesToUpdate = context.Advisories
                 .Where(a => a.SectionName == EditingSection.SectionName)
                 .ToList();

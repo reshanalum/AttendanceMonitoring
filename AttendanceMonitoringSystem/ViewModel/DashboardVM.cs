@@ -46,7 +46,7 @@ namespace AttendanceMonitoringSystem.ViewModel
 
         public void ExecuteShowTeacherPage()
         {
-            //temporary lang
+
 
             var studentListView = new StudentListView(this);
             CurrentView = studentListView;

@@ -18,7 +18,7 @@ namespace AttendanceMonitoringSystem.ViewModel
         public Contact Contact1 { get; set; }
         public Contact Contact2 { get; set; }
 
-        // ComboBox choices
+
         public List<string> EnrollmentStatus { get; set; }
 
         private string _selectedEnrollmentStatus;
@@ -32,7 +32,6 @@ namespace AttendanceMonitoringSystem.ViewModel
                     _selectedEnrollmentStatus = value;
                     OnPropertyChanged(nameof(SelectedEnrollmentStatus));
 
-                    // update student value
                     if (EditingStudent != null)
                         EditingStudent.EnrollmentStatus = value;
                 }
@@ -80,7 +79,7 @@ namespace AttendanceMonitoringSystem.ViewModel
             Contact1 = contacts.Count > 0 ? contacts[0] : new Contact { ParentId = EditingParent.ParentId };
             Contact2 = contacts.Count > 1 ? contacts[1] : new Contact { ParentId = EditingParent.ParentId };
 
-            // IMPORTANT: Set the ComboBox selected item
+
             SelectedEnrollmentStatus = EditingStudent.EnrollmentStatus?.Trim();
             OnPropertyChanged(nameof(SelectedEnrollmentStatus));
 

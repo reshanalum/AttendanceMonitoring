@@ -43,9 +43,7 @@ namespace AttendanceMonitoringSystem.ViewModel
                 OnPropertyChanged();
             }
         }
-        // -----------------------------
-        // Constructor for SECTION FILTER
-        // -----------------------------
+
         public SpecificStudentListVM(DashboardVM dashboardVM, string sectionName)
         {
             _dashboardVM = dashboardVM;
@@ -113,7 +111,7 @@ namespace AttendanceMonitoringSystem.ViewModel
             context.Students.Remove(studentInDb);
             context.SaveChanges();
 
-            Students.Remove(SelectedStudent); // Remove from ObservableCollection (updates UI)
+            Students.Remove(SelectedStudent); 
             SelectedStudent = null;
         }
         private void ExecuteEditStudentCommand(object obj)
@@ -146,10 +144,6 @@ namespace AttendanceMonitoringSystem.ViewModel
             _dashboardVM.CurrentView = addView;
         }
 
-
-        // -----------------------------
-        // Load students for given section
-        // -----------------------------
         private void LoadStudentsForSection()
         {
             using var context = new AttendanceMonitoringContext();
@@ -157,7 +151,7 @@ namespace AttendanceMonitoringSystem.ViewModel
             var students = context.Advisories
                 .Where(a => a.SectionName == _sectionName)
                 .Select(a => a.StudentLink)
-                .Select(s => new StudentsinSection   // <- map to StudentsinSection
+                .Select(s => new StudentsinSection   
                 {
                     StudentId = s.StudentId,
                     FirstName = s.FirstName,
@@ -172,9 +166,7 @@ namespace AttendanceMonitoringSystem.ViewModel
                 Students.Add(s);
         }
 
-        // -----------------------------
-        // SEARCH SUPPORT
-        // -----------------------------
+
         public string SearchText
         {
             get => _searchText;
@@ -188,7 +180,7 @@ namespace AttendanceMonitoringSystem.ViewModel
 
         private void FilterStudents()
         {
-            LoadStudentsForSection(); // reload base list
+            LoadStudentsForSection(); 
 
             if (string.IsNullOrWhiteSpace(SearchText))
                 return;
@@ -207,9 +199,7 @@ namespace AttendanceMonitoringSystem.ViewModel
                 Students.Add(s);
         }
 
-        // -----------------------------
-        // BACK BUTTON
-        // -----------------------------
+
         private void ExecuteBackCommand(object obj)
         {
             var sectionDetails = new SectionDetailsView(_dashboardVM,

@@ -175,7 +175,7 @@
             </Grid>
         </Border>
 
-        <!-- Searchbar -->
+
         <Grid Grid.Row="0">
 
             <Grid.ColumnDefinitions>
