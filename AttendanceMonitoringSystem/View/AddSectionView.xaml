@@ -366,7 +366,7 @@
             <Border Height="600"
                     Width="1550">
                 <ListView  Padding="8,5"
-                           Margin="0,10,0,0"
+                           Margin="0,10,487,10"
                            ItemsSource="{Binding StudentList}">
                     <ListView.View>
                         <GridView>
@@ -395,7 +395,7 @@
                             <Setter Property="Background" Value="White"/>
                             <Setter Property="Foreground" Value="#333"/>
                             <Setter Property="FontWeight" Value="SemiBold"/>
-                            <Setter Property="FontSize" Value="14"/>
+                            <Setter Property="FontSize" Value="18"/>
                             <Setter Property="Height" Value="40"/>
                             <Setter Property="Padding" Value="10,0"/>
                             <Setter Property="BorderBrush" Value="#E5E7EB"/>

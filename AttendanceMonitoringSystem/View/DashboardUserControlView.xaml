@@ -161,7 +161,7 @@
 
             <chart:SfChart Margin="10" 
                             Header="Population Count"
-                            FontSize="17"
+                            FontSize="18"
                             FontWeight="Bold"
                             Grid.Column="0">
                 <chart:SfChart.Legend>
@@ -169,7 +169,7 @@
                                          Header="Types of Population"
                                          DockPosition="Top"
                                          ItemMargin="0,8,0,0"
-                                         FontSize="12"
+                                         FontSize="18"
                                          IconHeight="13"
                                          IconWidth="13"/>
                 </chart:SfChart.Legend>
@@ -193,7 +193,7 @@
             <Grid Grid.Column="1">
                 <chart:SfChart Margin="20" 
                                 Header="Attendance History 2025-2026"
-                                FontSize="17"
+                                FontSize="18"
                                 FontWeight="Bold">
                     <chart:SfChart.PrimaryAxis>
                         <chart:CategoryAxis PlotOffset="20" />
