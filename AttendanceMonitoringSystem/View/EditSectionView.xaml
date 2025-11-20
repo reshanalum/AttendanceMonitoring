@@ -392,6 +392,11 @@
                         </GridView>
                     </ListView.View>
                     <ListView.Resources>
+
+                        <Style TargetType="TextBlock">
+                            <Setter Property="FontSize" Value="18"/>
+                        </Style>
+                        
                         <Style TargetType="GridViewColumnHeader">
                             <Setter Property="Background" Value="White"/>
                             <Setter Property="Foreground" Value="#333"/>

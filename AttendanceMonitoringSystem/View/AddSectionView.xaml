@@ -373,6 +373,7 @@
                             <GridViewColumn Width="50">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
+                               
                                         <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
@@ -418,6 +419,11 @@
                                 </Setter.Value>
                             </Setter>
                         </Style>
+
+                        <Style TargetType="TextBlock">
+                            <Setter Property="FontSize" Value="18"/>
+                        </Style>
+                        
                     </ListView.Resources>
                 </ListView>
             </Border>

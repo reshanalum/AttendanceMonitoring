@@ -176,6 +176,10 @@
 
                 <ListView.Resources>
 
+                    <Style TargetType="TextBlock">
+                        <Setter Property="FontSize" Value="18"/>
+                    </Style>
+
                     <Style TargetType="GridViewColumnHeader">
                         <Setter Property="Background" Value="White"/>
                         <Setter Property="Foreground" Value="#002D96"/>
@@ -213,6 +217,7 @@
                                 <DataTemplate>
                                     <TextBlock Text="{Binding LRN}"
                                                FontFamily="Montserrat"
+                                                                                       FontSize="18"
                                                 FontWeight="Regular"
                                                 Foreground="#002D96"
                                                 HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -225,6 +230,7 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding FirstName}"
+                                                                                       FontSize="18"
                                                FontFamily="Montserrat"
                                                 FontWeight="Regular"
                                                 Foreground="#002D96"
@@ -238,6 +244,7 @@
                                 <DataTemplate>
                                     <TextBlock Text="{Binding LastName}"
                                                 FontFamily="Montserrat"
+                                                                                       FontSize="18"
                                                 FontWeight="Regular"
                                                 Foreground="#002D96"
                                                 HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -313,6 +320,10 @@
                         SelectedIndex="{Binding SelectedIndex}">
 
                 <ListView.Resources>
+
+                    <Style TargetType="TextBlock">
+                        <Setter Property="FontSize" Value="18"/>
+                    </Style>
 
                     <Style TargetType="GridViewColumnHeader">
                         <Setter Property="Background" Value="White"/>
