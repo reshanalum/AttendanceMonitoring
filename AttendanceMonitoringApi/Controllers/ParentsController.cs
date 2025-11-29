@@ -31,24 +31,32 @@ namespace AttendanceMonitoringApi.Controllers
                 .Where(c => c.StudentLink.RFID == uid)
                 .FirstAsync();
 
-            Attendance attendance = await _context.Attendances
+            Attendance? attendance = await _context.Attendances
                 .Include(c => c.StudentLink)
                 .Where(c => c.StudentLink.RFID == uid)
-                .FirstAsync();
+                .OrderByDescending(c => c.AttendanceId)
+                .FirstOrDefaultAsync();
 
-            if (relationship == null || attendance == null)
+            if (relationship == null)
             {
                 return NotFound();
             }
 
             string status = "";
-            if (status == "Arrived")
+            if (attendance == null)
             {
-                status = "Left";
+                status = "Arrived";
             }
             else
             {
-                status = "Arrived";
+                if (attendance.Status == "Arrived")
+                {
+                    status = "Left";
+                }
+                else
+                {
+                    status = "Arrived";
+                }
             }
 
             string studentName = relationship.StudentLink.FirstName + " " + relationship.StudentLink.LastName;
