@@ -75,9 +75,14 @@ namespace AttendanceMonitoringApi.Controllers
 
         // POST: api/Notifications
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Notification>> PostNotification(Notification notification)
+        [HttpPost("/PostNotification")]
+        public async Task<ActionResult<Notification>> PostNotification([FromForm] string sentMessage)
         {
+            Notification notification = new();
+            //{
+            //    //message = sentMessage,
+
+            //};
             _context.Notifications.Add(notification);
             try
             {

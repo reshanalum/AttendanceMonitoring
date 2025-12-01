@@ -25,11 +25,15 @@ namespace AttendanceMonitoringApi.Controllers
         [HttpGet("{uid}")]
         public async Task<ActionResult<String>> GetParentContactNumberAndStudent(string uid)
         {
-            Relationship relationship = await _context.Relationships
+            var student = await _context.Students.FirstOrDefaultAsync(c => c.RFID == uid);
+
+            if (student == null) return NotFound("No student found!");
+
+            Relationship? relationship = await _context.Relationships
                 .Include(c => c.StudentLink)
                 .Include(c => c.ParentLink)
                 .Where(c => c.StudentLink.RFID == uid)
-                .FirstAsync();
+                .FirstOrDefaultAsync();
 
             Attendance? attendance = await _context.Attendances
                 .Include(c => c.StudentLink)
@@ -39,7 +43,7 @@ namespace AttendanceMonitoringApi.Controllers
 
             if (relationship == null)
             {
-                return NotFound();
+                return NotFound("No relationship was found!");
             }
 
             string status = "";
