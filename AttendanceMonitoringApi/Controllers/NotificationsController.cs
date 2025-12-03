@@ -21,136 +21,35 @@ namespace AttendanceMonitoringApi.Controllers
             _context = context;
         }
 
-        // GET: api/Notifications
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Notification>>> GetNotifications()
-        {
-            return await _context.Notifications.ToListAsync();
-        }
-
-        // GET: api/Notifications/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Notification>> GetNotification(string id)
-        {
-            var notification = await _context.Notifications.FindAsync(id);
-
-            if (notification == null)
-            {
-                return NotFound();
-            }
-
-            return notification;
-        }
-
-        // PUT: api/Notifications/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutNotification(int id, Notification notification)
-        {
-            if (id != notification.NotificationId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(notification).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!NotificationExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
         // POST: api/Notifications
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("/PostNotification")]
-        public async Task<ActionResult<Notification>> PostNotification([FromForm] string sentMessage)
+        public async Task<ActionResult<Notification>> PostNotification([FromForm] string message)
         {
-            Notification notification = new();
+            //Notification notification = new();
             //{
             //    //message = sentMessage,
 
             //};
-            _context.Notifications.Add(notification);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (NotificationExists(notification.NotificationId))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            //_context.Notifications.Add(notification);
+            //try
+            //{
+            //    await _context.SaveChangesAsync();
+            //}
+            //catch (DbUpdateException)
+            //{
+            //    if (NotificationExists(notification.NotificationId))
+            //    {
+            //        return Conflict();
+            //    }
+            //    else
+            //    {
+            //        throw;
+            //    }
+            //}
 
-            return CreatedAtAction("GetNotification", new { id = notification.NotificationId }, notification);
-        }
-
-        [HttpPost("/{uid}")]
-        public async Task<ActionResult<Notification>> PostNotificationByUID(string uid)
-        {
-            Attendance attendance = await _context.Attendances
-                .Include(c => c.StudentLink)
-                .Where(c => c.StudentLink.RFID == uid)
-                .LastAsync();
-
-            Notification notification = new() 
-            { 
-                Message = $"{attendance.StudentLink.FirstName} {attendance.StudentLink.LastName} has arrived at school!",
-                AttendanceLink = attendance
-            };
-
-            _context.Notifications.Add(notification);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (NotificationExists(notification.NotificationId))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtAction("GetNotification", new { id = notification.NotificationId }, notification);
-        }
-
-        // DELETE: api/Notifications/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteNotification(string id)
-        {
-            var notification = await _context.Notifications.FindAsync(id);
-            if (notification == null)
-            {
-                return NotFound();
-            }
-
-            _context.Notifications.Remove(notification);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            //return CreatedAtAction("GetNotification", new { id = notification.NotificationId }, notification);
+            return Ok();
         }
 
         private bool NotificationExists(int id)

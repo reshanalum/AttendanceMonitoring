@@ -24,6 +24,7 @@ namespace AttendanceMonitoringApi.Controllers
         // POST: api/Attendances
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Consumes("application/x-www-form-urlencoded")]
         public async Task<ActionResult<Attendance>> PostAttendanceByUID([FromForm] string uid)
         {
             var student = await _context.Students.FirstOrDefaultAsync(c => c.RFID == uid);
@@ -33,10 +34,10 @@ namespace AttendanceMonitoringApi.Controllers
                 return NotFound("No student found!");
             }
 
-            Attendance oldAttendance = await _context.Attendances
+            Attendance? oldAttendance = await _context.Attendances
                 .Where(c => c.StudentLink.RFID == uid)
                 .OrderByDescending(c => c.AttendanceId)
-                .FirstAsync();
+                .FirstOrDefaultAsync();
 
             string newStatus = "";
             if (oldAttendance == null || oldAttendance.Status == "Left")
