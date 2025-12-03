@@ -50,10 +50,6 @@ namespace AttendanceMonitoringSystem.ViewModel
 
             LoadTeachers();
         }
-
-        // -------------------------------------------------------------
-        // LOAD TEACHERS + THEIR ADVISORY CLASS
-        // -------------------------------------------------------------
         private void LoadTeachers()
         {
             using var context = new AttendanceMonitoringContext();
@@ -76,9 +72,6 @@ namespace AttendanceMonitoringSystem.ViewModel
                 TeacherList.Add(t);
         }
 
-        // -------------------------------------------------------------
-        // SHOW INFORMATION
-        // -------------------------------------------------------------
         private void ExecuteShowTeacherInformation(object obj)
         {
             if (SelectedTeacher == null)
@@ -104,9 +97,6 @@ namespace AttendanceMonitoringSystem.ViewModel
             _dashboardVM.CurrentView = view;
         }
 
-        // -------------------------------------------------------------
-        // DELETE TEACHER
-        // -------------------------------------------------------------
         public void DeleteTeacher(object obj)
         {
             if (SelectedTeacher == null)
@@ -142,9 +132,7 @@ namespace AttendanceMonitoringSystem.ViewModel
             SelectedTeacher = null;
         }
 
-        // -------------------------------------------------------------
-        // EDIT TEACHER
-        // -------------------------------------------------------------
+
         private void ExecuteEditTeacherCommand(object obj)
         {
             if (SelectedTeacher == null)
@@ -170,19 +158,12 @@ namespace AttendanceMonitoringSystem.ViewModel
             _dashboardVM.CurrentView = editView;
         }
 
-        // -------------------------------------------------------------
-        // ADD TEACHER
-        // -------------------------------------------------------------
         private void ExecuteAddTeacherCommand(object obj)
         {
             var addView = new AddTeacherView();
             //addView.DataContext = new AddTeacherVM(_dashboardVM);
             _dashboardVM.CurrentView = addView;
         }
-
-        // -------------------------------------------------------------
-        // SEARCH FILTER
-        // -------------------------------------------------------------
         public string TeacherSearchText
         {
             get => _searchText;
@@ -196,7 +177,7 @@ namespace AttendanceMonitoringSystem.ViewModel
 
         private void FilterTeachers()
         {
-            LoadTeachers(); // reset list
+            LoadTeachers(); 
 
             if (string.IsNullOrWhiteSpace(TeacherSearchText))
                 return;
@@ -217,9 +198,6 @@ namespace AttendanceMonitoringSystem.ViewModel
         }
     }
 
-    // -----------------------------
-    // DISPLAY MODEL FOR VIEW
-    // -----------------------------
     public class TeacherDisplay
     {
         public int ClassAdviserId { get; set; }
