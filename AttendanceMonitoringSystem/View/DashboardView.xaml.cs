@@ -76,6 +76,11 @@ namespace AttendanceMonitoringSystem.View
             _vm.ExecuteShowSectionList();
         }
 
+        private void ShowStudentList(object sender, RoutedEventArgs e)
+        {
+            _vm.ExecuteShowStudentPage();
+        }
+
         private void ShowTeacherList(object sender, RoutedEventArgs e)
         {
             _vm.ExecuteShowTeacherPage();
@@ -88,6 +93,11 @@ namespace AttendanceMonitoringSystem.View
         private void ButtonMinimize_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
+        }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
