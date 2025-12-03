@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AttendanceMonitoringSystem.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,12 +21,21 @@ namespace AttendanceMonitoringSystem.View
     /// </summary>
     public partial class TeacherListView : UserControl
     {
-        public TeacherListView()
+        private TeacherListVM _vm;
+        public TeacherListView(DashboardVM dashboardVM)
         {
             InitializeComponent();
+
+            _vm = new TeacherListVM(dashboardVM);
+                this.DataContext = _vm;
         }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void ListView_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
 
         }

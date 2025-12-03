@@ -4,17 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AttendanceMonitoringSystem.View"
-             xmlns:ViewModel="clr-namespace:AttendanceMonitoringSystem.ViewModel" 
-             xmlns:fa="http://schemas.fontawesome.io/icons/"
-             xmlns:c="clr-namespace:AttendanceMonitoringSystem.Command"
-             mc:Ignorable="d" 
-             d:DesignHeight="944" 
-             d:DesignWidth="1105"
-             Background="#F4F4F4">
+            xmlns:ViewModel="clr-namespace:AttendanceMonitoringSystem.ViewModel" 
+            xmlns:fa="http://schemas.fontawesome.io/icons/"
+            xmlns:c="clr-namespace:AttendanceMonitoringSystem.Command"
+            mc:Ignorable="d" 
+            d:DesignHeight="944" 
+            d:DesignWidth="1105"
+            Background="#F4F4F4">
 
-    <UserControl.DataContext>
-        <ViewModel:ClassListVM/>
-    </UserControl.DataContext>
+
 
     <UserControl.Resources>
 
@@ -35,11 +33,11 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="5"
-                            Width="{TemplateBinding Width}"
-                            Height="{TemplateBinding Height}">
+                           BorderBrush="{TemplateBinding BorderBrush}"
+                           BorderThickness="{TemplateBinding BorderThickness}"
+                           CornerRadius="5"
+                           Width="{TemplateBinding Width}"
+                           Height="{TemplateBinding Height}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -77,12 +75,12 @@
                         <Grid x:Name="root">
                             <!-- Background -->
                             <Border x:Name="border"
-                            Background="{TemplateBinding Background}"
-                            CornerRadius="6"
-                            SnapsToDevicePixels="True"/>
+                           Background="{TemplateBinding Background}"
+                           CornerRadius="6"
+                           SnapsToDevicePixels="True"/>
                             <!-- Icon/Content -->
                             <ContentPresenter HorizontalAlignment="Center"
-                                      VerticalAlignment="Center"/>
+                                     VerticalAlignment="Center"/>
                         </Grid>
 
                         <ControlTemplate.Triggers>
@@ -118,85 +116,32 @@
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
 
-        <!-- Pagination Bar -->
-        <StackPanel Grid.Row="3"
-            Orientation="Horizontal"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Margin="0,20,0,0"
-            Background="Transparent">
 
-            <Button Content="Prev"
-            Style="{StaticResource PageButtonStyle}"
-            IsEnabled="True"
-            Width="50"
-            Height="50"
-            FontSize="18"/>
-
-            <Button Content="1" 
-            Style="{StaticResource ActivePageButtonStyle}"
-            Width="50"
-            Height="50"
-            FontSize="18"/>
-
-            <Button Content="2"
-            Style="{StaticResource PageButtonStyle}"
-            Width="50"
-            Height="50"
-            FontSize="18"/>
-
-            <Button Content="3" 
-            Style="{StaticResource PageButtonStyle}"
-            Width="50"
-            Height="50"
-            FontSize="18"/>
-
-            <TextBlock Text="..."
-               VerticalAlignment="Center"
-               Margin="8,0"
-               FontSize="18"
-               FontWeight="SemiBold"
-               Foreground="#6c757d"/>
-
-            <Button Content="10" 
-            Style="{StaticResource PageButtonStyle}"
-            Width="50"
-            Height="50"
-            FontSize="18"/>
-
-
-            <Button Content="Next"
-            Style="{StaticResource PageButtonStyle}"
-            Width="50"
-            Height="50"
-            FontSize="18"/>
-        </StackPanel>
 
         <Border Grid.Row="2"
-                CornerRadius="2"
-                Background="White"
-                SnapsToDevicePixels="True">
+               CornerRadius="2"
+               Background="White"
+               SnapsToDevicePixels="True">
 
             <Border.Effect>
                 <DropShadowEffect Color="Black"
-                          BlurRadius="10"
-                          ShadowDepth="2"
-                          Opacity="0.15"/>
+                         BlurRadius="10"
+                         ShadowDepth="2"
+                         Opacity="0.15"/>
             </Border.Effect>
 
-            <ListView  Padding="8,5"
-                       Grid.Row="2"
-                       SelectionChanged="ListView_SelectionChanged"
-                       ItemsSource="{Binding Class_Adviser}"
-                       SelectedItem="{Binding SelectedTeacher}"
-                       SelectedIndex="{Binding SelectedIndex}">
+            <ListView Padding="8,5"
+         Grid.Row="2"
+         ItemsSource="{Binding TeacherList}"
+         SelectedItem="{Binding SelectedTeacher}"
+         HorizontalContentAlignment="Stretch" SelectionChanged="ListView_SelectionChanged_1">
 
                 <ListView.Resources>
                     <Style TargetType="GridViewColumnHeader">
                         <Setter Property="Background" Value="White"/>
                         <Setter Property="Foreground" Value="#002D96"/>
                         <Setter Property="FontWeight" Value="Bold"/>
-                        <Setter Property="FontSize" Value="14"/>
+                        <Setter Property="FontSize" Value="18"/>
                         <Setter Property="Height" Value="40"/>
                         <Setter Property="Padding" Value="10,0"/>
                         <Setter Property="BorderBrush" Value="#E5E7EB"/>
@@ -205,15 +150,15 @@
                             <Setter.Value>
                                 <ControlTemplate TargetType="GridViewColumnHeader">
                                     <Border Background="{TemplateBinding Background}"
-                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                            BorderThickness="{TemplateBinding BorderThickness}">
+                               BorderBrush="{TemplateBinding BorderBrush}"
+                               BorderThickness="{TemplateBinding BorderThickness}">
                                         <TextBlock Text="{TemplateBinding Content}"
-                                                   VerticalAlignment="Center"
-                                                   HorizontalAlignment="Center"
-                                                   Foreground="{TemplateBinding Foreground}"
-                                                   FontWeight="{TemplateBinding FontWeight}"
-                                                   FontSize="{TemplateBinding FontSize}"
-                                                   Margin="{TemplateBinding Padding}"/>
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Center"
+                                      Foreground="{TemplateBinding Foreground}"
+                                      FontWeight="{TemplateBinding FontWeight}"
+                                      FontSize="{TemplateBinding FontSize}"
+                                      Margin="{TemplateBinding Padding}"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -223,67 +168,97 @@
 
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="First Name" 
-                                    Width="250">
+                        <GridViewColumn Header="" Width="130">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding SectionName}"
-                                               FontFamily="Montserrat"
-                                                FontWeight="Medium"
-                                                Foreground="#002D96"
-                                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <Grid HorizontalAlignment="Stretch">
+                                        <TextBlock Text="{Binding ClassAdviserId}" 
+                                                  FontSize="18"
+                                      FontFamily="Montserrat"
+                                      FontWeight="Regular"
+                                      Foreground="#002D96"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+                                    </Grid>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Last Name" 
-                                    Width="250">
+
+                        <GridViewColumn Header="First Name" Width="200">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding SectionName}"
-                                               FontFamily="Montserrat"
-                                                FontWeight="Medium"
-                                                Foreground="#002D96"
-                                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <Grid HorizontalAlignment="Stretch">
+                                        <TextBlock Text="{Binding FirstName}" 
+                                        FontSize="18"
+                                      FontFamily="Montserrat"
+                                      FontWeight="Regular"
+                                      Foreground="#002D96"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+                                    </Grid>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Phone Number" 
-                                    Width="230">
+
+                        <GridViewColumn Header="Last Name" Width="200">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding SectionName}"
-                                               FontFamily="Montserrat"
-                                                FontWeight="Medium"
-                                                Foreground="#002D96"
-                                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <Grid HorizontalAlignment="Stretch">
+                                        <TextBlock Text="{Binding LastName}" 
+                                       FontSize="18"
+                                      FontFamily="Montserrat"
+                                      FontWeight="Regular"
+                                      Foreground="#002D96"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+                                    </Grid>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Class Advisory" 
-                                    Width="280">
+
+                        <GridViewColumn Header="Advisory Class" Width="200">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding SectionName}"
-                                               FontFamily="Montserrat"
-                                                FontWeight="Medium"
-                                                Foreground="#002D96"
-                                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <Grid HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding SectionName}" 
+                                       FontSize="18"
+                                      FontFamily="Montserrat"
+                                      FontWeight="Regular"
+                                      Foreground="#002D96"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+                                    </Grid>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
+
                         <GridViewColumn Width="100">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Width="24" 
-                                                Height="24" 
-                                                Margin="2"
-                                                Background="Transparent">
-                                        <fa:ImageAwesome Icon="Pagelines" 
-                                                             Width="16" 
-                                                             Height="16"
-                                                             Foreground="#002D96"/>
-                                    </Button>
+                                    <Grid HorizontalAlignment="Stretch">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <Button Width="24"
+                                       Height="24"
+                                       Background="#F4F4F4"
+                                       Command="{Binding DataContext.ShowTeacherInformationCommand, RelativeSource={RelativeSource AncestorType=UserControl}}">
+                                                <fa:ImageAwesome Icon="Bars"
+                                                    Width="16"
+                                                    Height="16"
+                                                    Foreground="#002D96"/>
+                                            </Button>
 
+                                            <Button Width="24"
+                                       Height="24"
+                                       Margin="2"
+                                       Background="#F4F4F4"
+                                       Command="{Binding DataContext.DeleteTeacherCommand, RelativeSource={RelativeSource AncestorType=UserControl}}">
+                                                <fa:ImageAwesome Icon="Trash"
+                                                    Width="16"
+                                                    Height="16"
+                                                    Foreground="DarkRed"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </Grid>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -301,45 +276,59 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Border
-                    Background="White"
-                    BorderThickness="2"
-                    CornerRadius="2"
-                    Padding="10,0"
-                    SnapsToDevicePixels="True" Grid.ColumnSpan="2" Margin="532,10,0,10">
+            <Border Grid.Column="1"
+       Background="White"
+       BorderThickness="2"
+       CornerRadius="2"
+       Padding="10,0"
+       SnapsToDevicePixels="True"
+       Panel.ZIndex="50">
 
                 <Border.Effect>
                     <DropShadowEffect Color="Black" 
-                                      Opacity="0.2" 
-                                      BlurRadius="8" 
-                                      Direction="270"/>
+                         Opacity="0.2" 
+                         BlurRadius="8" 
+                         Direction="270"/>
                 </Border.Effect>
 
-                <StackPanel Orientation="Horizontal" 
-                            VerticalAlignment="Center">
+
+                <Grid VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
                     <fa:ImageAwesome Icon="Search"
-                                     Foreground="#002D96"
-                                     Width="32" Height="33"
-                                     Margin="10,0,5,0"/>
+                        Foreground="#002D96"
+                        Width="40" Height="28"
+                        Margin="10,0,5,0"
+                        VerticalAlignment="Center"/>
 
-                    <TextBox x:Name="SearchBox"
-                             BorderThickness="0"
-                             Background="Transparent"
-                             VerticalContentAlignment="Center"
-                             FontSize="18"
-                             Foreground="Black"/>
+                    <TextBox Grid.Column="1"
+                            x:Name="SearchBox"
+                            Focusable="True"
+                            IsTabStop="True"
+                            BorderThickness="0"
+                            Background="White"
+                            VerticalContentAlignment="Center"
+                            FontSize="18"
+                            Foreground="Black"
+                            Text="{Binding Path=TeacherSearchText, UpdateSourceTrigger=PropertyChanged, Delay=300}"/>
+
 
                     <TextBlock Text="Search..."
-                               FontSize="18"
-                               Foreground="Gray"
-                               VerticalAlignment="Center"
-                               Margin="5,0,0,0"
-                               IsHitTestVisible="False"
-                               Visibility="{Binding Text.IsEmpty, ElementName=SearchBox, Converter={StaticResource BoolToVisibilityConverter}}"/>
-                </StackPanel>
+                              Grid.Column="1"
+                              FontSize="18"
+                              Foreground="Gray"
+                              VerticalAlignment="Center"
+                              Margin="5,0,0,0"
+                              IsHitTestVisible="False"
+                              Visibility="{Binding Text.IsEmpty, ElementName=SearchBox, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                </Grid>
 
             </Border>
+
+
 
             <Grid Grid.Column="0">
 
@@ -349,29 +338,50 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0"
-                            Orientation="Vertical"
-                            VerticalAlignment="Center">
+                           Orientation="Vertical"
+                           VerticalAlignment="Center">
 
                     <TextBlock Text="Teacher List" 
-                               FontSize="30" 
-                               FontWeight="Bold" 
-                               Foreground="#002D96"/>
+                              FontSize="30" 
+                              FontWeight="Bold" 
+                              Foreground="#002D96"/>
 
                     <TextBlock Text="Grade 6  " 
-                               FontSize="14" 
-                               Foreground="Gray"
-                               FontWeight="Bold" 
-                               Margin="0,0,0,10"
-                               VerticalAlignment="Bottom"/>
+                              FontSize="14" 
+                              Foreground="Gray"
+                              FontWeight="Bold" 
+                              Margin="0,0,0,10"
+                              VerticalAlignment="Bottom"/>
 
                 </StackPanel>
 
                 <StackPanel Grid.Column="1"
-                            Orientation="Horizontal"
-                            HorizontalAlignment="Right">
+                           Orientation="Horizontal"
+                           HorizontalAlignment="Right">
 
+                    <Button Cursor="Hand"
+                           Style="{StaticResource IconButtonStyle}"
+                           Width="45"
+                           Height="45"
+                           Command="{Binding ShowAddTeacherCommand}">
+                        <fa:ImageAwesome Icon="UserPlus"
+                                Foreground="#002D96"
+                                Width="40"
+                                Height="40"
+                                HorizontalAlignment="Center"/>
+                    </Button>
 
-
+                    <Button Cursor="Hand"
+                           Style="{StaticResource IconButtonStyle}"
+                           Margin="20,0,20,0"
+                           Width="45"
+                           Height="45"
+                           Command="{Binding ShowEditTeacherCommand}">
+                        <fa:ImageAwesome Icon="Edit"
+                                Foreground="#002D96"
+                                Width="40"
+                                Height="40"/>
+                    </Button>
 
 
                 </StackPanel>

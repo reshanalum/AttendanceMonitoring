@@ -1,5 +1,4 @@
-﻿using AttendanceMonitoringSystem.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,23 +16,13 @@ using System.Windows.Shapes;
 namespace AttendanceMonitoringSystem.View
 {
     /// <summary>
-    /// Interaction logic for StudentListView.xaml
+    /// Interaction logic for EditTeacherView.xaml
     /// </summary>
-    public partial class StudentListView : UserControl
+    public partial class EditTeacherView : UserControl
     {
-        private StudentListVM _vm;
-
-        public StudentListView(DashboardVM dashboardVM)
+        public EditTeacherView()
         {
             InitializeComponent();
-            _vm = new StudentListVM(dashboardVM);
-            this.DataContext = _vm;
-
-        }
-
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }

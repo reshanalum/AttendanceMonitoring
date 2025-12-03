@@ -44,16 +44,21 @@ namespace AttendanceMonitoringSystem.ViewModel
             CurrentView = dashboardHomeView;
         }
 
-        public void ExecuteShowTeacherPage()
+        public void ExecuteShowStudentPage()
         {
 
 
             var studentListView = new StudentListView(this);
             CurrentView = studentListView;
         }
+        
+        public void ExecuteShowTeacherPage()
+        {
 
+            var teacherListView = new TeacherListView(this);
+            CurrentView = teacherListView;
 
-
+        }
 
 
     }
