@@ -39,7 +39,7 @@ namespace AttendanceMonitoringSystem.View
         {
             if (_vm != null)
             {
-                _vm.SaveCommand(); // Calls your VM’s method
+                _vm.SaveCommand();
             }
         }
 
@@ -47,7 +47,7 @@ namespace AttendanceMonitoringSystem.View
         {
             if (_vm != null)
             {
-                _vm.BackToStudentList(); // Navigate back
+                _vm.BackToStudentList();
             }
         }
 

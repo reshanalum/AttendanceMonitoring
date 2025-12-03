@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AttendanceMonitoringSystem.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,34 @@ namespace AttendanceMonitoringSystem.View
     /// </summary>
     public partial class AddTeacherView : UserControl
     {
+        private AddTeacherVM _vm;
+
         public AddTeacherView()
         {
             InitializeComponent();
+            Loaded += UserControl_Loaded;
         }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            _vm = (AddTeacherVM)DataContext;
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (_vm != null)
+            {
+                _vm.SaveCommand();
+            }
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (_vm != null)
+            {
+                _vm.BackToTeacherList();
+            }
+        }
+
     }
 }

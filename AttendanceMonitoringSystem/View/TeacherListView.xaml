@@ -172,7 +172,7 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid HorizontalAlignment="Stretch">
-                                        <TextBlock Text="{Binding ClassAdviserId}" 
+                                        <TextBlock Text="{Binding DisplayNumber}" 
                                                   FontSize="18"
                                       FontFamily="Montserrat"
                                       FontWeight="Regular"
