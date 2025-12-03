@@ -46,14 +46,12 @@ namespace AttendanceMonitoringSystem.ViewModel
             ShowAddTeacherCommand = new RelayCommand(ExecuteAddTeacherCommand);
 
             DeleteTeacherCommand = new RelayCommand(DeleteTeacher);
-            ShowTeacherInformationCommand = new RelayCommand(ExecuteShowTeacherInformation);
+
 
             LoadTeachers();
         }
 
-        // -------------------------------------------------------------
-        // LOAD TEACHERS + THEIR ADVISORY CLASS
-        // -------------------------------------------------------------
+
         private void LoadTeachers()
         {
             using var context = new AttendanceMonitoringContext();
@@ -64,55 +62,27 @@ namespace AttendanceMonitoringSystem.ViewModel
                     ClassAdviserId = a.ClassAdviserId,
                     FirstName = a.FirstName,
                     LastName = a.LastName,
-
-                    SectionName = a.AdvisoryList
-                        .Select(s => s.SectionName)
-                        .FirstOrDefault() ?? "None"
+                    SectionName = a.AdvisoryList.Select(s => s.SectionName).FirstOrDefault() ?? "None"
                 })
+                .OrderBy(a => a.ClassAdviserId)
                 .ToList();
 
             TeacherList.Clear();
+
+            int number = 1;
             foreach (var t in advisers)
+            {
+                t.DisplayNumber = number++;
                 TeacherList.Add(t);
+            }
         }
 
-        // -------------------------------------------------------------
-        // SHOW INFORMATION
-        // -------------------------------------------------------------
-        private void ExecuteShowTeacherInformation(object obj)
-        {
-            if (SelectedTeacher == null)
-            {
-                MessageBox.Show("Please select a teacher first.", "No Selection",
-                    MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
 
-            using var context = new AttendanceMonitoringContext();
-            var adviser = context.Class_Advisers
-                .FirstOrDefault(t => t.ClassAdviserId == SelectedTeacher.ClassAdviserId);
-
-            if (adviser == null)
-            {
-                MessageBox.Show("Teacher not found in database.", "Error",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            var view = new TeacherInformationView();
-            //view.DataContext = new TeacherInformationVM(adviser, _dashboardVM);
-            _dashboardVM.CurrentView = view;
-        }
-
-        // -------------------------------------------------------------
-        // DELETE TEACHER
-        // -------------------------------------------------------------
         public void DeleteTeacher(object obj)
         {
             if (SelectedTeacher == null)
             {
-                MessageBox.Show("No teacher selected.", "Error",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("No teacher selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -124,27 +94,33 @@ namespace AttendanceMonitoringSystem.ViewModel
                 return;
 
             using var context = new AttendanceMonitoringContext();
-
-            var teacherInDb = context.Class_Advisers
-                .FirstOrDefault(c => c.ClassAdviserId == SelectedTeacher.ClassAdviserId);
+            var teacherInDb = context.Class_Advisers.FirstOrDefault(c => c.ClassAdviserId == SelectedTeacher.ClassAdviserId);
 
             if (teacherInDb == null)
             {
-                MessageBox.Show("Teacher does not exist in database.", "Error",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Teacher does not exist in database.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
             context.Class_Advisers.Remove(teacherInDb);
             context.SaveChanges();
 
+            // Remove from collection
             TeacherList.Remove(SelectedTeacher);
+
+            // Recalculate numbering for all remaining teachers
+            RecalculateDisplayNumbers();
+
             SelectedTeacher = null;
         }
 
-        // -------------------------------------------------------------
-        // EDIT TEACHER
-        // -------------------------------------------------------------
+        private void RecalculateDisplayNumbers()
+        {
+            for (int i = 0; i < TeacherList.Count; i++)
+                TeacherList[i].DisplayNumber = i + 1; // triggers PropertyChanged
+        }
+
+
         private void ExecuteEditTeacherCommand(object obj)
         {
             if (SelectedTeacher == null)
@@ -166,23 +142,16 @@ namespace AttendanceMonitoringSystem.ViewModel
             }
 
             var editView = new EditTeacherView();
-            //editView.DataContext = new EditTeacherVM(adviser, _dashboardVM);
+            editView.DataContext = new EditTeacherVM(adviser, _dashboardVM);
             _dashboardVM.CurrentView = editView;
         }
 
-        // -------------------------------------------------------------
-        // ADD TEACHER
-        // -------------------------------------------------------------
         private void ExecuteAddTeacherCommand(object obj)
         {
             var addView = new AddTeacherView();
-            //addView.DataContext = new AddTeacherVM(_dashboardVM);
+            addView.DataContext = new AddTeacherVM(_dashboardVM);
             _dashboardVM.CurrentView = addView;
         }
-
-        // -------------------------------------------------------------
-        // SEARCH FILTER
-        // -------------------------------------------------------------
         public string TeacherSearchText
         {
             get => _searchText;
@@ -196,7 +165,7 @@ namespace AttendanceMonitoringSystem.ViewModel
 
         private void FilterTeachers()
         {
-            LoadTeachers(); // reset list
+            LoadTeachers(); 
 
             if (string.IsNullOrWhiteSpace(TeacherSearchText))
                 return;
@@ -217,10 +186,7 @@ namespace AttendanceMonitoringSystem.ViewModel
         }
     }
 
-    // -----------------------------
-    // DISPLAY MODEL FOR VIEW
-    // -----------------------------
-    public class TeacherDisplay
+    public class TeacherDisplay : NotifyPropertyChanged
     {
         public int ClassAdviserId { get; set; }
         public string FirstName { get; set; }
@@ -228,5 +194,19 @@ namespace AttendanceMonitoringSystem.ViewModel
         public string SectionName { get; set; }
 
         public string FullName => $"{FirstName} {LastName}";
+
+        private int _displayNumber;
+        public int DisplayNumber
+        {
+            get => _displayNumber;
+            set
+            {
+                if (_displayNumber != value)
+                {
+                    _displayNumber = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
     }
 }

@@ -6,27 +6,21 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
 namespace AttendanceMonitoringSystem.ViewModel
 {
-    public class StudentListVM: NotifyPropertyChanged
+    public class StudentListVM : NotifyPropertyChanged
     {
         private readonly DashboardVM _dashboardVM;
 
         public ICommand ShowEditStudentCommand { get; set; }
         public ICommand ShowAddStudentCommand { get; set; }
-
         public ICommand DeleteStudentCommand { get; set; }
-
         public ICommand ShowStudentInformationCommand { get; set; }
 
-        public string SelectedSectionName { get; set; }
-
-        private List<Student> _allStudents;
+        private List<StudentInDisplay> _allStudents;
 
         private string _studentSearchText;
         public string StudentSearchText
@@ -35,7 +29,7 @@ namespace AttendanceMonitoringSystem.ViewModel
             set
             {
                 _studentSearchText = value;
-                FilterStudents();    
+                FilterStudents();
                 OnPropertyChanged();
             }
         }
@@ -113,13 +107,6 @@ namespace AttendanceMonitoringSystem.ViewModel
                 .Skip((CurrentPage - 1) * ItemsPerPage)
                 .Take(ItemsPerPage);
 
-            foreach (var item in items)
-                PagedStudents.Add(item);
-
-            OnPropertyChanged(nameof(PagedStudents));
-        }
-
-        ///////
 
         public ObservableCollection<Student> StudentList { get; set; } = new ObservableCollection<Student>();
 
@@ -127,52 +114,16 @@ namespace AttendanceMonitoringSystem.ViewModel
 
         public Student SelectedStudent
         {
-            get => selectedStudent;
+            get => _selectedStudent;
             set
             {
-                selectedStudent = value;
+                _selectedStudent = value;
                 OnPropertyChanged();
             }
         }
 
-        private void FilterStudents()
-        {
-            string search = StudentSearchText?.Trim().ToLower() ?? "";
-
-            var filtered = _allStudents
-                .Where(s =>
-                    s.FirstName.ToLower().Contains(search) ||
-                    s.LastName.ToLower().Contains(search) ||
-                    s.StudentId.ToString().Contains(search) ||
-                    s.LRN.ToLower().Contains(search) ||
-                    s.EnrollmentStatus.ToLower().Contains(search)
-                )
-                .ToList();
-
-            StudentList.Clear();
-            foreach (var student in filtered)
-                StudentList.Add(student);
-        }
-
-
-
-        private void LoadStudents()
-        {
-
-            using var context = new AttendanceMonitoringContext();
-
-            _allStudents = context.Students.ToList();  // Master list
-
-            StudentList.Clear();
-            foreach (var student in _allStudents)
-                StudentList.Add(student);
-
-        }
-
         public StudentListVM(DashboardVM dashboardVM)
         {
-            LoadStudents();
-            CurrentPage = 1;
             _dashboardVM = dashboardVM;
 
             ShowEditStudentCommand = new RelayCommand(ExecuteEditStudentCommand);
@@ -180,35 +131,66 @@ namespace AttendanceMonitoringSystem.ViewModel
             DeleteStudentCommand = new RelayCommand(DeleteStudent);
             ShowStudentInformationCommand = new RelayCommand(ExecuteShowStudentInformation);
 
-            //Pagination
-            NextPageCommand = new RelayCommand(_ => GoToPage(CurrentPage + 1), _ => CurrentPage < TotalPages);
-            PrevPageCommand = new RelayCommand(_ => GoToPage(CurrentPage - 1));
-            GoToPageCommand = new RelayCommand(page => GoToPage((int)page));
-
-            
-            UpdatePagination();
+            LoadStudents();
         }
 
-       
+        private void LoadStudents()
+        {
+            using var context = new AttendanceMonitoringContext();
+
+            _allStudents = context.Students
+                .Select(s => new StudentInDisplay
+                {
+                    StudentId = s.StudentId,
+                    FirstName = s.FirstName,
+                    LastName = s.LastName,
+                    LRN = s.LRN,
+                    EnrollmentStatus = s.EnrollmentStatus
+                })
+                .ToList();
+
+            RecalculateDisplayNumbers(_allStudents);
+            RefreshStudentList(_allStudents);
+        }
+
+        private void RefreshStudentList(List<StudentInDisplay> students)
+        {
+            LoadStudents();
+            _dashboardVM = dashboardVM;
+
+            ShowEditStudentCommand = new RelayCommand(ExecuteEditStudentCommand);
+            ShowAddStudentCommand = new RelayCommand(ExecuteAddStudentCommand);
+
+            DeleteStudentCommand = new RelayCommand(DeleteStudent);
+            ShowStudentInformationCommand = new RelayCommand(ExecuteShowStudentInformation);
+        }
 
         private void ExecuteShowStudentInformation(object obj)
         {
-            if (SelectedStudent == null)
-            {
-                MessageBox.Show("Please select a student first.", "No Selection", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            var view = new StudentInformation();
-            view.DataContext = new StudentInformationVM(SelectedStudent, _dashboardVM);
-            _dashboardVM.CurrentView = view;
+            for (int i = 0; i < students.Count; i++)
+                students[i].DisplayNumber = i + 1;
         }
 
+        private void FilterStudents()
+        {
+            var search = StudentSearchText?.Trim().ToLower() ?? "";
 
+            var filtered = string.IsNullOrWhiteSpace(search)
+                ? _allStudents
+                : _allStudents.Where(s =>
+                    s.FirstName.ToLower().Contains(search) ||
+                    s.LastName.ToLower().Contains(search) ||
+                    s.LRN.ToLower().Contains(search) ||
+                    s.EnrollmentStatus.ToLower().Contains(search) ||
+                    s.StudentId.ToString().Contains(search))
+                    .ToList();
+
+            RecalculateDisplayNumbers(filtered);
+            RefreshStudentList(filtered);
+        }
 
         public void DeleteStudent(object obj)
         {
-
             if (SelectedStudent == null)
             {
                 MessageBox.Show("No student selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -233,18 +215,56 @@ namespace AttendanceMonitoringSystem.ViewModel
 
             context.Students.Remove(studentInDb);
             context.SaveChanges();
-            StudentList.Remove(SelectedStudent);
+
+            // Remove from master list and refresh
+            _allStudents.Remove(SelectedStudent);
+            RecalculateDisplayNumbers(_allStudents);
+            RefreshStudentList(_allStudents);
+
             SelectedStudent = null;
         }
 
-        private void ExecuteEditStudentCommand(object obj)
+        private void ExecuteShowStudentInformation(object obj)
         {
+            if (SelectedStudent == null)
+            {
+                MessageBox.Show("Please select a student first.", "No Selection", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
 
-            var student = SelectedStudent;
+            using var context = new AttendanceMonitoringContext();
+
+            // Fetch the real Student entity from the DB
+            var student = context.Students
+                .FirstOrDefault(s => s.StudentId == SelectedStudent.StudentId);
 
             if (student == null)
             {
+                MessageBox.Show("Student not found in database.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            var view = new StudentInformation();
+            view.DataContext = new StudentInformationVM(student, _dashboardVM);
+            _dashboardVM.CurrentView = view;
+        }
+
+
+        private void ExecuteEditStudentCommand(object obj)
+        {
+            if (SelectedStudent == null)
+            {
                 MessageBox.Show("Please select a student to edit.", "No Selection", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            using var context = new AttendanceMonitoringContext();
+            var student = context.Students
+                .FirstOrDefault(s => s.StudentId == SelectedStudent.StudentId);
+
+            if (student == null)
+            {
+                MessageBox.Show("Student not found in database.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -253,13 +273,38 @@ namespace AttendanceMonitoringSystem.ViewModel
             _dashboardVM.CurrentView = editView;
         }
 
+
         private void ExecuteAddStudentCommand(object obj)
         {
             var addView = new AddStudentView();
             addView.DataContext = new AddStudentVM(_dashboardVM);
             _dashboardVM.CurrentView = addView;
         }
+    }
 
+    public class StudentInDisplay : NotifyPropertyChanged
+    {
+        public int StudentId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string LRN { get; set; }
+        public string EnrollmentStatus { get; set; }
+
+        public string FullName => $"{FirstName} {LastName}";
+
+        private int _displayNumber;
+        public int DisplayNumber
+        {
+            get => _displayNumber;
+            set
+            {
+                if (_displayNumber != value)
+                {
+                    _displayNumber = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
     }
     
 }

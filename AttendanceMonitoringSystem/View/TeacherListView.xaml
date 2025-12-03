@@ -168,11 +168,11 @@
 
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="" Width="130">
+                        <GridViewColumn Header="" Width="100">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid HorizontalAlignment="Stretch">
-                                        <TextBlock Text="{Binding ClassAdviserId}" 
+                                        <TextBlock Text="{Binding DisplayNumber}" 
                                                   FontSize="18"
                                       FontFamily="Montserrat"
                                       FontWeight="Regular"
@@ -184,7 +184,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="First Name" Width="200">
+                        <GridViewColumn Header="First Name" Width="250">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid HorizontalAlignment="Stretch">
@@ -237,16 +237,6 @@
                                 <DataTemplate>
                                     <Grid HorizontalAlignment="Stretch">
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <Button Width="24"
-                                       Height="24"
-                                       Background="#F4F4F4"
-                                       Command="{Binding DataContext.ShowTeacherInformationCommand, RelativeSource={RelativeSource AncestorType=UserControl}}">
-                                                <fa:ImageAwesome Icon="Bars"
-                                                    Width="16"
-                                                    Height="16"
-                                                    Foreground="#002D96"/>
-                                            </Button>
-
                                             <Button Width="24"
                                        Height="24"
                                        Margin="2"
