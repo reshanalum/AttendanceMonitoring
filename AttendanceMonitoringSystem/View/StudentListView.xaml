@@ -17,6 +17,7 @@
     <UserControl.Resources>
 
         <c:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <c:PageEqualsConverter x:Key="PageEqualsConverter"/>
 
         <Style x:Key="PageButtonStyle" TargetType="Button">
             <Setter Property="Width" Value="40"/>
@@ -132,9 +133,8 @@
 
             <ListView Padding="8,5"
                       Grid.Row="2"
-                      ItemsSource="{Binding StudentList}"
-                      SelectedItem="{Binding SelectedStudent}"
-                      HorizontalContentAlignment="Stretch">
+                      ItemsSource="{Binding PagedStudents}"
+                      SelectedItem="{Binding SelectedStudent}">
 
                 <ListView.Resources>
                     <Style TargetType="GridViewColumnHeader">
@@ -168,7 +168,7 @@
 
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="LRN" Width="130">
+                        <GridViewColumn Header="LRN" Width="200">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid HorizontalAlignment="Stretch">
@@ -200,7 +200,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="First Name" Width="200">
+                        <GridViewColumn Header="First Name" Width="230">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid HorizontalAlignment="Stretch">
@@ -216,7 +216,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Last Name" Width="150">
+                        <GridViewColumn Header="Last Name" Width="230">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid HorizontalAlignment="Stretch">
@@ -412,57 +412,58 @@
 
         <!-- Pagination Bar -->
         <StackPanel Grid.Row="3"
-                     Orientation="Horizontal"
-                     HorizontalAlignment="Center"
-                     VerticalAlignment="Center"
-                     Margin="0,20,0,0"
-                     Background="Transparent">
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="0,20,0,0"
+                    Background="Transparent">
 
-                            <Button Content="Prev"
-                     Style="{StaticResource PageButtonStyle}"
-                     IsEnabled="True"
-                     Width="50"
-                     Height="50"
-                     FontSize="18"/>
+            <!-- Previous Button -->
+            <Button Content="Prev"
+                    Style="{StaticResource PageButtonStyle}"
+                    Command="{Binding PrevPageCommand}"
+                    Width="50"
+                    Height="50"
+                    FontSize="18"/>
 
-                            <Button Content="1" 
-                     Style="{StaticResource ActivePageButtonStyle}"
-                     Width="50"
-                     Height="50"
-                     FontSize="18"/>
+            <ItemsControl ItemsSource="{Binding PageButtons}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
 
-                            <Button Content="2"
-                     Style="{StaticResource PageButtonStyle}"
-                     Width="50"
-                     Height="50"
-                     FontSize="18"/>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding Number}"
+                                Command="{Binding DataContext.GoToPageCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                CommandParameter="{Binding Number}"
+                                Width="50"
+                                Height="50"
+                                FontSize="18">
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource PageButtonStyle}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsCurrent}" Value="True">
+                                            <Setter Property="Background" Value="#002D96"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
 
-                            <Button Content="3" 
-                     Style="{StaticResource PageButtonStyle}"
-                     Width="50"
-                     Height="50"
-                     FontSize="18"/>
-
-                            <TextBlock Text="..."
-                        VerticalAlignment="Center"
-                        Margin="8,0"
-                        FontSize="18"
-                        FontWeight="SemiBold"
-                        Foreground="#6c757d"/>
-
-                            <Button Content="10" 
-                     Style="{StaticResource PageButtonStyle}"
-                     Width="50"
-                     Height="50"
-                     FontSize="18"/>
-
-
-                            <Button Content="Next"
-                     Style="{StaticResource PageButtonStyle}"
-                     Width="50"
-                     Height="50"
-                     FontSize="18"/>
+            <Button Content="Next"
+                    Style="{StaticResource PageButtonStyle}"
+                    Command="{Binding NextPageCommand}"
+                    Width="50"
+                    Height="50"
+                    FontSize="18"/>
         </StackPanel>
+
 
     </Grid>
 </UserControl>

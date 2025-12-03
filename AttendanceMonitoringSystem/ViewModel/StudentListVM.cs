@@ -40,7 +40,86 @@ namespace AttendanceMonitoringSystem.ViewModel
             }
         }
 
+        //for pagination
 
+        public ObservableCollection<Student> PagedStudents { get; set; } = new ObservableCollection<Student>();
+        private int currentPage { get; set; }
+        public int CurrentPage
+        {
+            get => currentPage;
+            set
+            {
+                currentPage = value;
+                OnPropertyChanged();
+                LoadPage();
+                UpdatePageButtons();
+            }
+        }
+
+        private void UpdatePageButtons()
+        {
+            PageButtons.Clear();
+
+            int start = Math.Max(1, CurrentPage - 2);
+            int end = Math.Min(TotalPages, CurrentPage + 2);
+
+            for (int i = start; i <= end; i++)
+            {
+                PageButtons.Add(new PageButton
+                {
+                    Number = i,
+                    CurrentPage = CurrentPage
+                });
+            }
+
+            OnPropertyChanged(nameof(PageButtons));
+        }
+
+        public int ItemsPerPage { get; set; } = 20;
+        public int TotalPages { get; set; }
+        public ObservableCollection<PageButton> PageButtons { get; set; } = new();
+        public ICommand NextPageCommand { get; }
+        public ICommand PrevPageCommand { get; }
+        public ICommand GoToPageCommand { get; }
+
+        private void GoToPage(int v)
+        {
+            if (v < 1 || v > TotalPages)
+            {
+                return;
+            }
+            CurrentPage = v;
+            LoadPage();
+        }
+
+        private void UpdatePagination()
+        {
+            TotalPages = (int)Math.Ceiling((double)StudentList.Count / ItemsPerPage);
+
+            UpdatePageButtons();
+            LoadPage();
+
+            OnPropertyChanged(nameof(CurrentPage));
+            OnPropertyChanged(nameof(TotalPages));
+            OnPropertyChanged(nameof(PageButtons));
+        }
+
+        private void LoadPage()
+        {
+            if (CurrentPage < 1) CurrentPage = 1;
+
+            PagedStudents.Clear();
+            var items = StudentList
+                .Skip((CurrentPage - 1) * ItemsPerPage)
+                .Take(ItemsPerPage);
+
+            foreach (var item in items)
+                PagedStudents.Add(item);
+
+            OnPropertyChanged(nameof(PagedStudents));
+        }
+
+        ///////
 
         public ObservableCollection<Student> StudentList { get; set; } = new ObservableCollection<Student>();
 
@@ -93,14 +172,24 @@ namespace AttendanceMonitoringSystem.ViewModel
         public StudentListVM(DashboardVM dashboardVM)
         {
             LoadStudents();
+            CurrentPage = 1;
             _dashboardVM = dashboardVM;
 
             ShowEditStudentCommand = new RelayCommand(ExecuteEditStudentCommand);
             ShowAddStudentCommand = new RelayCommand(ExecuteAddStudentCommand);
-
             DeleteStudentCommand = new RelayCommand(DeleteStudent);
             ShowStudentInformationCommand = new RelayCommand(ExecuteShowStudentInformation);
+
+            //Pagination
+            NextPageCommand = new RelayCommand(_ => GoToPage(CurrentPage + 1), _ => CurrentPage < TotalPages);
+            PrevPageCommand = new RelayCommand(_ => GoToPage(CurrentPage - 1));
+            GoToPageCommand = new RelayCommand(page => GoToPage((int)page));
+
+            
+            UpdatePagination();
         }
+
+       
 
         private void ExecuteShowStudentInformation(object obj)
         {
@@ -172,4 +261,5 @@ namespace AttendanceMonitoringSystem.ViewModel
         }
 
     }
+    
 }

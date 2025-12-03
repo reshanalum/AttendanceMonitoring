@@ -100,7 +100,7 @@
     <Grid Margin="20">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="590"/>
+            <ColumnDefinition Width="850"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -156,11 +156,12 @@
                    Margin="0,0,0,0"
                    Grid.Row="1"/>
 
-        <Border Grid.ColumnSpan="1"
+        <Border     Grid.ColumnSpan="1"
                     CornerRadius="2"
                     Background="White"
                     Grid.Row="2"
-                    SnapsToDevicePixels="True" Margin="0,0,15,130">
+                    SnapsToDevicePixels="True" 
+                    Margin="0,0,15,100">
 
             <Border.Effect>
                 <DropShadowEffect Color="Black"
@@ -170,7 +171,7 @@
             </Border.Effect>
             <ListView   Padding="8,5"
                         Grid.Row="2"
-                        ItemsSource="{Binding StudentList}"
+                        ItemsSource="{Binding PagedStudents}"
                         SelectedItem="{Binding SelectedStudent, Mode=TwoWay}"
                         SelectedIndex="{Binding SelectedIndex}">
 
@@ -254,8 +255,69 @@
                     </GridView>
                 </ListView.View>
             </ListView>
+            
         </Border>
-        <Grid Grid.Row="0">
+
+        <Grid Grid.Row="2"
+              Grid.Column="0"
+              VerticalAlignment="Bottom">
+
+            <!-- Pagination Bar -->
+            <StackPanel Grid.Row="3"
+             Orientation="Horizontal"
+             HorizontalAlignment="Center"
+             VerticalAlignment="Center"
+             Margin="0,20,0,0"
+             Background="Transparent">
+
+                <!-- Previous Button -->
+                <Button Content="Prev"
+             Style="{StaticResource PageButtonStyle}"
+             Command="{Binding PrevPageCommand}"
+             Width="50"
+             Height="50"
+             FontSize="18"/>
+
+                <ItemsControl ItemsSource="{Binding PageButtons}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Content="{Binding Number}"
+                         Command="{Binding DataContext.GoToPageCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                         CommandParameter="{Binding Number}"
+                         Width="50"
+                         Height="50"
+                         FontSize="18">
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource PageButtonStyle}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsCurrent}" Value="True">
+                                                <Setter Property="Background" Value="#002D96"/>
+                                                <Setter Property="Foreground" Value="White"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <Button Content="Next"
+             Style="{StaticResource PageButtonStyle}"
+             Command="{Binding NextPageCommand}"
+             Width="50"
+             Height="50"
+             FontSize="18"/>
+            </StackPanel>
+
+        </Grid>
+            <Grid Grid.Row="0">
             <Button x:Name="BtnBack"
              BorderThickness="0"
              FontFamily="Montserrat"
