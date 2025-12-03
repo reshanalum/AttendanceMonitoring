@@ -12,16 +12,7 @@ namespace AttendanceMonitoringSystem.ViewModel
     public class SpecificStudentListVM : NotifyPropertyChanged
     {
         private readonly DashboardVM _dashboardVM;
-        private string _sectionName;
-        public string SectionName
-        {
-            get => _sectionName;
-            set
-            {
-                _sectionName = value;
-                OnPropertyChanged();
-            }
-        }
+
         private string _searchText;
 
         public ObservableCollection<StudentsinSection> Students { get; set; } = new ObservableCollection<StudentsinSection>();
@@ -120,16 +111,15 @@ namespace AttendanceMonitoringSystem.ViewModel
             OnPropertyChanged(nameof(PagedStudents));
         }
 
-        public SpecificStudentListVM(DashboardVM dashboardVM, string sectionName)
+        public SpecificStudentListVM(DashboardVM dashboardVM, SectionDisplay section)
         {
             _dashboardVM = dashboardVM;
-            _sectionName = sectionName;
+            selectedSection = section;
 
             ShowEditStudentCommand = new RelayCommand(ExecuteEditStudentCommand);
             ShowAddStudentCommand = new RelayCommand(ExecuteAddStudentCommand);
             DeleteStudentCommand = new RelayCommand(DeleteStudent);
             ShowStudentInformationCommand = new RelayCommand(ExecuteShowStudentInformation);
-            BackCommand = new RelayCommand(ExecuteBackCommand);
 
             LoadStudentsForSection();
             CurrentPage = 1;
@@ -149,7 +139,7 @@ namespace AttendanceMonitoringSystem.ViewModel
 
             // Step 1: Fetch student data from DB
             var studentsFromDb = context.Advisories
-                .Where(a => a.SectionName == _sectionName)
+                .Where(a => a.SectionName == selectedSection.SectionName)
                 .Select(a => a.StudentLink)
                 .ToList(); // Materialize query to memory
 
@@ -260,17 +250,6 @@ namespace AttendanceMonitoringSystem.ViewModel
             _dashboardVM.CurrentView = view;
         }
 
-        private void ExecuteBackCommand(object obj)
-        {
-            var sectionDetails = new SectionDetailsView(_dashboardVM,
-                new SectionDisplay { SectionName = _sectionName });
-
-            sectionDetails.DataContext = new SectionDetailsVM(_dashboardVM,
-                new SectionDisplay { SectionName = _sectionName });
-
-            _dashboardVM.CurrentView = sectionDetails;
-        }
-
         public string SearchText
         {
             get => _searchText;
@@ -301,6 +280,19 @@ namespace AttendanceMonitoringSystem.ViewModel
                 Students.Add(s);
 
             RecalculateDisplayNumbers(); // Ensure dynamic numbering after filter
+        }
+
+        private SectionDisplay selectedSection;
+        public void SetSelectedSection(SectionDisplay section)
+        {
+            selectedSection = section;
+        }
+        public void BackToSectionDetailsList()
+        {
+
+            var sectionView = new SectionDetailsView(_dashboardVM, selectedSection);
+            sectionView.DataContext = new SectionDetailsVM(_dashboardVM, selectedSection);
+            _dashboardVM.CurrentView = sectionView;
         }
     }
 

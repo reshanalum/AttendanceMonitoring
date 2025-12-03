@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AttendanceMonitoringSystem.View"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:faa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:c="clr-namespace:AttendanceMonitoringSystem.Command"
              mc:Ignorable="d" 
              d:DesignHeight="944" 
@@ -108,6 +109,7 @@
     <Grid Margin="20">
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="80"/>
             <RowDefinition Height="20"/>
             <RowDefinition/>
@@ -116,7 +118,7 @@
 
 
 
-        <Border Grid.Row="2"
+        <Border Grid.Row="3"
                 CornerRadius="2"
                 Background="White"
                 SnapsToDevicePixels="True">
@@ -285,8 +287,54 @@
 
         </Border>
 
-
+        <!-- Back arrow -->
         <Grid Grid.Row="0">
+            <Button x:Name="BtnBack"
+                     BorderThickness="0"
+                     FontFamily="Montserrat"
+                     FontSize="15"
+                     FontWeight="Bold"
+                     Cursor="Hand"
+                     Click="ButtonBack_Click"
+                    HorizontalAlignment="Left"
+                    Margin="0,0,0,0">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FF3060FF"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Width="30" Height="30"
+                                Background="{TemplateBinding Background}" Margin="0,-2,3,-2">
+                            <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <faa:IconImage Icon="ArrowLeft"
+                               Height="25"
+                               Width="32"
+                               Foreground="#FF002D96">
+                    <faa:IconImage.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </faa:IconImage.RenderTransform>
+                </faa:IconImage>
+            </Button>
+
+        </Grid>
+        
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -405,7 +453,7 @@
 
         </Grid>
         <!-- Pagination Bar -->
-        <StackPanel Grid.Row="3"
+        <StackPanel Grid.Row="4"
              Orientation="Horizontal"
              HorizontalAlignment="Center"
              VerticalAlignment="Center"

@@ -26,8 +26,8 @@ namespace AttendanceMonitoring
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=C:\\Users\\resha\\Documents\\AttendanceMonitoringFINALPROMISE.db");
-            //optionsBuilder.UseSqlite("Data Source=C:\\Users\\MYPC\\Documents\\Fergie Codes\\Final_SLP_AttendanceMonitoringSystemCode\\AttendanceMonitoringFINALPROMISE.db"); //fergie comment this before pushing to github
+            //optionsBuilder.UseSqlite("Data Source=C:\\Users\\resha\\Documents\\AttendanceMonitoringFINALPROMISE.db");
+            optionsBuilder.UseSqlite("Data Source=C:\\Users\\MYPC\\Documents\\Fergie Codes\\Final_SLP_AttendanceMonitoringSystemCode\\AttendanceMonitoringFINALPROMISE.db"); //fergie comment this before pushing to github
 
         }
 
