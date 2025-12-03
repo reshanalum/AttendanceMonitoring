@@ -133,7 +133,7 @@
 
             <ListView Padding="8,5"
                       Grid.Row="2"
-                      ItemsSource="{Binding PagedStudents}"
+                      ItemsSource="{Binding StudentList}"
                       SelectedItem="{Binding SelectedStudent}">
 
                 <ListView.Resources>
@@ -168,7 +168,7 @@
 
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="LRN" Width="130">
+                        <GridViewColumn Header="" Width="100">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid HorizontalAlignment="Stretch">
@@ -200,7 +200,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="First Name" Width="200">
+                        <GridViewColumn Header="First Name" Width="300">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid HorizontalAlignment="Stretch">
