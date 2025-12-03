@@ -135,8 +135,7 @@ namespace AttendanceMonitoringSystem.ViewModel
                 || string.IsNullOrWhiteSpace(NewLRN)
                 || string.IsNullOrWhiteSpace(NewEnrollmentStatus)
                 || string.IsNullOrWhiteSpace(NewParentFirstName)     
-                || string.IsNullOrWhiteSpace(NewParentLastName)
-                || string.IsNullOrWhiteSpace(NewParentEmail))
+                || string.IsNullOrWhiteSpace(NewParentLastName))
             {
                 MessageBox.Show("A requirement is missing.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;

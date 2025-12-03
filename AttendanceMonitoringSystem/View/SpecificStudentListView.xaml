@@ -166,7 +166,25 @@
 
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="LRN" Width="130">
+
+                        <GridViewColumn Header="" Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid HorizontalAlignment="Stretch">
+                                        <TextBlock Text="{Binding DisplayNumber}" 
+                                       FontFamily="Montserrat"
+                                       FontWeight="Regular"
+                                       Foreground="#002D96"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                        FontSize="18"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        
+                        <GridViewColumn Header="LRN" Width="200">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid HorizontalAlignment="Stretch">
@@ -182,23 +200,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Student ID" Width="130">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Grid HorizontalAlignment="Stretch">
-                                        <TextBlock Text="{Binding StudentId}" 
-                                       FontFamily="Montserrat"
-                                       FontWeight="Regular"
-                                       Foreground="#002D96"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                        FontSize="18"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-
-                        <GridViewColumn Header="First Name" Width="200">
+                        <GridViewColumn Header="First Name" Width="250">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid HorizontalAlignment="Stretch">
@@ -214,7 +216,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Last Name" Width="150">
+                        <GridViewColumn Header="Last Name" Width="200">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid HorizontalAlignment="Stretch">

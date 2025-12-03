@@ -168,7 +168,7 @@
 
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="" Width="130">
+                        <GridViewColumn Header="" Width="100">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid HorizontalAlignment="Stretch">
@@ -184,7 +184,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="First Name" Width="200">
+                        <GridViewColumn Header="First Name" Width="250">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid HorizontalAlignment="Stretch">
