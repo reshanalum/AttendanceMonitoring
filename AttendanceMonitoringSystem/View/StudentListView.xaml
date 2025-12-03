@@ -133,7 +133,7 @@
 
             <ListView Padding="8,5"
                       Grid.Row="2"
-                      ItemsSource="{Binding StudentList}"
+                      ItemsSource="{Binding PagedStudents}"
                       SelectedItem="{Binding SelectedStudent}">
 
                 <ListView.Resources>
