@@ -90,7 +90,7 @@
                 <Grid>
                     <TextBox x:Name="Username"
                              Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
-                             FontSize="13"
+                             FontSize="20"
                              FontWeight="Regular"
                              FontFamily="Montserrat"
                              BorderThickness="0"
@@ -121,7 +121,7 @@
                 <Grid>
                     <Grid>
                         <PasswordBox x:Name="PasswordBox"
-                 FontSize="13"
+                 FontSize="20"
                  FontWeight="Regular"
                  FontFamily="Montserrat"
                  BorderThickness="0"
