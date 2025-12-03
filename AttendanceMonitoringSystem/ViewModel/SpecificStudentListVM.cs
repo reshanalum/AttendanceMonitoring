@@ -67,7 +67,7 @@ namespace AttendanceMonitoringSystem.ViewModel
             OnPropertyChanged(nameof(PageButtons));
         }
 
-        public int ItemsPerPage { get; set; } = 20;
+        public int ItemsPerPage { get; set; } = 15;
         public int TotalPages { get; set; }
         public ObservableCollection<PageButton> PageButtons { get; set; } = new();
         public ICommand NextPageCommand { get; }
