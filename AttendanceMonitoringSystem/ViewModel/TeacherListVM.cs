@@ -142,7 +142,7 @@ namespace AttendanceMonitoringSystem.ViewModel
             }
 
             var editView = new EditTeacherView();
-            //editView.DataContext = new EditTeacherVM(adviser, _dashboardVM);
+            editView.DataContext = new EditTeacherVM(adviser, _dashboardVM);
             _dashboardVM.CurrentView = editView;
         }
 

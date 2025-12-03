@@ -4,9 +4,302 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AttendanceMonitoringSystem.View"
+             xmlns:ViewModel="clr-namespace:AttendanceMonitoringSystem.ViewModel" 
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns:c="clr-namespace:AttendanceMonitoringSystem.Command"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+             d:DesignHeight="944" 
+             d:DesignWidth="1105"
+             Background="#F4F4F4">
+
+
+    <Grid Margin="10">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition/>
+
+        </Grid.RowDefinitions>
+
+
+        <Border Grid.Row="2"
+                CornerRadius="2"
+                Background="White"
+                SnapsToDevicePixels="True">
+
+            <Border.Effect>
+                <DropShadowEffect Color="Black"
+                          BlurRadius="10"
+                          ShadowDepth="2"
+                          Opacity="0.15"/>
+            </Border.Effect>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="350"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+
+
+
+
+                </Grid>
+
+                <Grid Grid.Row="0">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Teacher Information" 
+                               FontSize="23" 
+                               FontWeight="Bold" 
+                               Foreground="#002D96"
+                               Margin="10,0,0,0"/>
+
+
+
+
+                    <StackPanel Grid.Row="1"
+                                Grid.Column="0"
+                                Orientation="Vertical"
+                                Margin="20,0,20,0"
+                                VerticalAlignment="Center">
+
+                        <TextBlock Text="First Name" 
+                               FontSize="23" 
+                               FontWeight="Bold" 
+                               Foreground="#002D96"/>
+
+                        <Border Background="White"
+                                BorderThickness="2"
+                                CornerRadius="6"
+                                Padding="10,5"
+                                SnapsToDevicePixels="True"
+                                Height="50"
+                                Width="400">
+
+                            <Border.Effect>
+                                <DropShadowEffect Color="#000000"
+                                     Opacity="0.35"   
+                                    BlurRadius="15"
+                                    ShadowDepth="3"/>
+                            </Border.Effect>
+
+                            <TextBox x:Name="FirstNameTextBox"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     FontSize="18"
+                                     Foreground="#333"
+                                     VerticalContentAlignment="Center"
+                                     Padding="10,5"
+                                      Text="{Binding EditingTeacher.FirstName, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Border>
+
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1"
+                                Grid.Column="1"
+                                Orientation="Vertical"
+                                Margin="20,10,20,10"
+                                VerticalAlignment="Center">
+
+                        <TextBlock Text="Last Name" 
+                               FontSize="23" 
+                               FontWeight="Bold" 
+                               Foreground="#002D96"/>
+
+                        <Border Background="White"
+                                BorderThickness="2"
+                                CornerRadius="6"
+                                Padding="10,5"
+                                SnapsToDevicePixels="True"
+                                Height="50"
+                                Width="400">
+
+                            <Border.Effect>
+                                <DropShadowEffect Color="#000000"
+                                     Opacity="0.35"   
+                                    BlurRadius="15"
+                                    ShadowDepth="3"/>
+                            </Border.Effect>
+
+                            <TextBox x:Name="LastNameTextBox"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     FontSize="18"
+                                     Foreground="#333"
+                                     VerticalContentAlignment="Center"
+                                     Padding="10,5"
+                                     Text="{Binding EditingTeacher.LastName, UpdateSourceTrigger=PropertyChanged}" />
+                        </Border>
+
+                    </StackPanel>
+
+
+
+
+
+                </Grid>
+
+
+            </Grid>
+
+
+
+        </Border>
+
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                <Button Width="120" 
+                        Height="40" 
+                        Cursor="Hand" 
+                         Click="CancelButton_Click"
+                        >
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border"
+                                    Background="#002D96"
+                                    CornerRadius="8"
+                                    SnapsToDevicePixels="True">
+                                <StackPanel Orientation="Horizontal" 
+                                            HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center">
+                                    <fa:ImageAwesome Icon="Times" 
+                                                     Foreground="White"
+                                                     Width="16" 
+                                                     Height="16" 
+                                                     Margin="0,0,6,0"/>
+                                    <TextBlock Text="Cancel" 
+                                               Foreground="White" 
+                                               VerticalAlignment="Center"
+                                               FontSize="15"/>
+                                </StackPanel>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" 
+                                         Value="True">
+                                    <Setter TargetName="border" 
+                                            Property="Background" 
+                                            Value="#0039D6"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" 
+                                         Value="True">
+                                    <Setter TargetName="border" 
+                                            Property="Background"
+                                            Value="#001F70"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button Width="120" 
+                        Height="40" 
+                        Cursor="Hand" 
+                        Click="SaveButton_Click"
+                        Margin="20,0,20,0">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border"
+                                    Background="#002D96"
+                                    CornerRadius="8"
+                                    SnapsToDevicePixels="True">
+                                <StackPanel Orientation="Horizontal" 
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center">
+                                    <fa:ImageAwesome Icon="Save" 
+                                                     Foreground="White" 
+                                                     Width="16" 
+                                                     Height="16"
+                                                     Margin="0,0,6,0"/>
+                                    <TextBlock Text="Save"
+                                               Foreground="White" 
+                                               VerticalAlignment="Center"
+                                               FontSize="15"/>
+                                </StackPanel>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="#0039D6"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="#001F70"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+            </StackPanel>
+
+
+            <Grid Grid.Column="0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0"
+                            Orientation="Vertical"
+                            VerticalAlignment="Center">
+
+                    <TextBlock Text="Edit Teacher" 
+                               FontSize="30" 
+                               FontWeight="Bold" 
+                               Foreground="#002D96"/>
+
+                    <TextBlock Text="Grade 6  " 
+                               FontSize="14" 
+                               Foreground="Gray"
+                               FontWeight="Bold" 
+                               Margin="0,0,0,10"
+                               VerticalAlignment="Bottom"/>
+
+                </StackPanel>
+
+            </Grid>
+
+
+        </Grid>
+
+
     </Grid>
 </UserControl>
