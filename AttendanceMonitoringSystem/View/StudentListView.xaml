@@ -131,10 +131,10 @@
             </Border.Effect>
 
             <ListView Padding="8,5"
-          Grid.Row="2"
-          ItemsSource="{Binding StudentList}"
-          SelectedItem="{Binding SelectedStudent}"
-          HorizontalContentAlignment="Stretch">
+                      Grid.Row="2"
+                      ItemsSource="{Binding StudentList}"
+                      SelectedItem="{Binding SelectedStudent}"
+                      HorizontalContentAlignment="Stretch">
 
                 <ListView.Resources>
                     <Style TargetType="GridViewColumnHeader">
@@ -285,7 +285,7 @@
 
         </Border>
 
-
+<!-- Top portion-->
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -410,6 +410,59 @@
 
         </Grid>
 
+        <!-- Pagination Bar -->
+        <StackPanel Grid.Row="3"
+                     Orientation="Horizontal"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center"
+                     Margin="0,20,0,0"
+                     Background="Transparent">
+
+                            <Button Content="Prev"
+                     Style="{StaticResource PageButtonStyle}"
+                     IsEnabled="True"
+                     Width="50"
+                     Height="50"
+                     FontSize="18"/>
+
+                            <Button Content="1" 
+                     Style="{StaticResource ActivePageButtonStyle}"
+                     Width="50"
+                     Height="50"
+                     FontSize="18"/>
+
+                            <Button Content="2"
+                     Style="{StaticResource PageButtonStyle}"
+                     Width="50"
+                     Height="50"
+                     FontSize="18"/>
+
+                            <Button Content="3" 
+                     Style="{StaticResource PageButtonStyle}"
+                     Width="50"
+                     Height="50"
+                     FontSize="18"/>
+
+                            <TextBlock Text="..."
+                        VerticalAlignment="Center"
+                        Margin="8,0"
+                        FontSize="18"
+                        FontWeight="SemiBold"
+                        Foreground="#6c757d"/>
+
+                            <Button Content="10" 
+                     Style="{StaticResource PageButtonStyle}"
+                     Width="50"
+                     Height="50"
+                     FontSize="18"/>
+
+
+                            <Button Content="Next"
+                     Style="{StaticResource PageButtonStyle}"
+                     Width="50"
+                     Height="50"
+                     FontSize="18"/>
+        </StackPanel>
 
     </Grid>
 </UserControl>
