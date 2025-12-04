@@ -29,6 +29,7 @@ namespace AttendanceMonitoring
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Data Source=C:\\Users\\simon\\source\\repos\\AttendanceMonitoring.db");
+            //optionsBuilder.UseSqlite("Data Source=C:\\Users\\simon\\Downloads\\AttendanceMonitoringFINALPROMISE.db");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
