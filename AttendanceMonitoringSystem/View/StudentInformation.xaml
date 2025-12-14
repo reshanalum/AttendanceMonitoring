@@ -8,7 +8,7 @@
              xmlns:ViewModel="clr-namespace:AttendanceMonitoringSystem.ViewModel" 
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:c="clr-namespace:AttendanceMonitoringSystem.Command"
-             d:DesignHeight="949" 
+             d:DesignHeight="944" 
              d:DesignWidth="1105"
              Background="#F4F4F4">
 
@@ -16,11 +16,8 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
-            <RowDefinition Height="10"/>
             <RowDefinition/>
-
         </Grid.RowDefinitions>
-
 
         <Border Grid.Row="2"
                 CornerRadius="2"
@@ -35,42 +32,115 @@
             </Border.Effect>
 
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="350"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
 
-             
+
+
                 <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="500"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
 
-                     <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                     </Grid.ColumnDefinitions>
+                    <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto"
+                                  Margin="20,0,0,0">
+                        <StackPanel>
+
+
+                            <TextBlock Text="Student Information" 
+                                       FontSize="23" 
+                                       FontWeight="Bold" 
+                                       Foreground="#002D96"
+                                       Margin="0,10,0,10"
+                                       HorizontalAlignment="Center"/>
+                            <StackPanel Orientation="Vertical" Margin="0,0,0,20">
+
+                                <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
+                                    <TextBlock Text="LRN: " FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
+                                    <TextBlock Text="{Binding SelectedStudent.LRN}"  FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
+                                    <TextBlock Text="RFID: " FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
+                                    <TextBlock Text="{Binding SelectedStudent.RFID}"  FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
+                                    <TextBlock Text="First Name: " FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
+                                    <TextBlock Text="{Binding SelectedStudent.FirstName}"  FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
+                                    <TextBlock Text="Last Name: " FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
+                                    <TextBlock Text="{Binding SelectedStudent.LastName}"  FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
+                                    <TextBlock Text="Enrollment Status: " FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
+                                    <TextBlock Text="{Binding SelectedStudent.EnrollmentStatus}"  FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
+                                </StackPanel>
+                            </StackPanel>
+
+
+                            <TextBlock Text="Parent Information" 
+                                   FontSize="23" 
+                                   FontWeight="Bold" 
+                                   Foreground="#002D96"
+                                   Margin="0,0,0,10"
+                                   HorizontalAlignment="Center"/>
+
+                            <StackPanel Orientation="Vertical">
+
+                                <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
+                                    <TextBlock Text="First Name: " FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
+                                    <TextBlock Text="{Binding Parent.FirstName}"  
+                   FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
+                                    <TextBlock Text="Last Name: " FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
+                                    <TextBlock Text="{Binding Parent.LastName}"  
+                   FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
+                                    <TextBlock Text="Contact Number #1: " FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
+                                    <TextBlock Text="{Binding Contact1.PhoneNumber, TargetNullValue='N/A'}"
+                                    FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
+                                    <TextBlock Text="Contact Number #2: " FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
+                                    <TextBlock Text="{Binding Contact2.PhoneNumber , TargetNullValue='N/A'}"  
+                   FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
+                                </StackPanel>
+
+                            </StackPanel>
+
+                        </StackPanel>
+                    </ScrollViewer>
 
 
                     <Grid Grid.Column="1">
-
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="40"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
                         <TextBlock Text="Attendance History" 
-                                 FontSize="23" 
-                                 FontWeight="Bold" 
-                                 Foreground="#002D96"
-                                 Margin="10,0,0,0"/>
+                                   FontSize="23" 
+                                   FontWeight="Bold" 
+                                   Foreground="#002D96"
+                                   Margin="20,10,0,0"
+                                   HorizontalAlignment="Center"/>
 
 
-                        <ListView Grid.Row="1" Padding="8,5"
-                                   Margin="20"
-                                   Width="500"
-                                   Height="400"
-                                   HorizontalAlignment="Center"
-                                   ItemsSource="{Binding AttendanceList}"
-                                   SelectedItem="{Binding SelectedAttendance, Mode=TwoWay}"
-                                   SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}">
+
+                        <ListView Grid.Row="1" 
+                                  Padding="8,5"
+                                   Margin="10"
+                                   Width="700"
+                                   Height="750"
+                                   HorizontalAlignment="Center">
 
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">
@@ -89,12 +159,12 @@
                                                          BorderBrush="{TemplateBinding BorderBrush}"
                                                          BorderThickness="{TemplateBinding BorderThickness}">
                                                     <TextBlock Text="{TemplateBinding Content}"
-                                                                VerticalAlignment="Center"
-                                                                HorizontalAlignment="Center"
-                                                                Foreground="{TemplateBinding Foreground}"
-                                                                FontWeight="{TemplateBinding FontWeight}"
-                                                                FontSize="{TemplateBinding FontSize}"
-                                                                Margin="{TemplateBinding Padding}"/>
+                                                               VerticalAlignment="Center"
+                                                               HorizontalAlignment="Center"
+                                                               Foreground="{TemplateBinding Foreground}"
+                                                               FontWeight="{TemplateBinding FontWeight}"
+                                                               FontSize="{TemplateBinding FontSize}"
+                                                               Margin="{TemplateBinding Padding}"/>
                                                 </Border>
                                             </ControlTemplate>
                                         </Setter.Value>
@@ -108,467 +178,91 @@
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock Text="{Binding Status}"
-                                                        FontFamily="Montserrat"
-                                                        FontWeight="Regular"
-                                                        Foreground="#002D96"
-                                                         FontSize="18"
-                                                          HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                           FontFamily="Montserrat"
+                                                           FontWeight="Regular"
+                                                           Foreground="#002D96"
+                                                           FontSize="18"
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
 
-                                    <GridViewColumn Header="DateTime" Width="300">
+                                    <GridViewColumn Header="Date &amp; Time" Width="500">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock Text="{Binding DateTime, StringFormat=MM/dd/yyyy HH:mm}"
-                                                            FontFamily="Montserrat"
-                                                            FontWeight="Regular"
-                                                            Foreground="#002D96"
-                                                            FontSize="18"
-                                                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                           FontFamily="Montserrat"
+                                                           FontWeight="Regular"
+                                                           Foreground="#002D96"
+                                                           FontSize="18"
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
                                 </GridView>
                             </ListView.View>
                         </ListView>
-
-
-
-
-
-
-
-
-
                     </Grid>
-
-
-                    <Grid Grid.Column="0">
-
-
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-
-
-                        <TextBlock Text="Parent Information" 
-                                 FontSize="23" 
-                                 FontWeight="Bold" 
-                                 Foreground="#002D96"
-                                 Margin="10,0,0,0"/>
-
-
-
-                                <StackPanel Grid.Row="1"
-                                  Grid.Column="0"
-                                  Orientation="Vertical"
-                                  Margin="20,10,20,10"
-                                  VerticalAlignment="Center">
-
-                                    <TextBlock Text="First Name" 
-                                             FontSize="23" 
-                                             FontWeight="Bold" 
-                                             Foreground="#002D96"/>
-
-                                    <Border Background="White"
-                                              BorderThickness="2"
-                                              CornerRadius="6"
-                                              Padding="10,5"
-                                              SnapsToDevicePixels="True"
-                                              Height="50"
-                                              Width="400">
-
-                                        <Border.Effect>
-                                            <DropShadowEffect Color="#000000"
-                                                               Opacity="0.35"   
-                                                              BlurRadius="15"
-                                                              ShadowDepth="3"/>
-                                        </Border.Effect>
-
-                                        <TextBox x:Name="ParentFirstNameTextBox"
-                                                   Background="Transparent"
-                                                   BorderThickness="0"
-                                                   FontSize="18"
-                                                   Foreground="#333"
-                                                   VerticalContentAlignment="Center"
-                                                   Padding="10,5"
-                                                   Text="{Binding EditingParent.FirstName}"/>
-                                    </Border>
-
-                                </StackPanel>
-
-
-                                <StackPanel Grid.Row="2"
-                                              Grid.Column="0"
-                                              Orientation="Vertical"
-                                              Margin="20,10,20,10"
-                                              VerticalAlignment="Center">
-
-                                    <TextBlock Text="Last Name" 
-                                                 FontSize="23" 
-                                                 FontWeight="Bold" 
-                                                 Foreground="#002D96"/>
-
-                                    <Border Background="White"
-                                              BorderThickness="2"
-                                              CornerRadius="6"
-                                              Padding="10,5"
-                                              SnapsToDevicePixels="True"
-                                              Height="50"
-                                              Width="400">
-
-                                        <Border.Effect>
-                                            <DropShadowEffect Color="#000000"
-                                                               Opacity="0.35"   
-                                                              BlurRadius="15"
-                                                              ShadowDepth="3"/>
-                                        </Border.Effect>
-
-                                        <TextBox x:Name="ParentLastNameTextBox"
-                                                   Background="Transparent"
-                                                   BorderThickness="0"
-                                                   FontSize="18"
-                                                   Foreground="#333"
-                                                   VerticalContentAlignment="Center"
-                                                   Padding="10,5"
-                                                   Text="{Binding EditingParent.LastName}"/>
-                                    </Border>
-
-                                </StackPanel>
-
-                                <StackPanel Grid.Row="3"
-                                          Grid.Column="0"
-                                          Orientation="Vertical"
-                                          Margin="20,10,20,10"
-                                          VerticalAlignment="Center">
-
-                                    <TextBlock Text="Contact Number #1" 
-                                                 FontSize="23" 
-                                                 FontWeight="Bold" 
-                                                 Foreground="#002D96"/>
-
-                                    <Border Background="White"
-                                          BorderThickness="2"
-                                          CornerRadius="6"
-                                          Padding="10,5"
-                                          SnapsToDevicePixels="True"
-                                          Height="50"
-                                          Width="400">
-
-                                        <Border.Effect>
-                                            <DropShadowEffect Color="#000000"
-                                                   Opacity="0.35"   
-                                                  BlurRadius="15"
-                                                  ShadowDepth="3"/>
-                                        </Border.Effect>
-
-                                        <TextBox x:Name="ParentContact1TextBox"
-                                                   Background="Transparent"
-                                                   BorderThickness="0"
-                                                   FontSize="18"
-                                                   Foreground="#333"
-                                                   VerticalContentAlignment="Center"
-                                                   Padding="10,5"
-                                                   Text="{Binding Contact1.PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
-                                    </Border>
-
-                                </StackPanel>
-
-
-
-                                <StackPanel Grid.Row="4"
-                  Grid.Column="0"
-                  Orientation="Vertical"
-                  Margin="20,10,20,10"
-                  VerticalAlignment="Center">
-
-                                    <TextBlock Text="Contact Number #2" 
-                 FontSize="23" 
-                 FontWeight="Bold" 
-                 Foreground="#002D96"/>
-
-                                    <Border Background="White"
-                  BorderThickness="2"
-                  CornerRadius="6"
-                  Padding="10,5"
-                  SnapsToDevicePixels="True"
-                  Height="50"
-                  Width="400">
-
-                                        <Border.Effect>
-                                            <DropShadowEffect Color="#000000"
-                       Opacity="0.35"   
-                      BlurRadius="15"
-                      ShadowDepth="3"/>
-                                        </Border.Effect>
-
-                                        <TextBox x:Name="ParentContact1NetwokTextBox"
-                       Background="Transparent"
-                       BorderThickness="0"
-                       FontSize="18"
-                       Foreground="#333"
-                       VerticalContentAlignment="Center"
-                       Padding="10,5" 
-                      Text="{Binding Contact2.PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
-                                    </Border>
-
-                                </StackPanel>
-
-                    </Grid>
-
-
-
-
-
                 </Grid>
-
-
-                   
-
-
-             
-
-                <Grid Grid.Row="0">
-
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock Text="Student Information" 
-                               FontSize="23" 
-                               FontWeight="Bold" 
-                               Foreground="#002D96"
-                               Margin="10,0,0,0"/>
-
-                    <StackPanel Grid.Row="1"
-                                Grid.Column="0"
-                                Orientation="Vertical"
-                                Margin="20,0,20,0"
-                                VerticalAlignment="Center">
-
-                        <TextBlock Text="LRN" 
-                               FontSize="23" 
-                               FontWeight="Bold" 
-                               Foreground="#002D96"/>
-
-                        <Border Background="#E0E0E0"
-                                BorderThickness="2"
-                                CornerRadius="6"
-                                Padding="10,5"
-                                SnapsToDevicePixels="True"
-                                Height="50"
-                                Width="400">
-
-                            <Border.Effect>
-                                <DropShadowEffect Color="#000000"
-                                     Opacity="0.35"   
-                                    BlurRadius="15"
-                                    ShadowDepth="3"/>
-                            </Border.Effect>
-
-                            <TextBox x:Name="LRNTextBox"
-                                     Background="Transparent"
-                                     BorderThickness="0"
-                                     FontSize="18"
-                                     Foreground="#333"
-                                     VerticalContentAlignment="Center"
-                                     Padding="10,5"
-                                     Text="{Binding SelectedStudent.LRN, UpdateSourceTrigger=PropertyChanged}"
-                                     IsReadOnly="True"/>
-                        </Border>
-
-                    </StackPanel>
-
-                    <StackPanel Grid.Row="1"
-                                Grid.Column="1"
-                                Orientation="Vertical"
-                                Margin="20,0,20,0"
-                                VerticalAlignment="Center">
-
-                        <TextBlock Text="RFID" 
-                               FontSize="23" 
-                               FontWeight="Bold" 
-                               Foreground="#002D96"/>
-
-                        <Border Background="White"
-                                BorderThickness="2"
-                                CornerRadius="6"
-                                Padding="10,5"
-                                SnapsToDevicePixels="True"
-                                Height="50"
-                                Width="400">
-
-                            <Border.Effect>
-                                <DropShadowEffect Color="#000000"
-                                     Opacity="0.35"   
-                                    BlurRadius="15"
-                                    ShadowDepth="3"/>
-                            </Border.Effect>
-
-                            <TextBox x:Name="RFIDTextBox"
-                                     Background="Transparent"
-                                     BorderThickness="0"
-                                     FontSize="18"
-                                     Foreground="#333"
-                                     VerticalContentAlignment="Center"
-                                     Padding="10,5"
-                                     Text="{Binding SelectedStudent.RFID, UpdateSourceTrigger=PropertyChanged}" />
-                        </Border>
-
-                    </StackPanel>
-
-
-                    <StackPanel Grid.Row="2"
-                                Grid.Column="0"
-                                Orientation="Vertical"
-                                Margin="20,0,20,0"
-                                VerticalAlignment="Center">
-
-                        <TextBlock Text="First Name" 
-                               FontSize="23" 
-                               FontWeight="Bold" 
-                               Foreground="#002D96"/>
-
-                        <Border Background="White"
-                                BorderThickness="2"
-                                CornerRadius="6"
-                                Padding="10,5"
-                                SnapsToDevicePixels="True"
-                                Height="50"
-                                Width="400">
-
-                            <Border.Effect>
-                                <DropShadowEffect Color="#000000"
-                                     Opacity="0.35"   
-                                    BlurRadius="15"
-                                    ShadowDepth="3"/>
-                            </Border.Effect>
-
-                            <TextBox x:Name="FirstNameTextBox"
-                                     Background="Transparent"
-                                     BorderThickness="0"
-                                     FontSize="18"
-                                     Foreground="#333"
-                                     VerticalContentAlignment="Center"
-                                     Padding="10,5"
-                                      IsReadOnly="True"
-                                      Text="{Binding SelectedStudent.FirstName, UpdateSourceTrigger=PropertyChanged}"
-                                     />
-                        </Border>
-
-                    </StackPanel>
-
-                    <StackPanel Grid.Row="2"
-                                Grid.Column="1"
-                                Orientation="Vertical"
-                                Margin="20,10,20,10"
-                                VerticalAlignment="Center">
-
-                        <TextBlock Text="Last Name" 
-                               FontSize="23" 
-                               FontWeight="Bold" 
-                               Foreground="#002D96"/>
-
-                        <Border Background="White"
-                                BorderThickness="2"
-                                CornerRadius="6"
-                                Padding="10,5"
-                                SnapsToDevicePixels="True"
-                                Height="50"
-                                Width="400">
-
-                            <Border.Effect>
-                                <DropShadowEffect Color="#000000"
-                                     Opacity="0.35"   
-                                    BlurRadius="15"
-                                    ShadowDepth="3"/>
-                            </Border.Effect>
-
-                            <TextBox x:Name="LastNameTextBox"
-                                     Background="Transparent"
-                                     BorderThickness="0"
-                                     FontSize="18"
-                                     Foreground="#333"
-                                     VerticalContentAlignment="Center"
-                                     Padding="10,5"
-                                      IsReadOnly="True"
-                                      Text="{Binding SelectedStudent.LastName, UpdateSourceTrigger=PropertyChanged}"/>
-                        </Border>
-
-                    </StackPanel>
-
-
-
-                    <StackPanel Grid.Row="3"
-                                Grid.Column="0"
-                                Orientation="Vertical"
-                                Margin="20,10,20,10"
-                                VerticalAlignment="Center">
-
-                        <TextBlock Text="Enrollment Status" 
-                               FontSize="23" 
-                               FontWeight="Bold" 
-                               Foreground="#002D96"/>
-
-                        <Border Background="White"
-                                BorderThickness="2"
-                                CornerRadius="6"
-
-                                SnapsToDevicePixels="True"
-                                Height="50"
-                                Width="400">
-
-                            <Border.Effect>
-                                <DropShadowEffect Color="#000000"
-                                     Opacity="0.35"   
-                                    BlurRadius="15"
-                                    ShadowDepth="3"/>
-                            </Border.Effect>
-
-                            <TextBox x:Name="EnrollmentStatus"
-                                     Background="Transparent"
-                                     BorderThickness="0"
-                                     FontSize="18"
-                                     Foreground="#333"
-                                     VerticalContentAlignment="Center"
-                                     Padding="10,5"
-                                     IsReadOnly="True"
-                                     Text="{Binding SelectedStudent.EnrollmentStatus, UpdateSourceTrigger=PropertyChanged}"/>
-
-                        </Border>
-
-                    </StackPanel>
-
-                </Grid>
-
 
             </Grid>
-
-
         </Border>
 
-
+        <!-- Back Button -->
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0">
+            <Grid Grid.Column="1">
 
+
+                <Button Width="180" 
+                        Height="40" 
+                        Cursor="Hand" 
+                        Command="{Binding EditStudentCommand}"
+                        Margin="20,0,20,0"
+                        HorizontalAlignment="Right">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border"
+                                    Background="#002D96"
+                                    CornerRadius="8"
+                                    SnapsToDevicePixels="True">
+                                <StackPanel Orientation="Horizontal" 
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center">
+                                    <fa:ImageAwesome Icon="Edit" 
+                                                     Foreground="White" 
+                                                     Width="16" 
+                                                     Height="16"
+                                                     Margin="0,0,6,0"/>
+                                    <TextBlock Text=" Edit Student"
+                                               Foreground="White" 
+                                               VerticalAlignment="Center"
+                                               FontSize="15"/>
+                                </StackPanel>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="#0039D6"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="#001F70"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+
+            </Grid>
+
+            <Grid Grid.Column="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="300"/>
                     <ColumnDefinition/>
@@ -593,11 +287,8 @@
                     </Button>
 
                 </StackPanel>
-
             </Grid>
-
         </Grid>
-
 
     </Grid>
 </UserControl>

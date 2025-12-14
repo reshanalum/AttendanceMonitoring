@@ -31,6 +31,7 @@ namespace AttendanceMonitoringSystem.View
         {
             _vm = (StudentInformationVM)DataContext;
         }
+
     }
 
 
