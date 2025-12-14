@@ -44,6 +44,17 @@ namespace AttendanceMonitoringSystem.ViewModel
 
         public string SectionName { get; set; }
 
+
+        private string? _newRFID;
+        public string? NewRFID
+        {
+            get => _newRFID;
+            set
+            {
+                _newRFID = string.IsNullOrWhiteSpace(value) ? null : value;
+                OnPropertyChanged(nameof(NewRFID));
+            }
+        }
         public List<string> EnrollmentStatus { get; set; }
 
 
@@ -149,12 +160,35 @@ namespace AttendanceMonitoringSystem.ViewModel
 
             using var context = new AttendanceMonitoringContext();
 
+
+            if (!string.IsNullOrWhiteSpace(NewLRN))
+            {
+                if (context.Students.Any(s => s.LRN == NewLRN))
+                {
+                    MessageBox.Show("LRN already exists.", "Validation Error",
+                                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+            }
+
+
+            if (!string.IsNullOrWhiteSpace(NewRFID))
+            {
+                if (context.Students.Any(s => s.RFID == NewRFID))
+                {
+                    MessageBox.Show("RFID already exists.", "Validation Error",
+                                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+            }
+
             var newStudent = new Student
             {
                 StudentId = NewStudentID,
                 FirstName = NewFirstName,
                 LastName = NewLastName,
                 LRN = NewLRN,
+                RFID = NewRFID, 
                 EnrollmentStatus = NewEnrollmentStatus
             };
 
