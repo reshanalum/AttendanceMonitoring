@@ -182,18 +182,22 @@ namespace AttendanceMonitoringSystem.ViewModel
 
             var filtered = _allStudents
                 .Where(s =>
-                    s.FirstName.ToLower().Contains(search) ||
-                    s.LastName.ToLower().Contains(search) ||
-                    s.LRN.ToLower().Contains(search) ||
-                    s.EnrollmentStatus.ToLower().Contains(search) ||
+                    (s.FirstName ?? "").ToLower().Contains(search) ||
+                    (s.LastName ?? "").ToLower().Contains(search) ||
+                    (s.LRN ?? "").ToLower().Contains(search) ||
+                    (s.EnrollmentStatus ?? "").ToLower().Contains(search) ||
                     s.StudentId.ToString().Contains(search))
                 .ToList();
+
 
             StudentList.Clear();
             foreach (var student in filtered)
                 StudentList.Add(student);
 
             RecalculateDisplayNumbers();
+
+            CurrentPage = 1;
+            UpdatePagination();
         }
 
         private void RecalculateDisplayNumbers()
