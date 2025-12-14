@@ -8,12 +8,18 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LiveCharts;
+using LiveCharts.Wpf;
 
 namespace AttendanceMonitoringSystem.ViewModel
 {
     public class DashboardUserControlVM : NotifyPropertyChanged
     {
         public ObservableCollection<SectionDisplay> PopulationData { get; set; } = new ObservableCollection<SectionDisplay>();
+        public SeriesCollection PopulationSeries { get; set; }
+        public SeriesCollection AttendanceSeries { get; set; }
+        public string[] AttendanceLabels { get; set; }
+
         public class AttendanceChartItem
         {
             public string DateLabel { get; set; }
@@ -36,6 +42,9 @@ namespace AttendanceMonitoringSystem.ViewModel
             _dashboardVM = dashboardVM;
             LoadPieChartData();
             LoadAttendanceChartData();
+
+            BuildPopulationChart();
+            BuildAttendanceChart();
         }
         private string _searchText;
         public string SearchText
@@ -51,6 +60,52 @@ namespace AttendanceMonitoringSystem.ViewModel
                 }
             }
         }
+        private void BuildPopulationChart()
+        {
+            PopulationSeries = new SeriesCollection();
+
+            foreach (var item in PopulationData)
+            {
+                PopulationSeries.Add(new PieSeries
+                {
+                    Title = item.SectionName,
+                    Values = new ChartValues<int> { item.StudentCount },
+                    DataLabels = true
+                });
+            }
+
+            OnPropertyChanged(nameof(PopulationSeries));
+        }
+        private void BuildAttendanceChart()
+        {
+            AttendanceSeries = new SeriesCollection
+    {
+        new LineSeries
+        {
+            Title = "On Time",
+            Values = new ChartValues<int>(
+                AttendanceDataChartList.Select(x => x.OnTime)
+            ),
+            PointGeometrySize = 10
+        },
+        new LineSeries
+        {
+            Title = "Late",
+            Values = new ChartValues<int>(
+                AttendanceDataChartList.Select(x => x.Late)
+            ),
+            PointGeometrySize = 10
+        }
+    };
+
+            AttendanceLabels = AttendanceDataChartList
+                .Select(x => x.DateLabel)
+                .ToArray();
+
+            OnPropertyChanged(nameof(AttendanceSeries));
+            OnPropertyChanged(nameof(AttendanceLabels));
+        }
+
 
         private void FilterSearchItems()
         {
