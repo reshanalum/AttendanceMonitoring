@@ -312,7 +312,7 @@
                                      Foreground="#333"
                                      VerticalContentAlignment="Center"
                                      Padding="10,5"
-                                     Text="{Binding NewLRN, UpdateSourceTrigger=PropertyChanged}" />
+                                     Text="{Binding NewRFID, UpdateSourceTrigger=PropertyChanged}" />
                         </Border>
 
                     </StackPanel>

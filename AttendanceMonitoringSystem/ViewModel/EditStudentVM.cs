@@ -19,6 +19,7 @@ namespace AttendanceMonitoringSystem.ViewModel
         public Contact Contact2 { get; set; }
 
 
+
         public List<string> EnrollmentStatus { get; set; }
 
         private string _selectedEnrollmentStatus;
@@ -93,12 +94,29 @@ namespace AttendanceMonitoringSystem.ViewModel
         {
             using var context = new AttendanceMonitoringContext();
 
-            var studentInDb = context.Students.FirstOrDefault(s => s.StudentId == EditingStudent.StudentId);
+            EditingStudent.RFID = string.IsNullOrWhiteSpace(EditingStudent.RFID)  ? null : EditingStudent.RFID;
+
+            if (!string.IsNullOrWhiteSpace(EditingStudent.RFID))
+            {
+                bool rfidExists = context.Students.Any(s =>
+                    s.RFID == EditingStudent.RFID &&
+                    s.StudentId != EditingStudent.StudentId);
+
+                if (rfidExists)
+                {
+                    MessageBox.Show("RFID already exists.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+            }
+
+              var studentInDb = context.Students.FirstOrDefault(s => s.StudentId == EditingStudent.StudentId);
             if (studentInDb != null)
             {
                 studentInDb.FirstName = EditingStudent.FirstName;
                 studentInDb.LastName = EditingStudent.LastName;
                 studentInDb.LRN = EditingStudent.LRN;
+                studentInDb.RFID = EditingStudent.RFID; 
                 studentInDb.EnrollmentStatus = EditingStudent.EnrollmentStatus;
             }
 
