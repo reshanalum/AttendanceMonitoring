@@ -26,13 +26,6 @@ namespace AttendanceMonitoringSystem.ViewModel
             public int OnTime { get; set; }
             public int Late { get; set; }
         }
-        public class SearchResult
-        {
-            public string DisplayName { get; set; } 
-            public string Type { get; set; }        
-            public object Reference { get; set; }   
-        }
-
         public ObservableCollection<AttendanceChartItem> AttendanceDataChartList { get; set; }
             = new ObservableCollection<AttendanceChartItem>();
 
@@ -41,24 +34,9 @@ namespace AttendanceMonitoringSystem.ViewModel
         {
             _dashboardVM = dashboardVM;
             LoadPieChartData();
-            LoadAttendanceChartData();
 
             BuildPopulationChart();
             BuildAttendanceChart();
-        }
-        private string _searchText;
-        public string SearchText
-        {
-            get => _searchText;
-            set
-            {
-                if (_searchText != value)
-                {
-                    _searchText = value;
-                    OnPropertyChanged();  // Notify binding
-                    FilterSearchItems();         // Update the filtered list
-                }
-            }
         }
         private void BuildPopulationChart()
         {
@@ -107,92 +85,7 @@ namespace AttendanceMonitoringSystem.ViewModel
         }
 
 
-        private void FilterSearchItems()
-        {
-            FilteredSearchItems.Clear();
-
-            if (string.IsNullOrWhiteSpace(SearchText))
-            {
-                foreach (var item in AllSearchItems)
-                    FilteredSearchItems.Add(item);
-                return;
-            }
-
-            var lower = SearchText.ToLower();
-            var filtered = AllSearchItems
-                .Where(x => x.DisplayName.ToLower().Contains(lower))
-                .ToList();
-
-            foreach (var item in filtered)
-                FilteredSearchItems.Add(item);
-        }
-
-        public ObservableCollection<SearchResult> AllSearchItems { get; set; } = new ObservableCollection<SearchResult>();
-        public ObservableCollection<SearchResult> FilteredSearchItems { get; set; } = new ObservableCollection<SearchResult>();
-        private void LoadSearchItems()
-        {
-            using (var db = new AttendanceMonitoringContext())
-            {
-
-                foreach (var s in db.Students.ToList())
-                {
-                    AllSearchItems.Add(new SearchResult
-                    {
-                        DisplayName = $"{s.FirstName} {s.LastName}",
-                        Type = "Student",
-                        Reference = s
-                    });
-                }
-
-
-                foreach (var sec in db.Advisories.Select(a => a.SectionName).Distinct().ToList())
-                {
-                    AllSearchItems.Add(new SearchResult
-                    {
-                        DisplayName = sec,
-                        Type = "Section",
-                        Reference = sec
-                    });
-                }
-
-
-                foreach (var t in db.Class_Advisers.ToList())
-                {
-                    AllSearchItems.Add(new SearchResult
-                    {
-                        DisplayName = $"{t.FirstName} {t.LastName}",
-                        Type = "Teacher",
-                        Reference = t
-                    });
-                }
-            }
-
-        }
-
-        private void LoadAttendanceChartData()
-        {
-            using (var db = new AttendanceMonitoringContext())
-            {
-                TimeSpan cutoff = new TimeSpan(7, 50, 0); // 7:50 AM late na
-
-                var chartData = db.Attendances
-                    .Where(a => a.Status == "IN") // Only consider arrivals
-                    .AsEnumerable()
-                    .GroupBy(a => a.DateTime.Date)
-                    .Select(g => new AttendanceChartItem
-                    {
-                        DateLabel = g.Key.ToString("MMM dd"),     // e.g., "Nov 19"
-                        OnTime = g.Count(a => a.DateTime.TimeOfDay <= cutoff),
-                        Late = g.Count(a => a.DateTime.TimeOfDay > cutoff)
-                    })
-                    .OrderBy(x => x.DateLabel)
-                    .ToList();
-
-                AttendanceDataChartList.Clear();
-                foreach (var item in chartData)
-                    AttendanceDataChartList.Add(item);
-            }
-        }
+      
 
         private void LoadPieChartData()
         {

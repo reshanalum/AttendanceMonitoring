@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\BannerDashBoard.png" />
     <None Remove="Images\BG.png" />
     <None Remove="Images\Key.png" />
     <None Remove="Images\Navigationpanel.png" />
@@ -17,6 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotNetProjects.Extended.Wpf.Toolkit" Version="5.0.129" />
+    <PackageReference Include="DotNetProjects.WpfToolkit.Input" Version="6.1.94" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="5.0.0" />
     <PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
     <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
     <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
@@ -35,6 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\BannerDashBoard.png" />
     <Resource Include="Images\BG.png" />
     <Resource Include="Images\Key.png" />
     <Resource Include="Images\Navigationpanel.png" />

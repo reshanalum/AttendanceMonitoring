@@ -10,7 +10,8 @@
              xmlns:c="clr-namespace:AttendanceMonitoringSystem.Command"
              xmlns:chart="clr-namespace:Syncfusion.UI.Xaml.Charts;assembly=Syncfusion.SfChart.WPF"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
-             
+             xmlns:input="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit"
+
              mc:Ignorable="d" 
              d:DesignHeight="939" 
              d:DesignWidth="1105"
@@ -67,79 +68,49 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid Margin="50">
+    <Grid >
 
         <Grid.RowDefinitions>
-
-            <RowDefinition Height="200"/>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <Grid Grid.Row="0">
+            <Image Source="/Images/BannerDashBoard.png"
+                   Stretch="UniformToFill"
+                   Margin="0"/>
+
+        </Grid>
+
+        <Grid></Grid>
+
         <TextBlock Text="WELCOME!" 
-                     FontSize="60" 
+                     FontSize="35" 
                      FontWeight="Bold" 
                      Foreground="#002D96"
                    VerticalAlignment="Bottom"
-                   HorizontalAlignment="Center"
-                   Padding="0,0,0,20"/>
+                   Grid.Row="1"
+                   Margin="50, 0, 50, 0"/>
 
-        <Grid Grid.Row="1">
-            <Border 
-                    Background="White"
-                    BorderThickness="2"
-                    CornerRadius="30"
-                    Padding="10,0,0,0"
-                    SnapsToDevicePixels="True"
-                    Width="650"
-                    Height="80"
-                >
+        <Grid Grid.Row="2">
 
-                <Border.Effect>
-                    <DropShadowEffect Color="Black" 
-                                      Opacity="0.2" 
-                                      BlurRadius="8" 
-                                      Direction="270"/>
-                </Border.Effect>
-
-                <Grid Height="50">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <fa:ImageAwesome Icon="Search"
-                                     Foreground="#002D96"
-                                     Width="26" Height="32"
-                                     Margin="10,0,5,0"
-                                     Grid.Column ="0"/>
-
-                    <Grid Grid.Column="1">
-                        <TextBox x:Name="SearchBox"
-                                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-                                 BorderThickness="0"
-                                 Background="Transparent"
-                                 VerticalContentAlignment="Center"
-                                 FontSize="18"
-                                 Foreground="Black"
-                                 Height="50"/>
-
-                        <TextBlock Text="Search a Student, Teacher, or Section..."
-                                   FontSize="18"
-                                   Foreground="Gray"
-                                   VerticalAlignment="Center"
-                                   Margin="5,0,0,0"
-                                   IsHitTestVisible="False"
-                                   Visibility="{Binding Text.IsEmpty, ElementName=SearchBox, Converter={StaticResource BoolToVisibilityConverter}}"/>
-                    </Grid>
-                </Grid>
-
-            </Border>
+            <TextBlock 
+        Text="Welcome to Attendance Monitoring System by third year students in computer engineering from Ateneo de Davao University"
+        HorizontalAlignment="Left"   
+        VerticalAlignment="Center"     
+        Margin="50, 0, 50, 0"
+        TextWrapping="Wrap"            
+        FontSize="20"                  
+        FontWeight="SemiBold"
+        Foreground="#505050"                             
+    />
 
         </Grid>
 
 
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="3" Margin="50, 0, 50, 50">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
