@@ -60,6 +60,25 @@ namespace AttendanceMonitoringSystem.ViewModel
 
         }
 
+        public void ExecuteShowAdminSettings()
+        {
+            var result = MessageBox.Show(
+                "Would you like to change your username or password?",
+                "Admin Settings",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                CurrentView = new AdminSettingsView(this);
+            }
+            else
+            {
+
+                CurrentView = new DashboardUserControlView(this);
+            }
+        }
+
 
     }
 }

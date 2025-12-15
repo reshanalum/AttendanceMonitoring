@@ -95,8 +95,9 @@ namespace AttendanceMonitoringSystem.View
             WindowState = WindowState.Minimized;
         }
 
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        private void ShowAdminSettings(object sender, RoutedEventArgs e)
         {
+            _vm.ExecuteShowAdminSettings();
 
         }
     }
