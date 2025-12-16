@@ -28,9 +28,9 @@
 
 
         <Border Grid.Row="2"
-               CornerRadius="2"
+               CornerRadius="15"
                Background="White"
-               SnapsToDevicePixels="True">
+               SnapsToDevicePixels="True" Margin="0,0,0,629">
 
             <Border.Effect>
                 <DropShadowEffect Color="Black"
@@ -52,17 +52,16 @@
                                             Background="Transparent"
                                             Content="{Binding NewView}" />
 
-                <Grid Grid.Row="0">
+                <Grid Grid.Row="0" Margin="0,0,0,132">
 
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="100"/>
+
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
@@ -70,7 +69,8 @@
                               FontSize="23" 
                               FontWeight="Bold" 
                               Foreground="#002D96"
-                              Margin="10,0,0,0"/>
+                              Margin="20,0,0,0"
+                               VerticalAlignment="Center"/>
 
                     <Button Width="300" 
                        Height="50" 
@@ -78,6 +78,8 @@
 Click="ChangePassword_Click"
                        Grid.Column="0"
                             Grid.Row="2"
+                            HorizontalAlignment="Left"
+                            Margin="40,10,10,40"
                         >
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
@@ -118,9 +120,11 @@ Click="ChangePassword_Click"
                     <Button Width="300" 
                        Height="50" 
                        Cursor="Hand" 
-Click="ChangeUsername_Click"
+                        Click="ChangeUsername_Click"
                        Grid.Column="0"
-                            Grid.Row="1">
+                            Grid.Row="1"
+                            HorizontalAlignment="Left"
+                            Margin="40,10,10,0">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border x:Name="border"

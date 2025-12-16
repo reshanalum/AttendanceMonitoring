@@ -92,19 +92,20 @@
                      Foreground="#002D96"
                    VerticalAlignment="Bottom"
                    Grid.Row="1"
-                   Margin="50, 0, 50, 0"/>
+                   Margin="50, 0, 50, -5"/>
 
         <Grid Grid.Row="2">
 
             <TextBlock 
-        Text="Welcome to Attendance Monitoring System by third year students in computer engineering from Ateneo de Davao University"
-        HorizontalAlignment="Left"   
-        VerticalAlignment="Center"     
-        Margin="50, 0, 50, 0"
-        TextWrapping="Wrap"            
-        FontSize="20"                  
-        FontWeight="SemiBold"
-        Foreground="#505050"                             
+                    Text="Welcome to Attendance Monitoring System by third year students in computer engineering from Ateneo de Davao University"
+                    HorizontalAlignment="Left"   
+                    VerticalAlignment="Center"     
+                    Margin="50,0,0,0"
+                    TextWrapping="Wrap"            
+                    FontSize="18"                  
+                    FontWeight="SemiBold"
+                    Foreground="#505050" Width="915"  
+               
     />
 
         </Grid>
