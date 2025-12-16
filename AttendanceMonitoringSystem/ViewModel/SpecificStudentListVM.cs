@@ -137,13 +137,12 @@ namespace AttendanceMonitoringSystem.ViewModel
         {
             using var context = new AttendanceMonitoringContext();
 
-            // Step 1: Fetch student data from DB
             var studentsFromDb = context.Advisories
                 .Where(a => a.SectionName == selectedSection.SectionName)
                 .Select(a => a.StudentLink)
-                .ToList(); // Materialize query to memory
+                .ToList(); 
 
-            // Step 2: Map to StudentsinSection with display numbers
+          
             Students.Clear();
             int number = 1;
             foreach (var s in studentsFromDb)
@@ -195,7 +194,7 @@ namespace AttendanceMonitoringSystem.ViewModel
             context.SaveChanges();
 
             Students.Remove(SelectedStudent);
-            RecalculateDisplayNumbers(); // Update numbering dynamically
+            RecalculateDisplayNumbers(); 
             SelectedStudent = null;
         }
 
@@ -279,7 +278,7 @@ namespace AttendanceMonitoringSystem.ViewModel
             foreach (var s in filtered)
                 Students.Add(s);
 
-            RecalculateDisplayNumbers(); // Ensure dynamic numbering after filter
+            RecalculateDisplayNumbers(); 
         }
 
         private SectionDisplay selectedSection;

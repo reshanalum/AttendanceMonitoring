@@ -43,7 +43,6 @@ namespace AttendanceMonitoringSystem.ViewModel
         {
             _dashboardVM = dashboardVM;
 
-            // ComboBox items
             EnrollmentStatus = new List<string>
             {
                 "ENROLLED",

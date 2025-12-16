@@ -12,7 +12,7 @@ namespace AttendanceMonitoringSystem.ViewModel
     {
         private readonly DashboardVM _dashboardVM;
 
-        // Read-only student/parent info
+        
         public Student SelectedStudent { get; }
         public Parent Parent { get; }
         public Contact? Contact1 { get; }
@@ -39,12 +39,11 @@ namespace AttendanceMonitoringSystem.ViewModel
 
             using var context = new AttendanceMonitoringContext();
 
-            // Load student
             var studentInDb = context.Students.FirstOrDefault(s => s.StudentId == student.StudentId);
             if (studentInDb == null) throw new System.Exception("Selected student not found.");
             SelectedStudent = studentInDb;
 
-            // Load parent
+   
             var relationship = context.Relationships.FirstOrDefault(r => r.StudentId == SelectedStudent.StudentId);
             if (relationship == null) throw new System.Exception("Parent relationship not found.");
 
@@ -52,17 +51,14 @@ namespace AttendanceMonitoringSystem.ViewModel
             if (parentInDb == null) throw new System.Exception("Parent not found in DB.");
             Parent = parentInDb;
 
-            // Load contacts
             var contacts = context.Contacts
                 .Where(c => c.ParentId == Parent.ParentId)
                 .ToList();
             Contact1 = contacts.Count > 0 ? contacts[0] : null;
             Contact2 = contacts.Count > 1 ? contacts[1] : null;
-
-            // Load attendance
             LoadAttendanceHistory();
 
-            // Initialize commands
+   
             BackCommand = new RelayCommand(ExecuteBackCommand);
             EditStudentCommand = new RelayCommand(ExecuteEditStudent);
         }
@@ -99,7 +95,6 @@ namespace AttendanceMonitoringSystem.ViewModel
                 return;
             }
 
-            // Open EditStudent view
             var editView = new EditStudent();
             editView.DataContext = new EditStudentVM(student, _dashboardVM);
             _dashboardVM.CurrentView = editView;

@@ -51,7 +51,7 @@ namespace AttendanceMonitoringSystem.View
         private void btnADD_Click(object sender, RoutedEventArgs e)
         {
             string username = Username.Text.Trim();
-            string password = PasswordBox.Password.Trim(); // <-- use PasswordBox here
+            string password = PasswordBox.Password.Trim(); 
 
             using var context = new AttendanceMonitoringContext();
 
@@ -79,7 +79,7 @@ namespace AttendanceMonitoringSystem.View
                 MessageBox.Show("Invalid username or password", "Login Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
 
                 Username.Text = string.Empty;
-                PasswordBox.Password = string.Empty; // <-- clear PasswordBox
+                PasswordBox.Password = string.Empty; 
                 Username.Focus();
             }
         }
