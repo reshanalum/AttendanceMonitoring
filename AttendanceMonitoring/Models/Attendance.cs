@@ -11,7 +11,7 @@
         public int StudentId { get; set; }
         public Student StudentLink { get; set; }
 
-        public List<Notification> NotificationList { get; set; }
+        //public List<Notification> NotificationList { get; set; }
 
     }
 

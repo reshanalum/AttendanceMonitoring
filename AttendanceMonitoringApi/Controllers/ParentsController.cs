@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AttendanceMonitoring;
 using AttendanceMonitoring.Models;
+using AttendanceMonitoringApi.Services;
 
 namespace AttendanceMonitoringApi.Controllers
 {
@@ -15,70 +16,70 @@ namespace AttendanceMonitoringApi.Controllers
     public class ParentsController : ControllerBase
     {
         private readonly AttendanceMonitoringContext _context;
+        private readonly IBackgroundTaskQueue _taskQueue;
+        private readonly IServiceScopeFactory _scopeFactory;
 
-        public ParentsController(AttendanceMonitoringContext context)
+        public ParentsController(AttendanceMonitoringContext context, IBackgroundTaskQueue taskQeue, IServiceScopeFactory scopeFactory)
         {
             _context = context;
+            _taskQueue = taskQeue;
+            _scopeFactory = scopeFactory;
         }
 
         // GET: api/Parents/XX XX XX XX
         [HttpGet("{uid}")]
         public async Task<ActionResult<String>> GetParentContactNumberAndStudent(string uid)
         {
-            var student = await _context.Students.FirstOrDefaultAsync(c => c.RFID == uid);
+            var data = await _context.Relationships
+                .Where(r => r.StudentLink.RFID == uid)
+                .Select(r => new 
+                    {
+                    StudentId = r.StudentLink.StudentId,
+                    StudentName = r.StudentLink.FirstName + " " + r.StudentLink.LastName,
+                    RFID = r.StudentLink.RFID,
+                    ParentName = r.ParentLink.FirstName + " " + r.ParentLink.LastName,
+                    PhoneNumber = r.ParentLink.ContactList.Where(c => c.PhoneNumber != null).Select(c => c.PhoneNumber).FirstOrDefault()
+            })
+            .FirstOrDefaultAsync();
+            
+            if (data == null) return NotFound("No student or relationship found!");
 
-            if (student == null) return NotFound("No student found!");
-
-            Relationship? relationship = await _context.Relationships
-                .Include(c => c.StudentLink)
-                .Include(c => c.ParentLink)
-                .Where(c => c.StudentLink.RFID == uid)
+            var lastStatus = await _context.Attendances
+                .Where(a => a.StudentLink.StudentId == data.StudentId)
+                .OrderByDescending(a => a.AttendanceId)
+                .Select(a => a.Status)
                 .FirstOrDefaultAsync();
-
-            Attendance? attendance = await _context.Attendances
-                .Include(c => c.StudentLink)
-                .Where(c => c.StudentLink.RFID == uid)
-                .OrderByDescending(c => c.AttendanceId)
-                .FirstOrDefaultAsync();
-
-            if (relationship == null)
-            {
-                return NotFound("No relationship was found!");
-            }
 
             string status = "";
-            if (attendance == null)
+            if (lastStatus == null || lastStatus == "Left")
             {
                 status = "Arrived";
             }
             else
             {
-                if (attendance.Status == "Arrived")
-                {
-                    status = "Left";
-                }
-                else
-                {
-                    status = "Arrived";
-                }
+                status = "Left";
             }
 
-            string studentName = relationship.StudentLink.FirstName + " " + relationship.StudentLink.LastName;
-            string parentName = relationship.ParentLink.FirstName + " " + relationship.ParentLink.LastName;
-
-            string phoneNumber = await _context.Contacts
-                .Include(c => c.ParentLink)
-                .Where(c => c.ParentLink.ParentId == relationship.ParentId)
-                .Select(c => c.PhoneNumber)
-                .FirstAsync();
-
-
-            if (phoneNumber == null)
+            _taskQueue.QueueBackgroundWorkItem(async token =>
             {
-                return NotFound();
-            }
+                //var logger = serviceProvider.GetRequiredService<ILogger<ParentsController>>();
+                using var scope = _scopeFactory.CreateScope();
+                var attendanceService = scope.ServiceProvider.GetRequiredService<IAttendanceService>();
 
-            return phoneNumber + "\n" + studentName + "\n" + parentName + "\n" + status + "\n" + DateTime.Now;
+                //logger.LogInformation($"Posting attendance for student: {data.StudentName}");
+
+                try
+                {
+                    await attendanceService.PostAttendance(data.RFID, token);
+                    //logger.LogInformation("Attendance post requested for student {StudentId}", data.StudentId);
+                }
+                catch (Exception ex)
+                {
+                    //logger.LogError(ex, "Failed to post attendance for student {StudentId}", data.StudentId);
+                }
+            });
+
+            return data.PhoneNumber + "\n" + data.StudentName + "\n" + data.ParentName + "\n" + status + "\n" + DateTime.UtcNow;
         }
     }
 }

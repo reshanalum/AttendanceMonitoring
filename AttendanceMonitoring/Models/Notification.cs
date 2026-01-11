@@ -6,10 +6,10 @@
         public string Message { get; set; }
 
         //Relationships
-        public int AttendanceId { get; set; }
-        public Attendance AttendanceLink { get; set; }
+        //public int AttendanceId { get; set; }
+        //public Attendance AttendanceLink { get; set; }
 
-        public List<Delivered> DeliveredList { get; set; }
+        //public List<Delivered> DeliveredList { get; set; }
     }
 
 

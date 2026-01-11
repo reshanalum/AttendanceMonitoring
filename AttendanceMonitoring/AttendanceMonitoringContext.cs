@@ -16,7 +16,7 @@ namespace AttendanceMonitoring
         public DbSet<Attendance> Attendances { get; set; }
         public DbSet<Class_Adviser> Class_Advisers { get; set; }
         public DbSet<Contact> Contacts { get; set; }
-        public DbSet<Delivered> Delivereds { get; set; }
+        //public DbSet<Delivered> Delivereds { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<Parent> Parents { get; set; }
         public DbSet<Relationship> Relationships { get; set; }
@@ -28,7 +28,8 @@ namespace AttendanceMonitoring
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=C:\\Users\\simon\\source\\repos\\AttendanceMonitoring.db");
+           // optionsBuilder.UseSqlite("Data Source=C:\\Users\\simon\\source\\repos\\AttendanceMonitoring.db");
+            optionsBuilder.UseSqlite("Data Source=C:\\Users\\Tomaroy\\Downloads\\DatabaseOG(2).db");
             //optionsBuilder.UseSqlite("Data Source=C:\\Users\\simon\\Downloads\\AttendanceMonitoringFINALPROMISE.db");
         }
 
@@ -38,7 +39,7 @@ namespace AttendanceMonitoring
             modelBuilder.ApplyConfiguration(new AttendanceConfiguration());
             modelBuilder.ApplyConfiguration(new ClassAdviserConfiguration());
             modelBuilder.ApplyConfiguration(new ContactConfiguration());
-            modelBuilder.ApplyConfiguration(new DeliveredConfiguration());
+            //modelBuilder.ApplyConfiguration(new DeliveredConfiguration());
             modelBuilder.ApplyConfiguration(new NotificationConfiguration());
             modelBuilder.ApplyConfiguration(new ParentConfiguration());
             modelBuilder.ApplyConfiguration(new RelationshipConfiguration());

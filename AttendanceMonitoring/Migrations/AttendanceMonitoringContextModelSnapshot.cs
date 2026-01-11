@@ -108,37 +108,10 @@ namespace AttendanceMonitoring.Migrations
                     b.ToTable("Contact", (string)null);
                 });
 
-            modelBuilder.Entity("AttendanceMonitoring.Models.Delivered", b =>
-                {
-                    b.Property<int>("DeliveredId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ContactId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("DateTimeSent")
-                        .HasColumnType("date");
-
-                    b.Property<int>("NotificationId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("DeliveredId");
-
-                    b.HasIndex("ContactId");
-
-                    b.HasIndex("NotificationId");
-
-                    b.ToTable("Delivered", (string)null);
-                });
-
             modelBuilder.Entity("AttendanceMonitoring.Models.Notification", b =>
                 {
                     b.Property<int>("NotificationId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("AttendanceId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Message")
@@ -146,8 +119,6 @@ namespace AttendanceMonitoring.Migrations
                         .HasColumnType("varchar(400)");
 
                     b.HasKey("NotificationId");
-
-                    b.HasIndex("AttendanceId");
 
                     b.ToTable("Notification", (string)null);
                 });
@@ -294,36 +265,6 @@ namespace AttendanceMonitoring.Migrations
                     b.Navigation("ParentLink");
                 });
 
-            modelBuilder.Entity("AttendanceMonitoring.Models.Delivered", b =>
-                {
-                    b.HasOne("AttendanceMonitoring.Models.Contact", "ContactLink")
-                        .WithMany("DeliveredList")
-                        .HasForeignKey("ContactId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AttendanceMonitoring.Models.Notification", "NotificationLink")
-                        .WithMany("DeliveredList")
-                        .HasForeignKey("NotificationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ContactLink");
-
-                    b.Navigation("NotificationLink");
-                });
-
-            modelBuilder.Entity("AttendanceMonitoring.Models.Notification", b =>
-                {
-                    b.HasOne("AttendanceMonitoring.Models.Attendance", "AttendanceLink")
-                        .WithMany("NotificationList")
-                        .HasForeignKey("AttendanceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AttendanceLink");
-                });
-
             modelBuilder.Entity("AttendanceMonitoring.Models.Relationship", b =>
                 {
                     b.HasOne("AttendanceMonitoring.Models.Parent", "ParentLink")
@@ -343,24 +284,9 @@ namespace AttendanceMonitoring.Migrations
                     b.Navigation("StudentLink");
                 });
 
-            modelBuilder.Entity("AttendanceMonitoring.Models.Attendance", b =>
-                {
-                    b.Navigation("NotificationList");
-                });
-
             modelBuilder.Entity("AttendanceMonitoring.Models.Class_Adviser", b =>
                 {
                     b.Navigation("AdvisoryList");
-                });
-
-            modelBuilder.Entity("AttendanceMonitoring.Models.Contact", b =>
-                {
-                    b.Navigation("DeliveredList");
-                });
-
-            modelBuilder.Entity("AttendanceMonitoring.Models.Notification", b =>
-                {
-                    b.Navigation("DeliveredList");
                 });
 
             modelBuilder.Entity("AttendanceMonitoring.Models.Parent", b =>

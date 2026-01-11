@@ -23,30 +23,28 @@ namespace AttendanceMonitoringApi.Controllers
 
         // POST: api/Notifications
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost("/PostNotification")]
-        public async Task<ActionResult<Notification>> PostNotification([FromForm] string message)
+        [HttpPost]
+        [Consumes("application/x-www-form-urlencoded")]
+        public async Task<ActionResult<Notification>> PostNotification([FromForm] string uid)
         {
-            //Notification notification = new();
-            //{
-            //    //message = sentMessage,
-
-            //};
-            //_context.Notifications.Add(notification);
-            //try
-            //{
-            //    await _context.SaveChangesAsync();
-            //}
-            //catch (DbUpdateException)
-            //{
-            //    if (NotificationExists(notification.NotificationId))
-            //    {
-            //        return Conflict();
-            //    }
-            //    else
-            //    {
-            //        throw;
-            //    }
-            //}
+            Notification notification = new();
+            notification.Message = uid;
+            _context.Notifications.Add(notification);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (NotificationExists(notification.NotificationId))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             //return CreatedAtAction("GetNotification", new { id = notification.NotificationId }, notification);
             return Ok();

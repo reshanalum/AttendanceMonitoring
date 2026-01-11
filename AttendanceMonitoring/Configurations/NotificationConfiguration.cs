@@ -14,9 +14,9 @@ namespace AttendanceMonitoring.Configurations
                 .HasColumnType("varchar(400)");
 
             //Foreign Key
-            builder.HasOne(c => c.AttendanceLink)
-                .WithMany(c => c.NotificationList)
-                .HasForeignKey(c => c.AttendanceId);
+            //builder.HasOne(c => c.AttendanceLink)
+            //    .WithMany(c => c.NotificationList)
+            //    .HasForeignKey(c => c.AttendanceId);
 
 
         }
