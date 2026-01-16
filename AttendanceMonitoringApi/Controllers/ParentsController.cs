@@ -41,7 +41,9 @@ namespace AttendanceMonitoringApi.Controllers
                     PhoneNumber = r.ParentLink.ContactList.Where(c => c.PhoneNumber != null).Select(c => c.PhoneNumber).FirstOrDefault()
             })
             .FirstOrDefaultAsync();
-            
+
+            QueueNotificationTask(uid);
+
             if (data == null) return NotFound("No student or relationship found!");
 
             var lastStatus = await _context.Attendances
@@ -60,26 +62,29 @@ namespace AttendanceMonitoringApi.Controllers
                 status = "Left";
             }
 
-            _taskQueue.QueueBackgroundWorkItem(async token =>
-            {
-                //var logger = serviceProvider.GetRequiredService<ILogger<ParentsController>>();
-                using var scope = _scopeFactory.CreateScope();
-                var attendanceService = scope.ServiceProvider.GetRequiredService<IAttendanceService>();
-
-                //logger.LogInformation($"Posting attendance for student: {data.StudentName}");
-
-                try
-                {
-                    await attendanceService.PostAttendance(data.RFID, token);
-                    //logger.LogInformation("Attendance post requested for student {StudentId}", data.StudentId);
-                }
-                catch (Exception ex)
-                {
-                    //logger.LogError(ex, "Failed to post attendance for student {StudentId}", data.StudentId);
-                }
-            });
+            QueueAttendanceTask(uid);
 
             return data.PhoneNumber + "\n" + data.StudentName + "\n" + data.ParentName + "\n" + status + "\n" + DateTime.UtcNow;
+        }
+
+        private void QueueAttendanceTask(string rfid)
+        {
+            _taskQueue.QueueBackgroundWorkItem(async token =>
+            {
+                using var scope = _scopeFactory.CreateScope();
+                var service = scope.ServiceProvider.GetRequiredService<IAttendanceService>();
+                await service.PostAttendance(rfid, token);
+            });
+        }
+
+        private void QueueNotificationTask(string uid)
+        {
+            _taskQueue.QueueBackgroundWorkItem(async token =>
+            {
+                using var scope = _scopeFactory.CreateScope();
+                var service = scope.ServiceProvider.GetRequiredService<INotificationService>();
+                await service.PostNotification(uid, token);
+            });
         }
     }
 }

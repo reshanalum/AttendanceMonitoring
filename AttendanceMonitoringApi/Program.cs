@@ -11,14 +11,14 @@ namespace AttendanceMonitoringApi
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.WebHost.ConfigureKestrel(serverOptions =>
-            {
-                serverOptions.ListenAnyIP(5000);
-                //serverOptions.ListenAnyIP(5001, listenOptions =>
-                //{
-                //    listenOptions.UseHttps();
-                //});
-            });
+            //builder.WebHost.ConfigureKestrel(serverOptions =>
+            //{
+            //    serverOptions.ListenAnyIP(5000);
+            //    //serverOptions.ListenAnyIP(5001, listenOptions =>
+            //    //{
+            //    //    listenOptions.UseHttps();
+            //    //});
+            //});
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -27,6 +27,7 @@ namespace AttendanceMonitoringApi
             builder.Services.AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>();
             builder.Services.AddHostedService<QueuedProcessorBackgroundService>();
             builder.Services.AddScoped<IAttendanceService, AttendanceService>();
+            builder.Services.AddScoped<INotificationService, NotificationService>();
             builder.Services.AddLogging();
 
             // Connection to database
@@ -36,15 +37,16 @@ namespace AttendanceMonitoringApi
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+            //if (app.Environment.IsDevelopment())
+            //{
+            //    app.UseSwagger();
+            //    app.UseSwaggerUI();
+            //}
 
+            app.UseRouting();
             //app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
 
             app.MapControllers();
