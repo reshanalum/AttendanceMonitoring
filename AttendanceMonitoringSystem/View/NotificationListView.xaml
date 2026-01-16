@@ -130,7 +130,7 @@ xmlns:ViewModel="clr-namespace:AttendanceMonitoringSystem.ViewModel"
 
             <ListView Padding="8,5"
                      Grid.Row="2"
-                     ItemsSource="{Binding NotificationList}"
+                     ItemsSource="{Binding PagedNotifications}"
                      SelectedItem="{Binding SelectedNotification}">
 
                 <ListView.InputBindings>

@@ -79,7 +79,7 @@
 
         <Grid Grid.Row="0">
             <Image Source="/Images/BannerDashBoard.png"
-                   Stretch="UniformToFill"
+                   Stretch="Fill"
                    Margin="0"/>
 
         </Grid>
@@ -89,10 +89,11 @@
         <TextBlock Text="WELCOME!" 
                      FontSize="35" 
                      FontWeight="Bold" 
-                     Foreground="#002D96"
-                   VerticalAlignment="Bottom"
-                   Grid.Row="1"
-                   Margin="50, 0, 50, -5"/>
+                     Foreground="#F4F4F4"
+                    
+                    Grid.Row="1"
+                    Padding="45,5,0,0"
+                     Background="#002D96"/>
 
         <Grid Grid.Row="2">
 
@@ -104,7 +105,7 @@
                     TextWrapping="Wrap"            
                     FontSize="18"                  
                     FontWeight="SemiBold"
-                    Foreground="#505050" Width="915"  
+                    Foreground="#505050" 
                
     />
 

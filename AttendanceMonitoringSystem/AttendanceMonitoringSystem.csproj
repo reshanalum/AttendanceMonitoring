@@ -39,11 +39,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\BannerDashBoard.png" />
     <Resource Include="Images\BG.png" />
     <Resource Include="Images\Key.png" />
     <Resource Include="Images\Navigationpanel.png" />
     <Resource Include="Images\School Logo.png" />
+    <Resource Include="Images\BannerDashBoard.png" />
     <Resource Include="Images\Username.png" />
   </ItemGroup>
 
