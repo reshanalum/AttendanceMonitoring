@@ -142,12 +142,23 @@ namespace AttendanceMonitoringSystem.ViewModel
         private ICommand _navigateToDetailsCommand;
         public ICommand NavigateToDetailsCommand
         {
+
             get
             {
                 if (_navigateToDetailsCommand == null)
                 {
                     _navigateToDetailsCommand = new RelayCommand(param =>
                     {
+                        if (SelectedNotification == null)
+                        {
+                            System.Windows.MessageBox.Show(
+                                "Please select a notification first.",
+                                "No Selection",
+                                System.Windows.MessageBoxButton.OK,
+                                System.Windows.MessageBoxImage.Warning
+                            );
+                            return;
+                        }
                         if (SelectedNotification != null)
                         {
                             string rfid = SelectedNotification.Notification.Message;

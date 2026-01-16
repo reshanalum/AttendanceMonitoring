@@ -197,7 +197,7 @@ xmlns:ViewModel="clr-namespace:AttendanceMonitoringSystem.ViewModel"
 
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="   " Width="1200">
+                        <GridViewColumn Header="Notification" Width="500">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid HorizontalAlignment="Stretch">
@@ -207,25 +207,28 @@ xmlns:ViewModel="clr-namespace:AttendanceMonitoringSystem.ViewModel"
                                       FontWeight="Regular"
                                       Foreground="#002D96"
                                       HorizontalAlignment="Center"
-                                      VerticalAlignment="Center"/>
+                                      VerticalAlignment="Center"
+                                                  />
                                     </Grid>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Width="100">
+                        <GridViewColumn Header="Action" Width="100">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid HorizontalAlignment="Stretch">
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin='30,0,0,0'>
                                             <Button Width="24"
-                              Height="24"
-                              Background="#F4F4F4"
-                              Command="{Binding DataContext.NavigateToDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}">
+                                                  Height="24"
+                                                  Background="#F4F4F4"
+                                                  Command="{Binding DataContext.NavigateToDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}">
                                                 <fa:ImageAwesome Icon="Bars"
                                            Width="16"
                                            Height="16"
-                                           Foreground="#002D96"/>
+                                           Foreground="#002D96"
+                                                                 />
+                                                
                                             </Button>
 
                                         </StackPanel>
