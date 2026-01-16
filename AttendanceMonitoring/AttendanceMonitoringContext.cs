@@ -16,7 +16,7 @@ namespace AttendanceMonitoring
         public DbSet<Attendance> Attendances { get; set; }
         public DbSet<Class_Adviser> Class_Advisers { get; set; }
         public DbSet<Contact> Contacts { get; set; }
-        public DbSet<Delivered> Delivereds { get; set; }
+        //public DbSet<Delivered> Delivereds { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<Parent> Parents { get; set; }
         public DbSet<Relationship> Relationships { get; set; }
@@ -26,7 +26,7 @@ namespace AttendanceMonitoring
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=C:\\Users\\resha\\Documents\\Database.db");
+            optionsBuilder.UseSqlite("Data Source=C:\\Sites\\AttedanceMonitoringDB\\DatabaseOG(2).db");
             //optionsBuilder.UseSqlite("Data Source=C:\\Users\\MYPC\\Documents\\Fergie Codes\\Final_SLP_AttendanceMonitoringSystemCode\\AttendanceMonitoringFINALPROMISE.db"); //fergie comment this before pushing to github
             //optionsBuilder.UseSqlite("Data Source=C:\\Users\\15-FB1019AX r5\\OneDrive\\Documents\\Fergie Codes\\AttendanceMonitoring\\AttendanceMonitoring-master\\AttendanceMonitoringFINALPROMISE.db");
 
@@ -38,7 +38,7 @@ namespace AttendanceMonitoring
             modelBuilder.ApplyConfiguration(new AttendanceConfiguration());
             modelBuilder.ApplyConfiguration(new ClassAdviserConfiguration());
             modelBuilder.ApplyConfiguration(new ContactConfiguration());
-            modelBuilder.ApplyConfiguration(new DeliveredConfiguration());
+            //modelBuilder.ApplyConfiguration(new DeliveredConfiguration());
             modelBuilder.ApplyConfiguration(new NotificationConfiguration());
             modelBuilder.ApplyConfiguration(new ParentConfiguration());
             modelBuilder.ApplyConfiguration(new RelationshipConfiguration());

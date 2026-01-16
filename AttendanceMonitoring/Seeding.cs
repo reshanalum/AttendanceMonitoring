@@ -69,7 +69,7 @@ namespace AttendanceMonitoring
 
                 // 3️⃣ TERTIARY ENTITIES -------------------------------
                 var notifications = new Faker<Notification>()
-                    .RuleFor(c => c.AttendanceId, f => f.PickRandom(attendances).AttendanceId)
+                    //.RuleFor(c => c.AttendanceId, f => f.PickRandom(attendances).AttendanceId)
                     .RuleFor(c => c.Message, f => f.PickRandom("ABOT NA IMONG ANAK LODS", "PASI NA IMONG ANAK LODS"))
                     .Generate(50);
 
@@ -77,11 +77,11 @@ namespace AttendanceMonitoring
                 context.SaveChanges(); // Needed before Delivered
 
                 // 4️⃣ FINAL DEPENDENTS -------------------------------
-                var delivered = new Faker<Delivered>()
-                    .RuleFor(c => c.NotificationId, f => f.PickRandom(notifications).NotificationId)
-                    .RuleFor(c => c.ContactId, f => f.PickRandom(contacts).ContactId)
-                    .RuleFor(c => c.DateTimeSent, f => f.Date.Between(new DateTime(2025, 1, 1), DateTime.Now))
-                    .Generate(50);
+                //var delivered = new Faker<Delivered>()
+                //    .RuleFor(c => c.NotificationId, f => f.PickRandom(notifications).NotificationId)
+                //    .RuleFor(c => c.ContactId, f => f.PickRandom(contacts).ContactId)
+                //    .RuleFor(c => c.DateTimeSent, f => f.Date.Between(new DateTime(2025, 1, 1), DateTime.Now))
+                //    .Generate(50);
 
                 var relationships = new Faker<Relationship>()
                     .RuleFor(c => c.StudentId, f => f.PickRandom(students).StudentId)
@@ -89,7 +89,7 @@ namespace AttendanceMonitoring
                     .RuleFor(c => c.RelationshipType, f => f.PickRandom("PARENT", "GUARDIAN"))
                     .Generate(30);
 
-                context.Delivereds.AddRange(delivered);
+                //context.Delivereds.AddRange(delivered);
                 context.Relationships.AddRange(relationships);
                 context.SaveChanges();
             }

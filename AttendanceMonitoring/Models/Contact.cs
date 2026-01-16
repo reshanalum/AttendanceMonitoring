@@ -8,7 +8,7 @@
         //Relationships
         public int ParentId { get; set; }
         public Parent ParentLink { get; set; }
-        public List<Delivered> DeliveredList { get; set; }
+        //public List<Delivered> DeliveredList { get; set; }
     }
 
 
