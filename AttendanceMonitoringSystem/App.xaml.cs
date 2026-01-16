@@ -9,6 +9,7 @@ namespace AttendanceMonitoringSystem
     /// </summary>
     public partial class App : Application
     {
+
     }
 
 }

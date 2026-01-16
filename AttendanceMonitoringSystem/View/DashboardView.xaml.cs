@@ -86,6 +86,18 @@ namespace AttendanceMonitoringSystem.View
             _vm.ExecuteShowTeacherPage();
         }
 
+        private void ShowAdminSettings(object sender, RoutedEventArgs e)
+        {
+            _vm.ExecuteShowAdminSettings();
+
+        }
+
+        private void ShowNotificationList(object sender, RoutedEventArgs e)
+        {
+            _vm.ExecuteShowNotificationList();
+
+        }
+
         private void ButtonClose_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
@@ -95,9 +107,6 @@ namespace AttendanceMonitoringSystem.View
             WindowState = WindowState.Minimized;
         }
 
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
-        {
 
-        }
     }
 }

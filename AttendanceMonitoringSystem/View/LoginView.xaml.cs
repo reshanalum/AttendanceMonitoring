@@ -60,9 +60,19 @@ namespace AttendanceMonitoringSystem.View
 
             if (user != null)
             {
-                DashboardView dashboard = new DashboardView();
-                dashboard.Show();
-                this.Close();
+                //DashboardView dashboard = new DashboardView();
+                //dashboard.Show();
+                //this.Close();
+                try
+                {
+                    DashboardView dashboard = new DashboardView();
+                    dashboard.Show();
+                    this.Hide(); // DO NOT close yet
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString(), "Dashboard Error");
+                }
             }
             else
             {

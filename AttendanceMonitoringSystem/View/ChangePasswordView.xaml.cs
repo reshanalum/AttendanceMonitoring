@@ -17,22 +17,29 @@ using System.Windows.Shapes;
 namespace AttendanceMonitoringSystem.View
 {
     /// <summary>
-    /// Interaction logic for StudentInformation.xaml
+    /// Interaction logic for ChangePasswordView.xaml
     /// </summary>
-    public partial class StudentInformation : UserControl
+    public partial class ChangePasswordView : UserControl
     {
-        private StudentInformationVM _vm;
-        public StudentInformation()
+
+        public ChangePasswordView(DashboardVM dashboardVM)
         {
             InitializeComponent();
+            _vm = new ChangePasswordVM(dashboardVM);
+            this.DataContext = _vm;
         }
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        private ChangePasswordVM _vm;
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            _vm = (StudentInformationVM)DataContext;
+            if (DataContext is ChangePasswordVM vm)
+                vm.Save();
         }
 
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            _vm.Cancel();  
+        }
     }
-
-
 }

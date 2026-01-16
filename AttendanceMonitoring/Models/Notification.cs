@@ -1,16 +1,16 @@
-﻿namespace AttendanceMonitoring.Models
-{
-    public class Notification
+﻿    namespace AttendanceMonitoring.Models
     {
-        public int NotificationId { get; set; }
-        public string Message { get; set; }
+        public class Notification
+        {
+            public int NotificationId { get; set; }
+            public string Message { get; set; }
 
-        //Relationships
-        public int AttendanceId { get; set; }
-        public Attendance AttendanceLink { get; set; }
+            //Relationships
+            public int AttendanceId { get; set; }
+            public Attendance AttendanceLink { get; set; }
 
-        public List<Delivered> DeliveredList { get; set; }
+            public List<Delivered> DeliveredList { get; set; }
+        }
+
+
     }
-
-
-}

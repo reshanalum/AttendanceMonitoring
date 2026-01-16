@@ -17,22 +17,18 @@ using System.Windows.Shapes;
 namespace AttendanceMonitoringSystem.View
 {
     /// <summary>
-    /// Interaction logic for StudentInformation.xaml
+    /// Interaction logic for NotificationListView.xaml
     /// </summary>
-    public partial class StudentInformation : UserControl
+    public partial class NotificationListView : UserControl
     {
-        private StudentInformationVM _vm;
-        public StudentInformation()
+        private NotificationListVM _vm;
+
+        public NotificationListView(DashboardVM dashboardVM)
         {
             InitializeComponent();
-        }
+            _vm = new NotificationListVM(dashboardVM);
+            this.DataContext = _vm;
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            _vm = (StudentInformationVM)DataContext;
         }
-
     }
-
-
 }

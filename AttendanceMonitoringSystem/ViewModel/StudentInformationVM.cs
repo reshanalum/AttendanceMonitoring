@@ -4,6 +4,7 @@ using AttendanceMonitoringSystem.Commands;
 using AttendanceMonitoringSystem.View;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 
 namespace AttendanceMonitoringSystem.ViewModel
 {
@@ -11,60 +12,64 @@ namespace AttendanceMonitoringSystem.ViewModel
     {
         private readonly DashboardVM _dashboardVM;
 
-        private Student _selectedStudent;
-        public Student SelectedStudent
-        {
-            get => _selectedStudent;
-            set
-            {
-                _selectedStudent = value;
-                OnPropertyChanged(nameof(SelectedStudent));
-            }
-        }
+        // Read-only student/parent info
+        public Student SelectedStudent { get; }
+        public Parent Parent { get; }
+        public Contact? Contact1 { get; }
+        public Contact? Contact2 { get; }
 
         private List<Attendance> _attendanceList;
         public List<Attendance> AttendanceList
         {
             get => _attendanceList;
-            set
+            private set
             {
                 _attendanceList = value;
                 OnPropertyChanged(nameof(AttendanceList));
             }
         }
 
-        private int _selectedIndex;
-        public int SelectedIndex
-        {
-            get => _selectedIndex;
-            set
-            {
-                _selectedIndex = value;
-                OnPropertyChanged(nameof(SelectedIndex));
-            }
-        }
-
-        public Attendance SelectedAttendance { get; set; }
-
+        // Commands
         public RelayCommand BackCommand { get; }
-
-        // For ComboBox
-        public List<string> EnrollmentStatus { get; } = new List<string> { "Enrolled", "Dropped", "Pending" };
+        public RelayCommand EditStudentCommand { get; }
 
         public StudentInformationVM(Student student, DashboardVM dashboardVM)
         {
             _dashboardVM = dashboardVM;
-            SelectedStudent = student;
 
+            using var context = new AttendanceMonitoringContext();
+
+            // Load student
+            var studentInDb = context.Students.FirstOrDefault(s => s.StudentId == student.StudentId);
+            if (studentInDb == null) throw new System.Exception("Selected student not found.");
+            SelectedStudent = studentInDb;
+
+            // Load parent
+            var relationship = context.Relationships.FirstOrDefault(r => r.StudentId == SelectedStudent.StudentId);
+            if (relationship == null) throw new System.Exception("Parent relationship not found.");
+
+            var parentInDb = context.Parents.FirstOrDefault(p => p.ParentId == relationship.ParentId);
+            if (parentInDb == null) throw new System.Exception("Parent not found in DB.");
+            Parent = parentInDb;
+
+            // Load contacts
+            var contacts = context.Contacts
+                .Where(c => c.ParentId == Parent.ParentId)
+                .ToList();
+            Contact1 = contacts.Count > 0 ? contacts[0] : null;
+            Contact2 = contacts.Count > 1 ? contacts[1] : null;
+
+            // Load attendance
             LoadAttendanceHistory();
 
+            // Initialize commands
             BackCommand = new RelayCommand(ExecuteBackCommand);
+            EditStudentCommand = new RelayCommand(ExecuteEditStudent);
         }
 
         private void LoadAttendanceHistory()
         {
             using var context = new AttendanceMonitoringContext();
-
             AttendanceList = context.Attendances
                 .Where(a => a.StudentId == SelectedStudent.StudentId)
                 .OrderByDescending(a => a.DateTime)
@@ -76,6 +81,28 @@ namespace AttendanceMonitoringSystem.ViewModel
             var view = new StudentListView(_dashboardVM);
             view.DataContext = new StudentListVM(_dashboardVM);
             _dashboardVM.CurrentView = view;
+        }
+
+        private void ExecuteEditStudent(object obj)
+        {
+            if (SelectedStudent == null)
+            {
+                MessageBox.Show("Please select a student to edit.", "No Selection", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            using var context = new AttendanceMonitoringContext();
+            var student = context.Students.FirstOrDefault(s => s.StudentId == SelectedStudent.StudentId);
+            if (student == null)
+            {
+                MessageBox.Show("Student not found in database.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            // Open EditStudent view
+            var editView = new EditStudent();
+            editView.DataContext = new EditStudentVM(student, _dashboardVM);
+            _dashboardVM.CurrentView = editView;
         }
     }
 }

@@ -184,7 +184,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         
-                        <GridViewColumn Header="LRN" Width="200">
+                        <GridViewColumn Header="LRN" Width="250">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid HorizontalAlignment="Stretch">
@@ -216,7 +216,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Last Name" Width="150">
+                        <GridViewColumn Header="Last Name" Width="300">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid HorizontalAlignment="Stretch">

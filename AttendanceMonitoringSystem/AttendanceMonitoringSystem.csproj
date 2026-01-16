@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\BannerDashBoard.png" />
     <None Remove="Images\BG.png" />
     <None Remove="Images\Key.png" />
     <None Remove="Images\Navigationpanel.png" />
@@ -17,10 +18,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotNetProjects.Extended.Wpf.Toolkit" Version="5.0.129" />
+    <PackageReference Include="DotNetProjects.WpfToolkit.Input" Version="6.1.94" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="5.0.0" />
     <PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
     <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.10" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.10">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -38,6 +43,7 @@
     <Resource Include="Images\Key.png" />
     <Resource Include="Images\Navigationpanel.png" />
     <Resource Include="Images\School Logo.png" />
+    <Resource Include="Images\BannerDashBoard.png" />
     <Resource Include="Images\Username.png" />
   </ItemGroup>
 
