@@ -34,10 +34,6 @@ namespace AttendanceMonitoringSystem.ViewModel
 
         }
 
-        // Observable collection for the UI
-        //private ObservableCollection<NotificationDisplay> _allNotifications;
-        // private ObservableCollection<NotificationDisplay> _filteredNotifications;
-
         public ObservableCollection<NotificationDisplay> NotificationList { get; set; }
     = new ObservableCollection<NotificationDisplay>();
 

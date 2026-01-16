@@ -54,31 +54,33 @@
                                        HorizontalAlignment="Center"/>
                             <StackPanel Orientation="Vertical" Margin="0,0,0,20">
 
-                                <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
-                                    <TextBlock Text="LRN: " FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
-                                    <TextBlock Text="{Binding SelectedStudent.LRN}"  FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
-                                </StackPanel>
+                                <TextBlock FontSize="23" Foreground="#002D96" Margin="0,5,0,10">
+                                <Run Text="LRN: " FontWeight="Bold"/>
+                                <Run Text="{Binding SelectedStudent.LRN}"/>
+                                                        </TextBlock>
 
-                                <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
-                                    <TextBlock Text="RFID: " FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
-                                    <TextBlock Text="{Binding SelectedStudent.RFID}"  FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
-                                </StackPanel>
+                                                        <TextBlock FontSize="23" Foreground="#002D96" Margin="0,5,0,10">
+                                <Run Text="RFID: " FontWeight="Bold"/>
+                                <Run Text="{Binding SelectedStudent.RFID}"/>
+                                                        </TextBlock>
 
-                                <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
-                                    <TextBlock Text="First Name: " FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
-                                    <TextBlock Text="{Binding SelectedStudent.FirstName}"  FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
-                                </StackPanel>
+                                                        <TextBlock FontSize="23" Foreground="#002D96" Margin="0,5,0,10">
+                                <Run Text="First Name: " FontWeight="Bold"/>
+                                <Run Text="{Binding SelectedStudent.FirstName}"/>
+                                                        </TextBlock>
 
-                                <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
-                                    <TextBlock Text="Last Name: " FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
-                                    <TextBlock Text="{Binding SelectedStudent.LastName}"  FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
-                                </StackPanel>
+                                                        <TextBlock FontSize="23" Foreground="#002D96" Margin="0,5,0,10">
+                                <Run Text="Last Name: " FontWeight="Bold"/>
+                                <Run Text="{Binding SelectedStudent.LastName}"/>
+                                                        </TextBlock>
 
-                                <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
-                                    <TextBlock Text="Enrollment Status: " FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
-                                    <TextBlock Text="{Binding SelectedStudent.EnrollmentStatus}"  FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
-                                </StackPanel>
+                                                        <TextBlock FontSize="23" Foreground="#002D96" Margin="0,5,0,10">
+                                <Run Text="Enrollment Status: " FontWeight="Bold"/>
+                                <Run Text="{Binding SelectedStudent.EnrollmentStatus}"/>
+                                                        </TextBlock>
+
                             </StackPanel>
+
 
 
                             <TextBlock Text="Parent Information" 
@@ -90,29 +92,30 @@
 
                             <StackPanel Orientation="Vertical">
 
-                                <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
-                                    <TextBlock Text="First Name: " FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
-                                    <TextBlock Text="{Binding Parent.FirstName}"  
-                   FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
+                                <StackPanel Orientation="Vertical" Margin="0,0,0,20">
+
+                                    <TextBlock FontSize="23" Foreground="#002D96" Margin="0,5,0,10">
+                                        <Run Text="First Name: " FontWeight="Bold"/>
+                                        <Run Text="{Binding Parent.FirstName}"/>
+                                                                    </TextBlock>
+
+                                                                    <TextBlock FontSize="23" Foreground="#002D96" Margin="0,5,0,10">
+                                        <Run Text="Last Name: " FontWeight="Bold"/>
+                                        <Run Text="{Binding Parent.LastName}"/>
+                                                                    </TextBlock>
+
+                                                                    <TextBlock FontSize="23" Foreground="#002D96" Margin="0,5,0,10">
+                                        <Run Text="Contact Number #1: " FontWeight="Bold"/>
+                                        <Run Text="{Binding Contact1.PhoneNumber, TargetNullValue='N/A'}"/>
+                                                                    </TextBlock>
+
+                                                                    <TextBlock FontSize="23" Foreground="#002D96" Margin="0,5,0,10">
+                                        <Run Text="Contact Number #2: " FontWeight="Bold"/>
+                                        <Run Text="{Binding Contact2.PhoneNumber, TargetNullValue='N/A'}"/>
+                                    </TextBlock>
+
                                 </StackPanel>
 
-                                <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
-                                    <TextBlock Text="Last Name: " FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
-                                    <TextBlock Text="{Binding Parent.LastName}"  
-                   FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
-                                </StackPanel>
-
-                                <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
-                                    <TextBlock Text="Contact Number #1: " FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
-                                    <TextBlock Text="{Binding Contact1.PhoneNumber, TargetNullValue='N/A'}"
-                                    FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
-                                </StackPanel>
-
-                                <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
-                                    <TextBlock Text="Contact Number #2: " FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
-                                    <TextBlock Text="{Binding Contact2.PhoneNumber , TargetNullValue='N/A'}"  
-                   FontSize="23" FontWeight="Bold" Foreground="#002D96"/>
-                                </StackPanel>
 
                             </StackPanel>
 
@@ -140,7 +143,8 @@
                                    Margin="10"
                                    Width="700"
                                    Height="750"
-                                   HorizontalAlignment="Center">
+                                   HorizontalAlignment="Center"
+                                   ItemsSource="{Binding AttendanceList}">
 
                             <ListView.Resources>
                                 <Style TargetType="GridViewColumnHeader">

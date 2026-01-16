@@ -3,6 +3,7 @@ using AttendanceMonitoring.Models;
 using AttendanceMonitoringSystem.Commands;
 using AttendanceMonitoringSystem.View;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 
@@ -12,22 +13,25 @@ namespace AttendanceMonitoringSystem.ViewModel
     {
         private readonly DashboardVM _dashboardVM;
 
+
         // Read-only student/parent info
         public Student SelectedStudent { get; }
         public Parent Parent { get; }
         public Contact? Contact1 { get; }
         public Contact? Contact2 { get; }
 
-        private List<Attendance> _attendanceList;
-        public List<Attendance> AttendanceList
-        {
-            get => _attendanceList;
-            private set
-            {
-                _attendanceList = value;
-                OnPropertyChanged(nameof(AttendanceList));
-            }
-        }
+        //private List<Attendance> _attendanceList;
+        //public List<Attendance> AttendanceList
+        //{
+        //    get => _attendanceList;
+        //    private set
+        //    {
+        //        _attendanceList = value;
+        //        OnPropertyChanged(nameof(AttendanceList));
+        //    }
+        //}
+
+        public ObservableCollection<Attendance> AttendanceList { get; set; } = new ObservableCollection<Attendance>();
 
         // Commands
         public RelayCommand BackCommand { get; }
@@ -60,20 +64,49 @@ namespace AttendanceMonitoringSystem.ViewModel
             Contact2 = contacts.Count > 1 ? contacts[1] : null;
 
             // Load attendance
-            LoadAttendanceHistory();
+            LoadAttendanceForStudent();
 
             // Initialize commands
             BackCommand = new RelayCommand(ExecuteBackCommand);
             EditStudentCommand = new RelayCommand(ExecuteEditStudent);
         }
 
-        private void LoadAttendanceHistory()
+        //private void LoadAttendanceHistory()
+        //{
+        //    using var context = new AttendanceMonitoringContext();
+        //    AttendanceList = context.Attendances
+        //        .Where(a => a.StudentId == SelectedStudent.StudentId)
+        //        .OrderByDescending(a => a.DateTime)
+        //        .ToList();
+        //}
+
+        private void LoadAttendanceForStudent()
         {
+            if (SelectedStudent == null)
+            {
+                AttendanceList.Clear();
+                return;
+            }
+
             using var context = new AttendanceMonitoringContext();
-            AttendanceList = context.Attendances
+
+            var attendances = context.Attendances
                 .Where(a => a.StudentId == SelectedStudent.StudentId)
-                .OrderByDescending(a => a.DateTime)
+                .Select(a => new Attendance
+                {
+                    AttendanceId = a.AttendanceId,
+                    StudentId = a.StudentId,
+                    DateTime = a.DateTime,
+                    Status = a.Status,
+                    StudentLink = a.StudentLink,
+                })
                 .ToList();
+
+            AttendanceList.Clear();
+            foreach (var attendance in attendances)
+            {
+                AttendanceList.Add(attendance);
+            }
         }
 
         private void ExecuteBackCommand(object obj)
