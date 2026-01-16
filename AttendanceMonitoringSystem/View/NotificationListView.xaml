@@ -1,0 +1,337 @@
+﻿<UserControl x:Class="AttendanceMonitoringSystem.View.NotificationListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AttendanceMonitoringSystem.View"
+xmlns:ViewModel="clr-namespace:AttendanceMonitoringSystem.ViewModel" 
+            xmlns:fa="http://schemas.fontawesome.io/icons/"
+            xmlns:c="clr-namespace:AttendanceMonitoringSystem.Command"
+            mc:Ignorable="d" 
+            d:DesignHeight="944" 
+            d:DesignWidth="1105"
+            Background="#F4F4F4">
+    <UserControl.Resources>
+
+        <c:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <c:PageEqualsConverter x:Key="PageEqualsConverter"/>
+
+        <Style x:Key="PageButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Background" Value="#F8F9FA"/>
+            <Setter Property="Foreground" Value="#333"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="BorderBrush" Value="#D0D0D0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="8,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                           BorderBrush="{TemplateBinding BorderBrush}"
+                           BorderThickness="{TemplateBinding BorderThickness}"
+                           CornerRadius="5"
+                           Width="{TemplateBinding Width}"
+                           Height="{TemplateBinding Height}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#E9ECEF"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#DEE2E6"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="#AAA"/>
+                                <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <Style x:Key="ActivePageButtonStyle" BasedOn="{StaticResource PageButtonStyle}" TargetType="Button">
+            <Setter Property="Background" Value="#002D96"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#002D96"/>
+        </Style>
+
+        <Style x:Key="IconButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="root">
+                            <!-- Background -->
+                            <Border x:Name="border"
+                           Background="{TemplateBinding Background}"
+                           CornerRadius="6"
+                           SnapsToDevicePixels="True"/>
+                            <!-- Icon/Content -->
+                            <ContentPresenter HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"/>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <!-- Hover -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#402D96FF"/>
+                                <!-- Semi-transparent overlay matching icon color -->
+                            </Trigger>
+
+                            <!-- Pressed -->
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#602D96FF"/>
+                            </Trigger>
+
+                            <!-- Disabled -->
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Opacity" Value="0.5"/>
+                                <Setter Property="Foreground" Value="#AAA"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Margin="20">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+
+
+
+        <Border Grid.Row="2"
+               CornerRadius="2"
+               Background="White"
+               SnapsToDevicePixels="True">
+
+            <Border.Effect>
+                <DropShadowEffect Color="Black"
+                         BlurRadius="10"
+                         ShadowDepth="2"
+                         Opacity="0.15"/>
+            </Border.Effect>
+
+            <ListView Padding="8,5"
+                     Grid.Row="2"
+                     ItemsSource="{Binding NotificationList}"
+                     SelectedItem="{Binding SelectedNotification}">
+
+                <ListView.InputBindings>
+                    <MouseBinding MouseAction="LeftDoubleClick" 
+                     Command="{Binding NavigateToDetailsCommand}" />
+                </ListView.InputBindings>
+
+                <ListView.Resources>
+                    <Style TargetType="GridViewColumnHeader">
+                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="Foreground" Value="#002D96"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="FontSize" Value="18"/>
+                        <Setter Property="Height" Value="40"/>
+                        <Setter Property="Padding" Value="10,0"/>
+                        <Setter Property="BorderBrush" Value="#E5E7EB"/>
+                        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="GridViewColumnHeader">
+                                    <Border Background="{TemplateBinding Background}"
+                               BorderBrush="{TemplateBinding BorderBrush}"
+                               BorderThickness="{TemplateBinding BorderThickness}">
+                                        <TextBlock Text="{TemplateBinding Content}"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Center"
+                                      Foreground="{TemplateBinding Foreground}"
+                                      FontWeight="{TemplateBinding FontWeight}"
+                                      FontSize="{TemplateBinding FontSize}"
+                                      Margin="{TemplateBinding Padding}"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.Resources>
+
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="   " Width="900">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid HorizontalAlignment="Stretch">
+                                        <TextBlock Text="{Binding DisplayMessage}" 
+                                       FontSize="18"
+                                      FontFamily="Montserrat"
+                                      FontWeight="Regular"
+                                      Foreground="#002D96"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+
+        </Border>
+
+        <!-- Top portion-->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="1"
+       Background="White"
+       BorderThickness="2"
+       CornerRadius="2"
+       Padding="10,0"
+       SnapsToDevicePixels="True"
+       Panel.ZIndex="50">
+
+                <Border.Effect>
+                    <DropShadowEffect Color="Black" 
+                         Opacity="0.2" 
+                         BlurRadius="8" 
+                         Direction="270"/>
+                </Border.Effect>
+
+
+                <Grid VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <fa:ImageAwesome Icon="Search"
+                        Foreground="#002D96"
+                        Width="40" Height="28"
+                        Margin="10,0,5,0"
+                        VerticalAlignment="Center"/>
+
+                    <TextBox Grid.Column="1"
+                            x:Name="SearchBox"
+                            Focusable="True"
+                            IsTabStop="True"
+                            BorderThickness="0"
+                            Background="White"
+                            VerticalContentAlignment="Center"
+                            FontSize="18"
+                            Foreground="Black"
+                            Text="{Binding Path=NotificationSearchText, UpdateSourceTrigger=PropertyChanged, Delay=300}"/>
+
+
+                    <TextBlock Text="Search..."
+                              Grid.Column="1"
+                              FontSize="18"
+                              Foreground="Gray"
+                              VerticalAlignment="Center"
+                              Margin="5,0,0,0"
+                              IsHitTestVisible="False"
+                              Visibility="{Binding Text.IsEmpty, ElementName=SearchBox, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                </Grid>
+
+            </Border>
+
+
+
+            <Grid Grid.Column="0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="266*"/>
+                    <ColumnDefinition Width="215*"/>
+                    <ColumnDefinition Width="51*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0"
+                           Orientation="Vertical"
+                           VerticalAlignment="Center">
+
+                    <TextBlock Text="Notifications" 
+                              FontSize="30" 
+                              FontWeight="Bold" 
+                              Foreground="#002D96"/>
+
+                </StackPanel>
+
+
+            </Grid>
+
+
+        </Grid>
+
+        <!-- Pagination Bar -->
+        <StackPanel Grid.Row="3"
+                   Orientation="Horizontal"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Margin="0,20,0,0"
+                   Background="Transparent">
+
+            <!-- Previous Button -->
+            <Button Content="Prev"
+                   Style="{StaticResource PageButtonStyle}"
+                   Command="{Binding PrevPageCommand}"
+                   Width="50"
+                   Height="50"
+                   FontSize="18"/>
+
+            <ItemsControl ItemsSource="{Binding PageButtons}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding Number}"
+                               Command="{Binding DataContext.GoToPageCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                               CommandParameter="{Binding Number}"
+                               Width="50"
+                               Height="50"
+                               FontSize="18">
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource PageButtonStyle}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsCurrent}" Value="True">
+                                            <Setter Property="Background" Value="#002D96"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <Button Content="Next"
+                   Style="{StaticResource PageButtonStyle}"
+                   Command="{Binding NextPageCommand}"
+                   Width="50"
+                   Height="50"
+                   FontSize="18"/>
+        </StackPanel>
+
+
+    </Grid>
+</UserControl>
