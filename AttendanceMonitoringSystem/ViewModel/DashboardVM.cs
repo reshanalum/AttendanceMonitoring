@@ -27,7 +27,7 @@ namespace AttendanceMonitoringSystem.ViewModel
 
         public DashboardVM()
         {
-
+            ExecuteShowDashboard();
         }
 
         public void ExecuteShowSectionList()
