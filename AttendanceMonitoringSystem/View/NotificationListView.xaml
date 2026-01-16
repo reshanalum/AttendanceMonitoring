@@ -133,10 +133,6 @@ xmlns:ViewModel="clr-namespace:AttendanceMonitoringSystem.ViewModel"
                      ItemsSource="{Binding PagedNotifications}"
                      SelectedItem="{Binding SelectedNotification}">
 
-                <ListView.InputBindings>
-                    <MouseBinding MouseAction="LeftDoubleClick" 
-                     Command="{Binding NavigateToDetailsCommand}" />
-                </ListView.InputBindings>
 
                 <ListView.Resources>
                     <Style TargetType="GridViewColumnHeader">
@@ -170,7 +166,7 @@ xmlns:ViewModel="clr-namespace:AttendanceMonitoringSystem.ViewModel"
 
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="   " Width="900">
+                        <GridViewColumn Header="   " Width="1200">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid HorizontalAlignment="Stretch">
@@ -185,8 +181,31 @@ xmlns:ViewModel="clr-namespace:AttendanceMonitoringSystem.ViewModel"
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
+
+                        <GridViewColumn Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid HorizontalAlignment="Stretch">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <Button Width="24"
+                              Height="24"
+                              Background="#F4F4F4"
+                              Command="{Binding DataContext.NavigateToDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}">
+                                                <fa:ImageAwesome Icon="Bars"
+                                           Width="16"
+                                           Height="16"
+                                           Foreground="#002D96"/>
+                                            </Button>
+
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
+
+         
             </ListView>
 
 

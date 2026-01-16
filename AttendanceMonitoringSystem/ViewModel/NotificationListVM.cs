@@ -1,6 +1,7 @@
 ﻿using AttendanceMonitoring;
 using AttendanceMonitoring.Models;
 using AttendanceMonitoringSystem.Commands;
+using AttendanceMonitoringSystem.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -137,19 +138,15 @@ namespace AttendanceMonitoringSystem.ViewModel
                     {
                         if (SelectedNotification != null)
                         {
-                            var notif = SelectedNotification.Notification;
-                            var scannedRFID = notif.Message;
-                            var student = _context.Students.FirstOrDefault(s => s.RFID == scannedRFID);
+                            string rfid = SelectedNotification.Notification.Message;
 
-                            if (student != null)
-                            {
-                                System.Windows.MessageBox.Show($"Student: {student.FirstName} {student.LastName}\nRFID: {student.RFID}");
-                            }
-                            else
-                            {
-                                System.Windows.MessageBox.Show("This scan is unassigned. You can assign this RFID to a student here.");
-                                // Navigate to assignment view logic here
-                            }
+                            // 1. Create the VM and pass the Scanned RFID
+                            // 2. Switch the View in the Dashboard
+                            // (Assuming your AssignRFIDView is linked to AssignRFIDViewModel in DataTemplates)
+
+                            var assignView = new AssignRFIDView();
+                            assignView.DataContext = new AssignRFIDVM(_dashboardVM, rfid);
+                            _dashboardVM.CurrentView = assignView;
                         }
                     });
                 }
