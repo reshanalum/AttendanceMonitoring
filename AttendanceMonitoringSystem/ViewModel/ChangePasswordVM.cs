@@ -58,6 +58,7 @@ namespace AttendanceMonitoringSystem.ViewModel
 
             using var context = new AttendanceMonitoringContext();
 
+            // Replace this with your actual user identification logic
             var user = context.Users.FirstOrDefault(u => u.LastName == CurrentPassword);
 
             if (user == null)
@@ -66,12 +67,12 @@ namespace AttendanceMonitoringSystem.ViewModel
                 return;
             }
 
-            user.LastName = NewPassword; 
+            user.LastName = NewPassword; // Save new password
             context.SaveChanges();
 
             MessageBox.Show("Password successfully updated.");
 
-         
+            // Return to Admin Settings
             _dashboardVM.CurrentView = new AdminSettingsView(_dashboardVM)
             {
                 DataContext = new AdminSettingsVM(_dashboardVM)

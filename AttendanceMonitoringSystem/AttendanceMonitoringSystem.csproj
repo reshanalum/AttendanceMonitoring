@@ -47,10 +47,4 @@
     <Resource Include="Images\Username.png" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="db\AttendanceMonitoringFINALPROMISE.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>
