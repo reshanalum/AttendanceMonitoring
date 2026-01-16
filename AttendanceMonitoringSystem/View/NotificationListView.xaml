@@ -236,7 +236,7 @@ xmlns:ViewModel="clr-namespace:AttendanceMonitoringSystem.ViewModel"
                     </GridView>
                 </ListView.View>
 
-         
+
             </ListView>
 
 

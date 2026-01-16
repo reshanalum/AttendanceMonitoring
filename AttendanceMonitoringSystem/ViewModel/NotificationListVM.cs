@@ -31,8 +31,10 @@ namespace AttendanceMonitoringSystem.ViewModel
 
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(2);
-            timer.Tick += (s, e) => {
-                if (string.IsNullOrWhiteSpace(NotificationSearchText))
+            timer.Tick += (s, e) =>
+            {
+                if (SelectedNotification == null &&
+                    string.IsNullOrWhiteSpace(NotificationSearchText))
                 {
                     LoadNotifications();
                 }
