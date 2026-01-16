@@ -60,6 +60,13 @@ namespace AttendanceMonitoringSystem.ViewModel
 
         }
 
+        public void ExecuteShowNotificationList()
+        {
+            var notificationListView = new NotificationListView(this);
+            CurrentView = notificationListView;
+
+        }
+
         public void ExecuteShowAdminSettings()
         {
             var result = MessageBox.Show(
