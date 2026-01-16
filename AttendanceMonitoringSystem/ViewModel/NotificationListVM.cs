@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Threading;
 using static AttendanceMonitoringSystem.ViewModel.NotificationListVM;
 
 namespace AttendanceMonitoringSystem.ViewModel
@@ -24,6 +25,19 @@ namespace AttendanceMonitoringSystem.ViewModel
             _context = new AttendanceMonitoringContext();
             LoadNotifications();
             CurrentPage = 1;
+
+            //reloads
+            LoadNotifications();
+
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(2);
+            timer.Tick += (s, e) => {
+                if (string.IsNullOrWhiteSpace(NotificationSearchText))
+                {
+                    LoadNotifications();
+                }
+            };
+            timer.Start();
 
             //Pagination
             NextPageCommand = new RelayCommand(_ => GoToPage(CurrentPage + 1), _ => CurrentPage < TotalPages);
