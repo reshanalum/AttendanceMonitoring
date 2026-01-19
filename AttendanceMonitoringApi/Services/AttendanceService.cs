@@ -45,7 +45,7 @@ namespace AttendanceMonitoringApi.Services
 
             Attendance newAttendance = new()
             {
-                DateTime = DateTime.UtcNow,
+                DateTime = DateTime.Now,
                 StudentLink = student,
                 Status = newStatus
             };

@@ -29,7 +29,7 @@ namespace AttendanceMonitoring
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
            // optionsBuilder.UseSqlite("Data Source=C:\\Users\\simon\\source\\repos\\AttendanceMonitoring.db");
-            optionsBuilder.UseSqlite("Data Source=C:\\Sites\\AttedanceMonitoringDB\\DatabaseOG(2).db");
+            optionsBuilder.UseSqlite("Data Source=C:\\Sites\\BrgyHizonElemDb\\BRGY-HIZON-ELEM-DB.db");
             //optionsBuilder.UseSqlite("Data Source=C:\\Users\\simon\\Downloads\\AttendanceMonitoringFINALPROMISE.db");
         }
 

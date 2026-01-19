@@ -64,7 +64,7 @@ namespace AttendanceMonitoringApi.Controllers
 
             QueueAttendanceTask(uid);
 
-            return data.PhoneNumber + "\n" + data.StudentName + "\n" + data.ParentName + "\n" + status + "\n" + DateTime.UtcNow;
+            return data.PhoneNumber + "\n" + data.StudentName + "\n" + data.ParentName + "\n" + status + "\n" + DateTime.Now;
         }
 
         private void QueueAttendanceTask(string rfid)
